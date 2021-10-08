@@ -10,11 +10,6 @@ public class Game {
     private Board gameBoard;
     private Player player; //assuming 1 player for now.
 
-    public Game(int difficulty, int dim) {
-        this.seeder = new Seeder(difficulty);
-        this.gameBoard = new Board(dim, seeder);
-        this.player = new Player();
-    }
 
 
     public void run(Inout inOut) {
@@ -23,7 +18,8 @@ public class Game {
         String init = inOut.getInput();
         if (init == "start") {
 
-            this.setup(); // get difficulty level adn dimension.
+            this.setup(); // get difficulty level and dimension from User. Create a properly seeded gameBoard. Create a Player.
+
             inOut.sendOutput(Constants.movePrompt);
             try {
                 String input = inOut.getInput();
@@ -51,6 +47,10 @@ public class Game {
             this.run(inOut);
         }
 
+    }
+
+    public void setup(){
+        //
     }
 
 
