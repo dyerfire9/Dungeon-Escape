@@ -1,5 +1,5 @@
 package java;
-import java.constants.*;
+
 /**
  * Controls the system responsible for receiving player inputs and updating Board.
  */
@@ -7,24 +7,24 @@ import java.constants.*;
 
 public class Game {
     private Seeder seeder; // use seeder to control difficulty level.
-    private Board gameBoard;
+    private Board gameBoard; // 1D array for now
     private Player player; //assuming 1 player for now.
 
 
 
     public void run(Inout inOut) {
 
-        inOut.sendOutput(Constants.initGamePrompt);
+        inOut.sendOutput(initGamePrompt);
         String init = inOut.getInput();
         if (init == "start") {
 
             this.setup(); // get difficulty level and dimension from User. Create a properly seeded gameBoard. Create a Player.
 
-            inOut.sendOutput(Constants.movePrompt);
+            inOut.sendOutput(movePrompt);
             try {
                 String input = inOut.getInput();
                 while (!input.equals("quit")) {
-                    inOut.sendOutput(Constants.movePrompt);
+                    inOut.sendOutput(movePrompt);
                     input = inOut.getInput();
                     if (!input.equals("quit")) {
                         int[] move = this.moveProcessor(input);
@@ -43,14 +43,14 @@ public class Game {
         } else if (init == "quit") {
             this.end();
         } else {
-            inOut.sendOutput(Constants.invalidInputPrompt);
+            inOut.sendOutput(invalidInputPrompt);
             this.run(inOut);
         }
 
     }
 
     public void setup(){
-        //
+        // initilize a Seeder, a Board
     }
 
 

@@ -1,19 +1,18 @@
 package java;
 
 public class Board {
-    private Seeder seeder; // creates randomized decorations for this Board.
     private int dimension;
 
     //add a default dimension Board.
-    public Board (int dim, Seeder seeder){
-        // seeder is a 2D Array[dim] that has been randomized. Iterate through seeder to seed the Board.
-        this.seeder = seeder;
+    public Board (int dim, Seed seed){
+        // seeder is a 1D Array[dim] that has been randomized. Iterate through seeder to seed the Board.
+        this.seed = seeder;
         this.dimension = dim;
         this.seed(seeder);
     }
 
-    private Board seed(Seeder s) {
-        //
+    private Board seed(Seed s) {
+        // board needs a SEED only, not an entire Seeder
     }
 
     public String check(int[] Pos) {
