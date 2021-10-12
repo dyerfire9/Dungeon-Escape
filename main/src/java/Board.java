@@ -2,13 +2,20 @@ package java;
 
 public class Board {
     private int dimension;
+    private int[] board;
 
     //add a default dimension Board.
-    public Board (int dim, Seed seed){
-        // seeder is a 1D Array[dim] that has been randomized. Iterate through seeder to seed the Board.
-        this.seed = seeder;
+    public Board (int dim, int size){
         this.dimension = dim;
-        this.seed(seeder);
+        this.board = new int[size];
+    }
+
+    public int[] getBoard() {
+        return board;
+    }
+
+    public int getSize() {
+        return board.length;
     }
 
     private Board seed(Seed s) {

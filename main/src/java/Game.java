@@ -65,16 +65,27 @@ public class Game {
         //converts valid inputs into int[1,0] etc.
     }
 
-    private ?  boardResProcessor(String response){
-        //if "out of boundary"...
-        //if normal spot
-        //if blocked
-        // if gain points
-        // if lose points
-        int newPoints = player.pointsGetter();
-        if (newPoints < 0) {
-            this.end();
+//    private ?  boardResProcessor(String response){
+//        //if "out of boundary"...
+//        //if normal spot
+//        //if blocked
+//        // if gain points
+//        // if lose points
+//        int newPoints = player.pointsGetter();
+//        if (newPoints < 0) {
+//            this.end();
+//        }
+//    }
+
+    /**
+     * Prints the current board state.
+     * @return A string showing each tile of the board.
+     */
+    @Override
+    public String toString() {  //TODO: Shouldn't this belong to Board?
+        int[] bo = gameBoard.getBoard();
+        for (int i = 0; i < gameBoard.getSize(); i++) {
+            System.out.print(bo[i] + " ");
         }
     }
-
 }
