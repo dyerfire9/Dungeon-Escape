@@ -1,29 +1,42 @@
 package java;
 
+import java.util.ArrayList;
+
 public class Board {
-    private int dimension;
-    private int[] board;
+    private int size;
+    private Tile[] board;
 
-    //add a default dimension Board.
-    public Board (int dim, int size){
-        this.dimension = dim;
-        this.board = new int[size];
+    // add a default dimension Board.
+    // The board is one dimensional for now
+    public Board (int size){
+        this.size = size;
+        this.board = generateBoard().toArray(new Tile[this.size]);
     }
 
-    public int[] getBoard() {
-        return board;
+    public ArrayList<Tile> generateBoard() {
+        ArrayList<Tile> board_list = new Arraylist<>;
+        board_list.add(new Tile(false, "x"));
+        for (i = 1; i < this.size - 2; i ++) {
+            board_list.add(new Tile(true, "o"));
+        }
+        board_list.add(new Tile(false, "x"));
+
+        return board_list;
     }
+
 
     public int getSize() {
-        return board.length;
+        return this.size;
     }
 
-    private Board seed(Seed s) {
-        // board needs a SEED only, not an entire Seeder
-    }
+    @Override
+    public String toString() {
+        StringBuilder board_repr = new StringBuilder();
+        for (Tile i: this.board) {
+            board_repr.append(i.toString());
+        }
+        return board_repr.toString();
 
-    public String check(int[] Pos) {
-        //check what's at the position: out of boundary, blocked, deduct points, add points, or just a normal spot.
     }
 
 }
