@@ -18,11 +18,8 @@ public class Game {
 
     }
 
-    public int[] moveProcessor(String input) {
-
-        //deals with invalid inputs
-        //converts valid inputs into int[1,0] etc.
-        return null;
+    public void makeMove(int move) {
+        this.player.makeMove(move, this.board);
     }
 
 
@@ -31,7 +28,11 @@ public class Game {
      * @return A string showing each tile of the board.
      */
     @Override
-    public String toString() {  //TODO: Shouldn't this belong to Board?
-            return this.board.toString();
+    public String toString() {
+        String board_str = this.board.toString();
+
+        return board_str.substring(0, this.player.getPos())
+                + this.player.toString()
+                + board_str.substring(this.player.getPos() + 1);
         }
     }

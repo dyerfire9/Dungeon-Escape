@@ -1,10 +1,12 @@
 public class Player {
     private int pos;
     private int points;
+    private final String sprite;
 
-    public Player(){
-        this.pos = // center of board?;
+    public Player(int pos, String sprite){
+        this.pos = pos;
         this.points = 0;
+        this.sprite = sprite;
     }
 
     public void makeMove(int move, Board board){
@@ -21,5 +23,10 @@ public class Player {
 
     public int pointsGetter(){
         return points;
+    }
+
+    @Override
+    public String toString() {
+        return this.sprite;
     }
 }
