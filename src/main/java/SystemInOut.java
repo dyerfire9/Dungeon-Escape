@@ -11,20 +11,16 @@ public class SystemInOut {
      */
     public int parse(String input) {
         switch (input) {
-            case "a" -> {
+            case "a":
                 return -1;
-            }
-            case "d" -> {
+            case "d":
                 return 1;
-            }
             // In the consumer class, Integer.MIN_VALUE is taken to mean "quit the game".
             //TODO: Find a more organized solution
-            case "quit" -> {
+            case "quit":
                 return Integer.MIN_VALUE;
-            }
-            default -> {
+            default:
                 return 0;
-            }
         }
     }
 }

@@ -7,15 +7,9 @@ public class Game {
     private Board board; // 1D array for now
     private Player player; //assuming 1 player for now.
 
-
-    public void setup(){
-        // initilize a Seeder, a Board
-    }
-
-
-    public void end() {
-        //
-
+    public Game() {
+        this.board = new Board(10);
+        this.player = new Player(0, "X");
     }
 
     public void makeMove(int move) {

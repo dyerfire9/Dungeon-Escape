@@ -22,6 +22,9 @@ public class Main {
             if (movement == Integer.MIN_VALUE) {
                 System.out.println("Exiting program...");
                 isRunning = false;
+            } else {
+                game.makeMove(movement);
+                System.out.println(game);
             }
         }
 
