@@ -30,7 +30,7 @@ public class Board {
             return curr_position + move;
         }
         else {
-            return -1;
+            return curr_position;
         }
     }
 

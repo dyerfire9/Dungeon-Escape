@@ -9,7 +9,7 @@ public class Game {
 
     public Game() {
         this.board = new Board(10);
-        this.player = new Player(0, "X");
+        this.player = new Player(5, "X");
     }
 
     public void makeMove(int move) {
