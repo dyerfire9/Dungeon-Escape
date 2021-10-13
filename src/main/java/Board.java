@@ -1,5 +1,3 @@
-package java;
-
 import java.util.ArrayList;
 
 public class Board {
@@ -14,12 +12,15 @@ public class Board {
     }
 
     public ArrayList<Tile> generateBoard() {
-        ArrayList<Tile> board_list = new Arraylist<>;
+        ArrayList<Tile> board_list = new ArrayList<>();
         board_list.add(new Tile(false, "x"));
-        for (i = 1; i < this.size - 2; i ++) {
+        for (int i = 1; i < this.size - 1; i ++) {
             board_list.add(new Tile(true, "o"));
         }
         board_list.add(new Tile(false, "x"));
+
+
+        assert(this.size == board_list.size());
 
         return board_list;
     }
@@ -32,8 +33,8 @@ public class Board {
     @Override
     public String toString() {
         StringBuilder board_repr = new StringBuilder();
-        for (Tile i: this.board) {
-            board_repr.append(i.toString());
+        for (Tile tile : this.board) {
+            board_repr.append(tile.toString());
         }
         return board_repr.toString();
 

@@ -1,7 +1,5 @@
-package java;
-
 public class Player {
-    private int[] pos;
+    private int pos;
     private int points;
 
     public Player(){
@@ -13,7 +11,7 @@ public class Player {
         // change pos;
     }
 
-    public int[] getPos(){
+    public int getPos(){
         return pos;
     }
 
