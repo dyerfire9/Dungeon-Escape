@@ -7,8 +7,8 @@ public class Player {
         this.points = 0;
     }
 
-    public void makeMove(int[] move){
-        // change pos;
+    public void makeMove(int move, Board board){
+        this.pos = board.makeMove(move, this.pos);
     }
 
     public int getPos(){

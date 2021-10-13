@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Board {
-    private int size;
-    private Tile[] board;
+    private final int size;
+    private final Tile[] board;
 
     // add a default dimension Board.
     // The board is one dimensional for now
@@ -10,6 +10,7 @@ public class Board {
         this.size = size;
         this.board = generateBoard().toArray(new Tile[this.size]);
     }
+
 
     public ArrayList<Tile> generateBoard() {
         ArrayList<Tile> board_list = new ArrayList<>();
@@ -23,6 +24,14 @@ public class Board {
         assert(this.size == board_list.size());
 
         return board_list;
+    }
+    public int makeMove(int move, int curr_position) {
+        if (this.board[curr_position + move].isTraversable()) {
+            return curr_position + move;
+        }
+        else {
+            return -1;
+        }
     }
 
 
