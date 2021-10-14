@@ -4,7 +4,7 @@ public class Tile {
 
     public Tile(boolean is_movable, String sprite){
         this.is_movable = is_movable;
-        this.tile_image = sprite;
+        this.sprite = sprite;
     }
 
     public boolean isTraversable() {
@@ -13,6 +13,6 @@ public class Tile {
 
     @Override
     public String toString() {
-        return this.tile_image;
+        return this.sprite;
     }
 }
