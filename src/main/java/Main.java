@@ -24,7 +24,7 @@ public class Main {
                 isRunning = false;
             } else {
                 game.makeMove(movement);
-                System.out.println(game);
+                System.out.println(game.renderGame());
             }
         }
 
