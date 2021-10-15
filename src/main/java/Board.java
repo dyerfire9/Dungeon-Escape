@@ -10,7 +10,6 @@ public class Board {
         this.board = generateBoard().toArray(new Tile[this.size]);
     }
 
-    // TODO Maybe there's a way to make this cleaner
     public ArrayList<Tile> generateBoard() {
         ArrayList<Tile> board_list = new ArrayList<>();
         board_list.add(new Tile(false, "x"));
@@ -18,10 +17,6 @@ public class Board {
             board_list.add(new Tile(true, "o"));
         }
         board_list.add(new Tile(false, "x"));
-
-
-        assert(this.size == board_list.size());
-
         return board_list;
     }
     public int makeMove(int move, int curr_position) {
