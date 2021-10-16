@@ -20,6 +20,7 @@ public class SystemInOut {
             case "quit":
                 return Integer.MIN_VALUE;
             default:
+                System.out.println("Invalid move");
                 return 0;
         }
     }

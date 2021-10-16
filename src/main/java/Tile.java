@@ -1,18 +1,18 @@
 public class Tile {
-    private final boolean is_movable;
-    private String tile_image;
+    private final boolean isMovable;
+    private String tileImage;
 
-    public Tile(boolean is_movable, String tile_image){
-        this.is_movable = is_movable;
-        this.tile_image = tile_image;
+    public Tile(boolean isMovable, String tileImage){
+        this.isMovable = isMovable;
+        this.tileImage = tileImage;
     }
 
-    public boolean isTraversable() {
-        return this.is_movable;
+    public boolean isMovable() {
+        return this.isMovable;
     }
 
     @Override
     public String toString() {
-        return this.tile_image;
+        return this.tileImage;
     }
 }

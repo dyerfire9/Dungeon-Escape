@@ -17,11 +17,11 @@ public class Player {
         return pos;
     }
 
-    public void pointsSetter(int p){
+    public void setPoints(int p){
         points += p;
     }
 
-    public int pointsGetter(){
+    public int getPoints(){
         return points;
     }
 
