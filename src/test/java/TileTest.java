@@ -15,4 +15,5 @@ public class TileTest {
         Tile tile = new Tile(false, "x");
         assert(tile.toString().equals("x"));
     }
+    // TODO add test for checking whether at tile is traversable or not
 }

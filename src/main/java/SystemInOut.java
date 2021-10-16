@@ -10,6 +10,8 @@ public class SystemInOut {
      * @return An int representing the desired movement direction.
      */
     public int parse(String input) {
+        // TODO When we scale, we'll need a Key-value mapping. Can't keep adding code to this.
+        // TODO Either make a hashmap instance variable or a separate CommandLookup class with add and remove methods
         switch (input) {
             case "a":
                 return -1;

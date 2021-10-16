@@ -2,8 +2,11 @@
 
 # Gradle .gitignore (https://github.com/github/gitignore/blob/master/Gradle.gitignore)
 .gradle
+gradle
 **/build/
 !src/**/build/
+gradlew
+gradlew.bat
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -23,6 +26,8 @@ gradle-app.setting
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+.idea/
+
 
 # AWS User-specific
 .idea/**/aws.xml

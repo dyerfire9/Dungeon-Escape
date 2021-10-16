@@ -5,6 +5,7 @@ public class Player {
 
     public Player(int pos, String sprite){
         this.pos = pos;
+        // TODO make a PlayerState class and put the points in there.
         this.points = 0;
         this.sprite = sprite;
     }
