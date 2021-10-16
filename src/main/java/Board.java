@@ -25,7 +25,7 @@ public class Board {
         return boardList;
     }
     public int makeMove(int move, int currPosition) {
-        if (this.board[currPosition + move].isMovable()) {
+        if (this.board[currPosition + move].isTraversable()) {
             return currPosition + move;
         }
         else {
