@@ -4,31 +4,31 @@ import java.util.*;
  * Wrapper class for running an instance of Game
  */
 public class GameRunner {
+    private Game game;
+    private Renderer renderer;
+    private SystemInOut parser;
 
-    public void runGame(Game game) {
+    public GameRunner() {
+        this.parser = new SystemInOut();
+        this.game = new Game();
+        this.renderer = new Renderer();
+    }
+
+    public void runGame() {
         Scanner reader = new Scanner(System.in);
-        SystemInOut inOut = new SystemInOut();
-        boolean isRunning = game.getRunning();
 
-        while (isRunning) {
-            if (game.getPlayer().getPoints() < 0){
-                System.out.println("You've lost all points :(. \n End of game.");
-                game.setRunning(false);
+        while (this.game.getRunning()) {
+            System.out.println("\nWhat is your move?");
+            String input = reader.nextLine();
+            int movement = this.parser.parse(input);
+            if (movement == Integer.MIN_VALUE) {
+                System.out.println("Exiting program...");
+                this.game.setRunning(false);
+            } else {
+                this.game.makeMove(movement);
+                // System.out.println("Nice move!"); Not using this right now due to lack of distinction between hitting an obstacle and hitting the board boundary.
+                System.out.println(this.renderer.renderGame(this.game));
             }
-            else {
-                System.out.println("\nWhat is your move?");
-                String input = reader.nextLine();
-                int movement = inOut.parse(input);
-                if (movement == Integer.MIN_VALUE) {
-                    System.out.println("Exiting program...");
-                    game.setRunning(false);
-                } else {
-                    game.makeMove(movement);
-                    // System.out.println("Nice move!"); Not using this right now due to lack of distinction between hitting an obstacle and hitting the board boundary.
-                    System.out.println(game);
-                }
-            }
-            isRunning = game.getRunning();
         }
     }
 

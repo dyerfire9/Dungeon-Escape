@@ -17,24 +17,11 @@ public class Game {
         this.player.makeMove(move, this.board);
     }
 
-    public Player getPlayer() {return this.player; }
-    public void setPlayer(Player... pList) {
-        //TODO: have multiple players on the same board;
-    }
-
+    // Getters
     public boolean getRunning(){return this.isRunning; }
     public void setRunning(boolean isRunning) {this.isRunning = isRunning; }
 
-    /**
-     * Prints the current board state.
-     * @return A string showing each tile of the board.
-     */
-    @Override
-    public String toString() {
-        String boardStr = this.board.toString();
-
-        return boardStr.substring(0, this.player.getPos())
-                + this.player.toString()
-                + boardStr.substring(this.player.getPos() + 1);
-        }
+    public int getPlayerPosition() {return this.player.getPos();}
+    public String getPlayerString() {return this.player.toString();}
+    public String getBoardString() {return this.board.toString();}
     }

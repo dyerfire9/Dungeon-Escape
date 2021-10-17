@@ -1,17 +1,14 @@
 public class Renderer {
-    private Player player;
-    private Board board;
 
     public Renderer() {}
 
-    public String renderGame(Player player, Board board) {
-        String board_str = board.toString();
+    public String renderGame(Game game) {
+        String boardString = game.getBoardString();
+        String playerString = game.getPlayerString();
+        int playerPos = game.getPlayerPosition();
 
-        return board_str.substring(0, player.getPos())
-                + player.toString()
-                + board_str.substring(player.getPos() + 1);
+        return boardString.substring(0, playerPos)
+                + playerString
+                + boardString.substring(playerPos + 1);
     }
-
-
-
 }
