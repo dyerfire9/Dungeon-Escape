@@ -19,9 +19,6 @@ public class Board {
         }
         boardList.add(new Tile(false, "x"));
 
-
-        assert(this.size == boardList.size());
-
         return boardList;
     }
     public int makeMove(int move, int currPosition) {
