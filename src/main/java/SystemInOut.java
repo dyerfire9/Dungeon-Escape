@@ -14,12 +14,15 @@ public class SystemInOut {
         // TODO Either make a hashmap instance variable or a separate CommandLookup class with add and remove methods
         switch (input) {
             case "a":
+            case "A":
                 return -1;
             case "d":
+            case "D":
                 return 1;
             // In the consumer class, Integer.MIN_VALUE is taken to mean "quit the game".
             //TODO: Find a more organized solution
             case "quit":
+            case "QUIT":
                 return Integer.MIN_VALUE;
             default:
                 System.out.println("Invalid move");
