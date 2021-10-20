@@ -1,4 +1,4 @@
-package Objects;
+package InteractiveElements;
 
 public interface Movable {
 }
