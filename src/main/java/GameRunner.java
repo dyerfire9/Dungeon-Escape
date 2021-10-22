@@ -19,7 +19,7 @@ public class GameRunner {
 
         while (this.game.getRunning()) {
             System.out.println("\nWhat is your move?");
-            String input = reader.nextLine();
+            String input = reader.nextLine().toLowerCase();
             int[] movement = this.parser.parse(input);
             if (movement[0] == Integer.MIN_VALUE) {
                 System.out.println("Exiting program...");

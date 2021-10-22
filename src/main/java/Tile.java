@@ -1,3 +1,5 @@
+//TODO: is this still necessary?
+
 public class Tile {
     private final boolean isTraversable;
     private String tileImage;

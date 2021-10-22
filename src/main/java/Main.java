@@ -1,5 +1,3 @@
-import java.util.*;
-
 /**
  * Contains the main game loop.
  */

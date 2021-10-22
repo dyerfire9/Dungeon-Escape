@@ -1,20 +1,13 @@
 package InteractiveElements;
 
 public class InteractiveElement {
-    // Consider the construction of Player. This is the base class for all objects to be seeded on the board.
+    // This is the base class for all objects to be seeded on the board.
+    // TODO: could use image to represent an element.
+    public String sprite;
 
-    public int[] pos;
-    private final String sprite;
-
-    public InteractiveElement(int[] pos, String sprite){
-        this.pos = pos;
+    public InteractiveElement(String sprite){
         this.sprite = sprite;
     }
-
-    public int[] getPos(){
-        return pos;
-    }
-
 
     @Override
     public String toString() {

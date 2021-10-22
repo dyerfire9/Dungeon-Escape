@@ -16,25 +16,20 @@ public class SystemInOut {
         int[] move = {0, 0};// better way to represent?
         switch (input) {
             case "a":
-            case "A":
                 move[1] = -1;
                 break;
             case "d":
-            case "D":
                 move[1] = 1;
                 break;
             case "w":
-            case "W":
                 move[0] = -1;
                 break;
             case "s":
-            case "S":
                 move[0] = 1;
                 break;
             // In the consumer class, Integer.MIN_VALUE is taken to mean "quit the game".
             //TODO: Find a more organized solution
             case "quit":
-            case "QUIT":
                 move[0] = Integer.MIN_VALUE;
                 break;
             default:
