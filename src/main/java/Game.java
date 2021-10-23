@@ -1,4 +1,5 @@
 import Boards.Board;
+import Boards.MovableCoverBoard;
 import Boards.StationaryCoverBoard;
 import InteractiveElements.StationaryChangePoints;
 
@@ -11,9 +12,10 @@ public class Game {
     private ArrayList<Board> boards_list;
     private Player player;
 
-    // TODO: find better way to iterate thru all boards.
-    Board board = new Board(10);
-    StationaryCoverBoard scb = new StationaryCoverBoard(10, 10);
+    // TODO: Set up a trigger pattern for adding new boards.
+    Board board = new Board(20);
+    StationaryCoverBoard scb = new StationaryCoverBoard(20, 20);
+    MovableCoverBoard mcb = new MovableCoverBoard(20, 20);
 
     public Game () {
         // TODO: game can take in some params for more custom features.
@@ -24,9 +26,10 @@ public class Game {
         this.boards_list = new ArrayList<>();
         this.boards_list.add(board);
         this.boards_list.add(scb);
+        this.boards_list.add(mcb);
 
-        // TODO: find better way to initialize Player's starting position.
-        int startingPos = 24;
+        // TODO: find better way to initialize Player's starting position. Player cannot start at a blocked position.
+        int startingPos = 88;
         this.player = new Player(startingPos, "P");
 
     }
@@ -39,12 +42,26 @@ public class Game {
 
         Object board_res = board.getElement(newPos);
         Object stationary_res = scb.getElement(newPos);
+        Object mcb_res = mcb.getElement(newPos);
 
-        // TODO: the following is an example of two layers: 1. a bounded base board, 2. a cover board that hold stationary items: either blocks or elements that can change player's points.
+
+        // TODO: the following is an example of three layers: 1. a bounded base board, 2. a cover board that holds stationary elements: either blocks or elements that can change player's points. 3. a cover board that holds movable elements: either blocks or point-changers.
+        // TODO: better way to do the nested ifs?
         if (board_res == null) {
             if (stationary_res == null) {
-                this.player.setPos(newPos);
-            } else {
+                if (mcb_res == null) {
+                    this.player.setPos(newPos);
+                } else { // MovableCoverBoard is sending a MovableIE
+                    if (mcb_res.toString().equals("W")) {
+                        int change = ((StationaryChangePoints) mcb_res).getChange();
+                        this.player.changePoints(change);
+                        System.out.println("Met a movable points changer - Points changed!");
+                        this.player.setPos(newPos); // TODO: is it correct that player can move here?
+                    } else {
+                        System.out.println("There is a movable blocker - Cannot move there!");
+                    }
+                }
+            } else { // StationaryCoverBoard is sending a StationaryIE
                 if (stationary_res.toString().equals("C")) {
                     int change = ((StationaryChangePoints) stationary_res).getChange();
                     this.player.changePoints(change);
@@ -58,7 +75,7 @@ public class Game {
                 }
             }
         }
-        else {
+        else { // base Board is sending a Wall element
             System.out.println("There is a wall - Cannot move there!");
         }
     }

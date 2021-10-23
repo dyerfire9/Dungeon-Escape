@@ -5,7 +5,7 @@ public class Player {
 
     public Player(int pos, String sprite){
         this.pos = pos;
-        this.points = 0;
+        this.points = 100;
         this.sprite = sprite;
     }
 

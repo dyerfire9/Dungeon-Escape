@@ -13,6 +13,7 @@ public class StationaryCoverBoard extends Board {
             int randomInt = ThreadLocalRandom.current().nextInt(0, (boardSize + 1) * boardSize);
             this.setElement(randomInt, IEFactory.getType("StationaryChangePoints"));
             // TODO: refine randomizing algo for placing StationryBlocks
+            // TODO: extract all randomizing patterns and create an interface?
             this.setElement(randomInt / 3, IEFactory.getType("StationaryBlock"));
         }
     }

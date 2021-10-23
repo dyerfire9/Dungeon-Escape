@@ -23,7 +23,7 @@ public class GameRunner {
             int[] movement = this.parser.parse(input);
             if (movement[0] == Integer.MIN_VALUE) {
                 System.out.println("Exiting program...");
-                this.game.setRunning(false);
+                this.game.setRunning(false); // TODO: add End of Game when Player points < 0?
             } else {
                 this.game.makeMove(movement);
                 //System.out.println("Nice move!"); Not using this right now due to lack of distinction between hitting an obstacle and hitting the board boundary.

@@ -13,6 +13,12 @@ public class IEFactory {
         if(IEType.equalsIgnoreCase("StationaryBlock")) {
             return new StationaryBlock("X");
         }
+        if(IEType.equalsIgnoreCase("MovableChangePoints")) {
+            return new MovableChangePoints("W");
+        }
+        if(IEType.equalsIgnoreCase("MovableBlock")) {
+            return new MovableBlock("M");
+        }
 
         return null;
     }
