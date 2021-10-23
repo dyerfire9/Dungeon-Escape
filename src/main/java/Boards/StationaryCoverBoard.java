@@ -8,7 +8,9 @@ public class StationaryCoverBoard extends Board {
     public StationaryCoverBoard(int boardSize, int difficultyLevel) {
         super(boardSize);
         // TODO: better way to incorporate difficultyLevel in the algo.
-        int numOfElements = (boardSize + 1) * boardSize / difficultyLevel;
+        // Update: pre algo: (n(n+1))/difficulty, new algo: (n-2)^2 * 0.01 * difficulty.
+        // difficulty % of traversable area will be occupied by obstacle.
+        int numOfElements = (boardSize - 2) * (boardSize - 2) * difficultyLevel / 100;
         for (int i = 0; i < numOfElements; i ++) {
             int randomInt = ThreadLocalRandom.current().nextInt(0, (boardSize + 1) * boardSize);
             this.setElement(randomInt, IEFactory.getType("StationaryChangePoints"));
