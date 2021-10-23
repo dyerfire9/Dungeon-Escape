@@ -2,7 +2,7 @@ import org.junit.*;
 
 public class PlayerTest {
     @Test(timeout = 50)
-    public void TestPlayer(){
+    public void TestPlayerBasics(){
         Player player = new Player(25, "P");
 
         assert(player.getPos() == (25));
@@ -17,4 +17,11 @@ public class PlayerTest {
         assert (player.getPoints() == 130);
 
     }
+
+    @Test(timeout = 50)
+    public void TestPlayerToString(){
+        Player player = new Player(25, "P");
+        assert (player.toString().equals("P"));
+    }
+
 }
