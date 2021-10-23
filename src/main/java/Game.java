@@ -50,7 +50,7 @@ public class Game {
                     int change = ((StationaryChangePoints) stationary_res).getChange();
                     this.player.changePoints(change);
                     System.out.println("Met a stationary points changer - Points changed!");
-                    this.player.setPos(newPos); // TODO: is it correct that player can move here?
+                    this.player.setPos(newPos);
                     // TODO: need better points system.
                     System.out.println("Your points is " + this.player.getPoints());
                 }
