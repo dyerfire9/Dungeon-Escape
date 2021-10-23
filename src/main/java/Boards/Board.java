@@ -22,7 +22,7 @@ public class Board {
             // left edge:
             boardList[i * (this.size + 1)] = "x";
             // right edge:
-            boardList[(i + 1) * this.size - 1] = "x";
+            boardList[(i + 1) * (this.size + 1) - 2] = "x";
 
         }
         return boardList;
