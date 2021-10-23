@@ -1,5 +1,7 @@
 package Boards;
 
+import java.util.Arrays;
+
 public class Board {
     private final int size;
     private Object[] board;
@@ -44,5 +46,12 @@ public class Board {
         this.board[pos] = element;
     }
 
+    @Override
+    public String toString() {
+        return "Board{" +
+                "size=" + size +
+                ", board=" + Arrays.toString(board) +
+                '}';
+    }
 }
 
