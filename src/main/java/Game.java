@@ -26,6 +26,7 @@ public class Game {
         this.boards_list.add(scb);
 
         // TODO: find better way to initialize Player's starting position.
+        // We will have portals eventually we don't need to consider starting pos..?
         int startingPos = 24;
         this.player = new Player(startingPos, "P");
 
