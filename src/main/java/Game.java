@@ -1,6 +1,7 @@
 import Boards.Board;
 import Boards.MovableCoverBoard;
 import Boards.StationaryCoverBoard;
+import InteractiveElements.MovableChangePoints;
 import InteractiveElements.StationaryChangePoints;
 
 import java.util.ArrayList;
@@ -53,9 +54,10 @@ public class Game {
                     this.player.setPos(newPos);
                 } else { // MovableCoverBoard is sending a MovableIE
                     if (mcb_res.toString().equals("W")) {
-                        int change = ((StationaryChangePoints) mcb_res).getChange();
+                        int change = ((MovableChangePoints) mcb_res).getChange();
                         this.player.changePoints(change);
                         System.out.println("Met a movable points changer - Points changed!");
+                        System.out.println("Your points is " + this.player.getPoints());
                         this.player.setPos(newPos); // TODO: is it correct that player can move here?
                     } else {
                         System.out.println("There is a movable blocker - Cannot move there!");
@@ -66,9 +68,10 @@ public class Game {
                     int change = ((StationaryChangePoints) stationary_res).getChange();
                     this.player.changePoints(change);
                     System.out.println("Met a stationary points changer - Points changed!");
+                    System.out.println("Your points is " + this.player.getPoints());
                     this.player.setPos(newPos); // TODO: is it correct that player can move here?
                     // TODO: need better points system.
-                    System.out.println("Your points is " + this.player.getPoints());
+
                 }
                 else {
                     System.out.println("There is a stationary blocker - Cannot move there!");
