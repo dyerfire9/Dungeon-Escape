@@ -1,4 +1,4 @@
-import Boards.Board;
+import boards.Board;
 import org.junit.*;
 
 public class BoardTest {

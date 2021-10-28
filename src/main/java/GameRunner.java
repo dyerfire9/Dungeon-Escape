@@ -1,33 +1,45 @@
+import boards.Board;
+
 import java.util.*;
 
-/**
- * Wrapper class for running an instance of Game
- */
 public class GameRunner {
+    private Board board;
     private Game game;
+    private Player player;
     private Renderer renderer;
-    private SystemInOut parser;
+    private SystemIn parser;
 
-    public GameRunner() {
-        this.parser = new SystemInOut();
-        this.game = new Game();
+    public GameRunner(Board board) {
+        this.board = board;
+        this.game = new Game(this.board);
+        this.player = this.game.getPlayer();
+
+        this.parser = new SystemIn();
         this.renderer = new Renderer();
     }
 
-    public void runGame() {
-        Scanner reader = new Scanner(System.in);
 
-        while (this.game.getRunning()) {
+    // runGame takes in a move, parse it -> (game.movePlayer, game.changePlayer, RenderGame)
+    public void runGame() {
+        System.out.println("Your now have " + player.getPoints() + " points.");
+        Scanner reader = new Scanner(System.in);
+        while (this.game.isRunning()) {
             System.out.println("\nWhat is your move?");
             String input = reader.nextLine().toLowerCase();
-            int[] movement = this.parser.parse(input);
-            if (movement[0] == Integer.MIN_VALUE) {
-                System.out.println("Exiting program...");
-                this.game.setRunning(false); // TODO: add End of Game when Player points < 0?
-            } else {
-                this.game.makeMove(movement);
-                //System.out.println("Nice move!"); Not using this right now due to lack of distinction between hitting an obstacle and hitting the board boundary.
+            int[] move = this.parser.parse(input);
+            if (move[0] == Integer.MIN_VALUE) {
+                System.out.println("\nExiting program...");
+                this.game.setRunning(false);
+            }
+            else {
+                this.game.movePlayer(move);
+                this.game.changePlayer(board.getElement(this.player.getPos())); // TODO: This may change slightly depending on what we decide with points-changers. Right now Player occupies the element's position and "shadows" its sprite.
                 System.out.println(this.renderer.renderGame(this.game));
+
+                if (this.player.getPoints() < 0) {
+                    this.game.setRunning(false);
+                    System.out.println("\nYou lost all points...Game ends.");
+                }
             }
         }
     }

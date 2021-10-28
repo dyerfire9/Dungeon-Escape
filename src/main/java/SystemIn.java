@@ -3,7 +3,7 @@
  * In the current version, it only responds to movement commands.
  */
 
-public class SystemInOut {
+public class SystemIn {
 
     /**
      * Parses the user's command and returns a movement action.

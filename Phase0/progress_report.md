@@ -16,7 +16,7 @@ A tile-based game where the player can move between tiles stored on a board, tho
 - Each board has a Goal, when the player reaches the goal, they move onto the next board (next level). The game ends when the player beats the final board (basically the final level)
 
 ### CRC Model:
-Made virtual CRC cards for 3 entities (Player, Tile, Board), 3 Use Cases (Renderer, SystemInOut, Game), and 1 controller (GameRunner) based on the Specification. Included where attributes are stored, getters and setters, the methods that the program uses, and short descriptions for non-self-explanatory methods.
+Made virtual CRC cards for 3 entities (Player, Tile, Board), 3 Use Cases (Renderer, SystemIn, Game), and 1 controller (GameRunner) based on the Specification. Included where attributes are stored, getters and setters, the methods that the program uses, and short descriptions for non-self-explanatory methods.
 
 ### Scenario walk-through:
 
@@ -49,7 +49,7 @@ The skeleton program implements all of the classes outlined in the CRC cards. Wh
 
 ### Henry:
 - I've created CRC card based on our overall model.
-- I'm currently working on SystemInOut TODOs. There will be some changes user input. 
+- I'm currently working on SystemIn TODOs. There will be some changes user input. 
 - I provided some suggestions for others code refactoring.
 - Personally, I want to make some changes on the structure of Board.java's structure, but it should be discussed with team members first.
 

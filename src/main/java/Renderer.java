@@ -1,55 +1,47 @@
-import Boards.Board;
-import Boards.MovableCoverBoard;
-import Boards.StationaryCoverBoard;
-
-import java.util.ArrayList;
+import boards.Board;
 
 public class Renderer {
 
-    public String renderGame(Game game) {
-        ArrayList<Board> boards_list = game.getBoards();
-        Player player = game.getPlayer();
-
-        // TODO: find better way to iterate through all boards
-        Board board = boards_list.get(0);
-        StationaryCoverBoard scb = (StationaryCoverBoard) boards_list.get(1);
-        MovableCoverBoard mcb = (MovableCoverBoard) boards_list.get(2);
-
-
+    public String renderBoard(Board board) {
         int boardSize = board.getSize();
-
-
         StringBuilder boardRepr = new StringBuilder();
-        for (int i = 0; i < (boardSize + 1) * boardSize; i++) {
-            Object board_res = board.getElement(i);
-            Object scb_res = scb.getElement(i);
-            Object mcb_res = mcb.getElement(i);
-
-
-            if ((i+1) % (boardSize + 1) == 0){ // break up 1D string to 2D matrix. Note that this algorithm have to change if use more than 1 char to represent elements.
-                boardRepr.append('\n');
-                continue;
-            }
-            if (board_res != null) {   // an edge block
-                boardRepr.append(board_res.toString());
-            } else { // not an edge block
-                if (scb_res == null) { // nothing on stationary board
-                    if (mcb_res == null) {// nothing on movable board
-                        boardRepr.append("o");
-                    }
-                    else { // something on the movable board
-                        boardRepr.append(mcb_res.toString());
-                    }
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                int[] pos = {i, j};
+                Object element = board.getElement(pos);
+                String sprite = ".";
+                if ( element != null) {
+                    sprite = element.toString();
                 }
-                else {  // something on the stationary board
-                    boardRepr.append(scb_res.toString());
-                }
+                boardRepr.append(sprite);
             }
+            boardRepr.append('\n');
         }
-        // change player's sprite:
-        boardRepr.setCharAt(player.getPos(), 'P');
+
+        boardRepr.setCharAt(0, 'P');
+        boardRepr.setCharAt((boardSize + 1) * boardSize-2, 'G');
 
         return boardRepr.toString();
+
+    }
+
+
+
+
+    public String renderGame(Game game) {
+
+        // the only difference is that game knows where player is.
+
+        Board board = game.getBoard();
+        Player player = game.getPlayer();
+        int[] playerPos = player.getPos();
+        int playerLinearPos = playerPos[0] * (board.getSize() + 1) + playerPos[1];
+
+        String boardRepr = this.renderBoard(board);
+        // TODO: this is a bad temporary fix for resetting the Player's starting position. Thre is an off chance that Player fails to move at first, so resetting the [0,0] to . is not reasonable. But in GUI, we'll deal with layering of images, so this rendering is OK for debugging purposes.
+        String gameString= '.' + boardRepr.substring(1, playerLinearPos) + "P" + boardRepr.substring(playerLinearPos + 1);
+
+        return gameString;
     }
 
 }
