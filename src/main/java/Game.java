@@ -57,7 +57,7 @@ public class Game {
                         int change = ((MovableChangePoints) mcb_res).getChange();
                         this.player.changePoints(change);
                         System.out.println("Met a movable points changer - Points changed!");
-                        System.out.println("Your points is " + this.player.getPoints());
+                        System.out.println("You have " + this.player.getPoints() + " points!");
                         this.player.setPos(newPos); // TODO: is it correct that player can move here?
                     } else {
                         System.out.println("There is a movable blocker - Cannot move there!");
@@ -68,7 +68,7 @@ public class Game {
                     int change = ((StationaryChangePoints) stationary_res).getChange();
                     this.player.changePoints(change);
                     System.out.println("Met a stationary points changer - Points changed!");
-                    System.out.println("Your points is " + this.player.getPoints());
+                    System.out.println("You have " + this.player.getPoints() + " points!");
                     this.player.setPos(newPos); // TODO: is it correct that player can move here?
                     // TODO: need better points system.
 
