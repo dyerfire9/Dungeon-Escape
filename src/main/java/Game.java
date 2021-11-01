@@ -1,27 +1,61 @@
-/**
- * Controls the system responsible for receiving player inputs and updating Board.
- */
+import boards.Board;
+import elements.ChangePoints;
+import elements.Element;
+import elements.Movable;
 
 
 public class Game {
-    private Board board; // 1D array for now
-    private Player player; //assuming 1 player for now.
-    private boolean isRunning = true;
 
-    public Game() {
-        this.board = new Board(10);
-        this.player = new Player(5, "P");
+    private boolean isRunning;
+    private Board board;
+    private Player player;
+
+    public Game (Board board) {
+        this.board = board;
+        this.isRunning = true;
+        int[] pos = {0,0};
+        this.player = new Player(pos, "P");
     }
 
-    public void makeMove(int move) {
-        this.player.makeMove(move, this.board);
+    public void movePlayer(int[] move) {
+        int[] currentPos = player.getPos();
+        int[] newPos = {currentPos[0] + move[0], currentPos[1] + move[1]};
+        Object element = board.getElement(newPos);
+        // TODO: need to refine this logic...if newPos has a points-changer, can Player still move onto that position? In pacman, you "eat" a points-changer, and move onto its position.
+        player.setPos(newPos);
+        if (element == null)  {
+        }
+        else  {
+            System.out.println("Met an element!");
+        }
     }
 
-    // Getters
-    public boolean getRunning(){return this.isRunning; }
-    public void setRunning(boolean isRunning) {this.isRunning = isRunning; }
 
-    public int getPlayerPosition() {return this.player.getPos();}
-    public String getPlayerString() {return this.player.toString();}
-    public String getBoardString() {return this.board.toString();}
+    public void changePlayer(Object e) {
+        if (e instanceof ChangePoints){
+           player.changePoints(((ChangePoints) e).getChange());
+        }
+        System.out.println("Your now have " + player.getPoints() + " points.");
     }
+
+
+
+
+    // Getter & Setter for game status.
+    public boolean isRunning() {
+        return this.isRunning;
+    }
+
+    public void setRunning(boolean isRunning) {
+        this.isRunning = isRunning;
+    }
+
+    public Board getBoard() {
+        return this.board;
+    }
+
+    public Player getPlayer() {
+        return this.player;
+    }
+
+}

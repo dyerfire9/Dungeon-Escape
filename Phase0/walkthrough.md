@@ -10,7 +10,7 @@
 
 - Then a Player instance is created and stored in the Game and is added onto the board at a certain position.
 
-- While the game is running, the GameRunner will prompt user to provide an input ('a' and 'd' ideally) and interpret the user input using SystemInOut and move the Player left or right. Then update the position of player, and render board again using the Renderer.
+- While the game is running, the GameRunner will prompt user to provide an input ('a' and 'd' ideally) and interpret the user input using SystemIn and move the Player left or right. Then update the position of player, and render board again using the Renderer.
 
 - If the user makes a move and Board identifies that the Tile is non-traversable, the player cannot overcome it and player's position remains the same and the board is re-rendered from the Renderer. 
     
