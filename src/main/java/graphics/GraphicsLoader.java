@@ -16,7 +16,7 @@ public class GraphicsLoader {
     public GraphicsLoader () {}
 
     public void drawBoard(GraphicsContext gc) {
-        Image test = new Image("C:\\Users\\adity\\IdeaProjects\\course-project-1190\\src\\main\\assets\\tiles\\cobble_blood1.png");
+        Image test = new Image("file:src/main/assets/tiles/cobble_blood1.png");
 
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j ++) {
@@ -25,7 +25,7 @@ public class GraphicsLoader {
         }
     }
     public void drawPlayer(GraphicsContext gc) {
-        Image playerSprite = new Image("C:\\Users\\adity\\IdeaProjects\\course-project-1190\\src\\main\\assets\\player\\deep_elf_blademaster.png");
+        Image playerSprite = new Image("file:src/main/assets/player/deep_elf_blademaster.png");
 
 
         gc.drawImage(playerSprite, 0, 0);
