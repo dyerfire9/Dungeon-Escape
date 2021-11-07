@@ -12,7 +12,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.util.HashSet;
-
+import graphics.GraphicsLoader;
 /**
  * Separate main file, only to be used for the graphics branch.
  */
@@ -38,8 +38,11 @@ public class GraphicsMain extends Application {
 
         prepareActionHandlers();
 
-        graphicsContext = canvas.getGraphicsContext2D();
+        GraphicsLoader gl = new GraphicsLoader();
+        GraphicsContext gc = canvas.getGraphicsContext2D();
 
+        gl.drawBoard(gc);
+        gl.drawPlayer(gc);
         loadGraphics();
 
         /**
