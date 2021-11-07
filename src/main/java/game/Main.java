@@ -1,3 +1,5 @@
+package game;
+
 /**
  * Contains the main game loop.
  */

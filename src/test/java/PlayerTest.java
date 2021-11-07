@@ -1,3 +1,4 @@
+import game.Player;
 import org.junit.*;
 
 public class PlayerTest {

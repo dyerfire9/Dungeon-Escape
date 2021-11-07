@@ -1,3 +1,5 @@
+package game;
+
 import boards.Board;
 import elements.*;
 
@@ -77,7 +79,7 @@ public class GameMaker {
                 System.out.println(this.renderBoard(board));
             }
             else {
-                System.out.println("\nNow you have a ready-to-play board! Game starts......");
+                System.out.println("\nNow you have a ready-to-play board! game.Game starts......");
                 break;
             }
         }

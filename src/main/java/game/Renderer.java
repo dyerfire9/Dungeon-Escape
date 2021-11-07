@@ -1,3 +1,5 @@
+package game;
+
 import boards.Board;
 
 public class Renderer {
@@ -38,7 +40,7 @@ public class Renderer {
         int playerLinearPos = playerPos[0] * (board.getSize() + 1) + playerPos[1];
 
         String boardRepr = this.renderBoard(board);
-        // TODO: this is a bad temporary fix for resetting the Player's starting position. Thre is an off chance that Player fails to move at first, so resetting the [0,0] to . is not reasonable. But in GUI, we'll deal with layering of images, so this rendering is OK for debugging purposes.
+        // TODO: this is a bad temporary fix for resetting the game.Player's starting position. Thre is an off chance that game.Player fails to move at first, so resetting the [0,0] to . is not reasonable. But in GUI, we'll deal with layering of images, so this rendering is OK for debugging purposes.
         String gameString= '.' + boardRepr.substring(1, playerLinearPos) + "P" + boardRepr.substring(playerLinearPos + 1);
 
         return gameString;

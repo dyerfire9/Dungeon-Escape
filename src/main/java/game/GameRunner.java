@@ -1,3 +1,5 @@
+package game;
+
 import boards.Board;
 
 import java.util.*;
@@ -33,12 +35,12 @@ public class GameRunner {
             }
             else {
                 this.game.movePlayer(move);
-                this.game.changePlayer(board.getElement(this.player.getPos())); // TODO: This may change slightly depending on what we decide with points-changers. Right now Player occupies the element's position and "shadows" its sprite.
+                this.game.changePlayer(board.getElement(this.player.getPos())); // TODO: This may change slightly depending on what we decide with points-changers. Right now game.Player occupies the element's position and "shadows" its sprite.
                 System.out.println(this.renderer.renderGame(this.game));
 
                 if (this.player.getPoints() < 0) {
                     this.game.setRunning(false);
-                    System.out.println("\nYou lost all points...Game ends.");
+                    System.out.println("\nYou lost all points...game.Game ends.");
                 }
             }
         }

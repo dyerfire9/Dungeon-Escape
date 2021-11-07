@@ -1,3 +1,5 @@
+package game;
+
 /**
  * Parses input from the command line.
  * In the current version, it only responds to movement commands.

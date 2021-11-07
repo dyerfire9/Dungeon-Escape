@@ -1,7 +1,7 @@
+package game;
+
 import boards.Board;
 import elements.ChangePoints;
-import elements.Element;
-import elements.Movable;
 
 
 public class Game {
@@ -21,7 +21,7 @@ public class Game {
         int[] currentPos = player.getPos();
         int[] newPos = {currentPos[0] + move[0], currentPos[1] + move[1]};
         Object element = board.getElement(newPos);
-        // TODO: need to refine this logic...if newPos has a points-changer, can Player still move onto that position? In pacman, you "eat" a points-changer, and move onto its position.
+        // TODO: need to refine this logic...if newPos has a points-changer, can game.Player still move onto that position? In pacman, you "eat" a points-changer, and move onto its position.
         player.setPos(newPos);
         if (element == null)  {
         }
