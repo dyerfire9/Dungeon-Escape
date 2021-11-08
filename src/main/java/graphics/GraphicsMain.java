@@ -29,6 +29,12 @@ public class GraphicsMain extends Application {
     private static GraphicsContext gc;
     private static GraphicsLoader gl;
 
+    //TODO: Move these attributes somewhere else later
+    //TODO: Make class structure cleaner. Everything is static and a bit of a mess
+    private static int playerX = 0;
+    private static int playerY = 0;
+    private static KeyboardReader playerKeyReader;
+
     private static final int WIDTH = 32 * 20;
     private static final int HEIGHT = 32 * 20;
 
@@ -50,8 +56,8 @@ public class GraphicsMain extends Application {
         gc = canvas.getGraphicsContext2D();
 
         // Init KeyboardListener
-        KeyboardReader keyReader = new KeyboardReader(mainScene);
-        keyReader.addKeyListeners();
+        playerKeyReader = new KeyboardReader(mainScene);
+        playerKeyReader.addKeyListeners();
 
 
         // ########### Main game loop ###########
@@ -73,12 +79,32 @@ public class GraphicsMain extends Application {
 
         mainStage.show();
     }
-    
+
     private static void tickAndRender(long deltaTime) {
         clearScreen();
+        movePlayer();
         gl.drawBoard(gc);
-        gl.drawPlayer(gc, 0, 0);
+        gl.drawPlayer(gc, playerX, playerY);
         drawDebugInfo(deltaTime / 1000000000.0, 0, 0);
+    }
+
+    private static void movePlayer() {
+        if (playerKeyReader.getActiveKeys().contains("W")) {
+            playerY -= 1;
+            playerKeyReader.getActiveKeys().remove("W");
+        }
+        if (playerKeyReader.getActiveKeys().contains("A")) {
+            playerX -= 1;
+            playerKeyReader.getActiveKeys().remove("A");
+        }
+        if (playerKeyReader.getActiveKeys().contains("S")) {
+            playerY += 1;
+            playerKeyReader.getActiveKeys().remove("S");
+        }
+        if (playerKeyReader.getActiveKeys().contains("D")) {
+            playerX += 1;
+            playerKeyReader.getActiveKeys().remove("D");
+        }
     }
 
     /**
@@ -91,6 +117,7 @@ public class GraphicsMain extends Application {
     private static void drawDebugInfo(double deltaTimeSec, double x, double y) {
         gc.setFill(Color.MAGENTA);
         gc.fillText(String.format("FPS: %.1f", 1 / deltaTimeSec), x, y + 10);
+        gc.fillText(String.format("KeysActive: %s", playerKeyReader.getActiveKeys().toString()), x, y + 20);
     }
 
     /**
