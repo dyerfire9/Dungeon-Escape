@@ -12,6 +12,7 @@ import java.util.HashSet;
 public class KeyboardReader {
     private Scene mainScene;
     private HashSet<String> activeKeys;
+    private HashSet<String> pressedKeys;
 
     /**
      * Constructs a KeyboardReader given a JavaFX scene graph.
@@ -20,14 +21,20 @@ public class KeyboardReader {
     public KeyboardReader(Scene mainScene) {
         this.mainScene = mainScene;
         activeKeys = new HashSet<>();
+        pressedKeys = new HashSet<>();
     }
 
     /**
      * Attaches key listeners to the scene graph. Should only be called once.
      */
     public void addKeyListeners() {
-        mainScene.setOnKeyPressed(event -> activeKeys.add(event.getCode().toString()));
-        mainScene.setOnKeyReleased(event -> activeKeys.remove(event.getCode().toString()));
+        mainScene.setOnKeyPressed(event -> pressedKeys.add(event.getCode().toString()));
+        mainScene.setOnKeyReleased(event -> {
+            if (pressedKeys.contains(event.getCode().toString())) {
+                activeKeys.add(event.getCode().toString());
+            }
+            pressedKeys.remove(event.getCode().toString());
+        });
     }
 
 
@@ -43,6 +50,10 @@ public class KeyboardReader {
 
     public HashSet<String> getActiveKeys() {
         return activeKeys;
+    }
+
+    public HashSet<String> getPressedKeys() {
+        return pressedKeys;
     }
 
 }

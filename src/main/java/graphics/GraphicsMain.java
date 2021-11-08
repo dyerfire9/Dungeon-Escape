@@ -117,7 +117,7 @@ public class GraphicsMain extends Application {
     private static void drawDebugInfo(double deltaTimeSec, double x, double y) {
         gc.setFill(Color.MAGENTA);
         gc.fillText(String.format("FPS: %.1f", 1 / deltaTimeSec), x, y + 10);
-        gc.fillText(String.format("KeysActive: %s", playerKeyReader.getActiveKeys().toString()), x, y + 20);
+        gc.fillText(String.format("PressedKeys: %s", playerKeyReader.getPressedKeys().toString()), x, y + 20);
     }
 
     /**
