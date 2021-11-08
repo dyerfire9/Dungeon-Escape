@@ -1,14 +1,14 @@
 package graphics;
 
 import javafx.application.Application;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-
-
 
 
 public class GraphicsLoader {
@@ -24,11 +24,10 @@ public class GraphicsLoader {
             }
         }
     }
-    public void drawPlayer(GraphicsContext gc) {
+    public void drawPlayer(GraphicsContext gc, int tileX, int tileY) {
         Image playerSprite = new Image("file:src/main/assets/player/deep_elf_blademaster.png");
 
-
-        gc.drawImage(playerSprite, 0, 0);
+        gc.drawImage(playerSprite, 32*tileX, 32*tileY);
     }
 
 }
