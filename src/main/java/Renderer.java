@@ -19,14 +19,10 @@ public class Renderer {
         }
 
         boardRepr.setCharAt(0, 'P');
-        boardRepr.setCharAt((boardSize + 1) * boardSize-2, 'G');
+        //boardRepr.setCharAt((boardSize + 1) * boardSize-2, 'G');
 
         return boardRepr.toString();
-
     }
-
-
-
 
     public String renderGame(Game game) {
 

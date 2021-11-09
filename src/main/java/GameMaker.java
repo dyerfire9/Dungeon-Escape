@@ -74,9 +74,20 @@ public class GameMaker {
 
                 board.setElement(pos, e);
 
+                // Goal
+                int[] goalPos = {board.getSize() - 1, board.getSize() - 1};
+                Element goal = new Goal("G", goalPos);
+                board.setElement(goalPos, goal);
+
                 System.out.println(this.renderBoard(board));
             }
+
             else {
+                // Goal
+                int[] goalPos = {board.getSize() - 1, board.getSize() - 1};
+                Element goal = new Goal("G", goalPos);
+                board.setElement(goalPos, goal);
+
                 System.out.println("\nNow you have a ready-to-play board! Game starts......");
                 break;
             }

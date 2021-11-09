@@ -1,6 +1,7 @@
 import boards.Board;
 import elements.ChangePoints;
 import elements.Element;
+import elements.Goal;
 import elements.Movable;
 
 
@@ -23,11 +24,15 @@ public class Game {
         Object element = board.getElement(newPos);
         // TODO: need to refine this logic...if newPos has a points-changer, can Player still move onto that position? In pacman, you "eat" a points-changer, and move onto its position.
         player.setPos(newPos);
-        if (element == null)  {
+
+
+        if (element instanceof Goal) {
+            System.out.println("Congratulations, You have cleared this level!");
+            this.isRunning = false;
         }
-        else  {
-            System.out.println("Met an element!");
-        }
+        else if (element == null){}
+        else  {System.out.println("Met an obstacle!");}
+
     }
 
 
