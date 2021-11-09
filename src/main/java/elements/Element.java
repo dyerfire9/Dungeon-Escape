@@ -17,5 +17,11 @@ public class Element {
         return this.sprite;
     }
 
-    public int[] getPos() { return this.pos;}
+    public int[] getPos() {
+        return this.pos;
+    }
+
+    public void setPos(int[] newPos) {
+        this.pos = newPos;
+    }
 }
