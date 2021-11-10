@@ -1,27 +1,30 @@
 package elements;
 
+import javafx.scene.image.Image;
+import utils.Point2D;
+import utils.PointImagePair;
+
 public class Element {
     // This is the base class for all objects to be seeded on the board.
     // TODO: could use image to represent an element.
-    private String sprite;
-    private int[] pos;
+    private Image sprite;
+    private Point2D pos;
 
 
-    public Element(String sprite, int[] pos){
+    public Element(Image sprite, Point2D pos){
         this.sprite = sprite;
         this.pos = pos;
     }
 
-    @Override
-    public String toString() {
-        return this.sprite;
+    public PointImagePair getPointImagePair() {
+        return new PointImagePair(this.pos, this.sprite);
     }
 
-    public int[] getPos() {
+    public Point2D getPos() {
         return this.pos;
     }
 
-    public void setPos(int[] newPos) {
+    public void setPos(Point2D newPos) {
         this.pos = newPos;
     }
 }

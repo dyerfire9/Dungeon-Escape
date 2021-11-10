@@ -1,21 +1,24 @@
 package game;
 
-public class Player {
-    private int[] pos;
-    private int points;
-    private final String sprite;
+import javafx.scene.image.Image;
+import utils.Point2D;
 
-    public Player(int[] pos, String sprite){
+public class Player {
+    private Point2D pos;
+    private int points;
+    private final Image sprite;
+
+    public Player(Point2D pos){
         this.pos= pos;
         this.points = 100;
-        this.sprite = sprite;
+        this.sprite =  new Image("file:src/main/assets/player/deep_elf_blademaster.png");
     }
 
 
-    public int[] getPos(){
+    public Point2D getPos(){
         return pos;
     }
-    public void setPos(int[] newPos) { this.pos = newPos; }
+    public void setPos(Point2D newPos) { this.pos = newPos; }
 
 
     public void setPoints(int p){
@@ -26,8 +29,7 @@ public class Player {
     }
     public void changePoints(int change) {this.points += change;}
 
-    @Override
-    public String toString() {
+    public Image getSprite() {
         return this.sprite;
     }
 }

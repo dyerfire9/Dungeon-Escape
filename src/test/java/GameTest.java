@@ -1,4 +1,5 @@
 import boards.Board;
+import game.Game;
 import org.junit.*;
 
 // TODO add tests for all applicable game methods
@@ -6,7 +7,7 @@ public class GameTest {
     //@Test(timeout = 50)
     //public void TestMovePlayer() {
     //    Board board = new Board(8);
-    //    Game game = new Game(board);
+    //    game.Game game = new game.Game(board);
     //}
 
     @Test(timeout = 50)

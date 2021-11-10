@@ -2,6 +2,8 @@ package boards;
 
 import elements.Element;
 import elements.Movable;
+import utils.Point2D;
+import utils.PointImagePair;
 
 import java.util.ArrayList;
 
@@ -24,21 +26,11 @@ public class ObjectStateManager {
         boardObjects.remove(object);
     }
 
-    public ArrayList<String> getNames(){
-        ArrayList<String> collector = new ArrayList<String>();
-        for(int i = 0; i < this.boardObjects.size(); i++) {
-            if (boardObjects.get(i) instanceof Element) {
-                collector.add(((Element) (boardObjects.get(i))).toString());
-            }
-        }
-        return collector;
-    }
-
-    public ArrayList<int[]> getCoords(){
-        ArrayList<int[]> collector = new ArrayList<int[]>();
-        for(int i = 0; i < this.boardObjects.size(); i++) {
-            if (boardObjects.get(i) instanceof Element) {
-                collector.add(((Element) (boardObjects.get(i))).getPos());
+    public ArrayList<PointImagePair> getPointImagePairs(){
+        ArrayList<PointImagePair> collector = new ArrayList<>();
+        for (Movable boardObject : this.boardObjects) {
+            if (boardObject instanceof Element) {
+                collector.add(((Element) boardObject).getPointImagePair());
             }
         }
         return collector;

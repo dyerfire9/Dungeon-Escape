@@ -1,5 +1,6 @@
 package graphics;
 
+import game.Game;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -15,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.util.HashSet;
 import graphics.GraphicsLoader;
+import utils.Point2D;
 
 /**
  * Separate main file, only to be used for the graphics branch.
@@ -28,11 +30,10 @@ public class GraphicsMain extends Application {
     private static Scene mainScene;
     private static GraphicsContext gc;
     private static GraphicsLoader gl;
+    private static Game game;
 
     //TODO: Move these attributes somewhere else later
     //TODO: Make class structure cleaner. Everything is static and a bit of a mess
-    private static int playerX = 0;
-    private static int playerY = 0;
     private static KeyboardReader playerKeyReader;
 
     private static final int WIDTH = 32 * 20;
@@ -52,12 +53,17 @@ public class GraphicsMain extends Application {
         root.getChildren().add(canvas);
 
         // Init GraphicsContext and GraphicsLoader
-        gl = new GraphicsLoader();
         gc = canvas.getGraphicsContext2D();
 
         // Init KeyboardListener
         playerKeyReader = new KeyboardReader(mainScene);
         playerKeyReader.addKeyListeners();
+
+
+        /* GAME-RELATED SETUP */
+        gl = new GraphicsLoader();
+        game = new Game(20);
+
 
 
         // ########### Main game loop ###########
@@ -83,26 +89,26 @@ public class GraphicsMain extends Application {
     private static void tickAndRender(long deltaTime) {
         clearScreen();
         movePlayer();
-        gl.drawBoard(gc);
-        gl.drawPlayer(gc, playerX, playerY);
+        gl.drawBoard(gc, game);
+        gl.drawPlayer(gc, game);
         drawDebugInfo(deltaTime / 1000000000.0, 0, 0);
     }
 
     private static void movePlayer() {
         if (playerKeyReader.getActiveKeys().contains("W")) {
-            playerY -= 1;
+            game.movePlayer(new Point2D(0, -1));
             playerKeyReader.getActiveKeys().remove("W");
         }
         if (playerKeyReader.getActiveKeys().contains("A")) {
-            playerX -= 1;
+            game.movePlayer(new Point2D(-1, 0));
             playerKeyReader.getActiveKeys().remove("A");
         }
         if (playerKeyReader.getActiveKeys().contains("S")) {
-            playerY += 1;
+            game.movePlayer(new Point2D(0, 1));
             playerKeyReader.getActiveKeys().remove("S");
         }
         if (playerKeyReader.getActiveKeys().contains("D")) {
-            playerX += 1;
+            game.movePlayer(new Point2D(1, 0));
             playerKeyReader.getActiveKeys().remove("D");
         }
     }
@@ -126,7 +132,7 @@ public class GraphicsMain extends Application {
     private static void clearScreen() {
         Paint oldFill = gc.getFill();
 
-        gc.setFill(Color.BLACK);
+        gc.setFill(Color.WHITE);
         gc.fillRect(0, 0, WIDTH, HEIGHT);
         gc.setFill(oldFill);
     }
