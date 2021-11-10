@@ -16,10 +16,35 @@ import utils.PointImagePair;
 import java.util.ArrayList;
 
 
+/**
+ * Contains method to draw the board on a canvas element.
+ */
 public class GraphicsLoader {
 
-    public GraphicsLoader () {}
+    // Represents the amount of space (in pixels) that a single tile takes up.
+    // Added tileSize because we may not want to hardcode this value in the future.
+    private int tileSize;
 
+    /**
+     * Constructs an instance with the default tile size.
+     */
+    public GraphicsLoader() {
+        this.tileSize = 32;
+    }
+
+    /**
+     * Constructs an instance with a specified tile size.
+     * @param tileSize The tile size.
+     */
+    public GraphicsLoader(int tileSize) {
+        this.tileSize = tileSize;
+    }
+
+    /**
+     * Draws the current state of the board on a GraphicsContext instance.
+     * @param gc The GraphicsContext to draw on.
+     * @param game The specified Game instance to draw from.
+     */
     public void drawBoard(GraphicsContext gc, Game game) {
 
         ArrayList<PointImagePair> tiles = game.getBoardTiles();
@@ -28,18 +53,24 @@ public class GraphicsLoader {
         // Render tiles
         for (PointImagePair tile: tiles) {
             Point2D point = tile.getPoint();
-            gc.drawImage(tile.getImg(), 32*point.getX(), 32*point.getY());
+            gc.drawImage(tile.getImg(), tileSize * point.getX(), tileSize * point.getY());
         }
 
         for (PointImagePair obj: objects) {
             Point2D point = obj.getPoint();
-            gc.drawImage(obj.getImg(), 32* point.getX(), 32* point.getY());
+            gc.drawImage(obj.getImg(), tileSize * point.getX(), tileSize * point.getY());
         }
 
     }
+
+    /**
+     * Draws the player on a GraphicsContext instance.
+     * @param gc The GraphicsContext to draw on.
+     * @param game The specified Game instance to draw from.
+     */
     public void drawPlayer(GraphicsContext gc, Game game) {
         Point2D point = game.getPlayerPosition();
-        gc.drawImage(game.getPlayerSprite(), 32*point.getX(), 32*point.getY());
+        gc.drawImage(game.getPlayerSprite(), tileSize * point.getX(), tileSize * point.getY());
     }
 
 }
