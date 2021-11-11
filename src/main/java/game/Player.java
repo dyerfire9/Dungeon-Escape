@@ -30,4 +30,6 @@ public class Player {
     public void decrementIframes() {
         this.playerState.decrementIframes();
     }
+    public PlayerState getPlayerState() {return this.playerState;}
+
 }

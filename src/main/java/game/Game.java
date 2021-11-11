@@ -53,17 +53,6 @@ public class Game {
         this.player.decrementIframes();
     }
 
-
-//    public void changePlayer(Object e) {
-//        if (e instanceof ChangePoints){
-//           player.changePoints(((ChangePoints) e).getChange());
-//        }
-//        System.out.println("Your now have " + player.getPoints() + " points.");
-//    }
-
-
-
-
     // Getter & Setter for game status.
     public boolean isRunning() {
         return this.isRunning;
@@ -89,4 +78,5 @@ public class Game {
         return this.player.getPos();
     }
 
+    public PlayerState getPlayerState() {return this.player.getPlayerState();}
 }

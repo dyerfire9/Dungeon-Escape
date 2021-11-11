@@ -4,12 +4,14 @@ import game.Game;
 import javafx.application.Application;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import utils.PlayerState;
 import utils.Point2D;
 import utils.PointImagePair;
 
@@ -73,5 +75,16 @@ public class GraphicsLoader {
         gc.drawImage(game.getPlayerSprite(), tileSize * point.getX(), tileSize * point.getY());
     }
 
+    public void drawPlayerState(GraphicsContext gc, Point2D point, Game game) {
+        PlayerState currState = game.getPlayerState();
+
+        Font debugFont = new Font("Consolas", 12);
+        gc.setFont(debugFont);
+        gc.setFill(Color.MAGENTA);
+        gc.fillText(String.valueOf(currState.getPoints()), point.getX(), point.getY() + 12);
+        gc.fillText(String.valueOf(currState.checkInvincible()), point.getX(), point.getY() + 24);
+        gc.fillText(String.valueOf(currState.getiFrames()), point.getX(), point.getY() + 36);
+
+    }
 }
 
