@@ -5,6 +5,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -12,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.util.HashSet;
@@ -51,12 +53,14 @@ public class GraphicsMain extends Application {
         // Init canvas
         Canvas canvas = new Canvas(WIDTH, HEIGHT);
         root.getChildren().add(canvas);
+        // Allows for listening of keyboard events. Must be called after the node is added to scene graph
+        canvas.requestFocus();
 
         // Init GraphicsContext and GraphicsLoader
         gc = canvas.getGraphicsContext2D();
 
         // Init KeyboardListener
-        playerKeyReader = new KeyboardReader(mainScene);
+        playerKeyReader = new KeyboardReader(canvas);
         playerKeyReader.addKeyListeners();
 
 
@@ -121,9 +125,11 @@ public class GraphicsMain extends Application {
      * @param y Vertical screen position.
      */
     private static void drawDebugInfo(double deltaTimeSec, double x, double y) {
+        Font debugFont = new Font("Consolas", 12);
+        gc.setFont(debugFont);
         gc.setFill(Color.MAGENTA);
-        gc.fillText(String.format("FPS: %.1f", 1 / deltaTimeSec), x, y + 10);
-        gc.fillText(String.format("PressedKeys: %s", playerKeyReader.getPressedKeys().toString()), x, y + 20);
+        gc.fillText(String.format("FPS: %.1f", 1 / deltaTimeSec), x, y + 12);
+        gc.fillText(String.format("PressedKeys: %s", playerKeyReader.getPressedKeys().toString()), x, y + 24);
     }
 
     /**
