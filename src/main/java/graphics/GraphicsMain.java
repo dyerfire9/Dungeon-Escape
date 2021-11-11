@@ -98,7 +98,7 @@ public class GraphicsMain extends Application {
         gl.drawBoard(gc, game);
         gl.drawPlayer(gc, game);
         drawDebugInfo(deltaTime / 1000000000.0, 0, 0);
-        gl.drawPlayerState(gc, new Point2D(300, 0), game);
+        gl.drawPlayerState(gc, new Point2D(32*16, 32), game);
     }
 
     private static void movePlayer() {

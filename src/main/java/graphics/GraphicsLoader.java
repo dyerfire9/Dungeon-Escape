@@ -81,9 +81,9 @@ public class GraphicsLoader {
         Font debugFont = new Font("Consolas", 12);
         gc.setFont(debugFont);
         gc.setFill(Color.MAGENTA);
-        gc.fillText(String.valueOf(currState.getPoints()), point.getX(), point.getY() + 12);
-        gc.fillText(String.valueOf(currState.checkInvincible()), point.getX(), point.getY() + 24);
-        gc.fillText(String.valueOf(currState.getiFrames()), point.getX(), point.getY() + 36);
+        gc.fillText("Points: " + currState.getPoints(), point.getX(), point.getY() + 12);
+        gc.fillText("Invincible: " + currState.checkInvincible(), point.getX(), point.getY() + 24);
+        gc.fillText("Iframes: " + currState.getiFrames(), point.getX(), point.getY() + 36);
 
     }
 }
