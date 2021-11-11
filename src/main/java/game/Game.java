@@ -3,6 +3,7 @@ package game;
 import boards.Board;
 import elements.ChangePoints;
 import javafx.scene.image.Image;
+import utils.PlayerState;
 import utils.Point2D;
 import utils.PointImagePair;
 
@@ -29,14 +30,26 @@ public class Game {
         Point2D currentPos = player.getPos();
         Point2D newPos = Point2D.add(currentPos, move);
         boolean element = board.isTraversable(newPos);
-        // TODO: need to refine this logic...if newPos has a points-changer, can game.Player still move onto that position? In pacman, you "eat" a points-changer, and move onto its position.
 
         if (element)  {
             player.setPos(newPos);
         }
         else  {
-            System.out.println("Met an element!");
+            System.out.println("Met a wall!");
         }
+    }
+
+
+    public void updateBoard() {
+        this.board.updateBoard();
+    }
+
+    public void updatePlayerState() {
+        PlayerState currPlayerState = this.player.playerState;
+        Point2D position = this.player.getPos();
+        PlayerState modifiedPlayerState = this.board.updatePlayerState(position, currPlayerState);
+
+        this.player.setPlayerState(modifiedPlayerState);
     }
 
 

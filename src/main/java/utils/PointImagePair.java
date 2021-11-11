@@ -7,8 +7,8 @@ public class PointImagePair {
     Point2D point;
 
     public PointImagePair(Point2D point, Image img) {
-        this.img = img;
         this.point = point;
+        this.img = img;
     }
 
     public Image getImg() {

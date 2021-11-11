@@ -93,6 +93,7 @@ public class GraphicsMain extends Application {
     private static void tickAndRender(long deltaTime) {
         clearScreen();
         movePlayer();
+        game.updateBoard();
         gl.drawBoard(gc, game);
         gl.drawPlayer(gc, game);
         drawDebugInfo(deltaTime / 1000000000.0, 0, 0);
@@ -138,7 +139,7 @@ public class GraphicsMain extends Application {
     private static void clearScreen() {
         Paint oldFill = gc.getFill();
 
-        gc.setFill(Color.WHITE);
+        gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, WIDTH, HEIGHT);
         gc.setFill(oldFill);
     }

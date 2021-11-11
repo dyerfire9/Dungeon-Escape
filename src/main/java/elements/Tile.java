@@ -8,7 +8,12 @@ public class Tile {
 
     public Tile(Boolean isTraversable) {
         this.isTraversable = isTraversable;
-        this.sprite = new Image("file:src/main/assets/tiles/cobble_blood1.png");
+        if (isTraversable){
+            this.sprite = new Image("file:src/main/assets/tiles/cobble_blood1.png");
+        }
+        else {
+            this.sprite = new Image("file:src/main/assets/tiles/torch1.png");
+        }
     }
 
     public boolean isTraversable() {

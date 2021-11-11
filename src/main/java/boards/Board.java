@@ -1,9 +1,8 @@
 package boards;
 
-import elements.Element;
-import elements.Movable;
+import elements.MovableElement;
 import elements.Tile;
-import javafx.scene.image.Image;
+import utils.PlayerState;
 import utils.Point2D;
 import utils.PointImagePair;
 
@@ -17,7 +16,7 @@ public class Board {
     public Board(int size) {
         this.size = size;
         this.board = new Tile[size][size];
-        this.objectStateManager = new ObjectStateManager();
+        this.objectStateManager = new ObjectStateManager(size);
 
         this.fillBoard();
         this.fillEdges();
@@ -38,14 +37,13 @@ public class Board {
 
         return pointImagePairs;
     }
+
     public boolean isTraversable(Point2D point) {
         int x = point.getX();
         int y = point.getY();
 
         return this.board[x][y].isTraversable();
     }
-
-
 
     public void fillBoard() {
         for (int i = 0; i < this.getSize(); i++) {
@@ -54,6 +52,7 @@ public class Board {
             }
         }
     }
+
     public void fillEdges() {
         for (int i = 0; i < this.getSize(); i ++) {
 
@@ -72,16 +71,15 @@ public class Board {
         return this.objectStateManager.getPointImagePairs();
     }
 
+    public PlayerState updatePlayerState(Point2D position, PlayerState playerState) {
+        return this.objectStateManager.modifyPlayerState(position, playerState);
+    }
 
-    public void addMovableObject(Movable object){
+    public void addMovableObject(MovableElement object){
         this.objectStateManager.addObject(object);
     }
 
     public void updateBoard(){
-        this.objectStateManager.updateObjects();
-    }
-
-    public void updateObjects(){
         this.objectStateManager.updateObjects();
     }
 }

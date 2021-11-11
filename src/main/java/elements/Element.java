@@ -6,7 +6,6 @@ import utils.PointImagePair;
 
 public class Element {
     // This is the base class for all objects to be seeded on the board.
-    // TODO: could use image to represent an element.
     private Image sprite;
     private Point2D pos;
 
