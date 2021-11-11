@@ -50,6 +50,7 @@ public class Game {
         PlayerState modifiedPlayerState = this.board.updatePlayerState(position, currPlayerState);
 
         this.player.setPlayerState(modifiedPlayerState);
+        this.player.decrementIframes();
     }
 
 

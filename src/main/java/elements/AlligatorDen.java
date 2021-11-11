@@ -11,7 +11,7 @@ public class AlligatorDen extends Generator{
 
     @Override
     MovableElement generateElement(Point2D direction, int bound) {
-        return new MovableElement(new Image("file:src/main/assets/player/animals/alligator.png"),
+        return new Alligator(new Image("file:src/main/assets/player/animals/alligator.png"),
                 super.getPos(), super.bound, 60, this.direction);
     }
 }

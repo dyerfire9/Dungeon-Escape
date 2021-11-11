@@ -94,6 +94,7 @@ public class GraphicsMain extends Application {
         clearScreen();
         movePlayer();
         game.updateBoard();
+        game.updatePlayerState();
         gl.drawBoard(gc, game);
         gl.drawPlayer(gc, game);
         drawDebugInfo(deltaTime / 1000000000.0, 0, 0);

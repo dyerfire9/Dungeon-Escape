@@ -27,4 +27,7 @@ public class Player {
     public Image getSprite() {
         return this.sprite;
     }
+    public void decrementIframes() {
+        this.playerState.decrementIframes();
+    }
 }
