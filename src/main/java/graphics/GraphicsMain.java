@@ -1,5 +1,6 @@
 package graphics;
 
+import elements.Element;
 import game.Game;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -142,4 +143,14 @@ public class GraphicsMain extends Application {
         gc.fillRect(0, 0, WIDTH, HEIGHT);
         gc.setFill(oldFill);
     }
+
+
+    // Wrapper method to call from the gameMaker
+
+    private static void addObject(Element object){
+        game.getBoard().getObjectStateManager().addObject(object);
+    }
+
+
+
 }
