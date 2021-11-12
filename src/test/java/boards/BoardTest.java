@@ -1,3 +1,5 @@
+package boards;
+
 import boards.Board;
 import org.junit.*;
 import utils.Point2D;
