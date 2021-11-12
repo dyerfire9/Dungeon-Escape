@@ -82,5 +82,9 @@ public class Board {
     public void updateBoard(){
         this.objectStateManager.updateObjects();
     }
+
+    public ObjectManager getObjectStateManager() {
+        return objectStateManager;
+    }
 }
 
