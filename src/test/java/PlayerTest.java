@@ -1,28 +1,24 @@
 import game.Player;
 import org.junit.*;
+import utils.PlayerState;
+import utils.Point2D;
 
 public class PlayerTest {
-    @Test(timeout = 50)
+    @Test(timeout = 500)
     public void TestPlayerBasics(){
-        Player player = new Player(25, "P");
+        Point2D a = new Point2D(4,4);
+        Player player = new Player(a);
 
-        assert(player.getPos() == (25));
-        player.setPos(27);
-        assert (player.getPos() == (27));
+        assert(player.getPos() == a);
+        Point2D b = new Point2D(3,2);
+        player.setPos(b);
+        assert (player.getPos() == (b));
 
-        assert (player.getPoints() == (100));
-        player.setPoints(20);
-        assert (player.getPoints() == (120));
-
-        player.changePoints(10);
-        assert (player.getPoints() == 130);
-
+        assert (player.getPlayerState().getPoints() == (100));
+        PlayerState c = new PlayerState(20);
+        player.setPlayerState(c);
+        assert (player.getPlayerState().getPoints() == (20));
     }
 
-    @Test(timeout = 50)
-    public void TestPlayerToString(){
-        Player player = new Player(25, "P");
-        assert (player.toString().equals("P"));
-    }
 
 }

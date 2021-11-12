@@ -1,35 +1,34 @@
 import boards.Board;
 import game.Game;
 import org.junit.*;
+import utils.Point2D;
+
+import java.util.Objects;
 
 // TODO add tests for all applicable game methods
 public class GameTest {
-    //@Test(timeout = 50)
-    //public void TestMovePlayer() {
-    //    Board board = new Board(8);
-    //    game.Game game = new game.Game(board);
-    //}
-
-    @Test(timeout = 50)
-    public void TestChangePlayer() {
-        Board board = new Board(8);
-        Game game = new Game(board);
+    @Test(timeout = 500)
+    public void TestMovePlayer() {
+        Game game = new Game(8);
+        Point2D c = new Point2D(1,0);
+        game.movePlayer(c);
+        Point2D d = new Point2D(6,5);
+        assert Objects.equals(game.getPlayerPosition(), d);
     }
 
-    @Test(timeout = 50)
+    @Test(timeout = 500)
     public void TestIsRunning() {
-        Board board = new Board(8);
-        Game game = new Game(board);
+        Game game = new Game(8);
         assert game.isRunning();
     }
 
-    @Test(timeout = 50)
+    @Test(timeout = 500)
     public void TestSetRunning() {
-        Board board = new Board(8);
-        Game game = new Game(board);
+        Game game = new Game(8);
         game.setRunning(false);
         assert !game.isRunning();
         game.setRunning(true);
         assert game.isRunning();
     }
+
 }
