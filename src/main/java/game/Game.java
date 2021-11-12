@@ -62,6 +62,8 @@ public class Game {
         this.isRunning = isRunning;
     }
 
+    public Board getBoard() {return board;}
+
     public ArrayList<PointImagePair> getBoardTiles() {
         return this.board.getBoardSprites();
     }
