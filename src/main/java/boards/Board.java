@@ -16,7 +16,7 @@ public class Board {
     public Board(int size) {
         this.size = size;
         this.board = new Tile[size][size];
-        this.objectStateManager = new ObjectStateManager(size);
+        this.objectStateManager = new ObjectStateManager(size - 1);
 
         this.fillBoard();
         this.fillEdges();

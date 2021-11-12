@@ -34,7 +34,7 @@ public class MovableElement extends Element implements Movable{
         Point2D newPos = Point2D.add(currPos, this.velocity);
 
 
-        if (newPos.getX() > bound) {
+        if (newPos.getX() > this.bound || newPos.getY() > this.bound) {
             return false;
         }
         else {

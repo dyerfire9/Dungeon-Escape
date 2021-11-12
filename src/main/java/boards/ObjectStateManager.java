@@ -19,6 +19,7 @@ public class ObjectStateManager {
         this.boardObjects = new ArrayList<Element>();
         this.bound = bound;
 
+        System.out.println(this.bound);
         this.addObject(
                 new AlligatorDen(new Image("file:src/main/assets/tiles/dngn_open_door.png"),
                         new Point2D(2, 2),
