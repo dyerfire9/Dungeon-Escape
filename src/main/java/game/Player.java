@@ -1,18 +1,16 @@
 package game;
-
-import javafx.scene.image.Image;
 import utils.PlayerState;
 import utils.Point2D;
 
 public class Player {
     private Point2D pos;
     public PlayerState playerState;
-    private final Image sprite;
+    private final String sprite;
 
     public Player(Point2D pos){
         this.pos= pos;
         this.playerState = new PlayerState(100);
-        this.sprite =  new Image("file:src/main/assets/player/deep_elf_blademaster.png");
+        this.sprite =  "Player";
     }
 
 
@@ -24,7 +22,7 @@ public class Player {
     public void setPlayerState(PlayerState playerState) {
         this.playerState = playerState;
     }
-    public Image getSprite() {
+    public String getSprite() {
         return this.sprite;
     }
     public void decrementIframes() {

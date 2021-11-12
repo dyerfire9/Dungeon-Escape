@@ -1,13 +1,10 @@
 package game;
 
 import boards.Board;
-import elements.ChangePoints;
-import javafx.scene.image.Image;
 import utils.PlayerState;
 import utils.Point2D;
 import utils.PointImagePair;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -70,7 +67,7 @@ public class Game {
         return this.board.getMovableObjectPointImgPairs();
     }
 
-    public Image getPlayerSprite() {
+    public String getPlayerSprite() {
         return this.player.getSprite();
     }
 
