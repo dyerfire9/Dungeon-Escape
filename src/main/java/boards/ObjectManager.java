@@ -11,11 +11,11 @@ import utils.PointImagePair;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class ObjectStateManager {
+public class ObjectManager {
     private ArrayList<Element> boardObjects;
     private int bound;
 
-    public ObjectStateManager(int bound){
+    public ObjectManager(int bound){
         this.boardObjects = new ArrayList<Element>();
         this.bound = bound;
 
@@ -30,7 +30,7 @@ public class ObjectStateManager {
         );
     }
 
-    public ObjectStateManager(ArrayList<Element> boardObjects, int bound){
+    public ObjectManager(ArrayList<Element> boardObjects, int bound){
         this.boardObjects = boardObjects;
         this.bound = bound;
     }

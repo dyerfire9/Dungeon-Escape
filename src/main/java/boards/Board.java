@@ -11,12 +11,12 @@ import java.util.ArrayList;
 public class Board {
     private final int size;
     private final Tile[][] board;
-    private ObjectStateManager objectStateManager;
+    private ObjectManager objectStateManager;
 
     public Board(int size) {
         this.size = size;
         this.board = new Tile[size][size];
-        this.objectStateManager = new ObjectStateManager(size - 1);
+        this.objectStateManager = new ObjectManager(size - 1);
 
         this.fillBoard();
         this.fillEdges();
