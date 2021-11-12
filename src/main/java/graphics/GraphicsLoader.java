@@ -41,6 +41,7 @@ public class GraphicsLoader {
         this.strMapping.put("Player", new Image("file:src/main/assets/player/deep_elf_blademaster.png"));
         this.strMapping.put("alligator", new Image("file:src/main/assets/player/animals/alligator.png"));
         this.strMapping.put("alligatorDen", new Image("file:src/main/assets/tiles/dngn_open_door.png"));
+        this.strMapping.put("Goal", new Image("file:src/main/assets/player/statues/guardian-eyeopen-flame3.png"));
     }
 
     /**
@@ -67,6 +68,8 @@ public class GraphicsLoader {
             gc.drawImage(strMapping.get(tile.getImg()), tileSize * point.getX(), tileSize * point.getY());
         }
 
+
+       // Render elements
         for (PointImagePair obj: objects) {
             Point2D point = obj.getPoint();
             gc.drawImage(strMapping.get(obj.getImg()), tileSize * point.getX(), tileSize * point.getY());
@@ -93,6 +96,9 @@ public class GraphicsLoader {
         gc.fillText("Points: " + currState.getPoints(), point.getX(), point.getY() + 12);
         gc.fillText("Invincible: " + currState.checkInvincible(), point.getX(), point.getY() + 24);
         gc.fillText("Iframes: " + currState.getiFrames(), point.getX(), point.getY() + 36);
+        if (game.checkPlayerWon()) {
+            gc.fillText("Player has won the game!!!", point.getX(), point.getY() + 48);
+        }
 
     }
 }

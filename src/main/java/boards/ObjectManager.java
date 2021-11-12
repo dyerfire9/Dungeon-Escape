@@ -26,6 +26,10 @@ public class ObjectManager {
                         this.bound
                         )
         );
+
+        this.addObject(
+                new Goal("Goal", new Point2D(15, 15))
+        );
     }
 
     public ObjectManager(ArrayList<Element> boardObjects, int bound){

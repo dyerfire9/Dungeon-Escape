@@ -78,4 +78,8 @@ public class Game {
     }
 
     public PlayerState getPlayerState() {return this.player.getPlayerState();}
+
+    public boolean checkPlayerWon() {
+        return this.player.getPlayerState().getWinningState();
+    }
 }
