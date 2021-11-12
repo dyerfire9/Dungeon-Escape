@@ -18,8 +18,9 @@ import utils.PointImagePair;
 import java.util.ArrayList;
 
 
+//TODO: Rename this class to better reflect its current purpose
 /**
- * Contains method to draw the board on a canvas element.
+ * Contains methods for drawing the game state on a Canvas.
  */
 public class GraphicsLoader {
 
