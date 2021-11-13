@@ -41,7 +41,7 @@ public class GraphicsLoader {
         this.strMapping.put("notTraversable", new Image("file:src/main/assets/tiles/torch1.png"));
         this.strMapping.put("Player", new Image("file:src/main/assets/player/deep_elf_blademaster.png"));
         this.strMapping.put("alligator", new Image("file:src/main/assets/player/animals/alligator.png"));
-        this.strMapping.put("alligatorDen", new Image("file:src/main/assets/tiles/dngn_open_door.png"));
+        this.strMapping.put("alligatorDen", new Image("file:src/main/assets/tiles/dngn_entrance.png"));
         this.strMapping.put("Goal", new Image("file:src/main/assets/player/statues/guardian-eyeopen-flame3.png"));
     }
 
