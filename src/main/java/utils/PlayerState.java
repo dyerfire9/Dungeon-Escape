@@ -3,9 +3,12 @@ package utils;
 public class PlayerState {
     int points;
     int iFrames;
+    boolean hasWon;
+
     public PlayerState(int points) {
         this.points = points;
         this.iFrames = 60;
+        this.hasWon = false;
     }
 
     public void updatePoints(int change) {
@@ -29,4 +32,6 @@ public class PlayerState {
     public int getiFrames() {
         return iFrames;
     }
+    public void setWinningState(boolean hasWon) {this.hasWon = hasWon; }
+    public boolean getWinningState() {return this.hasWon;}
 }

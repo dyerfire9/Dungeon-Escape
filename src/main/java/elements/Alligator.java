@@ -1,11 +1,10 @@
 package elements;
 
-import javafx.scene.image.Image;
 import utils.PlayerState;
 import utils.Point2D;
 
 public class Alligator extends MovableElement implements Interactable{
-    public Alligator(Image sprite, Point2D pos, int bound, int max_tick, Point2D velocity) {
+    public Alligator(String sprite, Point2D pos, int bound, int max_tick, Point2D velocity) {
         super(sprite, pos, bound, max_tick, velocity);
     }
 

@@ -32,11 +32,12 @@ public class RenderPane {
 
     private final Font DEBUG_FONT = new Font("Consolas", 14);
 
+    //TODO: Edit constructor such that we only have to input one size-related parameter.
     /**
      * Constructs a pane with a desired screen size.
      * @param size The desired screen size.
      */
-    public RenderPane(Point2D size) {
+    public RenderPane(Game game, Point2D size) {
 
         // Build node structure
         anchor = new AnchorPane();
@@ -45,7 +46,7 @@ public class RenderPane {
 
         // Init some other fields
         gl = new GraphicsLoader();
-        game = new Game(20);
+        this.game = game;
         tick = 0;
         isTimerStopped = false;
         currentNanoTime = System.nanoTime();
@@ -189,6 +190,10 @@ public class RenderPane {
 
     public Canvas getCanvas() {
         return canvas;
+    }
+
+    public Game getGame() {
+        return game;
     }
 
 }

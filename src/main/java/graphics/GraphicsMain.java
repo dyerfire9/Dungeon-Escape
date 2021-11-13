@@ -1,5 +1,6 @@
 package graphics;
 
+import elements.Element;
 import game.Game;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -9,15 +10,12 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.util.HashSet;
-import graphics.GraphicsLoader;
 import utils.Point2D;
 
 /**
@@ -26,6 +24,8 @@ import utils.Point2D;
 public class GraphicsMain extends Application {
 
     private static Scene mainScene;
+    //NOTE: Not sure if storing RenderPane as private static is clean, but it's a temp solution at least
+    private static RenderPane renderPane;
 
     public static void main(String[] args) {
         launch(args);
@@ -41,11 +41,15 @@ public class GraphicsMain extends Application {
         mainStage.setScene(mainScene);
 
         // Init RenderPane and add to scene graph
-        RenderPane renderPane = new RenderPane(new Point2D(32 * 20, 32 * 20));
+        renderPane = new RenderPane(new Game(20), new Point2D(32 * 20, 32 * 20));
         root.getChildren().add(renderPane.getAnchor());
         renderPane.start();
 
         // Show stage
         mainStage.show();
+    }
+
+    private static void addObject(Element object){
+        renderPane.getGame().getBoard().getObjectStateManager().addObject(object);
     }
 }

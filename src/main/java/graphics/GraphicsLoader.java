@@ -16,6 +16,7 @@ import utils.Point2D;
 import utils.PointImagePair;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 //TODO: Rename this class to better reflect its current purpose
@@ -28,11 +29,20 @@ public class GraphicsLoader {
     // Added tileSize because we may not want to hardcode this value in the future.
     private int tileSize;
 
+    private HashMap<String, Image> strMapping = new HashMap<>();
+
     /**
      * Constructs an instance with the default tile size.
      */
     public GraphicsLoader() {
+
         this.tileSize = 32;
+        this.strMapping.put("isTraversable", new Image("file:src/main/assets/tiles/cobble_blood1.png"));
+        this.strMapping.put("notTraversable", new Image("file:src/main/assets/tiles/torch1.png"));
+        this.strMapping.put("Player", new Image("file:src/main/assets/player/deep_elf_blademaster.png"));
+        this.strMapping.put("alligator", new Image("file:src/main/assets/player/animals/alligator.png"));
+        this.strMapping.put("alligatorDen", new Image("file:src/main/assets/tiles/dngn_open_door.png"));
+        this.strMapping.put("Goal", new Image("file:src/main/assets/player/statues/guardian-eyeopen-flame3.png"));
     }
 
     /**
@@ -56,12 +66,14 @@ public class GraphicsLoader {
         // Render tiles
         for (PointImagePair tile: tiles) {
             Point2D point = tile.getPoint();
-            gc.drawImage(tile.getImg(), tileSize * point.getX(), tileSize * point.getY());
+            gc.drawImage(strMapping.get(tile.getImg()), tileSize * point.getX(), tileSize * point.getY());
         }
 
+
+       // Render elements
         for (PointImagePair obj: objects) {
             Point2D point = obj.getPoint();
-            gc.drawImage(obj.getImg(), tileSize * point.getX(), tileSize * point.getY());
+            gc.drawImage(strMapping.get(obj.getImg()), tileSize * point.getX(), tileSize * point.getY());
         }
 
     }
@@ -73,7 +85,7 @@ public class GraphicsLoader {
      */
     public void drawPlayer(GraphicsContext gc, Game game) {
         Point2D point = game.getPlayerPosition();
-        gc.drawImage(game.getPlayerSprite(), tileSize * point.getX(), tileSize * point.getY());
+        gc.drawImage(strMapping.get(game.getPlayerSprite()), tileSize * point.getX(), tileSize * point.getY());
     }
 
     public void drawPlayerState(GraphicsContext gc, Point2D point, Game game) {
@@ -85,6 +97,9 @@ public class GraphicsLoader {
         gc.fillText("Points: " + currState.getPoints(), point.getX(), point.getY() + 12);
         gc.fillText("Invincible: " + currState.checkInvincible(), point.getX(), point.getY() + 24);
         gc.fillText("Iframes: " + currState.getiFrames(), point.getX(), point.getY() + 36);
+        if (game.checkPlayerWon()) {
+            gc.fillText("Player has won the game!!!", point.getX(), point.getY() + 48);
+        }
 
     }
 }

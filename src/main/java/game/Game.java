@@ -1,13 +1,10 @@
 package game;
 
 import boards.Board;
-import elements.ChangePoints;
-import javafx.scene.image.Image;
 import utils.PlayerState;
 import utils.Point2D;
 import utils.PointImagePair;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -62,6 +59,8 @@ public class Game {
         this.isRunning = isRunning;
     }
 
+    public Board getBoard() {return board;}
+
     public ArrayList<PointImagePair> getBoardTiles() {
         return this.board.getBoardSprites();
     }
@@ -70,7 +69,7 @@ public class Game {
         return this.board.getMovableObjectPointImgPairs();
     }
 
-    public Image getPlayerSprite() {
+    public String getPlayerSprite() {
         return this.player.getSprite();
     }
 
@@ -79,4 +78,8 @@ public class Game {
     }
 
     public PlayerState getPlayerState() {return this.player.getPlayerState();}
+
+    public boolean checkPlayerWon() {
+        return this.player.getPlayerState().getWinningState();
+    }
 }

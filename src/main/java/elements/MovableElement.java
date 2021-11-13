@@ -1,6 +1,5 @@
 package elements;
 
-import javafx.scene.image.Image;
 import utils.Point2D;
 
 
@@ -9,7 +8,7 @@ public class MovableElement extends Element implements Movable{
     private int counter;
     private final Point2D velocity;
     private final int bound;
-    public MovableElement(Image sprite, Point2D pos, int bound, int max_tick, Point2D velocity) {
+    public MovableElement(String sprite, Point2D pos, int bound, int max_tick, Point2D velocity) {
         super(sprite, pos);
         this.bound = bound;
         this.velocity = velocity;

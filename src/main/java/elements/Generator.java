@@ -1,6 +1,5 @@
 package elements;
 
-import javafx.scene.image.Image;
 import utils.Point2D;
 
 public abstract class Generator extends Element {
@@ -8,7 +7,7 @@ public abstract class Generator extends Element {
     int max_tick;
     int counter;
     int bound;
-    public Generator(Image sprite, Point2D pos, Point2D direction, int max_tick, int bound) {
+    public Generator(String sprite, Point2D pos, Point2D direction, int max_tick, int bound) {
         super(sprite, pos);
         this.direction = direction;
         this.max_tick = max_tick;

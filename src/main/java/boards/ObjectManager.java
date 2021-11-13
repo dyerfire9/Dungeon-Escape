@@ -2,8 +2,6 @@ package boards;
 
 import elements.*;
 import elements.Element;
-import game.Player;
-import javafx.scene.image.Image;
 import utils.PlayerState;
 import utils.Point2D;
 import utils.PointImagePair;
@@ -21,12 +19,16 @@ public class ObjectManager {
 
         System.out.println(this.bound);
         this.addObject(
-                new AlligatorDen(new Image("file:src/main/assets/tiles/dngn_open_door.png"),
+                new AlligatorDen("alligatorDen",
                         new Point2D(2, 2),
                         new Point2D(0, 1),
                         120,
                         this.bound
                         )
+        );
+
+        this.addObject(
+                new Goal("Goal", new Point2D(15, 15))
         );
     }
 
