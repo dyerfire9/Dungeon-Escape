@@ -18,18 +18,6 @@ public class ObjectManager {
         this.bound = bound;
 
         System.out.println(this.bound);
-        this.addObject(
-                new AlligatorDen("alligatorDen",
-                        new Point2D(2, 2),
-                        new Point2D(0, 1),
-                        120,
-                        this.bound
-                        )
-        );
-
-        this.addObject(
-                new Goal("Goal", new Point2D(15, 15))
-        );
     }
 
     public ObjectManager(ArrayList<Element> boardObjects, int bound){
@@ -40,6 +28,28 @@ public class ObjectManager {
     public void addObject(Element object){
         boardObjects.add(object);
     }
+
+    // Methods to enable calls from gameMaker
+    // TODO: add more or configure with gameMaker
+
+    public void addRightAlligatorDen(Point2D pos) {
+        this.addObject(new AlligatorDen("alligatorDen", pos, new Point2D(1,0) ,120, bound));
+    }
+    public void addLeftAlligatorDen(Point2D pos) {
+        this.addObject(new AlligatorDen("alligatorDen", pos, new Point2D(-1,0) ,120, bound));
+    }
+    public void addUpAlligatorDen(Point2D pos) {
+        this.addObject(new AlligatorDen("alligatorDen", pos, new Point2D(0,-1) ,120, bound));
+    }
+    public void addDownAlligatorDen(Point2D pos) {
+        this.addObject(new AlligatorDen("alligatorDen", pos, new Point2D(0, 1) ,120, bound));
+    }
+
+    public void addGoal(Point2D pos) {
+        this.addObject(new Goal("Goal", pos));
+    }
+
+
 
     public void removeObject(Element object){
         boardObjects.remove(object);
