@@ -112,7 +112,7 @@ public class RenderPane {
 
         // Draws debug info for new game state
         gl.drawPlayerState(gc, new Point2D(32*16, 32), game);
-        drawDebugInfo(deltaTime / 100000.0, new Point2D(100, 100));
+        drawDebugInfo(1000000000.0 / deltaTime, new Point2D(100, 100));
 
         // Increments tick number
         tick += 1;
