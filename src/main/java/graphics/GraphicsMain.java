@@ -42,14 +42,42 @@ public class GraphicsMain extends Application {
 
         // Init RenderPane and add to scene graph
         renderPane = new RenderPane(new Game(20), new Point2D(32 * 20, 32 * 20));
+
         root.getChildren().add(renderPane.getAnchor());
+
+        // TODO: Remove after testing
+        this.addGoal(new Point2D(17, 17));
+        this.addUpAlligatorDen(new Point2D(12, 13));
+        this.addRightAlligatorDen(new Point2D(7,8));
+
         renderPane.start();
 
         // Show stage
         mainStage.show();
     }
 
-    private static void addObject(Element object){
+    /*private static void addObject(Element object){
         renderPane.getGame().getBoard().getObjectStateManager().addObject(object);
+    }*/
+
+    // Object-specific add methods to be called by gameMaker
+    // TODO: add more or configure with gameMaker
+    public void addGoal(Point2D pos) {
+        renderPane.getGame().getBoard().getObjectStateManager().addGoal(pos);
     }
+
+    public void addRightAlligatorDen(Point2D pos) {
+        renderPane.getGame().getBoard().getObjectStateManager().addRightAlligatorDen(pos);
+    }
+    public void addLeftAlligatorDen(Point2D pos) {
+        renderPane.getGame().getBoard().getObjectStateManager().addLeftAlligatorDen(pos);
+    }
+    public void addUpAlligatorDen(Point2D pos) {
+        renderPane.getGame().getBoard().getObjectStateManager().addUpAlligatorDen(pos);
+    }
+    public void addDownAlligatorDen(Point2D pos) {
+        renderPane.getGame().getBoard().getObjectStateManager().addDownAlligatorDen(pos);
+    }
+
+
 }
