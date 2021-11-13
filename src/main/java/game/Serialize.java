@@ -46,7 +46,7 @@ public class Serialize {
         try {
             FileOutputStream fileOut = new FileOutputStream("/tmp/objectManager.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(game.getBoard().getObjectStateManager());
+            out.writeObject(game.getBoard().getObjectManager());
             out.close();
             fileOut.close();
             System.out.print("Serialized data is saved in /tmp/objectManager.ser");

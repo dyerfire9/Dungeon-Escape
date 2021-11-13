@@ -1,19 +1,9 @@
 package graphics;
 
-import elements.Element;
 import game.Game;
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import utils.Point2D;
@@ -57,26 +47,26 @@ public class GraphicsMain extends Application {
     }
 
     /*private static void addObject(Element object){
-        renderPane.getGame().getBoard().getObjectStateManager().addObject(object);
+        renderPane.getGame().getBoard().getObjectManager().addObject(object);
     }*/
 
     // Object-specific add methods to be called by gameMaker
     // TODO: add more or configure with gameMaker
     public void addGoal(Point2D pos) {
-        renderPane.getGame().getBoard().getObjectStateManager().addGoal(pos);
+        renderPane.getGame().getBoard().getObjectManager().addGoal(pos);
     }
 
     public void addRightAlligatorDen(Point2D pos) {
-        renderPane.getGame().getBoard().getObjectStateManager().addRightAlligatorDen(pos);
+        renderPane.getGame().getBoard().getObjectManager().addRightAlligatorDen(pos);
     }
     public void addLeftAlligatorDen(Point2D pos) {
-        renderPane.getGame().getBoard().getObjectStateManager().addLeftAlligatorDen(pos);
+        renderPane.getGame().getBoard().getObjectManager().addLeftAlligatorDen(pos);
     }
     public void addUpAlligatorDen(Point2D pos) {
-        renderPane.getGame().getBoard().getObjectStateManager().addUpAlligatorDen(pos);
+        renderPane.getGame().getBoard().getObjectManager().addUpAlligatorDen(pos);
     }
     public void addDownAlligatorDen(Point2D pos) {
-        renderPane.getGame().getBoard().getObjectStateManager().addDownAlligatorDen(pos);
+        renderPane.getGame().getBoard().getObjectManager().addDownAlligatorDen(pos);
     }
 
 

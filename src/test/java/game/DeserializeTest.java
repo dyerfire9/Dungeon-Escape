@@ -28,7 +28,7 @@ public class DeserializeTest {
     public void TestDeserializeObjectManager() {
         Game game = new Game(9);
         Serialize.serializeObjectManager(game);
-        assert Deserialize.deserializeObjectManager().equals(game.getBoard().getObjectStateManager());
+        assert Deserialize.deserializeObjectManager().equals(game.getBoard().getObjectManager());
     }
 
 }
