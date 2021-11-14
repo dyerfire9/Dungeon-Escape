@@ -2,7 +2,9 @@ package game;
 import utils.PlayerState;
 import utils.Point2D;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
     private Point2D pos;
     public PlayerState playerState;
     private final String sprite;

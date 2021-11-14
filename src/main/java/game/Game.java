@@ -5,10 +5,11 @@ import utils.PlayerState;
 import utils.Point2D;
 import utils.PointImagePair;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Game {
+public class Game implements Serializable {
 
     private boolean isRunning;
     private Board board;

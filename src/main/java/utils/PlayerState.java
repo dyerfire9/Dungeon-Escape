@@ -1,6 +1,8 @@
 package utils;
 
-public class PlayerState {
+import java.io.Serializable;
+
+public class PlayerState implements Serializable {
     int points;
     int iFrames;
     boolean hasWon;

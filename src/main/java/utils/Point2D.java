@@ -1,9 +1,11 @@
 package utils;
 
+import java.io.Serializable;
+
 /**
  * Class that represents an immutable 2-tuple of integer coordinates (that is, a point (x, y)).
  */
-public class Point2D {
+public class Point2D implements Serializable {
 
     private final int x;
     private final int y;

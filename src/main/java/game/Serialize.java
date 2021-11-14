@@ -3,55 +3,41 @@ package game;
 import java.io.*;
 
 public class Serialize {
-    public static void serializeGame(Game game){
+
+    /**
+     * A serializer to save game data to a .ser file and report when completed.
+     */
+    public static void serialize(Game game){
         try {
-            FileOutputStream fileOut = new FileOutputStream("/tmp/game.ser");
+            FileOutputStream fileOut = new FileOutputStream("game.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(game);
             out.close();
             fileOut.close();
-            System.out.print("Serialized data is saved in /tmp/game.ser");
+            System.out.print("Serialized data is saved in game.ser");
         } catch (IOException i) {
             i.printStackTrace();
         }
     }
 
-    public static void serializePlayerState(Game game){
+    /**
+     * A deserializer, which can be used to convert the saved game data back into a game.
+     */
+    public static Game deserialize(){
+        Game game = null;
         try {
-            FileOutputStream fileOut = new FileOutputStream("/tmp/playerState.ser");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(game.getPlayerState());
-            out.close();
-            fileOut.close();
-            System.out.print("Serialized data is saved in /tmp/playerState.ser");
+            FileInputStream fileIn = new FileInputStream("game.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            game = (Game) in.readObject();
+            in.close();
+            fileIn.close();
         } catch (IOException i) {
             i.printStackTrace();
-        }
-    }
 
-    public static void serializeBoard(Game game){
-        try {
-            FileOutputStream fileOut = new FileOutputStream("/tmp/board.ser");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(game.getBoard());
-            out.close();
-            fileOut.close();
-            System.out.print("Serialized data is saved in /tmp/board.ser");
-        } catch (IOException i) {
-            i.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            System.out.println("game.Game class not found");
+            c.printStackTrace();
         }
-    }
-
-    public static void serializeObjectManager(Game game){
-        try {
-            FileOutputStream fileOut = new FileOutputStream("/tmp/objectManager.ser");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(game.getBoard().getObjectManager());
-            out.close();
-            fileOut.close();
-            System.out.print("Serialized data is saved in /tmp/objectManager.ser");
-        } catch (IOException i) {
-            i.printStackTrace();
-        }
+        return game;
     }
 }

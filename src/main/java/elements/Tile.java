@@ -1,7 +1,9 @@
 package elements;
 
 
-public class Tile {
+import java.io.Serializable;
+
+public class Tile implements Serializable {
     boolean isTraversable;
     private String sprite;
 

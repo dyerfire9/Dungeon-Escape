@@ -6,9 +6,10 @@ import utils.PlayerState;
 import utils.Point2D;
 import utils.PointImagePair;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Board {
+public class Board implements Serializable {
     private final int size;
     private final Tile[][] board;
     private ObjectManager objectManager;
