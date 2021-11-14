@@ -141,9 +141,16 @@ public class ObjectManager {
         for (Element element: objectsToAdd){
             this.addObject(element);
         }
-
-
     }
+
+
+    /**
+     * If a Player steps onto the same location as an Element, check to see if the Element can affect the Player's PlayerState; if so, update PlayerState.
+     *
+     * @param playerPosition the Player's current position
+     * @param playerState the Player's playerState, currently including points, temporary invincibility after encountering an element, and winning status.
+     * @return
+     */
     public PlayerState modifyPlayerState(Point2D playerPosition, PlayerState playerState) {
         for (Element boardObject : boardObjects) {
             if ((boardObject instanceof Interactable) & Point2D.equals(boardObject.getPos(), playerPosition)) {
