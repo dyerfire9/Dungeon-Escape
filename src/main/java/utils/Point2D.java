@@ -67,6 +67,12 @@ public class Point2D implements Serializable {
         return new Point2D(p1.getX() + p2.getX(), p1.getY() + p2.getY());
     }
 
+    /**
+     * Checks if two Point2D instances are equal.
+     * @param p1 the first point
+     * @param p2 the second point
+     * @return whether the two points are equal
+     */
     public static boolean equals(Point2D p1, Point2D p2) {
         return (p1.getX() == p2.getX()) & (p1.getY() == p2.getY());
     }
