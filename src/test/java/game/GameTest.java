@@ -12,7 +12,7 @@ public class GameTest {
         Game game = new Game(8);
         assert game.getBoard().getSize() == 8;
         Point2D p = new Point2D(5,5);
-        assert game.getPlayerPosition() == p;
+        assert Point2D.equals(game.getPlayerPosition(), p);
         assert game.getPlayerState().getPoints() == 100;
         assert game.getPlayerSprite() == "Player";
     }
