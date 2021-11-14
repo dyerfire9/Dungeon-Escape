@@ -22,7 +22,7 @@ public class ObjectManager implements Serializable {
         this.boardObjects = new ArrayList<Element>();
         this.bound = bound;
 
-        System.out.println(this.bound);
+        // System.out.println(this.bound);
     }
 
     /**

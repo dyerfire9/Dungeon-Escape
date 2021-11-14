@@ -9,7 +9,7 @@ public class PlayerState implements Serializable {
 
     /**
      * A constructor for the PlayerState class, which takes in an initial points and sets its invincibility frame count to 60 and winning state to false.
-     * @param points
+     * @param points the PlayerState's current points
      */
     public PlayerState(int points) {
         this.points = points;
