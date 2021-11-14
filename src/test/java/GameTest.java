@@ -3,8 +3,6 @@ import game.Game;
 import org.junit.*;
 import utils.Point2D;
 
-import java.util.Objects;
-
 // TODO add tests for all applicable game methods
 public class GameTest {
     @Test(timeout = 500)
@@ -13,7 +11,7 @@ public class GameTest {
         Point2D c = new Point2D(1,0);
         game.movePlayer(c);
         Point2D d = new Point2D(6,5);
-        assert Objects.equals(game.getPlayerPosition(), d);
+        assert Point2D.equals(game.getPlayerPosition(), d);
     }
 
     @Test(timeout = 500)
