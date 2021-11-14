@@ -1,3 +1,5 @@
+package game;
+
 import game.Player;
 import org.junit.*;
 import utils.PlayerState;
@@ -18,6 +20,7 @@ public class PlayerTest {
         PlayerState c = new PlayerState(20);
         player.setPlayerState(c);
         assert (player.getPlayerState().getPoints() == (20));
+        assert player.getSprite() == "Player";
     }
 
 
