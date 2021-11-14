@@ -5,6 +5,10 @@ public class Tile {
     boolean isTraversable;
     private String sprite;
 
+    /**
+     * A constructor for the Tile class.
+     * @param isTraversable indicates whether a Player can move onto this element's position on the board.
+     */
     public Tile(Boolean isTraversable) {
         this.isTraversable = isTraversable;
         if (isTraversable){
@@ -15,10 +19,16 @@ public class Tile {
         }
     }
 
+    /**
+     * @return whether a Player can move onto this element's position
+     */
     public boolean isTraversable() {
      return this.isTraversable;
     }
 
+    /**
+     * @return this element's representation
+     */
     public String getSprite() {
         return this.sprite;
     }

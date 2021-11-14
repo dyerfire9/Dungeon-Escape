@@ -8,6 +8,15 @@ public class MovableElement extends Element implements Movable{
     private int counter;
     private final Point2D velocity;
     private final int bound;
+
+    /**
+     * A constructor for the MovableElement class.
+     * @param sprite the element's representation
+     * @param pos the element's initial position
+     * @param bound the element's movement boundary
+     * @param max_tick the number of frame ticks before the next movement
+     * @param velocity the movement per tick, represented by a pair of integers on our tile-based game board.
+     */
     public MovableElement(String sprite, Point2D pos, int bound, int max_tick, Point2D velocity) {
         super(sprite, pos);
         this.bound = bound;
@@ -16,6 +25,10 @@ public class MovableElement extends Element implements Movable{
         this.counter = 0;
     }
 
+    /**
+     * An internal tick-counter to be linked to the frame ticks of the game. When the internal counter reaches a preset max number, the element makes a move.
+     * @return whether the element makes a move
+     */
     public boolean processTick() {
         if (counter < max_tick){
             counter += 1;
@@ -27,6 +40,10 @@ public class MovableElement extends Element implements Movable{
         }
     }
 
+    /**
+     * Checks whether the element can make a move to a new position on the board. If the new position is within the boundary, the element moves to the new position.
+     * @return whether the element has moved to a new position on the board
+     */
     @Override
     public boolean move() {
         Point2D currPos = super.getPos();
