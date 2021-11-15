@@ -4,7 +4,7 @@ import org.junit.Test;
 import utils.Point2D;
 
 public class SerializeTest {
-    @Test(timeout=50)
+    @Test(timeout=500)
     public void TestSerialization(){
         Game game = new Game(9);
         Point2D p = new Point2D(1,2);
