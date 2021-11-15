@@ -1,36 +1,26 @@
 package utils;
 
-import boards.ObjectManager;
-import elements.Alligator;
-import elements.Element;
-import org.junit.jupiter.api.Test;
+import elements.AlligatorDen;
+import elements.MovableElement;
+import org.junit.Test;
 
-import java.util.ArrayList;
+public class PointImagePairTest {
+    @Test(timeout = 500)
+    public void TestGetPoints() {
 
+        PointImagePair pointImagePair = new PointImagePair(new Point2D(2 ,2), "test");
 
-class PointImagePairTest {
+        Point2D point2D = pointImagePair.getPoint();
 
-    @Test
-    void getImg() {
-        ArrayList<Element> testArray = new ArrayList<>();
-        Point2D pos = new Point2D(4, 5);
-        Point2D velocity = new Point2D(0,2);
-        Alligator a = new Alligator("all", pos, 50, 80, velocity);
-        ObjectManager om = new ObjectManager(18);
-        om.addObject(a);
-        assert(om.getPointImagePairs().get(0).getImg().equals("all"));
+        assert (Point2D.equals(point2D, new Point2D(2, 2)));
     }
+    @Test(timeout = 500)
+    public void TestGetImage() {
 
-    @Test
-    void getPoint() {
-        ArrayList<Element> testArray = new ArrayList<>();
-        Point2D pos = new Point2D(4, 5);
-        Point2D velocity = new Point2D(0,2);
-        Alligator a = new Alligator("all", pos, 50, 80, velocity);
-        ObjectManager om = new ObjectManager(18);
-        om.addObject(a);
-        assert(Point2D.equals(om.getPointImagePairs().get(0).getPoint(),new Point2D(4,5)));
+        PointImagePair pointImagePair = new PointImagePair(new Point2D(2 ,2), "test");
+
+        String image = pointImagePair.getImg();
+
+        assert (image.equals("test"));
     }
-
-
 }
