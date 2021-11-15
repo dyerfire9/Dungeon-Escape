@@ -26,7 +26,8 @@ public class MovableElement extends Element implements Movable{
     }
 
     /**
-     * An internal tick-counter to be linked to the frame ticks of the game. When the internal counter reaches a preset max number, the element makes a move.
+     * An internal tick-counter to be linked to the frame ticks of the game. When the internal counter reaches a
+     * preset max number, the element makes a move.
      * @return whether the element makes a move
      */
     public boolean processTick() {
@@ -41,7 +42,8 @@ public class MovableElement extends Element implements Movable{
     }
 
     /**
-     * Checks whether the element can make a move to a new position on the board. If the new position is within the boundary, the element moves to the new position.
+     * Checks whether the element can make a move to a new position on the board.
+     * If the new position is within the boundary, the element moves to the new position.
      * @return whether the element has moved to a new position on the board
      */
     @Override
@@ -50,7 +52,8 @@ public class MovableElement extends Element implements Movable{
         Point2D newPos = Point2D.add(currPos, this.velocity);
 
 
-        if (newPos.getX() > this.bound || newPos.getY() > this.bound) {
+        if (((newPos.getX() > this.bound)|| (newPos.getX() < 0))  ||
+                ((newPos.getY() > this.bound)|| (newPos.getY() < 0))) {
             return false;
         }
         else {
