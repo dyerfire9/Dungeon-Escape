@@ -14,6 +14,7 @@ public class Game implements Serializable {
     private boolean isRunning;
     private Board board;
     private Player player;
+    private int size;
 
     /**
      * A constructor for the Game class.
@@ -22,7 +23,7 @@ public class Game implements Serializable {
      */
     public Game (int size) {
         this.board = new Board(size);
-
+        this.size = size;
         this.isRunning = true;
         Point2D pos = new Point2D(5, 5);
         this.player = new Player(pos);
@@ -101,4 +102,6 @@ public class Game implements Serializable {
     public boolean checkPlayerWon() {
         return this.player.getPlayerState().getWinningState();
     }
+
+    public int getSize(){return this.size;}
 }

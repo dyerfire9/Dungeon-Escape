@@ -2,6 +2,7 @@ package graphics;
 
 import game.Game;
 import game.Serialize;
+import game.GameMaker;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -28,13 +29,20 @@ public class GraphicsMain extends Application {
     private static Scene mainScene;
     //NOTE: Not sure if storing RenderPane as private static is clean, but it's a temp solution at least
     private static RenderPane renderPane;
-
+    private int boardSize;
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage mainStage) throws IOException {
+        GameMaker gameMaker = new GameMaker();
+
+        int[] sizeLoad  = gameMaker.getBoardSize();
+
+        this.boardSize = sizeLoad[0];
+        int load = sizeLoad[1];
+
         mainStage.setTitle("1190");
 
         // Build scene graph
@@ -43,14 +51,26 @@ public class GraphicsMain extends Application {
 //        mainStage.setScene(mainScene);
 
         // Init RenderPane and add to scene graph
-        renderPane = new RenderPane(new Game(20), new Point2D(32 * 20, 32 * 20));
+        if (load == 1) {
+            Game g = Serialize.deserialize();
+            int size = g.getSize();
+            renderPane = new RenderPane(g, new Point2D(32 * size,
+                    32 * size));
+        }
+        else {
+            renderPane = new RenderPane(new Game(20), new Point2D(32 * this.boardSize,
+                    32 * this.boardSize));
+            // TODO: Remove after testing
+            this.addGoal(new Point2D(17, 17));
+            this.addUpAlligatorDen(new Point2D(12, 13));
+            this.addRightAlligatorDen(new Point2D(7,8));
+        }
+
+
 
 //        root.getChildren().add(renderPane.getAnchor());
 
-        // TODO: Remove after testing
-        this.addGoal(new Point2D(17, 17));
-        this.addUpAlligatorDen(new Point2D(12, 13));
-        this.addRightAlligatorDen(new Point2D(7,8));
+
 
         renderPane.start();
 
