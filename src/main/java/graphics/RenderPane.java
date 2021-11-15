@@ -180,18 +180,34 @@ public class RenderPane {
 
     //------------ GETTERS AND SETTERS ------------//
 
+    /**
+     * A shortcut for getCanvas().getGraphicsContext2D().
+     * @return The Canvas' GraphicsContext.
+     */
     public GraphicsContext getContext() {
         return canvas.getGraphicsContext2D();
     }
 
+    /**
+     * Gets the AnchorPane associated with this instance.
+     * @return The AnchorPane instance.
+     */
     public AnchorPane getAnchor() {
         return anchor;
     }
 
+    /**
+     * Gets the Canvas associated with this instance.
+     * @return The Canvas instance.
+     */
     public Canvas getCanvas() {
         return canvas;
     }
 
+    /**
+     * Gets the Game associated with this instance.
+     * @return The Game instance.
+     */
     public Game getGame() {
         return game;
     }
