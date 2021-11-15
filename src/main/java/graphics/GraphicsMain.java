@@ -1,6 +1,7 @@
 package graphics;
 
 import game.Game;
+import game.Serialize;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -70,6 +71,11 @@ public class GraphicsMain extends Application {
             } else {
                 renderPane.start();
             }
+        });
+        // TODO: Clean up this other scuffed code block later
+        Button saveButton = (Button) fxmlScene.lookup("#saveButton");
+        saveButton.setOnMouseClicked(event -> {
+            Serialize.serialize(renderPane.getGame());
         });
 
         // Show stage

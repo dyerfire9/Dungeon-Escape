@@ -3,7 +3,9 @@ package elements;
 import utils.Point2D;
 import utils.PointImagePair;
 
-public class Element {
+import java.io.Serializable;
+
+public class Element implements Serializable {
     // This is the base class for all objects to be seeded on the board.
     private String sprite;
     private Point2D pos;
