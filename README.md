@@ -4,6 +4,8 @@ How to run:
 2. In intellij, right click on build.gradle and click on Link gradle project
 
 Note: Any time you are prompted to enter a board size, enter 20. We still need to fix some bugs with a dynamic board size. 
+
+
 2. Run GraphicsMain.java. 
 
 
