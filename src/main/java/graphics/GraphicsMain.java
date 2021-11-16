@@ -58,7 +58,7 @@ public class GraphicsMain extends Application {
                     32 * size));
         }
         else {
-            renderPane = new RenderPane(new Game(20), new Point2D(32 * this.boardSize,
+            renderPane = new RenderPane(new Game(this.boardSize), new Point2D(32 * this.boardSize,
                     32 * this.boardSize));
             // TODO: Remove after testing
             this.addGoal(new Point2D(17, 17));

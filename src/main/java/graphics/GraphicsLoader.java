@@ -98,7 +98,7 @@ public class GraphicsLoader {
         gc.fillText("Invincible: " + currState.checkInvincible(), point.getX(), point.getY() + 24);
         gc.fillText("Iframes: " + currState.getiFrames(), point.getX(), point.getY() + 36);
         if (game.checkPlayerWon()) {
-            gc.fillText("Player has won the game!!!", point.getX(), point.getY() + 48);
+            gc.fillText("Won the game", point.getX(), point.getY() + 48);
         }
 
     }
