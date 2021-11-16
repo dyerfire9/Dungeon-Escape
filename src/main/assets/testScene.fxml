@@ -55,7 +55,7 @@
                <children>
                   <VBox prefHeight="640.0" prefWidth="64.0">
                      <children>
-                        <Button id="playButton" mnemonicParsing="false" prefHeight="34.0" prefWidth="64.0" text="Edit">
+                        <Button id="playButton" mnemonicParsing="false" prefHeight="34.0" prefWidth="64.0" text="Pause">
                            <font>
                               <Font name="Consolas Bold" size="17.0" />
                            </font>
