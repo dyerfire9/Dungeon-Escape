@@ -1,7 +1,5 @@
 package game;
 
-import boards.Board;
-import game.Game;
 import org.junit.*;
 import utils.Point2D;
 

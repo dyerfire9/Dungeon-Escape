@@ -1,4 +1,4 @@
-package boards;
+package game;
 
 import elements.*;
 import elements.Element;

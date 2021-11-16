@@ -1,8 +1,7 @@
-package boards;
+package game;
 
 import elements.MovableElement;
 import elements.Tile;
-import game.PlayerState;
 import utils.Point2D;
 import utils.PointImagePair;
 

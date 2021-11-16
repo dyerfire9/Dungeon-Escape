@@ -1,6 +1,6 @@
 package boards;
 
-import boards.ObjectManager;
+import game.ObjectManager;
 import elements.Alligator;
 import elements.Element;
 import org.junit.jupiter.api.Test;
