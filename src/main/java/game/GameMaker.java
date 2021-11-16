@@ -24,7 +24,7 @@ public class GameMaker {
         boolean hasSavedGame = file.exists();
 
         if (hasSavedGame) {
-            System.out.println("\nSave state detected, do you want to load it or start from scratch? Enter y or n.");
+            System.out.println("\nSave state detected, do you want to load it? Enter y or n.");
             String useSavedGame = reader.next();
             while (! (useSavedGame.equals("y") || (useSavedGame.equals("n")))) {
                 System.out.println("\nInvalid input. Please type in y or n");
