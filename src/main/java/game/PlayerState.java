@@ -1,4 +1,4 @@
-package utils;
+package game;
 
 import java.io.Serializable;
 

@@ -1,8 +1,6 @@
 package game;
 
-import game.Player;
 import org.junit.*;
-import utils.PlayerState;
 import utils.Point2D;
 
 public class PlayerTest {

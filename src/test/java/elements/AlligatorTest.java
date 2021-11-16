@@ -1,8 +1,7 @@
 package elements;
 
-import game.Player;
 import org.junit.Test;
-import utils.PlayerState;
+import game.PlayerState;
 import utils.Point2D;
 
 public class AlligatorTest {

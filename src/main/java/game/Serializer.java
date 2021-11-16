@@ -2,7 +2,7 @@ package game;
 
 import java.io.*;
 
-public class Serialize {
+public class Serializer {
 
     /**
      * A serializer to save game data to a .ser file and report when completed.

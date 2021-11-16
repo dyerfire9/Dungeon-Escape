@@ -1,12 +1,10 @@
 package graphics;
 
 import game.Game;
-import game.Serialize;
+import game.Serializer;
 import game.GameMaker;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -17,8 +15,6 @@ import utils.Point2D;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
@@ -52,7 +48,7 @@ public class GraphicsMain extends Application {
 
         // Init RenderPane and add to scene graph
         if (load == 1) {
-            Game g = Serialize.deserialize();
+            Game g = Serializer.deserialize();
             int size = g.getSize();
             renderPane = new RenderPane(g, new Point2D(32 * size,
                     32 * size));
@@ -95,7 +91,7 @@ public class GraphicsMain extends Application {
         // TODO: Clean up this other scuffed code block later
         Button saveButton = (Button) fxmlScene.lookup("#saveButton");
         saveButton.setOnMouseClicked(event -> {
-            Serialize.serialize(renderPane.getGame());
+            Serializer.serialize(renderPane.getGame());
         });
 
         // Show stage

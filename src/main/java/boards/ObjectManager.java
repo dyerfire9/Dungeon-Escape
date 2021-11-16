@@ -2,7 +2,7 @@ package boards;
 
 import elements.*;
 import elements.Element;
-import utils.PlayerState;
+import game.PlayerState;
 import utils.Point2D;
 import utils.PointImagePair;
 

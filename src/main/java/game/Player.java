@@ -1,5 +1,4 @@
 package game;
-import utils.PlayerState;
 import utils.Point2D;
 
 import java.io.Serializable;

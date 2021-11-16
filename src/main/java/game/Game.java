@@ -1,7 +1,6 @@
 package game;
 
 import boards.Board;
-import utils.PlayerState;
 import utils.Point2D;
 import utils.PointImagePair;
 

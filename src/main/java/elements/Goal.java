@@ -1,6 +1,6 @@
 package elements;
 
-import utils.PlayerState;
+import game.PlayerState;
 import utils.Point2D;
 
 public class Goal extends Element implements Interactable {
