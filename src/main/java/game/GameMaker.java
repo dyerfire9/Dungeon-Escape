@@ -18,8 +18,6 @@ public class GameMaker {
 
         System.out.println("\nNice! Your board size is " + boardSize + ".");
 
-        System.out.println("Working Directory = " + System.getProperty("user.dir"));
-
         File file = new File("game.ser");
         boolean hasSavedGame = file.exists();
 
@@ -46,6 +44,7 @@ public class GameMaker {
              }
         }
         else  {
+            System.out.println("\nNo Save State Detected. Loading game");
             int[] values = new int[2];
             values[0] = boardSize;
             return values;
