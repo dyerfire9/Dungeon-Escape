@@ -22,11 +22,11 @@ public class ObjectManager implements Serializable {
         this.boardObjects = new ArrayList<Element>();
         this.bound = bound;
 
-        // System.out.println(this.bound);
     }
 
     /**
-     * Another constructor for the ObjectManager class, which creates an ObjectManager from a list of existing elements. Used to reload the game.
+     * Another constructor for the ObjectManager class, which creates an ObjectManager from a list of existing elements.
+     * Used to reload the game.
      * @param boardObjects a list of existing elements
      * @param bound the size of the board - 1, which is the size of the area where the elements can reside.
      */
@@ -47,7 +47,9 @@ public class ObjectManager implements Serializable {
     // TODO: add more or configure with gameMaker
 
     /**
-     * A method to place, specifically, an AlligatorDen that shoots alligators only to the right on the board. This method will link with gameMaker's "elements menu," so that the user can choose a specific type of element to plant at a specific location on the board.
+     * A method to place, specifically, an AlligatorDen that shoots alligators only to the right on the board. This
+     * method will link with gameMaker's "elements menu," so that the user can choose a specific type of element to
+     * plant at a specific location on the board.
      * @param pos where the new AlligatorDen is placed on the board.
      */
     public void addRightAlligatorDen(Point2D pos) {
@@ -98,7 +100,8 @@ public class ObjectManager implements Serializable {
 
 
     /**
-     * A getter method to collect and access a mapping between the location and the string representation of all objects currently on the board.
+     * A getter method to collect and access a mapping between the location and the string representation of all objects
+     * currently on the board.
      * @return the collection of every object's location and corresponding string representation.
      */
     public ArrayList<PointImagePair> getPointImagePairs(){
@@ -110,7 +113,8 @@ public class ObjectManager implements Serializable {
     }
 
     /**
-     * Updates the content of the ObjectManager, removing elements that have gone off the screen and adding elements that have been generated.
+     * Updates the content of the ObjectManager, removing elements that have gone off the screen and adding elements
+     * that have been generated.
      */
     public void updateObjects(){
         HashSet<Element> objectsToRemove = new HashSet<>();
@@ -146,10 +150,12 @@ public class ObjectManager implements Serializable {
 
 
     /**
-     * If a Player steps onto the same location as an Element, check to see if the Element can affect the Player's PlayerState; if so, update PlayerState.
+     * If a Player steps onto the same location as an Element, check to see if the Element can affect the Player's
+     * PlayerState; if so, update PlayerState.
      *
      * @param playerPosition the Player's current position
-     * @param playerState the Player's playerState, currently including points, temporary invincibility after encountering an element, and winning status.
+     * @param playerState the Player's playerState, currently including points, temporary invincibility after
+     *                    encountering an element, and winning status.
      * @return
      */
     public PlayerState modifyPlayerState(Point2D playerPosition, PlayerState playerState) {

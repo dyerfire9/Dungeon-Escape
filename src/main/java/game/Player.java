@@ -9,7 +9,8 @@ public class Player implements Serializable {
     private final String sprite;
 
     /**
-     * A constructor for the Player class, which sets its position on the board, its PlayerState with an initial 100 points, and a representation.
+     * A constructor for the Player class, which sets its position on the board, its PlayerState with an initial 100
+     * points, and a representation.
      * @param pos the initial position of the Player
      */
     public Player(Point2D pos){

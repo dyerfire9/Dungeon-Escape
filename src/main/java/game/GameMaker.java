@@ -51,17 +51,5 @@ public class GameMaker {
             return values;
         }
     }
-
-
-    public void seedBoard(Board board) {}
-
-    /*
-    public Board makeGame(){
-        int boardSize = this.getBoardSize();
-        Board board = new Board(boardSize);
-        this.seedBoard(board);
-        return board;
-    }
-*/
 }
 

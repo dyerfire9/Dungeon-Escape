@@ -54,7 +54,8 @@ public class Game implements Serializable {
     }
 
     /**
-     * Updates the Player's PlayerState using the board's feedback based on the Player's current location. Also decreases the Player's temporary invincibility-frame-count by 1.
+     * Updates the Player's PlayerState using the board's feedback based on the Player's current location. Also
+     * decreases the Player's temporary invincibility-frame-count by 1.
      */
     public void updatePlayerState() {
         PlayerState currPlayerState = this.player.playerState;
