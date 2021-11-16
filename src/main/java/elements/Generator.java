@@ -28,7 +28,9 @@ public abstract class Generator extends Element {
 
     /**
      * Generates and places newly generated elements.
-     * @return a newly generated element, which moves in the direction and within the boundary as specified by the Generator, and which starts moving after a certain number of frame ticks from the position of the Generator.
+     * @return a newly generated element, which moves in the direction and within the
+     * boundary as specified by the Generator, and which starts moving after a certain number of frame
+     * ticks from the position of the Generator.
      */
     public MovableElement placeElement() {
         if (counter < max_tick){
