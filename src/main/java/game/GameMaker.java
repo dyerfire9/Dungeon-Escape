@@ -38,8 +38,12 @@ public class GameMaker {
             if (useSavedGame.equals("y")) {
                 values[1] = 1;
                 values[0] = boardSize;
+                return values;
             }
-            return values;
+            else {
+                values[0] = boardSize;
+                return values;
+             }
         }
         else  {
             int[] values = new int[2];
