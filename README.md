@@ -10,9 +10,9 @@ Note: Any time you are prompted to enter a board size, enter 20. We still need t
 
 
 
-  - Since there is no serialized game in the beginning, you first will need to enter a board size to make a game (see note).
-  - You can now move around and interact with the game. 
-
+- Since there is no serialized game in the beginning, you first will need to enter a board size to make a game (see note).
+- You can now move around and interact with the game. 
+- Press the "P..." button to pause the game
 
 
 
