@@ -41,10 +41,6 @@ public class GraphicsMain extends Application {
 
         mainStage.setTitle("1190");
 
-        // Build scene graph
-//        Group root = new Group();
-//        mainScene = new Scene(root);
-//        mainStage.setScene(mainScene);
 
         // Init RenderPane and add to scene graph
         if (load == 1) {
@@ -61,22 +57,15 @@ public class GraphicsMain extends Application {
             this.addUpAlligatorDen(new Point2D(12, 13));
             this.addRightAlligatorDen(new Point2D(7,8));
         }
-
-
-
-//        root.getChildren().add(renderPane.getAnchor());
-
-
-
         renderPane.start();
 
         // Load resources using FXML
-        // NOTE: This method of loading doesn't work that
+        // NOTE: This method of loading resources may not work when packaged as a JAR
         URL url = new File("src/main/assets/testScene.fxml").toURI().toURL();
         Scene fxmlScene = new Scene(FXMLLoader.load(url));
         mainStage.setScene(fxmlScene);
 
-        // TODO: Clean up scuffed code block later
+        // TODO: Extract to another class later
         BorderPane bp = (BorderPane) fxmlScene.lookup("#layout");
         bp.setCenter(renderPane.getAnchor());
         Button playButton = (Button) fxmlScene.lookup("#playButton");
@@ -88,7 +77,7 @@ public class GraphicsMain extends Application {
                 renderPane.start();
             }
         });
-        // TODO: Clean up this other scuffed code block later
+        // TODO: Extract to another class later
         Button saveButton = (Button) fxmlScene.lookup("#saveButton");
         saveButton.setOnMouseClicked(event -> {
             Serializer.serialize(renderPane.getGame());
@@ -98,12 +87,9 @@ public class GraphicsMain extends Application {
         mainStage.show();
     }
 
-    /*private static void addObject(Element object){
-        renderPane.getGame().getBoard().getObjectManager().addObject(object);
-    }*/
-
     // Object-specific add methods to be called by gameMaker
     // TODO: add more or configure with gameMaker
+    // TODO: Move out of this class (doesn't really belong here)
     public void addGoal(Point2D pos) {
         renderPane.getGame().getBoard().getObjectManager().addGoal(pos);
     }
