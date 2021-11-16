@@ -1,4 +1,4 @@
-package boards;
+package game;
 
 import game.Board;
 import org.junit.*;
@@ -13,4 +13,12 @@ public class BoardTest {
         assert board.isTraversable(a);
         assert !board.isTraversable(b);
     }
+/*
+    @Test(timeout =  50)
+    public void TestBoardSprites() {
+        Board board = new Board(8);
+        Point2D a = new Point2D(5,5);
+        Point2D b = new Point2D(0,3);
+
+    }*/
 }
