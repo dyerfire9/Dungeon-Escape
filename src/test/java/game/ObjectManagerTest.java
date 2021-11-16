@@ -3,16 +3,16 @@ package game;
 import game.ObjectManager;
 import elements.Alligator;
 import elements.Element;
-import org.junit.jupiter.api.Test;
+import org.junit.*;
 import utils.Point2D;
 
 import java.util.ArrayList;
 
 
-class ObjectManagerTest {
+public class ObjectManagerTest {
 
-    @Test
-    void TestgetImg() {
+    @Test(timeout = 500)
+    public void TestgetImg() {
         ArrayList<Element> testArray = new ArrayList<>();
         Point2D pos = new Point2D(4, 5);
         Point2D velocity = new Point2D(0,2);
@@ -22,8 +22,8 @@ class ObjectManagerTest {
         assert(om.getPointImagePairs().get(0).getImg().equals("all"));
     }
 
-    @Test
-    void TestgetPoint() {
+    @Test(timeout = 500)
+    public void TestgetPoint() {
         ArrayList<Element> testArray = new ArrayList<>();
         Point2D pos = new Point2D(4, 5);
         Point2D velocity = new Point2D(0,2);
@@ -33,8 +33,8 @@ class ObjectManagerTest {
         assert(Point2D.equals(om.getPointImagePairs().get(0).getPoint(),new Point2D(4,5)));
     }
 
-    @Test
-    void TestAddObject() {
+    @Test(timeout = 500)
+    public void TestAddObject() {
         ArrayList<Element> testArray = new ArrayList<>();
         Point2D pos = new Point2D(4, 5);
         Point2D velocity = new Point2D(0,2);
