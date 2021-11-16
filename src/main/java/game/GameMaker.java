@@ -34,10 +34,10 @@ public class GameMaker {
 
             int[] values = new int[2];
 
-            values[0] = boardSize;
-            values[1] = 0;
+
             if (useSavedGame.equals("y")) {
                 values[1] = 1;
+                values[0] = boardSize;
             }
             return values;
         }
