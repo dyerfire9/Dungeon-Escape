@@ -9,7 +9,8 @@ public class Tile implements Serializable {
 
     /**
      * A constructor for the Tile class.
-     * @param isTraversable indicates whether a Player can move onto this element's position on the board.
+     * @param isTraversable indicates whether a Player can move onto
+     * this element's position on the board.
      */
     public Tile(Boolean isTraversable) {
         this.isTraversable = isTraversable;

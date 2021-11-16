@@ -8,7 +8,8 @@ public class PlayerState implements Serializable {
     boolean hasWon;
 
     /**
-     * A constructor for the PlayerState class, which takes in an initial points and sets its invincibility frame count to 60 and winning state to false.
+     * A constructor for the PlayerState class, which takes in an initial points and sets
+     * its invincibility frame count to 60 and winning state to false.
      * @param points the PlayerState's current points
      */
     public PlayerState(int points) {
@@ -35,7 +36,8 @@ public class PlayerState implements Serializable {
     }
 
     /**
-     * Checks whether the Player's invincibility frame count has decreased to 0. If not, the Player's PlayerState cannot be changed.
+     * Checks whether the Player's invincibility frame count has decreased to 0.
+     * If not, the Player's PlayerState cannot be changed.
      * @return whether the Player's invincibility frame count has decreased to 0.
      */
     public boolean checkInvincible() {

@@ -26,8 +26,8 @@ public class MovableElement extends Element implements Movable{
     }
 
     /**
-     * An internal tick-counter to be linked to the frame ticks of the game. When the internal counter reaches a
-     * preset max number, the element makes a move.
+     * An internal tick-counter to be linked to the frame ticks of the game.
+     * When the internal counter reaches a preset max number, the element makes a move.
      * @return whether the element makes a move
      */
     public boolean processTick() {

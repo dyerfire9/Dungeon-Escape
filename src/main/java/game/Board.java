@@ -51,7 +51,8 @@ public class Board implements Serializable {
 
     /**
      * @param point a location on the board
-     * @return a boolean that indicates whether the Player can move onto that position. Currently, only edges of the board or "walls" are non-traversable.
+     * @return a boolean that indicates whether the Player can move onto that position. Currently, only edges of the
+     * board or "walls" are non-traversable.
      */
     public boolean isTraversable(Point2D point) {
         int x = point.getX();
@@ -104,9 +105,6 @@ public class Board implements Serializable {
         return this.objectManager.modifyPlayerState(position, playerState);
     }
 
-    public void addMovableObject(MovableElement object){
-        this.objectManager.addObject(object);
-    }
 
     /**
      * Call on the board's objectManager to update the status of every object it contains .

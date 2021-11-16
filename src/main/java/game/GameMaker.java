@@ -21,20 +21,29 @@ public class GameMaker {
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
 
         File file = new File("game.ser");
-        boolean condition = file.exists();
+        boolean hasSavedGame = file.exists();
 
-        if (condition) {
-            System.out.println("\nSave state detected, do you want to load it or start from scratch?");
-            while (!reader.hasNextBoolean()) {
-                System.out.println("\nPlease type in a boolean");
+        if (hasSavedGame) {
+            System.out.println("\nSave state detected, do you want to load it? Enter y or n.");
+            String useSavedGame = reader.next();
+            while (! (useSavedGame.equals("y") || (useSavedGame.equals("n")))) {
+                System.out.println("\nInvalid input. Please type in y or n");
+
+                useSavedGame = reader.nextLine();
             }
-            boolean option = reader.nextBoolean();
 
             int[] values = new int[2];
 
-            values[0] = boardSize;
-            values[1] = option ? 1 : 0;
-            return values;
+
+            if (useSavedGame.equals("y")) {
+                values[1] = 1;
+                values[0] = boardSize;
+                return values;
+            }
+            else {
+                values[0] = boardSize;
+                return values;
+             }
         }
         else  {
             int[] values = new int[2];
@@ -42,17 +51,5 @@ public class GameMaker {
             return values;
         }
     }
-
-
-    public void seedBoard(Board board) {}
-
-    /*
-    public Board makeGame(){
-        int boardSize = this.getBoardSize();
-        Board board = new Board(boardSize);
-        this.seedBoard(board);
-        return board;
-    }
-*/
 }
 

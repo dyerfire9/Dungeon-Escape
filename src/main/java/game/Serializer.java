@@ -14,7 +14,7 @@ public class Serializer {
             out.writeObject(game);
             out.close();
             fileOut.close();
-            System.out.print("Serialized data is saved in game.ser");
+            System.out.print("Saved game is saved in game.ser");
         } catch (IOException i) {
             i.printStackTrace();
         }
