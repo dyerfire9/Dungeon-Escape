@@ -8,7 +8,6 @@ import utils.Point2D;
 
 import java.util.ArrayList;
 
-
 public class ObjectManagerTest {
 
     @Test(timeout = 500)
