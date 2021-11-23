@@ -1,7 +1,7 @@
 package utils;
 
 public class PointImagePair {
-    String img;
+    EnumsForSprites img;
     Point2D point;
 
     /**
@@ -9,7 +9,7 @@ public class PointImagePair {
      * @param point a location on the board, represented by a Point2D object composed of 2 integer coordinates
      * @param img a representation of the element present at that location
      */
-    public PointImagePair(Point2D point, String img) {
+    public PointImagePair(Point2D point, EnumsForSprites img) {
         this.point = point;
         this.img = img;
     }
@@ -18,7 +18,7 @@ public class PointImagePair {
      * Gets the representation of an element
      * @return the representation of an element, currently a String, to be mapped into an Image by the GraphicsLoader
      */
-    public String getImg() {
+    public EnumsForSprites getImg() {
         return img;
     }
 

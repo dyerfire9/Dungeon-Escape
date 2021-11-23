@@ -3,11 +3,12 @@ package elements;
 import org.junit.Test;
 import game.PlayerState;
 import utils.Point2D;
+import utils.EnumsForSprites;
 
 public class AlligatorTest {
         @Test(timeout = 500)
         public void TestAlligatorMovement() {
-            Alligator alligator = new Alligator("alligator", new Point2D(6, 5),
+            Alligator alligator = new Alligator(EnumsForSprites.ALLIGATOR, new Point2D(6, 5),
                     20, 60, new Point2D(1, 0));
 
             for (int i = 0; i <= 60; i++) {
@@ -17,7 +18,7 @@ public class AlligatorTest {
         }
         @Test(timeout = 500)
         public void TestAlligatorNoMove() {
-            Alligator alligator = new Alligator("alligator", new Point2D(6, 5),
+            Alligator alligator = new Alligator(EnumsForSprites.ALLIGATOR, new Point2D(6, 5),
                     20, 60, new Point2D(1, 0));
 
             for (int i = 0; i <= 59; i++) {
@@ -27,7 +28,7 @@ public class AlligatorTest {
         }
         @Test(timeout = 500)
         public void TestAlligatorInteractionInvincible() {
-            Alligator alligator = new Alligator("alligator", new Point2D(6, 5),
+            Alligator alligator = new Alligator(EnumsForSprites.ALLIGATOR, new Point2D(6, 5),
                     20, 60, new Point2D(1, 0));
 
             PlayerState playerState = new PlayerState(100);
@@ -36,8 +37,8 @@ public class AlligatorTest {
             assert (modifiedPlayerstate.getPoints() == 100);
         }
         @Test(timeout = 500)
-        public void TestAlligatorInteractionVunerable() {
-            Alligator alligator = new Alligator("alligator", new Point2D(6, 5),
+        public void TestAlligatorInteractionVulnerable() {
+            Alligator alligator = new Alligator(EnumsForSprites.ALLIGATOR, new Point2D(6, 5),
                     20, 60, new Point2D(1, 0));
 
             PlayerState playerState = new PlayerState(100);
