@@ -44,5 +44,4 @@ public class ObjectManagerTest {
         om.addObject(a);
     }
 
-
 }
