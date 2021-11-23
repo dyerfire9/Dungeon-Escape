@@ -26,7 +26,7 @@ public class PlayButtonController {
             button.setText("Play");
             playMode = false;
         } else {
-            button.setText("Edit");
+            button.setText("Pause");
             playMode = true;
         }
     }

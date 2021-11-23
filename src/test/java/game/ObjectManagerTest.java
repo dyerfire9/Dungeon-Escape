@@ -9,7 +9,6 @@ import utils.Point2D;
 
 import java.util.ArrayList;
 
-
 public class ObjectManagerTest {
 
     @Test(timeout = 500)
@@ -43,5 +42,4 @@ public class ObjectManagerTest {
         ObjectManager om = new ObjectManager(18);
         om.addObject(a);
     }
-
 }
