@@ -1,5 +1,6 @@
 package elements;
 
+import utils.EnumsForSprites;
 import utils.Point2D;
 
 public abstract class Generator extends Element {
@@ -16,7 +17,7 @@ public abstract class Generator extends Element {
      * @param max_tick the number of frame ticks before the next movement
      * @param bound the movement boundary of the generated objects
      */
-    public Generator(String sprite, Point2D pos, Point2D direction, int max_tick, int bound) {
+    public Generator(EnumsForSprites sprite, Point2D pos, Point2D direction, int max_tick, int bound) {
         super(sprite, pos);
         this.direction = direction;
         this.max_tick = max_tick;
