@@ -89,11 +89,17 @@ public class ObjectManager implements Serializable {
         this.addObject(new Goal("Goal", pos));
     }
 
+    public void addTeleporter(Point2D pos) {
+        this.addObject(new Teleporter("Teleporter", pos));
+    }
+
+
 
     /**
      * A method to remove elements from the board, which is managed by the board's objectManager.
      * @param object the element to be deleted
      */
+
     public void removeObject(Element object){
         boardObjects.remove(object);
     }
@@ -166,4 +172,15 @@ public class ObjectManager implements Serializable {
         }
         return playerState;
     }
+
+    public ArrayList<Element> getPortals() {
+        ArrayList<Element> portals = new ArrayList<>();
+        for (Element element: boardObjects){
+            if (element instanceof Teleportable){
+                portals.add(element);
+            }
+        }
+        return portals;
+    }
+
 }

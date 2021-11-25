@@ -1,5 +1,6 @@
 package game;
 
+import elements.Element;
 import utils.Point2D;
 import utils.PointImagePair;
 
@@ -64,6 +65,19 @@ public class Game implements Serializable {
 
         this.player.setPlayerState(modifiedPlayerState);
         this.player.decrementIframes();
+    }
+
+    public void teleportPlayer() {
+        ArrayList<Element> portals =  this.board.portalList();
+
+        Point2D currentPos = this.player.getPos();
+        if (Point2D.equals(currentPos, portals.get(0).getPos())){
+            this.player.setPos(portals.get(1).getPos());
+        }
+        else if (Point2D.equals(currentPos, portals.get(1).getPos())){
+            this.player.setPos(portals.get(0).getPos());
+        }
+
     }
 
     /**

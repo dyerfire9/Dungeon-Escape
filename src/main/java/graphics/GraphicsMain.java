@@ -54,6 +54,8 @@ public class GraphicsMain extends Application {
                     32 * this.boardSize));
             // TODO: Remove after testing
             this.addGoal(new Point2D(17, 17));
+            this.addTeleporter(new Point2D(4, 20));
+            this.addTeleporter(new Point2D(12, 12));
             this.addDownAlligatorDen(new Point2D(12, 13));
             this.addRightAlligatorDen(new Point2D(7,8));
         }
@@ -92,6 +94,9 @@ public class GraphicsMain extends Application {
     // TODO: Move out of this class (doesn't really belong here)
     public void addGoal(Point2D pos) {
         renderPane.getGame().getBoard().getObjectManager().addGoal(pos);
+    }
+    public void addTeleporter(Point2D pos){
+        renderPane.getGame().getBoard().getObjectManager().addTeleporter(pos);
     }
 
     public void addRightAlligatorDen(Point2D pos) {

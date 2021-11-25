@@ -37,6 +37,7 @@ public class GraphicsLoader {
         this.strMapping.put("alligator", new Image("file:src/main/assets/player/animals/alligator.png"));
         this.strMapping.put("alligatorDen", new Image("file:src/main/assets/tiles/dngn_entrance.png"));
         this.strMapping.put("Goal", new Image("file:src/main/assets/player/statues/guardian-eyeopen-flame3.png"));
+        this.strMapping.put("Teleporter", new Image("file:src/main/assets/tiles/dngn_exit_abyss.png"));
     }
 
     /**
