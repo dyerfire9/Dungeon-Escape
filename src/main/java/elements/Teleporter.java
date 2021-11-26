@@ -11,7 +11,6 @@ public class Teleporter extends Element implements Interactable, Teleportable{
 
     @Override
     public PlayerState changePlayerState(PlayerState playerState) {
-        playerState.updatePoints(-1);
         return playerState;
     }
 

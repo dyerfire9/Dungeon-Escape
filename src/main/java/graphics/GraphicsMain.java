@@ -98,7 +98,6 @@ public class GraphicsMain extends Application {
     public void addTeleporter(Point2D pos){
         renderPane.getGame().getBoard().getObjectManager().addTeleporter(pos);
     }
-
     public void addRightAlligatorDen(Point2D pos) {
         renderPane.getGame().getBoard().getObjectManager().addRightAlligatorDen(pos);
     }
