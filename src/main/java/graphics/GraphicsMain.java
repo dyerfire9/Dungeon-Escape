@@ -54,8 +54,8 @@ public class GraphicsMain extends Application {
                     32 * this.boardSize));
             // TODO: Remove after testing
             this.addGoal(new Point2D(17, 17));
-            this.addTeleporter(new Point2D(4, 20));
-            this.addTeleporter(new Point2D(12, 12));
+            this.addTeleporter(new Point2D(5, 15));
+            this.addTeleporter(new Point2D(15, 15));
             this.addDownAlligatorDen(new Point2D(12, 13));
             this.addRightAlligatorDen(new Point2D(7,8));
         }
