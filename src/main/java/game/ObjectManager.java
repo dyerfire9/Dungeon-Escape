@@ -2,7 +2,6 @@ package game;
 
 import elements.*;
 import elements.Element;
-import game.PlayerState;
 import utils.Point2D;
 import utils.PointImagePair;
 import utils.EnumsForSprites;
@@ -53,7 +52,7 @@ public class ObjectManager implements Serializable {
      * @param pos where the new AlligatorDen is placed on the board.
      */
     public void addRightAlligatorDen(Point2D pos) {
-        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATORDEN, pos, new Point2D(1,0) ,120, bound));
+        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATOR_DEN, pos, new Point2D(1,0) ,120, bound));
     }
 
 
@@ -62,7 +61,7 @@ public class ObjectManager implements Serializable {
      * @param pos where the new AlligatorDen is placed on the board
      */
     public void addLeftAlligatorDen(Point2D pos) {
-        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATORDEN, pos, new Point2D(-1,0) ,120, bound));
+        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATOR_DEN, pos, new Point2D(-1,0) ,120, bound));
     }
 
     /**
@@ -70,7 +69,7 @@ public class ObjectManager implements Serializable {
      * @param pos where the new AlligatorDen is placed on the board
      */
     public void addUpAlligatorDen(Point2D pos) {
-        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATORDEN, pos, new Point2D(0,-1) ,120, bound));
+        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATOR_DEN, pos, new Point2D(0,-1) ,120, bound));
     }
 
     /**
@@ -78,7 +77,7 @@ public class ObjectManager implements Serializable {
      * @param pos where the new AlligatorDen is placed on the board
      */
     public void addDownAlligatorDen(Point2D pos) {
-        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATORDEN, pos, new Point2D(0, 1) ,120, bound));
+        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATOR_DEN, pos, new Point2D(0, 1) ,120, bound));
     }
 
     /**
