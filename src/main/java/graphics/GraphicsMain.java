@@ -52,10 +52,6 @@ public class GraphicsMain extends Application {
         else {
             renderPane = new RenderPane(new Game(this.boardSize), new Point2D(32 * this.boardSize,
                     32 * this.boardSize));
-            // TODO: Remove after testing
-            this.addGoal(new Point2D(17, 17));
-            this.addDownAlligatorDen(new Point2D(12, 13));
-            this.addRightAlligatorDen(new Point2D(7,8));
         }
         renderPane.start();
 
@@ -71,11 +67,7 @@ public class GraphicsMain extends Application {
         Button playButton = (Button) fxmlScene.lookup("#playButton");
         PlayButtonController pbc = new PlayButtonController(playButton);
         playButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            if (pbc.isPlayMode()) {
-                renderPane.stop();
-            } else {
-                renderPane.start();
-            }
+            renderPane.changeGameState();
         });
         // TODO: Extract to another class later
         Button saveButton = (Button) fxmlScene.lookup("#saveButton");
@@ -86,26 +78,4 @@ public class GraphicsMain extends Application {
         // Show stage
         mainStage.show();
     }
-
-    // Object-specific add methods to be called by gameMaker
-    // TODO: add more or configure with gameMaker
-    // TODO: Move out of this class (doesn't really belong here)
-    public void addGoal(Point2D pos) {
-        renderPane.getGame().getBoard().getObjectManager().addGoal(pos);
-    }
-
-    public void addRightAlligatorDen(Point2D pos) {
-        renderPane.getGame().getBoard().getObjectManager().addRightAlligatorDen(pos);
-    }
-    public void addLeftAlligatorDen(Point2D pos) {
-        renderPane.getGame().getBoard().getObjectManager().addLeftAlligatorDen(pos);
-    }
-    public void addUpAlligatorDen(Point2D pos) {
-        renderPane.getGame().getBoard().getObjectManager().addUpAlligatorDen(pos);
-    }
-    public void addDownAlligatorDen(Point2D pos) {
-        renderPane.getGame().getBoard().getObjectManager().addDownAlligatorDen(pos);
-    }
-
-
 }

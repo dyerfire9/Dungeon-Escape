@@ -166,4 +166,13 @@ public class ObjectManager implements Serializable {
         }
         return playerState;
     }
+
+    public boolean checkOverlap(Point2D point) {
+        for (Element element: this.boardObjects) {
+            if (Point2D.equals(point,element.getPos())){
+                return true;
+            }
+        }
+        return false;
+    }
 }

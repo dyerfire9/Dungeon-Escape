@@ -113,12 +113,25 @@ public class Board implements Serializable {
         this.objectManager.updateObjects();
     }
 
+    public boolean checkOverlap(Point2D point) {
+        return this.objectManager.checkOverlap(point);
+    }
 
-    /**
-     * @return the objectManager of the board.
-     */
-    public ObjectManager getObjectManager() {
-        return objectManager;
+    //-----Adding Elements to the board----//
+    public void addGoal(Point2D pos) {
+        this.objectManager.addGoal(pos);
+    }
+    public void addRightAlligatorDen(Point2D pos) {
+        this.objectManager.addRightAlligatorDen(pos);
+    }
+    public void addLeftAlligatorDen(Point2D pos) {
+        this.objectManager.addLeftAlligatorDen(pos);
+    }
+    public void addUpAlligatorDen(Point2D pos) {
+        this.objectManager.addUpAlligatorDen(pos);
+    }
+    public void addDownAlligatorDen(Point2D pos) {
+        this.objectManager.addDownAlligatorDen(pos);
     }
 }
 

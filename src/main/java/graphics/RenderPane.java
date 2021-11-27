@@ -27,8 +27,10 @@ public class RenderPane {
     private long tick;
     private long currentNanoTime;
     private boolean isTimerStopped;
+    private boolean makeMode;
 
     private HashSet<String> pressedKeys;
+    private HashSet<Point2D> pressedTiles;
 
     private final Font DEBUG_FONT = new Font("Consolas", 14);
 
@@ -51,12 +53,16 @@ public class RenderPane {
         isTimerStopped = false;
         currentNanoTime = System.nanoTime();
         pressedKeys = new HashSet<>();
+        this.makeMode = false;
 
         // Attach event listeners
         canvas.setOnKeyPressed(this::onKeyPressed);
-        canvas.setOnMouseClicked(this::onMouseClicked);
         canvas.setOnKeyReleased(this::onKeyReleased);
+        canvas.setOnMouseClicked(this::onMouseClicked);
 
+        this.addGoal(new Point2D(17, 17));
+        this.game.addDownAlligatorDen(new Point2D(12, 13));
+        this.game.addRightAlligatorDen(new Point2D(7,8));
         // Init and start timer
         timer = new AnimationTimer() {
             @Override
@@ -65,6 +71,8 @@ public class RenderPane {
                 currentNanoTime = now;
             }
         };
+
+
     }
 
     //------------ PUBLIC METHODS ------------//
@@ -78,15 +86,6 @@ public class RenderPane {
         timer.start();
     }
 
-    /**
-     * Stops (or more accurately, pauses) the game loop.
-     */
-    public void stop() {
-        System.out.printf("Game timer stopped at tick=%d.%n", tick);
-        isTimerStopped = true;
-        timer.stop();
-    }
-
     //------------ RENDERING METHODS ------------//
 
     /**
@@ -97,25 +96,28 @@ public class RenderPane {
      * @param deltaTime Time elapsed (in nanoseconds) since the last call of the function.
      */
     private void tickAndRender(long deltaTime) {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        // Clears the canvas
-        clearCanvas();
+        if (!this.makeMode) {
+            GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        // Updates game state
-        game.updateBoard();
-        game.updatePlayerState();
+            // Clears the canvas
+            clearCanvas();
 
-        // Draws new game state
-        gl.drawBoard(gc, game);
-        gl.drawPlayer(gc, game);
+            // Updates game state
+            game.updateBoard();
+            game.updatePlayerState();
 
-        // Draws debug info for new game state
-        gl.drawPlayerState(gc, new Point2D(32*16, 32), game);
-        drawDebugInfo(1000000000.0 / deltaTime, new Point2D(100, 100));
+            // Draws new game state
+            gl.drawBoard(gc, game);
+            gl.drawPlayer(gc, game);
 
-        // Increments tick number
-        tick += 1;
+            // Draws debug info for new game state
+            gl.drawPlayerState(gc, new Point2D(32 * 16, 32), game);
+            drawDebugInfo(1000000000.0 / deltaTime, new Point2D(100, 100));
+
+            // Increments tick number
+            tick += 1;
+        }
     }
 
     private void drawDebugInfo(double fps, Point2D pos) {
@@ -143,7 +145,7 @@ public class RenderPane {
         String keyCode = event.getCode().toString();
 
         // Disables all other keybinds when game is paused.
-        if (!isTimerStopped) {
+        if (!makeMode) {
             // Movement-related keybinds
             if (keyCode.equals("W") && !pressedKeys.contains(keyCode)) {
                 game.movePlayer(new Point2D(0, -1));
@@ -157,17 +159,9 @@ public class RenderPane {
             if (keyCode.equals("D") && !pressedKeys.contains(keyCode)) {
                 game.movePlayer(new Point2D(1, 0));
             }
-        }
 
-        // Pause/resume keybinds.
-        if (keyCode.equals("ESCAPE")) {
-            if (isTimerStopped) {
-                start();
-            } else {
-                stop();
-            }
+            pressedKeys.add(event.getCode().toString());
         }
-        pressedKeys.add(event.getCode().toString());
     }
 
     private void onKeyReleased(KeyEvent event) {
@@ -176,6 +170,30 @@ public class RenderPane {
 
     private void onMouseClicked(MouseEvent event) {
         canvas.requestFocus();
+
+        if (this.makeMode){
+            Point2D mousePoint = new Point2D((int) Math.floor(event.getX()/32), (int) Math.floor(event.getY()/32));
+            if (this.checkClickedPoint(mousePoint)) {
+                this.game.addGoal(mousePoint);
+                GraphicsContext gc = canvas.getGraphicsContext2D();
+
+                // Clears the canvas
+                clearCanvas();
+                // Draws new game state
+                gl.drawBoard(gc, game);
+                gl.drawPlayer(gc, game);
+            }
+        }
+    }
+
+    private boolean checkClickedPoint(Point2D point) {
+        boolean boundCondition = (( 1 <= point.getX()  && point.getX() < this.game.getSize())
+                                    && ( 1 <= point.getY()  && point.getY() < this.game.getSize()));
+
+        boolean noOverlapCondition = game.checkOverlap(point);
+
+        System.out.println(noOverlapCondition);
+        return boundCondition && noOverlapCondition;
     }
 
     //------------ GETTERS AND SETTERS ------------//
@@ -210,6 +228,15 @@ public class RenderPane {
      */
     public Game getGame() {
         return game;
+    }
+
+    public void changeGameState() {this.makeMode = !this.makeMode;}
+
+    //-----------------Board Element Adders--------------//
+    // Object-specific add methods to be called by gameMaker
+
+    public void addGoal(Point2D pos) {
+        this.game.addGoal(pos);
     }
 
 }
