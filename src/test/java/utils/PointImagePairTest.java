@@ -8,7 +8,7 @@ public class PointImagePairTest {
     @Test(timeout = 500)
     public void TestGetPoints() {
 
-        PointImagePair pointImagePair = new PointImagePair(new Point2D(2 ,2), "test");
+        PointImagePair pointImagePair = new PointImagePair(new Point2D(2 ,2), EnumsForSprites.ALLIGATOR);
 
         Point2D point2D = pointImagePair.getPoint();
 
@@ -17,10 +17,10 @@ public class PointImagePairTest {
     @Test(timeout = 500)
     public void TestGetImage() {
 
-        PointImagePair pointImagePair = new PointImagePair(new Point2D(2 ,2), "test");
+        PointImagePair pointImagePair = new PointImagePair(new Point2D(2 ,2), EnumsForSprites.ALLIGATOR);
 
-        String image = pointImagePair.getImg();
+        EnumsForSprites image = pointImagePair.getImg();
 
-        assert (image.equals("test"));
+        assert (image.equals(EnumsForSprites.ALLIGATOR));
     }
 }

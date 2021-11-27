@@ -2,10 +2,11 @@ package elements;
 
 
 import java.io.Serializable;
+import utils.EnumsForSprites;
 
 public class Tile implements Serializable {
     boolean isTraversable;
-    private String sprite;
+    private EnumsForSprites sprite;
 
     /**
      * A constructor for the Tile class.
@@ -15,10 +16,10 @@ public class Tile implements Serializable {
     public Tile(Boolean isTraversable) {
         this.isTraversable = isTraversable;
         if (isTraversable){
-            this.sprite = "isTraversable";
+            this.sprite = EnumsForSprites.ISTRANSVERSABLE;
         }
         else {
-            this.sprite = "notTraversable";
+            this.sprite = EnumsForSprites.NOTTRANSVERSABLE;
         }
     }
 
@@ -32,7 +33,7 @@ public class Tile implements Serializable {
     /**
      * @return this element's representation
      */
-    public String getSprite() {
+    public EnumsForSprites getSprite() {
         return this.sprite;
     }
 }

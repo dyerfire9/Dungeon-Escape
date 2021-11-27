@@ -1,5 +1,6 @@
 package elements;
 
+import utils.EnumsForSprites;
 import utils.Point2D;
 import utils.PointImagePair;
 
@@ -7,7 +8,7 @@ import java.io.Serializable;
 
 public class Element implements Serializable {
     // This is the base class for all objects to be seeded on the board.
-    private String sprite;
+    private EnumsForSprites sprite;
     private Point2D pos;
 
 
@@ -17,7 +18,7 @@ public class Element implements Serializable {
      * image by the GraphicsLoader.
      * @param pos the element's position on the board, represented by a pair of integer coordinates.
      */
-    public Element(String sprite, Point2D pos){
+    public Element(EnumsForSprites sprite, Point2D pos){
         this.sprite = sprite;
         this.pos = pos;
     }

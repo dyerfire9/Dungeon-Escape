@@ -1,5 +1,6 @@
 package game;
 
+import utils.EnumsForSprites;
 import utils.Point2D;
 import utils.PointImagePair;
 
@@ -95,7 +96,7 @@ public class Game implements Serializable {
         return this.board.getMovableObjectPointImgPairs();
     }
 
-    public String getPlayerSprite() {
+    public EnumsForSprites getPlayerSprite() {
         return this.player.getSprite();
     }
 
