@@ -65,4 +65,8 @@ public class Player implements Serializable {
     public void decrementIframes() {
         this.playerState.decrementIframes();
     }
+
+    public void resetPlayerState() {
+        this.playerState = new PlayerState(100);
+    }
 }

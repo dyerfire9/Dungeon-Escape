@@ -117,6 +117,9 @@ public class Board implements Serializable {
         return this.objectManager.checkOverlap(point);
     }
 
+    public void resetObjectsToBaseState() {
+        this.objectManager.resetToBaseState();
+    }
     //-----Adding Elements to the board----//
     public void addGoal(Point2D pos) {
         this.objectManager.addGoal(pos);

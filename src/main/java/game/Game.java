@@ -74,6 +74,10 @@ public class Game implements Serializable {
         else return !board.checkOverlap(point);
     }
 
+    public void resetObjectsToBaseState() {
+        this.board.resetObjectsToBaseState();
+        this.player.resetPlayerState();
+    }
     /**
      * Getters and Setters for game status.
      */

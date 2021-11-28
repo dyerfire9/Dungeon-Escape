@@ -9,6 +9,7 @@ public class MovableElement extends Element implements Movable{
     private int counter;
     private final Point2D velocity;
     private final int bound;
+    private Point2D initialPosition;
 
     /**
      * A constructor for the MovableElement class.
@@ -18,12 +19,14 @@ public class MovableElement extends Element implements Movable{
      * @param max_tick the number of frame ticks before the next movement
      * @param velocity the movement per tick, represented by a pair of integers on our tile-based game board.
      */
-    public MovableElement(EnumsForSprites sprite, Point2D pos, int bound, int max_tick, Point2D velocity) {
-        super(sprite, pos);
+    public MovableElement(EnumsForSprites sprite, Point2D pos, int bound, int max_tick, Point2D velocity,
+                          boolean isPermanent) {
+        super(sprite, pos, isPermanent);
         this.bound = bound;
         this.velocity = velocity;
         this.max_tick = max_tick;
         this.counter = 0;
+        this.initialPosition = pos;
     }
 
     /**
@@ -62,6 +65,9 @@ public class MovableElement extends Element implements Movable{
 
             return true;
         }
+    }
 
+    public void reset() {
+        super.setPos(this.initialPosition);
     }
 }

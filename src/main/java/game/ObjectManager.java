@@ -16,9 +16,10 @@ public class ObjectManager implements Serializable {
 
     /**
      * A constructor for ObjectManager class.
+     *
      * @param bound the size of the board - 1, which is the size of the area where the elements can reside.
      */
-    public ObjectManager(int bound){
+    public ObjectManager(int bound) {
         this.boardObjects = new ArrayList<Element>();
         this.bound = bound;
 
@@ -27,19 +28,21 @@ public class ObjectManager implements Serializable {
     /**
      * Another constructor for the ObjectManager class, which creates an ObjectManager from a list of existing elements.
      * Used to reload the game.
+     *
      * @param boardObjects a list of existing elements
-     * @param bound the size of the board - 1, which is the size of the area where the elements can reside.
+     * @param bound        the size of the board - 1, which is the size of the area where the elements can reside.
      */
-    public ObjectManager(ArrayList<Element> boardObjects, int bound){
+    public ObjectManager(ArrayList<Element> boardObjects, int bound) {
         this.boardObjects = boardObjects;
         this.bound = bound;
     }
 
     /**
      * Add new elements to the board, collected and managed by the objectManager.
+     *
      * @param object new element to be added
      */
-    public void addObject(Element object){
+    public void addObject(Element object) {
         boardObjects.add(object);
     }
 
@@ -50,51 +53,61 @@ public class ObjectManager implements Serializable {
      * A method to place, specifically, an AlligatorDen that shoots alligators only to the right on the board. This
      * method will link with gameMaker's "elements menu," so that the user can choose a specific type of element to
      * plant at a specific location on the board.
+     *
      * @param pos where the new AlligatorDen is placed on the board.
      */
     public void addRightAlligatorDen(Point2D pos) {
-        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATORDEN, pos, new Point2D(1,0) ,120, bound));
+        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATORDEN, pos, new Point2D(1, 0), 120, bound,
+                true));
     }
 
 
     /**
      * A method to place left-shooting AlligatorDens.
+     *
      * @param pos where the new AlligatorDen is placed on the board
      */
     public void addLeftAlligatorDen(Point2D pos) {
-        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATORDEN, pos, new Point2D(-1,0) ,120, bound));
+        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATORDEN, pos, new Point2D(-1, 0), 120, bound,
+                true));
     }
 
     /**
      * A method to place upward-shooting AlligatorDens.
+     *
      * @param pos where the new AlligatorDen is placed on the board
      */
     public void addUpAlligatorDen(Point2D pos) {
-        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATORDEN, pos, new Point2D(0,-1) ,120, bound));
+        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATORDEN, pos, new Point2D(0, -1), 120, bound,
+                true));
     }
 
     /**
      * A method to place downward-shooting AlligatorDens.
+     *
      * @param pos where the new AlligatorDen is placed on the board
      */
     public void addDownAlligatorDen(Point2D pos) {
-        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATORDEN, pos, new Point2D(0, 1) ,120, bound));
+        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATORDEN, pos, new Point2D(0, 1), 120, bound,
+                true));
     }
 
     /**
      * A method to place a Goal element on the board. When Player reaches the Goal, the Player wins the game.
+     *
      * @param pos location where the Goal element is placed on the board
      */
     public void addGoal(Point2D pos) {
-        this.addObject(new Goal(EnumsForSprites.GOAL, pos));
+        this.addObject(new Goal(EnumsForSprites.GOAL, pos, true));
     }
 
 
     /**
      * A method to remove elements from the board, which is managed by the board's objectManager.
+     *
      * @param object the element to be deleted
      */
-    public void removeObject(Element object){
+    public void removeObject(Element object) {
         boardObjects.remove(object);
     }
 
@@ -102,12 +115,13 @@ public class ObjectManager implements Serializable {
     /**
      * A getter method to collect and access a mapping between the location and the string representation of all objects
      * currently on the board.
+     *
      * @return the collection of every object's location and corresponding string representation.
      */
-    public ArrayList<PointImagePair> getPointImagePairs(){
+    public ArrayList<PointImagePair> getPointImagePairs() {
         ArrayList<PointImagePair> collector = new ArrayList<>();
         for (Element boardObject : this.boardObjects) {
-                collector.add(boardObject.getPointImagePair());
+            collector.add(boardObject.getPointImagePair());
         }
         return collector;
     }
@@ -116,7 +130,7 @@ public class ObjectManager implements Serializable {
      * Updates the content of the ObjectManager, removing elements that have gone off the screen and adding elements
      * that have been generated.
      */
-    public void updateObjects(){
+    public void updateObjects() {
         HashSet<Element> objectsToRemove = new HashSet<>();
         HashSet<Element> objectsToAdd = new HashSet<>();
 
@@ -127,8 +141,7 @@ public class ObjectManager implements Serializable {
                 if (!result) {
                     objectsToRemove.add(boardObject);
                 }
-            }
-            else if (boardObject instanceof Generator) {
+            } else if (boardObject instanceof Generator) {
                 Element elementToAdd = ((Generator) boardObject).placeElement();
                 if (elementToAdd != null) {
                     objectsToAdd.add(elementToAdd);
@@ -138,12 +151,12 @@ public class ObjectManager implements Serializable {
         }
 
         // Remove objects that have gone offscreen
-        for (Element element: objectsToRemove) {
+        for (Element element : objectsToRemove) {
             this.removeObject(element);
         }
 
         //Add any generated objects
-        for (Element element: objectsToAdd){
+        for (Element element : objectsToAdd) {
             this.addObject(element);
         }
     }
@@ -154,8 +167,8 @@ public class ObjectManager implements Serializable {
      * PlayerState; if so, update PlayerState.
      *
      * @param playerPosition the Player's current position
-     * @param playerState the Player's playerState, currently including points, temporary invincibility after
-     *                    encountering an element, and winning status.
+     * @param playerState    the Player's playerState, currently including points, temporary invincibility after
+     *                       encountering an element, and winning status.
      * @return
      */
     public PlayerState modifyPlayerState(Point2D playerPosition, PlayerState playerState) {
@@ -168,11 +181,28 @@ public class ObjectManager implements Serializable {
     }
 
     public boolean checkOverlap(Point2D point) {
-        for (Element element: this.boardObjects) {
-            if (Point2D.equals(point,element.getPos())){
+        for (Element element : this.boardObjects) {
+            if (Point2D.equals(point, element.getPos())) {
                 return true;
             }
         }
         return false;
+
+    }
+    public void resetToBaseState() {
+        HashSet<Element> objectsToRemove = new HashSet<>();
+
+        for (Element element: this.boardObjects) {
+           if (element instanceof MovableElement && element.checkIsPermanent()){
+               ((MovableElement) element).reset();
+            }
+           else {
+               if (!element.checkIsPermanent()) {objectsToRemove.add(element);}
+           }
+        }
+
+        for (Element element: objectsToRemove) {
+            this.removeObject(element);
+        }
     }
 }

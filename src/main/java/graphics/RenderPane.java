@@ -26,7 +26,6 @@ public class RenderPane {
     private AnimationTimer timer;
     private long tick;
     private long currentNanoTime;
-    private boolean isTimerStopped;
     private boolean makeMode;
 
     private HashSet<String> pressedKeys;
@@ -50,7 +49,6 @@ public class RenderPane {
         gl = new GraphicsLoader();
         this.game = game;
         tick = 0;
-        isTimerStopped = false;
         currentNanoTime = System.nanoTime();
         pressedKeys = new HashSet<>();
         this.makeMode = false;
@@ -82,7 +80,6 @@ public class RenderPane {
      */
     public void start() {
         System.out.printf("Game timer started at tick=%d.%n", tick);
-        isTimerStopped = false;
         timer.start();
     }
 
@@ -192,7 +189,6 @@ public class RenderPane {
 
         boolean noOverlapCondition = game.checkOverlap(point);
 
-        System.out.println(noOverlapCondition);
         return boundCondition && noOverlapCondition;
     }
 
@@ -230,7 +226,19 @@ public class RenderPane {
         return game;
     }
 
-    public void changeGameState() {this.makeMode = !this.makeMode;}
+    public void changeGameState() {
+        if (!this.makeMode) {
+            this.game.resetObjectsToBaseState();
+            GraphicsContext gc = canvas.getGraphicsContext2D();
+
+            // Clears the canvas
+            clearCanvas();
+            // Draws new game state
+            gl.drawBoard(gc, game);
+            gl.drawPlayer(gc, game);
+        }
+        this.makeMode = !this.makeMode;
+    }
 
     //-----------------Board Element Adders--------------//
     // Object-specific add methods to be called by gameMaker
