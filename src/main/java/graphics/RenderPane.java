@@ -105,7 +105,6 @@ public class RenderPane {
         // Updates game state
         game.updateBoard();
         game.updatePlayerState();
-        game.teleportPlayer();
 
         // Draws new game state
         gl.drawBoard(gc, game);

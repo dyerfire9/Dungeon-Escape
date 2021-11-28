@@ -165,22 +165,28 @@ public class ObjectManager implements Serializable {
      * @return
      */
     public PlayerState modifyPlayerState(Point2D playerPosition, PlayerState playerState) {
+        ArrayList<Element> portals = new ArrayList<>();
+
         for (Element boardObject : boardObjects) {
             if ((boardObject instanceof Interactable) & Point2D.equals(boardObject.getPos(), playerPosition)) {
                 playerState = ((Interactable) boardObject).changePlayerState(playerState);
             }
+
+            if ((boardObject instanceof Teleporter)) {
+                portals.add(boardObject);
+            }
+
         }
+
+        if (Point2D.equals(playerPosition, portals.get(0).getPos())){
+            playerState = ((Teleporter) portals.get(0)).changePlayerState(playerState);
+        }
+        else if (Point2D.equals(playerPosition, portals.get(1).getPos())){
+            playerState = ((Teleporter) portals.get(1)).changePlayerState(playerState);
+        }
+
         return playerState;
     }
 
-    public ArrayList<Element> getPortals() {
-        ArrayList<Element> portals = new ArrayList<>();
-        for (Element element: boardObjects){
-            if (element instanceof Teleportable){
-                portals.add(element);
-            }
-        }
-        return portals;
-    }
 
 }

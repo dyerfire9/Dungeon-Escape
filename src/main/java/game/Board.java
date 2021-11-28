@@ -106,9 +106,6 @@ public class Board implements Serializable {
         return this.objectManager.modifyPlayerState(position, playerState);
     }
 
-    public ArrayList<Element> portalList(){
-        return this.objectManager.getPortals();
-    }
     /**
      * Call on the board's objectManager to update the status of every object it contains .
      */

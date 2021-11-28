@@ -15,7 +15,7 @@ public class Player implements Serializable {
      */
     public Player(Point2D pos){
         this.pos= pos;
-        this.playerState = new PlayerState(100);
+        this.playerState = new PlayerState(100, this.pos);
         this.sprite =  "Player";
     }
 
