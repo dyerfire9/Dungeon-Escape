@@ -19,7 +19,6 @@ import java.util.HashSet;
  */
 public class RenderPane {
 
-    private AnchorPane anchor;
     private Game game;
     private GraphicsLoader gl;
     private Canvas canvas;
@@ -41,9 +40,7 @@ public class RenderPane {
     public RenderPane(Game game, Point2D size) {
 
         // Build node structure
-        anchor = new AnchorPane();
         canvas = new Canvas(size.getX(), size.getY());
-        anchor.getChildren().add(canvas);
 
         // Init some other fields
         gl = new GraphicsLoader();
@@ -200,14 +197,6 @@ public class RenderPane {
      */
     public GraphicsContext getContext() {
         return canvas.getGraphicsContext2D();
-    }
-
-    /**
-     * Gets the AnchorPane associated with this instance.
-     * @return The AnchorPane instance.
-     */
-    public AnchorPane getAnchor() {
-        return anchor;
     }
 
     /**

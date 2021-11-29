@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -40,6 +41,7 @@ public class GraphicsMain extends Application {
         int load = sizeLoad[1];
 
         mainStage.setTitle("1190");
+        mainStage.setResizable(true);
 
 
         // Init RenderPane and add to scene graph
@@ -57,13 +59,13 @@ public class GraphicsMain extends Application {
 
         // Load resources using FXML
         // NOTE: This method of loading resources may not work when packaged as a JAR
-        URL url = new File("src/main/assets/testScene.fxml").toURI().toURL();
+        URL url = new File("src/main/assets/main.fxml").toURI().toURL();
         Scene fxmlScene = new Scene(FXMLLoader.load(url));
         mainStage.setScene(fxmlScene);
 
         // TODO: Extract to another class later
-        BorderPane bp = (BorderPane) fxmlScene.lookup("#layout");
-        bp.setCenter(renderPane.getAnchor());
+        ScrollPane sp = (ScrollPane) fxmlScene.lookup("#renderPaneParent");
+        sp.setContent(renderPane.getCanvas());
         Button playButton = (Button) fxmlScene.lookup("#playButton");
         PlayButtonController pbc = new PlayButtonController(playButton);
         playButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
