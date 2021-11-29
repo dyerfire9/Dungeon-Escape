@@ -60,7 +60,7 @@ public class GraphicsMain extends Application {
         }
         this.gameSeeder = new GameSeeder(g);
 
-        //TODO: to hoop up with GameMaker
+        //TODO: to hook up with GUI
         this.gameSeeder.addGoal(new Point2D(17, 17));
         this.gameSeeder.addDownAlligatorDen(new Point2D(12, 13));
         this.gameSeeder.addRightAlligatorDen(new Point2D(7,8));
