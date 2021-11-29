@@ -52,10 +52,13 @@ public class GraphicsMain extends Application {
         else {
             renderPane = new RenderPane(new Game(this.boardSize), new Point2D(32 * this.boardSize,
                     32 * this.boardSize));
+
+
             // TODO: Remove after testing
             this.addGoal(new Point2D(17, 17));
             this.addDownAlligatorDen(new Point2D(12, 13));
             this.addRightAlligatorDen(new Point2D(7,8));
+            this.addChasingElement(new Point2D(10,5));
         }
         renderPane.start();
 
@@ -107,5 +110,8 @@ public class GraphicsMain extends Application {
         renderPane.getGame().getBoard().getObjectManager().addDownAlligatorDen(pos);
     }
 
+    public void addChasingElement(Point2D pos){
+        renderPane.getGame().getBoard().getObjectManager().addChasingElement(pos);
+    }
 
 }

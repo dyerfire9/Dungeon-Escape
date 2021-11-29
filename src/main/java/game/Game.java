@@ -1,9 +1,13 @@
 package game;
 
+import elements.ChasingElement;
+import elements.Element;
+import elements.MovableElement;
 import utils.EnumsForSprites;
 import utils.Point2D;
 import utils.PointImagePair;
 
+import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -55,10 +59,21 @@ public class Game implements Serializable {
     }
 
     /**
-     * Updates the Player's PlayerState using the board's feedback based on the Player's current location. Also
-     * decreases the Player's temporary invincibility-frame-count by 1.
+     * Updates the Player's PlayerState using the board's feedback based on the Player's current location.
+     * Also scans through the list of boardObjects to add any ChasingElement to Player as an Observer.
+     * Also decreases the Player's temporary invincibility-frame-count by 1.
      */
     public void updatePlayerState() {
+
+        ArrayList<Element> boardObjects = this.getBoard().getObjectManager().getBoardObjects();
+        for (Element boardObject : boardObjects) {
+
+            if (boardObject instanceof ChasingElement) {
+                player.addObserver((ChasingElement)boardObject);
+            }
+        }
+
+
         PlayerState currPlayerState = this.player.playerState;
         Point2D position = this.player.getPos();
         PlayerState modifiedPlayerState = this.board.updatePlayerState(position, currPlayerState);

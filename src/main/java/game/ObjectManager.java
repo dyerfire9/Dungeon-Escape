@@ -35,6 +35,12 @@ public class ObjectManager implements Serializable {
         this.bound = bound;
     }
 
+
+    public ArrayList<Element> getBoardObjects(){
+        return this.boardObjects;
+    }
+
+
     /**
      * Add new elements to the board, collected and managed by the objectManager.
      * @param object new element to be added
@@ -45,6 +51,15 @@ public class ObjectManager implements Serializable {
 
     // Methods to enable calls from gameMaker
     // TODO: add more or configure with gameMaker
+
+
+    /**
+     * A method to place a ChasingElement as a specific location on the board.
+     * @param pos where the new ChasingElement is placed on the board.
+     */
+    public void addChasingElement(Point2D pos){
+       this.addObject(new ChasingElement(EnumsForSprites.Chaser, pos, this.bound, 60, new Point2D(0,0)));
+    }
 
     /**
      * A method to place, specifically, an AlligatorDen that shoots alligators only to the right on the board. This
@@ -154,9 +169,8 @@ public class ObjectManager implements Serializable {
      * PlayerState; if so, update PlayerState.
      *
      * @param playerPosition the Player's current position
-     * @param playerState the Player's playerState, currently including points, temporary invincibility after
-     *                    encountering an element, and winning status.
-     * @return
+     * @param playerState the Player's playerState, currently including points, temporary invincibility after encountering an element, and winning status.
+     * @return the updated PlayerState
      */
     public PlayerState modifyPlayerState(Point2D playerPosition, PlayerState playerState) {
         for (Element boardObject : boardObjects) {
