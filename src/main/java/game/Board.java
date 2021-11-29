@@ -106,6 +106,7 @@ public class Board implements Serializable {
         return this.objectManager.modifyPlayerState(position, playerState);
     }
 
+
     /**
      * Call on the board's objectManager to update the status of every object it contains .
      */

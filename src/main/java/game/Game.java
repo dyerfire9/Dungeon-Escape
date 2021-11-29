@@ -1,7 +1,5 @@
 package game;
 
-import elements.Element;
-import javafx.scene.effect.Light;
 import utils.Point2D;
 import utils.PointImagePair;
 
