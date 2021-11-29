@@ -22,15 +22,6 @@ public class PlayerState implements Serializable {
         this.playerPosition = playerPos;
     }
 
-//    /**
-//     * Empty constructor for playerstate, sets points to default (100)
-//     */
-//    public PlayerState() {
-//        this.points = 100;
-//        this.iFrames = 60;
-//        this.hasWon = false;
-//    }
-
     /**
      * Updates the PlayerState's points by an increment
      * @param change the change increment

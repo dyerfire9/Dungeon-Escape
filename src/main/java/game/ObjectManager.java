@@ -90,7 +90,7 @@ public class ObjectManager implements Serializable {
     }
 
     public void addTeleporter(Point2D pos) {
-        this.addObject(new Teleporter("Teleporter", pos));
+        this.addObject(new Teleporter("Teleporter", pos, new Point2D(6, 6)));
     }
 
 
@@ -159,32 +159,17 @@ public class ObjectManager implements Serializable {
      * If a Player steps onto the same location as an Element, check to see if the Element can affect the Player's
      * PlayerState; if so, update PlayerState.
      *
-     * @param playerPosition the Player's current position
+     * @param currPosition the Player's current position
      * @param playerState the Player's playerState, currently including points, temporary invincibility after
      *                    encountering an element, and winning status.
      * @return
      */
-    public PlayerState modifyPlayerState(Point2D playerPosition, PlayerState playerState) {
-        ArrayList<Element> portals = new ArrayList<>();
+    public PlayerState modifyPlayerState(Point2D currPosition, PlayerState playerState) {
 
         for (Element boardObject : boardObjects) {
-            if ((boardObject instanceof Interactable) & Point2D.equals(boardObject.getPos(), playerPosition)) {
+            if ((boardObject instanceof Interactable) & Point2D.equals(boardObject.getPos(), currPosition)) {
                 playerState = ((Interactable) boardObject).changePlayerState(playerState);
             }
-            if ((boardObject instanceof Teleportable)) {
-                portals.add(boardObject);
-            }
-        }
-
-        if (Point2D.equals(playerPosition, portals.get(0).getPos())){
-            //playerState = ((Teleportable) portals.get(0)).changePlayerPosition(playerState);
-            playerState = ((Teleportable) portals.get(0)).changePlayerPosition(playerState, portals.get(1).getPos());
-
-        }
-        else if (Point2D.equals(playerPosition, portals.get(1).getPos())){
-            //playerState = ((Teleportable) portals.get(1)).changePlayerPosition(playerState);
-            playerState = ((Teleportable) portals.get(1)).changePlayerPosition(playerState, portals.get(0).getPos());
-
         }
 
         return playerState;
