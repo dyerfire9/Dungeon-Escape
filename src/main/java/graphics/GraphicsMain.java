@@ -112,5 +112,4 @@ public class GraphicsMain extends Application {
         renderPane.getGame().getBoard().getObjectManager().addDownAlligatorDen(pos);
     }
 
-
 }
