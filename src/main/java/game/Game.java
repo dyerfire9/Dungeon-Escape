@@ -51,11 +51,13 @@ public class Game implements Serializable {
         if (traversable)  {
             player.setPos(newPos);
             for (Element pushable : pushables) {
-                if (pushable.getPos().getX() == player.getPos().getX() & pushable.getPos().getY() == player.getPos().getY()) {
+                if (pushable.getPos().getX() == player.getPos().getX() &
+                        pushable.getPos().getY() == player.getPos().getY()) {
                     Point2D pushedPos = new Point2D(pushable.getPos().getX() + movement.getX(),
-                            pushable.getPos().getY() + pushable.getPos().getY());
+                            pushable.getPos().getY() + movement.getY());
                     pushable.setPos(new Point2D(pushedPos.getX(), pushedPos.getY()));
                     // check the next pos of PUSHABLE is a traversable, IF not "Met a wall" or "Cannot push!""
+                    //TODO: Implement if statement when there are concatenated PushableElements and When it's beside the wall.
                 }
             }
         }
