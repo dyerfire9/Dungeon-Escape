@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 public class Player implements Serializable {
     private Point2D pos;
+    private Point2D lastPos;
     public PlayerState playerState;
     private final EnumsForSprites sprite;
 
@@ -26,12 +27,20 @@ public class Player implements Serializable {
     public Point2D getPos(){
         return pos;
     }
+/*
+    public Point2D getLastPos(){
+        return lastPos;
+    }*/
 
     /**
      * Sets the Player's position to a new position.
      * @param newPos the new position, represented by a Point2D object composed of 2 integer coordinates
      */
-    public void setPos(Point2D newPos) { this.pos = newPos; }
+    public void setPos(Point2D newPos) {
+    /*    // save the last position of the Player.
+        this.lastPos = this.getPos();*/
+        this.pos = newPos;
+    }
 
 
     /**

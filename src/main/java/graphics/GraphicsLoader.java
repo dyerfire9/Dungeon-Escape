@@ -43,6 +43,8 @@ public class GraphicsLoader {
                 new Image("file:src/main/assets/tiles/dngn_entrance.png"));
         this.strMapping.put(EnumsForSprites.GOAL,
                 new Image("file:src/main/assets/player/statues/guardian-eyeopen-flame3.png"));
+        this.strMapping.put(EnumsForSprites.PUSHABLE,
+                new Image("file:src/main/assets/player/nonliving/ball_lightning"));
     }
 
     /**

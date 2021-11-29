@@ -89,6 +89,10 @@ public class ObjectManager implements Serializable {
         this.addObject(new Goal(EnumsForSprites.GOAL, pos));
     }
 
+    public void addPushable(Point2D pos) {
+        this.addObject(new Pushable(EnumsForSprites.PUSHABLE, pos, 0, 120, new Point2D(5, 5)));
+    }
+
 
     /**
      * A method to remove elements from the board, which is managed by the board's objectManager.
@@ -110,6 +114,10 @@ public class ObjectManager implements Serializable {
                 collector.add(boardObject.getPointImagePair());
         }
         return collector;
+    }
+
+    public ArrayList<Element> getBoardObjects() {
+        return this.boardObjects;
     }
 
     /**

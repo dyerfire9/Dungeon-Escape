@@ -56,6 +56,7 @@ public class GraphicsMain extends Application {
             this.addGoal(new Point2D(17, 17));
             this.addDownAlligatorDen(new Point2D(12, 13));
             this.addRightAlligatorDen(new Point2D(7,8));
+            this.addPushable(new Point2D(3,3));
         }
         renderPane.start();
 
@@ -85,6 +86,10 @@ public class GraphicsMain extends Application {
 
         // Show stage
         mainStage.show();
+    }
+
+    private void addPushable(Point2D pos) {
+        renderPane.getGame().getBoard().getObjectManager().addPushable(pos);
     }
 
     // Object-specific add methods to be called by gameMaker
