@@ -64,7 +64,8 @@ public class GraphicsMain extends Application {
         this.gameSeeder.addGoal(new Point2D(17, 17));
         this.gameSeeder.addDownAlligatorDen(new Point2D(12, 13));
         this.gameSeeder.addRightAlligatorDen(new Point2D(7,8));
-        this.gameSeeder.addChasingElement(new Point2D(10,5));
+        this.gameSeeder.addChasingElement(new Point2D(10,5), 30);
+        this.gameSeeder.addChasingElement(new Point2D(5,16), 15);
 
 
 

@@ -56,8 +56,8 @@ public class ObjectManager implements Serializable {
      * A method to place a ChasingElement as a specific location on the board.
      * @param pos where the new ChasingElement is placed on the board.
      */
-    public void addChasingElement(Point2D pos){
-       this.addObject(new ChasingElement(EnumsForSprites.CHASER, pos, this.bound, 15, new Point2D(0,0)));
+    public void addChasingElement(Point2D pos, int max_tick){
+       this.addObject(new ChasingElement(EnumsForSprites.CHASER, pos, this.bound, max_tick, new Point2D(0,0)));
     }
 
     /**

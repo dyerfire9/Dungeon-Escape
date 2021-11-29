@@ -21,8 +21,8 @@ public class GameSeeder {
         this.game.getBoard().getObjectManager().addRightAlligatorDen(pos);
     }
 
-    public void addChasingElement(Point2D pos) {
-        this.game.getBoard().getObjectManager().addChasingElement(pos);
+    public void addChasingElement(Point2D pos, int max_tick) {
+        this.game.getBoard().getObjectManager().addChasingElement(pos, max_tick);
     }
 
 }
