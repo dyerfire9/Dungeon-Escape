@@ -171,18 +171,20 @@ public class ObjectManager implements Serializable {
             if ((boardObject instanceof Interactable) & Point2D.equals(boardObject.getPos(), playerPosition)) {
                 playerState = ((Interactable) boardObject).changePlayerState(playerState);
             }
-
-            if ((boardObject instanceof Teleporter)) {
+            if ((boardObject instanceof Teleportable)) {
                 portals.add(boardObject);
             }
-
         }
 
         if (Point2D.equals(playerPosition, portals.get(0).getPos())){
-            playerState = ((Teleporter) portals.get(0)).changePlayerState(playerState);
+            //playerState = ((Teleportable) portals.get(0)).changePlayerPosition(playerState);
+            playerState = ((Teleportable) portals.get(0)).changePlayerPosition(playerState, portals.get(1).getPos());
+
         }
         else if (Point2D.equals(playerPosition, portals.get(1).getPos())){
-            playerState = ((Teleporter) portals.get(1)).changePlayerState(playerState);
+            //playerState = ((Teleportable) portals.get(1)).changePlayerPosition(playerState);
+            playerState = ((Teleportable) portals.get(1)).changePlayerPosition(playerState, portals.get(0).getPos());
+
         }
 
         return playerState;

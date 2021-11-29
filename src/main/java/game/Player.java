@@ -42,7 +42,6 @@ public class Player implements Serializable {
         this.playerState = playerState;
     }
 
-
     /**
      * Sets the Player's representation, currently a String and to be mapped to an Image by  the GraphicsLoader.
      * @return the Player's representation
