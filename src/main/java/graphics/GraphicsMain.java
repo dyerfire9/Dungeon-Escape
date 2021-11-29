@@ -89,7 +89,7 @@ public class GraphicsMain extends Application {
     }
 
     private void addPushable(Point2D pos) {
-        renderPane.getGame().getBoard().getObjectManager().addPushable(pos);
+        renderPane.getGame().getBoard().getObjectManager().addPushableElement(pos);
     }
 
     // Object-specific add methods to be called by gameMaker

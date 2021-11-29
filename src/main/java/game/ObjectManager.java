@@ -89,8 +89,8 @@ public class ObjectManager implements Serializable {
         this.addObject(new Goal(EnumsForSprites.GOAL, pos));
     }
 
-    public void addPushable(Point2D pos) {
-        this.addObject(new Pushable(EnumsForSprites.PUSHABLE, pos, 0, 120, new Point2D(5, 5)));
+    public void addPushableElement(Point2D pos) {
+        this.addObject(new PushableElement(EnumsForSprites.PUSHABLEELEMENT, pos));
     }
 
 

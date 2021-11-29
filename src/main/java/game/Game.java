@@ -1,9 +1,7 @@
 package game;
 
 import elements.Element;
-import elements.Movable;
-import elements.MovableElement;
-import elements.Pushable;
+import elements.PushableElement;
 import utils.EnumsForSprites;
 import utils.Point2D;
 import utils.PointImagePair;
@@ -45,7 +43,7 @@ public class Game implements Serializable {
         Point2D movement = new Point2D(newPos.getX() - currentPos.getX(), newPos.getY() - currentPos.getY());
 
         for (Element object : this.board.getObjectManager().getBoardObjects()) {
-            if (object instanceof Pushable) {
+            if (object instanceof PushableElement) {
                 pushables.add(object);
             }
         }
@@ -54,7 +52,6 @@ public class Game implements Serializable {
             player.setPos(newPos);
             for (Element pushable : pushables) {
                 if (pushable.getPos() == player.getPos()) {
-                    // 오브젝트 매니저에서 다시 설정
                     pushable.setPos(new Point2D(pushable.getPos().getX() + movement.getX(),
                             pushable.getPos().getY() + pushable.getPos().getY()));
                     // check the next pos of PUSHABLE is a traversable, IF not "Met a wall" or "Cannot push!""
