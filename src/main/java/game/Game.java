@@ -39,7 +39,7 @@ public class Game implements Serializable {
         Point2D currentPos = player.getPos();
         Point2D newPos = Point2D.add(currentPos, move);
         boolean traversable = board.isTraversable(newPos);
-        ArrayList<Element> pushables = new ArrayList<>(); //여기서 체ㅡㅋ
+        ArrayList<Element> pushables = new ArrayList<>();
         Point2D movement = new Point2D(newPos.getX() - currentPos.getX(), newPos.getY() - currentPos.getY());
 
         for (Element object : this.board.getObjectManager().getBoardObjects()) {
@@ -51,9 +51,10 @@ public class Game implements Serializable {
         if (traversable)  {
             player.setPos(newPos);
             for (Element pushable : pushables) {
-                if (pushable.getPos() == player.getPos()) {
-                    pushable.setPos(new Point2D(pushable.getPos().getX() + movement.getX(),
-                            pushable.getPos().getY() + pushable.getPos().getY()));
+                if (pushable.getPos().getX() == player.getPos().getX() & pushable.getPos().getY() == player.getPos().getY()) {
+                    Point2D pushedPos = new Point2D(pushable.getPos().getX() + movement.getX(),
+                            pushable.getPos().getY() + pushable.getPos().getY());
+                    pushable.setPos(new Point2D(pushedPos.getX(), pushedPos.getY()));
                     // check the next pos of PUSHABLE is a traversable, IF not "Met a wall" or "Cannot push!""
                 }
             }

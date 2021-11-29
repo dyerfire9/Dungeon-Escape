@@ -18,13 +18,12 @@ public class PushableElement extends Element implements Pushable{
     }
 
     @Override
-    public boolean push() {
+    public boolean push(boolean pushable, Point2D movement) {
 
-        Point2D currPos = super.getPos();
-        Point2D newPos = super.getPos();
-
-
-
+        if (pushable){
+            super.setPos(movement);
+            return true;
+        }
         return false;
     }
 }
