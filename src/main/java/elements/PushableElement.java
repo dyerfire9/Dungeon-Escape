@@ -4,7 +4,6 @@ import utils.EnumsForSprites;
 import utils.Point2D;
 
 public class PushableElement extends Element implements Pushable{
-    private int counter;
 
     /**
      * A constructor fo the Element class. This is the base class for all elements on the board.
@@ -14,7 +13,6 @@ public class PushableElement extends Element implements Pushable{
      */
     public PushableElement(EnumsForSprites sprite, Point2D pos) {
         super(sprite, pos);
-        this.counter = counter;
     }
 
     @Override
@@ -24,6 +22,7 @@ public class PushableElement extends Element implements Pushable{
             super.setPos(movement);
             return true;
         }
+
         return false;
     }
 }
