@@ -49,8 +49,7 @@ public class ObjectManager implements Serializable {
         boardObjects.add(object);
     }
 
-    // Methods to enable calls from gameMaker
-    // TODO: add more or configure with gameMaker
+    // TODO: add for each type of element
 
 
     /**
@@ -58,7 +57,7 @@ public class ObjectManager implements Serializable {
      * @param pos where the new ChasingElement is placed on the board.
      */
     public void addChasingElement(Point2D pos){
-       this.addObject(new ChasingElement(EnumsForSprites.Chaser, pos, this.bound, 60, new Point2D(0,0)));
+       this.addObject(new ChasingElement(EnumsForSprites.CHASER, pos, this.bound, 15, new Point2D(0,0)));
     }
 
     /**

@@ -44,7 +44,7 @@ public class GraphicsLoader {
         this.strMapping.put(EnumsForSprites.GOAL,
                 new Image("file:src/main/assets/player/statues/guardian-eyeopen-flame3.png"));
 
-        this.strMapping.put(EnumsForSprites.Chaser,
+        this.strMapping.put(EnumsForSprites.CHASER,
                 new Image("file:src/main/assets/player/nonliving/molten_gargoyle.png"));
 
     }
