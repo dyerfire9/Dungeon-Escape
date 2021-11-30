@@ -57,6 +57,10 @@ public class GraphicsMain extends Application {
             this.addDownAlligatorDen(new Point2D(12, 13));
             this.addRightAlligatorDen(new Point2D(7,8));
             this.addPushable(new Point2D(3,3));
+            this.addPushable(new Point2D(3,7));
+            this.addPushable(new Point2D(4, 8));
+            this.addPushable(new Point2D(5, 8));
+
         }
         renderPane.start();
 

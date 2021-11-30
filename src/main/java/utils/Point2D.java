@@ -76,4 +76,11 @@ public class Point2D implements Serializable {
     public static boolean equals(Point2D p1, Point2D p2) {
         return (p1.getX() == p2.getX()) & (p1.getY() == p2.getY());
     }
+
+    public static boolean isConcatenated(Point2D p1, Point2D p2, Point2D distance) {
+        boolean x = ((p1.getX() + distance.getX()) == p2.getX());
+        boolean y = ((p1.getY() + distance.getY()) == p2.getY());
+
+        return x & y;
+    }
 }
