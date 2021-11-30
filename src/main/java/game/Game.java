@@ -52,7 +52,7 @@ public class Game implements Serializable {
 
         if (traversable)  {
             player.setPos(newPos);
-            for (Element pushable : pushables) {
+            loop: {for (Element pushable : pushables) {
                 otherPushables.remove(pushable);
 
                 if (Point2D.equals(pushable.getPos(), player.getPos())) {
@@ -60,21 +60,23 @@ public class Game implements Serializable {
                         Point2D pushedPos = new Point2D(pushable.getPos().getX() + movement.getX(),
                                 pushable.getPos().getY() + movement.getY());
                         if (!Point2D.isConcatenated(pushable.getPos(), another.getPos(), movement) &
-                                board.isTraversable(pushedPos)) {
+                                board.isTraversable(pushedPos) &
+                        !Point2D.equals(pushedPos, another.getPos())) {
                             pushable.setPos(pushedPos);
-                            break;
+                            break loop;
 
-                        } else if (Point2D.isConcatenated(pushable.getPos(), another.getPos(), movement)) {
+                        } else if (Point2D.equals(pushedPos, another.getPos())) {
                             player.setPos(currentPos);
                             System.out.println("You can't move multiple objects at once!");
-                            break;
-                        } //else {
+                            break loop;
+                        } //else if (){
                             //player.setPos(currentPos);
                             //System.out.println("The ball can't be pushed into the wall!");
                             //break;
-                        //}
+                        }
                         player.setPos(currentPos);
                     }
+                otherPushables.add(pushable);
                 }
 
 //                if (Point2D.equals(pushable.getPos(), player.getPos())) {
@@ -86,9 +88,8 @@ public class Game implements Serializable {
 //                }
 
 
-                otherPushables.add(pushable);
-            }
-        }
+            }}
+
         else  {
             System.out.println("Met a wall!");
         }
