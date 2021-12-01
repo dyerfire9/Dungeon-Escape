@@ -71,6 +71,7 @@ public class Game implements Serializable {
                             break loop;
                         }
                     }
+
                     System.out.println("You pushed a ball!");
                     pushable.setPos(new Point2D(pushable.getPos().getX() + movement.getX(),
                             pushable.getPos().getY() + movement.getY()));
