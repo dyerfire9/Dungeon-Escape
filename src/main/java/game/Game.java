@@ -52,42 +52,32 @@ public class Game implements Serializable {
 
         if (traversable)  {
             player.setPos(newPos);
-            for (Element pushable : pushables) {
+            loop : {for (Element pushable : pushables) {
                 otherPushables.remove(pushable);
 
+                // Player meets a Pushable Object.
                 if (Point2D.equals(pushable.getPos(), player.getPos())) {
                     for (Element another : otherPushables){
                         Point2D pushedPos = new Point2D(pushable.getPos().getX() + movement.getX(),
                                 pushable.getPos().getY() + movement.getY());
-                        if (!Point2D.isConcatenated(pushable.getPos(), another.getPos(), movement) &
-                                board.isTraversable(pushedPos)) {
-                            pushable.setPos(pushedPos);
-                            break;
 
-                        } else if (Point2D.isConcatenated(pushable.getPos(), another.getPos(), movement)) {
+                        if (Point2D.equals(pushedPos, another.getPos()) & board.isTraversable(pushedPos)) {
                             player.setPos(currentPos);
                             System.out.println("You can't move multiple objects at once!");
-                            break;
-                        } //else {
-                            //player.setPos(currentPos);
-                            //System.out.println("The ball can't be pushed into the wall!");
-                            //break;
-                        //}
-                        player.setPos(currentPos);
+                            break loop;
+                        } else if (!board.isTraversable(pushedPos)) {
+                            player.setPos(currentPos);
+                            System.out.println("The ball can't be pushed into the wall!");
+                            break loop;
+                        }
                     }
+                    System.out.println("You pushed a ball!");
+                    pushable.setPos(new Point2D(pushable.getPos().getX() + movement.getX(),
+                            pushable.getPos().getY() + movement.getY()));
                 }
 
-//                if (Point2D.equals(pushable.getPos(), player.getPos())) {
-//                    Point2D pushedPos = new Point2D(pushable.getPos().getX() + movement.getX(),
-//                            pushable.getPos().getY() + movement.getY());
-//                    pushable.setPos(new Point2D(pushedPos.getX(), pushedPos.getY()));
-//                    // check the next pos of PUSHABLE is a traversable, IF not "Met a wall" or "Cannot push!""
-//                    //TODO: Implement if statement when there are concatenated PushableElements and When it's beside the wall.
-//                }
-
-
                 otherPushables.add(pushable);
-            }
+            }}
         }
         else  {
             System.out.println("Met a wall!");
