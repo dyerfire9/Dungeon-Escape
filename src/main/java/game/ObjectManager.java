@@ -7,15 +7,17 @@ import utils.Point2D;
 import utils.PointImagePair;
 import utils.EnumsForSprites;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.Console;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class ObjectManager implements Serializable {
+public class ObjectManager implements Serializable, PropertyChangeListener {
     private ArrayList<Element> boardObjects;
     private int bound;
+    private Point2D playerPos = new Point2D(5, 5);
 
     /**
      * A constructor for ObjectManager class.
@@ -173,32 +175,43 @@ public class ObjectManager implements Serializable {
         for (Element element : objectsToAdd) {
             this.addObject(element);
         }
-    }
 
-    public void addObservers(Player player) {
+
+        // Set ChasingElement's velocity in relation to Player position each tick.
         for (Element boardObject : boardObjects) {
             if (boardObject instanceof ChasingElement) {
-                ChasingElementController controller = new ChasingElementController((ChasingElement) boardObject);
-                player.addObserver(controller);
+                ChasingElement ce = (ChasingElement)boardObject;
+                int directionX = (int) (Math.signum(Point2D.xDistance(playerPos, ce.getPos())) * 1);
+                int directionY = (int) (Math.signum(Point2D.yDistance(playerPos, ce.getPos())) * 1);
+                Point2D newVel = new Point2D(directionX, directionY);
+                ce.setVelocity(newVel);
             }
         }
     }
 
+    public void propertyChange(PropertyChangeEvent evt) {
+        Point2D playerOldPos = (Point2D) evt.getOldValue();
+        Point2D playerNewPos = (Point2D) evt.getNewValue();
 
-        /**
-         * If a Player steps onto the same location as an Element, check to see if the Element can affect the Player's
-         * PlayerState; if so, update PlayerState.
-         *
-         * @param playerPosition the Player's current position
-         * @param playerState the Player's playerState, currently including points, temporary invincibility after encountering an element, and winning status.
-         * @return the updated PlayerState
-         */
-        public PlayerState modifyPlayerState (Point2D playerPosition, PlayerState playerState){
-            for (Element boardObject : boardObjects) {
-                if ((boardObject instanceof Interactable) & Point2D.equals(boardObject.getPos(), playerPosition)) {
-                    playerState = ((Interactable) boardObject).changePlayerState(playerState);
-                }
-            }
-            return playerState;
-        }
+        this.playerPos = playerNewPos;
     }
+
+
+
+    /**
+     * If a Player steps onto the same location as an Element, check to see if the Element can affect the Player's
+     * PlayerState; if so, update PlayerState.
+     *
+     * @param playerPosition the Player's current position
+     * @param playerState    the Player's playerState, currently including points, temporary invincibility after encountering an element, and winning status.
+     * @return the updated PlayerState
+     */
+    public PlayerState modifyPlayerState(Point2D playerPosition, PlayerState playerState) {
+        for (Element boardObject : boardObjects) {
+            if ((boardObject instanceof Interactable) & Point2D.equals(boardObject.getPos(), playerPosition)) {
+                playerState = ((Interactable) boardObject).changePlayerState(playerState);
+            }
+        }
+        return playerState;
+    }
+}
