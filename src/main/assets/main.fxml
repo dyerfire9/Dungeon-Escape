@@ -81,7 +81,10 @@
                                  <content>
                                     <VBox id="palette" maxHeight="1.7976931348623157E308" prefHeight="500.0" prefWidth="64.0">
                                        <children>
-                                          <Button id="sampleElement" mnemonicParsing="false" prefHeight="64.0" prefWidth="64.0" />
+                                          <Button id="sampleElement" mnemonicParsing="false" prefHeight="64.0" prefWidth="64.0">
+                                             <graphic>
+                                                <ImageView id="sampleElementImage" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" />
+                                             </graphic></Button>
                                        </children>
                                     </VBox>
                                  </content></ScrollPane>

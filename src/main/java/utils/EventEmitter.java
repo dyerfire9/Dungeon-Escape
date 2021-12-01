@@ -53,9 +53,9 @@ public abstract class EventEmitter {
      * Emits an event to all listeners.
      * @param eventType An optional parameter for the event type. May be null.
      */
-    public void emit(String eventType) {
+    public void emit(String eventType, Object... args) {
         for (EventListener lst : listeners) {
-            lst.onEvent(eventType);
+            lst.onEvent(eventType, args);
         }
     }
 }

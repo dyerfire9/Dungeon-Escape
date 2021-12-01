@@ -9,7 +9,7 @@ public class EventEmitterTest {
     private class TestListener implements EventListener {
         private int state = 0;
         @Override
-        public void onEvent(String eventType) {
+        public void onEvent(String eventType, Object... args) {
             if (eventType.equals("add")) {
                 state++;
             } else {

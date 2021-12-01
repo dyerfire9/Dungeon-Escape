@@ -19,7 +19,7 @@
       <RowConstraints maxHeight="135.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label alignment="CENTER" prefHeight="37.0" prefWidth="306.0" text="User Dialog Prompt" textAlignment="CENTER" wrapText="true">
+      <Label id="prompt" alignment="CENTER" prefHeight="37.0" prefWidth="306.0" text="User Dialog Prompt" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Consolas Bold" size="14.0" />
          </font>
@@ -36,7 +36,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="49.0" prefWidth="300.0" GridPane.rowIndex="2">
          <children>
-            <Button id="button" layoutX="135.0" layoutY="6.0" mnemonicParsing="false" text="OK">
+            <Button id="button" layoutX="122.0" layoutY="8.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="56.0" text="OK">
                <font>
                   <Font name="Consolas Bold" size="12.0" />
                </font>

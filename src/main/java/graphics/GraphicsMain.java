@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import utils.EventListener;
 import utils.Point2D;
 
 import java.io.File;
@@ -35,7 +36,7 @@ public class GraphicsMain extends Application {
     public void start(Stage mainStage) throws IOException {
         GameMaker gameMaker = new GameMaker();
 
-        int[] sizeLoad  = gameMaker.getBoardSize();
+        int[] sizeLoad = gameMaker.getBoardSize();
 
         this.boardSize = sizeLoad[0];
         int load = sizeLoad[1];
@@ -79,5 +80,9 @@ public class GraphicsMain extends Application {
 
         // Show stage
         mainStage.show();
+    }
+
+    private static void getUserInput() {
+
     }
 }
