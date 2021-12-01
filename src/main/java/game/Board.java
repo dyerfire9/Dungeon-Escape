@@ -7,6 +7,7 @@ import utils.PointImagePair;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Board implements Serializable {
     private final int size;
@@ -110,7 +111,7 @@ public class Board implements Serializable {
      * Call on the board's objectManager to update the status of every object it contains .
      */
     public void updateBoard(){
-        this.objectManager.updateObjects();
+       this.objectManager.updateObjects();
     }
 
 

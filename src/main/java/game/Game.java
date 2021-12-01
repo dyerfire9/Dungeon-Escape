@@ -10,6 +10,7 @@ import utils.PointImagePair;
 import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 
 public class Game implements Serializable {
@@ -56,23 +57,14 @@ public class Game implements Serializable {
      */
     public void updateBoard() {
         this.board.updateBoard();
+        this.board.getObjectManager().addObservers(player);
     }
 
     /**
      * Updates the Player's PlayerState using the board's feedback based on the Player's current location.
-     * Also scans through the list of boardObjects to add any ChasingElement to Player as an Observer.
      * Also decreases the Player's temporary invincibility-frame-count by 1.
      */
     public void updatePlayerState() {
-
-        ArrayList<Element> boardObjects = this.getBoard().getObjectManager().getBoardObjects();
-        for (Element boardObject : boardObjects) {
-
-            if (boardObject instanceof ChasingElement) {
-                player.addObserver((ChasingElement)boardObject);
-            }
-        }
-
 
         PlayerState currPlayerState = this.player.playerState;
         Point2D position = this.player.getPos();
