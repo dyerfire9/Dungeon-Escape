@@ -216,7 +216,7 @@ public class RenderPane {
 
     public void changeGameState() {
         if (!this.makeMode) {
-            this.game.resetObjectsToBaseState();
+            this.resetObjectsToBaseState();
             GraphicsContext gc = canvas.getGraphicsContext2D();
 
             // Clears the canvas
@@ -226,6 +226,10 @@ public class RenderPane {
             gl.drawPlayer(gc, game);
         }
         this.makeMode = !this.makeMode;
+    }
+
+    public void resetObjectsToBaseState() {
+        this.game.resetObjectsToBaseState();
     }
 
     //-----------------Board Element Adders--------------//
