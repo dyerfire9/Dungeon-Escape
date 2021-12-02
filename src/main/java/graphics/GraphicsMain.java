@@ -57,7 +57,7 @@ public class GraphicsMain extends Application {
             this.addPortal(new Point2D(5, 15));
             this.addPortal(new Point2D(3, 10));
             this.addPortal(new Point2D(16, 7));
-            //this.addRock(new Point2D(15, 15));
+            this.addRock(new Point2D(15, 15));
             this.addDownAlligatorDen(new Point2D(12, 13));
             this.addRightAlligatorDen(new Point2D(7,8));
         }
