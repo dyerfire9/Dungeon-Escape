@@ -51,14 +51,16 @@ public class GraphicsMain extends Application {
             int size = g.getSize();
             renderPane = new RenderPane(g, new Point2D(32 * size,
                     32 * size));
+           this.gameSeeder = new GameSeeder(g);
         }
         else {
             g = new Game(this.boardSize);
 
             renderPane = new RenderPane(g, new Point2D(32 * this.boardSize,
                     32 * this.boardSize));
-        }
-        this.gameSeeder = new GameSeeder(g);
+          
+          
+          this.gameSeeder = new GameSeeder(g);
 
         //TODO: to hook up with GUI
         this.gameSeeder.addGoal(new Point2D(17, 17));
@@ -66,7 +68,17 @@ public class GraphicsMain extends Application {
         this.gameSeeder.addRightAlligatorDen(new Point2D(7,8));
         this.gameSeeder.addChasingElement(new Point2D(10,5), 30);
         this.gameSeeder.addChasingElement(new Point2D(5,16), 15);
+      
+      //TODO
+      /*
+      this.addPortal(new Point2D(5, 15));
+            this.addPortal(new Point2D(3, 10));
+            this.addPortal(new Point2D(16, 7));
+            this.addRock(new Point2D(15, 15));
+            */
 
+        }
+        
 
 
         renderPane.start();
@@ -98,5 +110,6 @@ public class GraphicsMain extends Application {
         // Show stage
         mainStage.show();
     }
+
 
 }

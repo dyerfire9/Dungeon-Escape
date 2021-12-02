@@ -2,7 +2,6 @@ package game;
 
 import elements.*;
 import elements.Element;
-import game.PlayerState;
 import utils.Point2D;
 import utils.PointImagePair;
 import utils.EnumsForSprites;
@@ -14,7 +13,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class ObjectManager implements Serializable, PropertyChangeListener {
+public class ObjectManager implements Serializable, ChangeListener {
     private ArrayList<Element> boardObjects;
     private int bound;
     private Point2D playerPos = new Point2D(5, 5);
@@ -117,13 +116,38 @@ public class ObjectManager implements Serializable, PropertyChangeListener {
         this.addObject(new Goal(EnumsForSprites.GOAL, pos));
     }
 
+    public void addPortal(Point2D pos) {
+        this.addObject(new Portal("Portal", pos, pos)); //new Point2D(15, 15)
+    }
+
+    public boolean checkPortals() {
+        boolean isPortal = false;
+        for (Element element : boardObjects){
+            if (element instanceof Portal){
+                isPortal = true;
+            }
+        }
+        return isPortal;
+    }
+
+    public void addRock(Point2D pos) {
+        Rock teleportPoint = new Rock("Rock", pos);
+        this.addObject(teleportPoint);
+
+        for (Element element : boardObjects){
+            if (element instanceof Portal){
+                ((Portal) element).changeTeleportPoint(teleportPoint.getPos());
+            }
+        }
+    }
 
     /**
      * A method to remove elements from the board, which is managed by the board's objectManager.
      *
      * @param object the element to be deleted
      */
-    public void removeObject(Element object) {
+
+    public void removeObject(Element object){
         boardObjects.remove(object);
     }
 
@@ -202,16 +226,23 @@ public class ObjectManager implements Serializable, PropertyChangeListener {
      * If a Player steps onto the same location as an Element, check to see if the Element can affect the Player's
      * PlayerState; if so, update PlayerState.
      *
-     * @param playerPosition the Player's current position
-     * @param playerState    the Player's playerState, currently including points, temporary invincibility after encountering an element, and winning status.
-     * @return the updated PlayerState
+     * @param playerState the Player's playerState, currently including points, temporary invincibility after
+     *                    encountering an element, and winning status.
+     * @return
+
      */
-    public PlayerState modifyPlayerState(Point2D playerPosition, PlayerState playerState) {
+    public PlayerState modifyPlayerState(PlayerState playerState) {
+        Point2D currPosition = playerState.getPos();
+
         for (Element boardObject : boardObjects) {
-            if ((boardObject instanceof Interactable) & Point2D.equals(boardObject.getPos(), playerPosition)) {
+            if ((boardObject instanceof Interactable) & Point2D.equals(boardObject.getPos(), currPosition)) {
                 playerState = ((Interactable) boardObject).changePlayerState(playerState);
             }
         }
+
         return playerState;
     }
+
+
+
 }
