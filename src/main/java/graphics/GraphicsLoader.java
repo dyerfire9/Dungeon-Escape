@@ -43,6 +43,8 @@ public class GraphicsLoader {
                 new Image("file:src/main/assets/tiles/dngn_entrance.png"));
         this.strMapping.put(EnumsForSprites.GOAL,
                 new Image("file:src/main/assets/player/statues/guardian-eyeopen-flame3.png"));
+        this.strMapping.put(EnumsForSprite.PORTAL, new Image("file:src/main/assets/tiles/dngn_portal.png"));
+        this.strMapping.put(EnumsForSprites.ROCK, new Image("file:src/main/assets/tiles/crystal_floor5.png"));
     }
 
     /**

@@ -60,8 +60,7 @@ public class Game implements Serializable {
      */
     public void updatePlayerState() {
         PlayerState currPlayerState = this.player.playerState;
-        Point2D position = this.player.getPos();
-        PlayerState modifiedPlayerState = this.board.updatePlayerState(position, currPlayerState);
+        PlayerState modifiedPlayerState = this.board.updatePlayerState(currPlayerState);
 
         this.player.setPlayerState(modifiedPlayerState);
         this.player.decrementIframes();

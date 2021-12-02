@@ -4,7 +4,6 @@ import utils.EnumsForSprites;
 import java.io.Serializable;
 
 public class Player implements Serializable {
-    private Point2D pos;
     public PlayerState playerState;
     private final EnumsForSprites sprite;
 
@@ -15,7 +14,7 @@ public class Player implements Serializable {
      */
     public Player(Point2D pos){
         this.pos= pos;
-        this.playerState = new PlayerState(100);
+        this.playerState = new PlayerState(100, pos);
         this.sprite =  EnumsForSprites.PLAYER;
     }
 
@@ -24,14 +23,14 @@ public class Player implements Serializable {
      * @return the Player's current position, represented by a Point2D object composed of 2 integer coordinates
      */
     public Point2D getPos(){
-        return pos;
+        return this.playerState.getPos();
     }
 
     /**
      * Sets the Player's position to a new position.
      * @param newPos the new position, represented by a Point2D object composed of 2 integer coordinates
      */
-    public void setPos(Point2D newPos) { this.pos = newPos; }
+    public void setPos(Point2D newPos) { this.playerState.setPos(newPos); }
 
 
     /**
@@ -41,7 +40,6 @@ public class Player implements Serializable {
     public void setPlayerState(PlayerState playerState) {
         this.playerState = playerState;
     }
-
 
     /**
      * Sets the Player's representation, currently a String and to be mapped to an Image by  the GraphicsLoader.

@@ -1,5 +1,6 @@
 package game;
 
+import elements.Element;
 import elements.MovableElement;
 import elements.Tile;
 import utils.Point2D;
@@ -101,8 +102,8 @@ public class Board implements Serializable {
      * @param playerState player's current playerState
      * @return the new playerState after an object in objectManager interacts with the player
      */
-    public PlayerState updatePlayerState(Point2D position, PlayerState playerState) {
-        return this.objectManager.modifyPlayerState(position, playerState);
+    public PlayerState updatePlayerState(PlayerState playerState) {
+        return this.objectManager.modifyPlayerState(playerState);
     }
 
 
