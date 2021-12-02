@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 //TODO: Not happy with class name
+
+// NOTE: I think the class can be generalized to work with N dialogs if needed in the future.
 /**
  * This class packages instructions for presenting the user with dialogs,
  * providing a much more minimal interface.
@@ -48,6 +50,9 @@ public class DialogPresenter {
         td.addOnClickedButton(this::onUserSubmit);
     }
 
+    /**
+     * Presents the contained dialogs to the user
+     */
     public void present() {
         File file = new File("game.ser");
         if (file.exists()) {

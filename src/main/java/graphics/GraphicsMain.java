@@ -51,10 +51,9 @@ public class GraphicsMain extends Application {
         dp.present();
     }
 
-    //TODO: Extract some code to other classes.
+    // Essentially "does everything else" after the dialogs are finished presenting.
+    //TODO: Bloated method, extract some code from it
     private void onDialogsPresented(Stage mainStage) throws IOException {
-        // Sanity check
-        if (dp == null) return;
 
         this.boardSize = dp.getRequestedBoardSize();
 
