@@ -92,6 +92,16 @@ public class ObjectManager implements Serializable {
         this.addObject(new Portal("Portal", pos, pos)); //new Point2D(15, 15)
     }
 
+    public boolean checkPortals() {
+        boolean isPortal = false;
+        for (Element element : boardObjects){
+            if (element instanceof Portal){
+                isPortal = true;
+            }
+        }
+        return isPortal;
+    }
+
     public void addRock(Point2D pos) {
         this.addObject(new Rock("Rock", pos));
 
