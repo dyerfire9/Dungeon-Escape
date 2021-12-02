@@ -47,5 +47,9 @@ public abstract class Generator extends Element {
             return genElement;
         }
     }
+
+    public void reset() {
+        this.counter = 0;
+    }
 }
 

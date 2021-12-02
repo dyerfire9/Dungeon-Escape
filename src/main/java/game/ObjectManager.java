@@ -195,6 +195,9 @@ public class ObjectManager implements Serializable {
            if (element instanceof MovableElement && element.checkIsPermanent()){
                ((MovableElement) element).reset();
             }
+            else if (element instanceof Generator && element.checkIsPermanent()){
+                ((Generator) element).reset();
+            }
            else {
                if (!element.checkIsPermanent()) {objectsToRemove.add(element);}
            }
