@@ -1,4 +1,4 @@
-package graphics;
+package graphics.dialog;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +16,8 @@ import java.net.URL;
  * Represents a dialog window that presents the user with a blank text field.
  */
 public class TextDialog extends Dialog {
+
+    private static final File TEMPLATE = new File("src/main/assets/textDialog.fxml");
     private TextField textField;
     private Label errorMsg;
     private Button okButton;
@@ -28,7 +30,7 @@ public class TextDialog extends Dialog {
     public TextDialog(String prompt) throws IOException {
         super(prompt);
 
-        URL url = new File("src/main/assets/textDialog.fxml").toURI().toURL();
+        URL url = TEMPLATE.toURI().toURL();
         Scene sc = new Scene(FXMLLoader.load(url));
         stage.setScene(sc);
 

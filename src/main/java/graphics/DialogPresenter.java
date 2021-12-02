@@ -1,5 +1,7 @@
 package graphics;
 
+import graphics.dialog.BoolDialog;
+import graphics.dialog.TextDialog;
 import javafx.beans.InvalidationListener;
 import javafx.event.Event;
 import javafx.scene.input.KeyCode;

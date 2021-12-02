@@ -2,6 +2,8 @@ package graphics;
 
 import game.Game;
 import game.Serializer;
+import graphics.dialog.BoolDialog;
+import graphics.dialog.TextDialog;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -89,7 +91,7 @@ public class GraphicsMain extends Application {
 
         Button saveButton = (Button) fxmlScene.lookup("#saveButton");
         saveButton.setOnMouseClicked(event -> {
-            renderPane.clearCanvas();
+            renderPane.resetObjectsToBaseState();
             Serializer.serialize(renderPane.getGame());
         });
 

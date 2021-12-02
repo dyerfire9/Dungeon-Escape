@@ -1,4 +1,4 @@
-package graphics;
+package graphics.dialog;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;

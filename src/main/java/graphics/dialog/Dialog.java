@@ -1,4 +1,4 @@
-package graphics;
+package graphics.dialog;
 
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
