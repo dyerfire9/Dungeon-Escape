@@ -2,5 +2,5 @@ package elements;
 
 
 public interface Movable {
-    void move();
+    boolean move();
 }

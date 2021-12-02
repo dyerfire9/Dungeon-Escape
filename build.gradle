@@ -1,14 +1,23 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
 }
+
+javafx {
+    version = '17'
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+mainClassName = 'graphics.GraphicsMain'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation 'junit:junit:4.13.1'
-    testImplementation('org.junit.jupiter:junit-jupiter:5.6.0')
+    implementation 'junit:junit:4.13.2'
+    testImplementation('org.junit.jupiter:junit-jupiter:5.8.1')
 }
 
 test {
@@ -16,3 +25,4 @@ test {
         events "passed", "skipped", "failed"
     }
 }
+
