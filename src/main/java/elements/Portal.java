@@ -2,15 +2,17 @@ package elements;
 import game.PlayerState;
 import utils.Point2D;
 
-public class Teleporter extends Element implements Interactable{
+public class Portal extends Element implements Interactable{
 
     private Point2D teleportPoint;
-    public Teleporter (String sprite, Point2D pos, Point2D teleportPoint) {
+    public Portal(String sprite, Point2D pos, Point2D teleportPoint) {
         super(sprite, pos);
+
         this.teleportPoint = teleportPoint;
     }
-
-
+    public void changeTeleportPoint(Point2D pos) {
+        this.teleportPoint = pos;
+    }
     @Override
     public PlayerState changePlayerState(PlayerState playerState) {
         playerState.setPos(this.teleportPoint);

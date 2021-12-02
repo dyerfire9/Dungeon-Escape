@@ -2,7 +2,6 @@ package game;
 
 import elements.*;
 import elements.Element;
-import game.PlayerState;
 import utils.Point2D;
 import utils.PointImagePair;
 
@@ -89,11 +88,25 @@ public class ObjectManager implements Serializable {
         this.addObject(new Goal("Goal", pos));
     }
 
-    public void addTeleporter(Point2D pos) {
-        this.addObject(new Teleporter("Teleporter", pos, new Point2D(6, 6)));
+    public void addPortal(Point2D pos) {
+        this.addObject(new Portal("Portal", pos, pos)); //new Point2D(15, 15)
     }
 
+    public void addRock(Point2D pos) {
+        this.addObject(new Rock("Rock", pos));
 
+        Rock teleportPoint = null;
+        for (Element element : boardObjects){
+            if (element instanceof Rock){
+                teleportPoint = (Rock) element;
+            }
+        }
+        for (Element element : boardObjects){
+            if (element instanceof Portal){
+                ((Portal) element).changeTeleportPoint(teleportPoint.getPos());
+            }
+        }
+    }
 
     /**
      * A method to remove elements from the board, which is managed by the board's objectManager.
@@ -174,6 +187,7 @@ public class ObjectManager implements Serializable {
 
         return playerState;
     }
+
 
 
 }
