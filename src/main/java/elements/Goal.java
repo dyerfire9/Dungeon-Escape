@@ -2,6 +2,7 @@ package elements;
 
 import game.PlayerState;
 import utils.Point2D;
+import utils.EnumsForSprites;
 
 public class Goal extends Element implements Interactable {
 
@@ -10,7 +11,7 @@ public class Goal extends Element implements Interactable {
      * @param sprite the element's representation
      * @param pos the element's initial position
      */
-    public Goal (String sprite, Point2D pos) {
+    public Goal (EnumsForSprites sprite, Point2D pos) {
         super(sprite, pos);
     }
 

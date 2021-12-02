@@ -4,7 +4,7 @@ import elements.*;
 import elements.Element;
 import utils.Point2D;
 import utils.PointImagePair;
-
+import utils.EnumsForSprites;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -52,7 +52,7 @@ public class ObjectManager implements Serializable {
      * @param pos where the new AlligatorDen is placed on the board.
      */
     public void addRightAlligatorDen(Point2D pos) {
-        this.addObject(new AlligatorDen("alligatorDen", pos, new Point2D(1,0) ,120, bound));
+        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATORDEN, pos, new Point2D(1,0) ,120, bound));
     }
 
 
@@ -61,7 +61,7 @@ public class ObjectManager implements Serializable {
      * @param pos where the new AlligatorDen is placed on the board
      */
     public void addLeftAlligatorDen(Point2D pos) {
-        this.addObject(new AlligatorDen("alligatorDen", pos, new Point2D(-1,0) ,120, bound));
+        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATORDEN, pos, new Point2D(-1,0) ,120, bound));
     }
 
     /**
@@ -69,7 +69,7 @@ public class ObjectManager implements Serializable {
      * @param pos where the new AlligatorDen is placed on the board
      */
     public void addUpAlligatorDen(Point2D pos) {
-        this.addObject(new AlligatorDen("alligatorDen", pos, new Point2D(0,-1) ,120, bound));
+        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATORDEN, pos, new Point2D(0,-1) ,120, bound));
     }
 
     /**
@@ -77,7 +77,7 @@ public class ObjectManager implements Serializable {
      * @param pos where the new AlligatorDen is placed on the board
      */
     public void addDownAlligatorDen(Point2D pos) {
-        this.addObject(new AlligatorDen("alligatorDen", pos, new Point2D(0, 1) ,120, bound));
+        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATORDEN, pos, new Point2D(0, 1) ,120, bound));
     }
 
     /**
@@ -85,7 +85,7 @@ public class ObjectManager implements Serializable {
      * @param pos location where the Goal element is placed on the board
      */
     public void addGoal(Point2D pos) {
-        this.addObject(new Goal("Goal", pos));
+        this.addObject(new Goal(EnumsForSprites.GOAL, pos));
     }
 
     public void addPortal(Point2D pos) {

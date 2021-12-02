@@ -2,6 +2,7 @@ package game;
 
 import org.junit.*;
 import utils.Point2D;
+import utils.EnumsForSprites;
 
 public class PlayerTest {
     @Test(timeout = 500)
@@ -18,7 +19,7 @@ public class PlayerTest {
         PlayerState c = new PlayerState(20);
         player.setPlayerState(c);
         assert (player.getPlayerState().getPoints() == (20));
-        assert player.getSprite() == "Player";
+        assert player.getSprite() == EnumsForSprites.PLAYER;
     }
 
 

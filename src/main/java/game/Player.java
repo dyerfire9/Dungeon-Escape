@@ -1,11 +1,11 @@
 package game;
 import utils.Point2D;
-
+import utils.EnumsForSprites;
 import java.io.Serializable;
 
 public class Player implements Serializable {
     public PlayerState playerState;
-    private final String sprite;
+    private final EnumsForSprites sprite;
 
     /**
      * A constructor for the Player class, which sets its position on the board, its PlayerState with an initial 100
@@ -13,8 +13,9 @@ public class Player implements Serializable {
      * @param pos the initial position of the Player
      */
     public Player(Point2D pos){
+        this.pos= pos;
         this.playerState = new PlayerState(100, pos);
-        this.sprite =  "Player";
+        this.sprite =  EnumsForSprites.PLAYER;
     }
 
 
@@ -44,7 +45,7 @@ public class Player implements Serializable {
      * Sets the Player's representation, currently a String and to be mapped to an Image by  the GraphicsLoader.
      * @return the Player's representation
      */
-    public String getSprite() {
+    public EnumsForSprites getSprite() {
         return this.sprite;
     }
 
