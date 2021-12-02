@@ -103,14 +103,9 @@ public class ObjectManager implements Serializable {
     }
 
     public void addRock(Point2D pos) {
-        this.addObject(new Rock("Rock", pos));
+        Rock teleportPoint = new Rock("Rock", pos);
+        this.addObject(teleportPoint);
 
-        Rock teleportPoint = null;
-        for (Element element : boardObjects){
-            if (element instanceof Rock){
-                teleportPoint = (Rock) element;
-            }
-        }
         for (Element element : boardObjects){
             if (element instanceof Portal){
                 ((Portal) element).changeTeleportPoint(teleportPoint.getPos());
