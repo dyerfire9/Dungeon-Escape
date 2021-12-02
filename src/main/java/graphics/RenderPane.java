@@ -28,7 +28,6 @@ public class RenderPane {
     private boolean makeMode;
 
     private HashSet<String> pressedKeys;
-    private HashSet<Point2D> pressedTiles;
 
     private final Font DEBUG_FONT = new Font("Consolas", 14);
 

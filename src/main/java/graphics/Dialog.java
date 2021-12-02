@@ -2,9 +2,8 @@ package graphics;
 
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import utils.EventEmitter;
 
-public abstract class Dialog extends EventEmitter {
+public abstract class Dialog {
     protected Stage stage;
     protected Label label;
 

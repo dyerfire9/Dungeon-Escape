@@ -1,12 +1,11 @@
 package graphics;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-import utils.EventEmitter;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,20 +25,13 @@ public class BoolDialog extends Dialog {
         noButton = (Button) sc.lookup("#noButton");
         label = (Label) sc.lookup("#prompt");
         label.setText(prompt);
-
-        yesButton.setOnMouseClicked(this::onClickedYes);
-        noButton.setOnMouseClicked(this::onClickedNo);
     }
 
-    //------------ EVENT METHODS ------------//
-
-    private void onClickedYes(MouseEvent event) {
-        emit("userClickedYes");
-        yesButton.setOnMouseClicked(null);
+    public void addOnClickedYes(EventHandler<MouseEvent> handler) {
+        yesButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
     }
 
-    private void onClickedNo(MouseEvent event) {
-        emit("userClickedNo");
-        noButton.setOnMouseClicked(null);
+    public void addOnClickedNo(EventHandler<MouseEvent> handler) {
+        noButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
     }
 }

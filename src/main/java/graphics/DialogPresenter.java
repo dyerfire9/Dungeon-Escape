@@ -1,53 +1,67 @@
 package graphics;
 
-import utils.EventEmitter;
+import javafx.beans.InvalidationListener;
+import javafx.event.Event;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class DialogPresenter extends EventEmitter {
+public class DialogPresenter {
 
-    public static void present() throws IOException {
-        // Instantiate dialogs, attach observers
-        BoolDialog bd = new BoolDialog("User save state detected. Would you like" +
+    private boolean done;
+    private int requestedBoardSize;
+    private BoolDialog bd;
+    private TextDialog td;
+    private ArrayList<InvalidationListener> listeners = new ArrayList<>();
+
+    public DialogPresenter() throws IOException {
+        done = false;
+        bd = new BoolDialog("User save state detected. Would you like" +
                 " to load it?");
-        TextDialog td = new TextDialog("Please enter the size of the board.");
-        bd.attach((eventType, args) -> {
-            if (eventType.equals("userClickedYes")) {
-                System.out.println("User clicked 'Yes'");
-                bd.hide();
-            } else if (eventType.equals("userClickedNo")) {
-                System.out.println("User clicked 'No'");
-                bd.hide();
-                td.show();
-            }
+        td = new TextDialog("Please enter the size of the board.");
+        bd.addOnClickedYes(event -> {
+            System.out.println("User clicked 'Yes'");
+            bd.hide();
         });
-        td.attach((eventType, args) -> {
-            try {
-                if (eventType.equals("userSubmit")) {
-                    String inputStr = (String) args[0];
-                    int input = Integer.parseInt(inputStr);
-                    System.out.printf("User input integer '%d'.", input);
-                    td.hide();
-                }
-            } catch (NumberFormatException nfe) {
-                td.setErrorMsg("Text is not a valid integer.");
-            } catch (Exception e) {
-                td.setErrorMsg("Unknown internal error.");
-            }
+        bd.addOnClickedNo(event -> {
+            System.out.println("User clicked 'No'");
+            bd.hide();
+            td.show();
         });
+        td.addOnKeyPressed(this::onUserSubmit);
+        td.addOnClickedButton(this::onUserSubmit);
+    }
 
-        // Decide which dialogs to show
-        // Show the appropriate dialogs
+    public void present() {
         File file = new File("game.ser");
-        boolean hasSavedGame = file.exists();
-
-        if (hasSavedGame) {
+        if (file.exists()) {
             bd.show();
         } else {
             td.show();
         }
+    }
 
+    private void onUserSubmit(Event event) {
+        try {
+            // Suppress response if user typed in non-ENTER key
+            if (event instanceof KeyEvent) {
+                KeyEvent keyEvent = (KeyEvent) event;
+                if (keyEvent.getCode() != KeyCode.ENTER) {
+                    return;
+                }
+            }
+            requestedBoardSize = Integer.parseInt(td.getText());
+            td.clearErrorMsg();
+            td.hide();
+            System.out.printf("User entered integer '%d'.\n", requestedBoardSize);
+        } catch (NumberFormatException nfe) {
+            td.setErrorMsg("Input is not a valid integer.");
+            System.out.printf("User entered non-integer '%s'.\n", td.getText());
+        } catch (Exception e) {
+            td.setErrorMsg("An unknown error occurred.");
+        }
     }
 }
