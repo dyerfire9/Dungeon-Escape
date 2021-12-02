@@ -126,7 +126,7 @@ public class RenderPane {
                 pos.getX(), pos.getY() + 3*DEBUG_FONT.getSize());
     }
 
-    private void clearCanvas() {
+    public void clearCanvas() {
         GraphicsContext gc = getContext();
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());

@@ -89,6 +89,7 @@ public class GraphicsMain extends Application {
 
         Button saveButton = (Button) fxmlScene.lookup("#saveButton");
         saveButton.setOnMouseClicked(event -> {
+            renderPane.clearCanvas();
             Serializer.serialize(renderPane.getGame());
         });
 
