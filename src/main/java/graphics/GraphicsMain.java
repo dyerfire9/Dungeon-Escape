@@ -1,6 +1,7 @@
 package graphics;
 
 import game.Game;
+import game.GameSeeder;
 import game.Serializer;
 import game.GameMaker;
 import javafx.application.Application;
@@ -26,6 +27,8 @@ public class GraphicsMain extends Application {
     //NOTE: Not sure if storing RenderPane as private static is clean, but it's a temp solution at least
     private static RenderPane renderPane;
     private int boardSize;
+    private GameSeeder gameSeeder;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -41,26 +44,43 @@ public class GraphicsMain extends Application {
 
         mainStage.setTitle("1190");
 
-
+        Game g;
         // Init RenderPane and add to scene graph
         if (load == 1) {
-            Game g = Serializer.deserialize();
+            g = Serializer.deserialize();
             int size = g.getSize();
             renderPane = new RenderPane(g, new Point2D(32 * size,
                     32 * size));
+           this.gameSeeder = new GameSeeder(g);
         }
         else {
-            renderPane = new RenderPane(new Game(this.boardSize), new Point2D(32 * this.boardSize,
+            g = new Game(this.boardSize);
+
+            renderPane = new RenderPane(g, new Point2D(32 * this.boardSize,
                     32 * this.boardSize));
-            // TODO: Remove after testing
-            this.addGoal(new Point2D(17, 17));
-            this.addPortal(new Point2D(5, 15));
+          
+          
+          this.gameSeeder = new GameSeeder(g);
+
+        //TODO: to hook up with GUI
+        this.gameSeeder.addGoal(new Point2D(17, 17));
+        this.gameSeeder.addDownAlligatorDen(new Point2D(12, 13));
+        this.gameSeeder.addRightAlligatorDen(new Point2D(7,8));
+        this.gameSeeder.addChasingElement(new Point2D(10,5), 30);
+        this.gameSeeder.addChasingElement(new Point2D(5,16), 15);
+      
+      //TODO
+      /*
+      this.addPortal(new Point2D(5, 15));
             this.addPortal(new Point2D(3, 10));
             this.addPortal(new Point2D(16, 7));
             this.addRock(new Point2D(15, 15));
-            this.addDownAlligatorDen(new Point2D(12, 13));
-            this.addRightAlligatorDen(new Point2D(7,8));
+            */
+
         }
+        
+
+
         renderPane.start();
 
         // Load resources using FXML
@@ -89,36 +109,6 @@ public class GraphicsMain extends Application {
 
         // Show stage
         mainStage.show();
-    }
-
-    // Object-specific add methods to be called by gameMaker
-    // TODO: add more or configure with gameMaker
-    // TODO: Move out of this class (doesn't really belong here)
-    public void addGoal(Point2D pos) {
-        renderPane.getGame().getBoard().getObjectManager().addGoal(pos);
-    }
-
-    public void addPortal(Point2D pos){
-        renderPane.getGame().getBoard().getObjectManager().addPortal(pos);
-    }
-
-    public void addRock(Point2D pos){
-        renderPane.getGame().getBoard().getObjectManager().addRock(pos);
-        //renderPane.getGame().getBoard().getObjectManager().linkRock();
-
-    }
-
-    public void addRightAlligatorDen(Point2D pos) {
-        renderPane.getGame().getBoard().getObjectManager().addRightAlligatorDen(pos);
-    }
-    public void addLeftAlligatorDen(Point2D pos) {
-        renderPane.getGame().getBoard().getObjectManager().addLeftAlligatorDen(pos);
-    }
-    public void addUpAlligatorDen(Point2D pos) {
-        renderPane.getGame().getBoard().getObjectManager().addUpAlligatorDen(pos);
-    }
-    public void addDownAlligatorDen(Point2D pos) {
-        renderPane.getGame().getBoard().getObjectManager().addDownAlligatorDen(pos);
     }
 
 

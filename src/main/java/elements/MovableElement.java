@@ -7,7 +7,7 @@ import utils.Point2D;
 public class MovableElement extends Element implements Movable{
     private final int max_tick;
     private int counter;
-    private final Point2D velocity;
+    private Point2D velocity;
     private final int bound;
 
     /**
@@ -42,6 +42,23 @@ public class MovableElement extends Element implements Movable{
         }
     }
 
+
+    /**
+     * Setter for MovableElement's velocity, so the MovableElement can change its movement.
+     * @param newVel the new velocity for the MovableElement
+     */
+    public void setVelocity(Point2D newVel) {
+        this.velocity = newVel;
+    }
+
+
+    /**
+     * Getter for MovableElement's current velocity.
+     */
+    public Point2D getVelocity() {
+        return this.velocity;
+    }
+
     /**
      * Checks whether the element can make a move to a new position on the board.
      * If the new position is within the boundary, the element moves to the new position.
@@ -50,7 +67,7 @@ public class MovableElement extends Element implements Movable{
     @Override
     public boolean move() {
         Point2D currPos = super.getPos();
-        Point2D newPos = Point2D.add(currPos, this.velocity);
+        Point2D newPos = Point2D.add(currPos, this.getVelocity());
 
 
         if (((newPos.getX() > this.bound)|| (newPos.getX() < 0))  ||

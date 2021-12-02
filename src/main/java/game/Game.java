@@ -1,11 +1,16 @@
 package game;
 
+import elements.ChasingElement;
+import elements.Element;
+import elements.MovableElement;
 import utils.EnumsForSprites;
 import utils.Point2D;
 import utils.PointImagePair;
 
+import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 
 public class Game implements Serializable {
@@ -26,6 +31,7 @@ public class Game implements Serializable {
         this.isRunning = true;
         Point2D pos = new Point2D(5, 5);
         this.player = new Player(pos);
+        player.addObserver(this.board.getObjectManager());
     }
 
 
@@ -55,10 +61,11 @@ public class Game implements Serializable {
     }
 
     /**
-     * Updates the Player's PlayerState using the board's feedback based on the Player's current location. Also
-     * decreases the Player's temporary invincibility-frame-count by 1.
+     * Updates the Player's PlayerState using the board's feedback based on the Player's current location.
+     * Also decreases the Player's temporary invincibility-frame-count by 1.
      */
     public void updatePlayerState() {
+
         PlayerState currPlayerState = this.player.playerState;
         PlayerState modifiedPlayerState = this.board.updatePlayerState(currPlayerState);
 
