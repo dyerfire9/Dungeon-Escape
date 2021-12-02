@@ -10,6 +10,7 @@ public class Portal extends Element implements Interactable{
 
         this.teleportPoint = teleportPoint;
     }
+
     public void changeTeleportPoint(Point2D pos) {
         this.teleportPoint = pos;
     }
