@@ -111,8 +111,8 @@ public class Board implements Serializable {
     /**
      * Call on the board's objectManager to update the status of every object it contains .
      */
-    public void updateBoard(){
-       this.objectManager.updateObjects();
+    public void updateBoard(PlayerState ps){
+       this.objectManager.updateObjects(ps);
     }
 
 

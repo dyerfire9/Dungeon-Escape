@@ -70,12 +70,12 @@ public class GraphicsMain extends Application {
         this.gameSeeder.addChasingElement(new Point2D(5,16), 15);
       
       //TODO
-      /*
-      this.addPortal(new Point2D(5, 15));
-            this.addPortal(new Point2D(3, 10));
-            this.addPortal(new Point2D(16, 7));
-            this.addRock(new Point2D(15, 15));
-            */
+
+      this.gameSeeder.addPortal(new Point2D(5, 15));
+      this.gameSeeder.addPortal(new Point2D(3, 10));
+      this.gameSeeder.addPortal(new Point2D(16, 7));
+      this.gameSeeder.addRock(new Point2D(15, 15));
+
 
         }
         

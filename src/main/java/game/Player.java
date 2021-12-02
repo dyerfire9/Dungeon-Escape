@@ -19,19 +19,9 @@ public class Player implements Serializable {
      * @param pos the initial position of the Player
      */
     public Player(Point2D pos){
-        this.pos= pos;
         this.playerState = new PlayerState(100, pos);
         this.sprite =  EnumsForSprites.PLAYER;
         this.observable = new PropertyChangeSupport(this);
-    }
-
-    /**
-     * Add a new observer to observe the changes to Player's position.
-     * @param observer the object that will be notified of changes to Player's position on the board.
-     */
-
-    public void addObserver(PropertyChangeListener observer){
-        observable.addPropertyChangeListener("playerPos", observer);
     }
 
 

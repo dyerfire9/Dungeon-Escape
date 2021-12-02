@@ -31,9 +31,9 @@ public class GraphicsLoader {
     public GraphicsLoader() {
 
         this.tileSize = 32;
-        this.strMapping.put(EnumsForSprites.ISTRANSVERSABLE,
+        this.strMapping.put(EnumsForSprites.ISTRASVERSABLE,
                 new Image("file:src/main/assets/tiles/cobble_blood1.png"));
-        this.strMapping.put(EnumsForSprites.NOTTRANSVERSABLE,
+        this.strMapping.put(EnumsForSprites.NOTTRASVERSABLE,
                 new Image("file:src/main/assets/tiles/torch1.png"));
         this.strMapping.put(EnumsForSprites.PLAYER,
                 new Image("file:src/main/assets/player/deep_elf_blademaster.png"));
@@ -42,10 +42,10 @@ public class GraphicsLoader {
         this.strMapping.put(EnumsForSprites.ALLIGATORDEN,
                 new Image("file:src/main/assets/tiles/dngn_entrance.png"));
         this.strMapping.put(EnumsForSprites.GOAL,
-                new Image("file:src/main/assets/player/statues/guardian-eyeopen-flame3.png"))
+                new Image("file:src/main/assets/player/statues/guardian-eyeopen-flame3.png"));
         this.strMapping.put(EnumsForSprites.CHASER,
-                new Image("file:src/main/assets/player/nonliving/molten_gargoyle.png"))
-        this.strMapping.put(EnumsForSprite.PORTAL, new Image("file:src/main/assets/tiles/dngn_portal.png"));
+                new Image("file:src/main/assets/player/nonliving/molten_gargoyle.png"));
+        this.strMapping.put(EnumsForSprites.PORTAL, new Image("file:src/main/assets/tiles/dngn_portal.png"));
         this.strMapping.put(EnumsForSprites.ROCK, new Image("file:src/main/assets/tiles/crystal_floor5.png"));
 
     }

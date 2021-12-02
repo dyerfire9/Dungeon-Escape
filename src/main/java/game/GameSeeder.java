@@ -25,4 +25,16 @@ public class GameSeeder {
         this.game.getBoard().getObjectManager().addChasingElement(pos, max_tick);
     }
 
+    //TODO:  more directions for Movable
+
+    public void addPortal(Point2D pos) {
+        this.game.getBoard().getObjectManager().addPortal(pos);
+    }
+
+    public void addRock(Point2D pos) {
+        this.game.getBoard().getObjectManager().addRock(pos);
+    }
+
+
+
 }

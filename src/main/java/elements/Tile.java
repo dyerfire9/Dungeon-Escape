@@ -16,10 +16,10 @@ public class Tile implements Serializable {
     public Tile(Boolean isTraversable) {
         this.isTraversable = isTraversable;
         if (isTraversable){
-            this.sprite = EnumsForSprites.ISTRANSVERSABLE;
+            this.sprite = EnumsForSprites.ISTRASVERSABLE;
         }
         else {
-            this.sprite = EnumsForSprites.NOTTRANSVERSABLE;
+            this.sprite = EnumsForSprites.NOTTRASVERSABLE;
         }
     }
 

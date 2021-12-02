@@ -31,7 +31,6 @@ public class Game implements Serializable {
         this.isRunning = true;
         Point2D pos = new Point2D(5, 5);
         this.player = new Player(pos);
-        player.addObserver(this.board.getObjectManager());
     }
 
 
@@ -57,7 +56,8 @@ public class Game implements Serializable {
      * A wrapper method that calls on the underlying board to update itself.
      */
     public void updateBoard() {
-        this.board.updateBoard();
+        PlayerState ps = this.player.getPlayerState();
+        this.board.updateBoard(ps);
     }
 
     /**

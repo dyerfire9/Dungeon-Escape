@@ -7,16 +7,14 @@ import utils.PointImagePair;
 import utils.EnumsForSprites;
 
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.io.Console;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class ObjectManager implements Serializable, ChangeListener {
+public class ObjectManager implements Serializable {
     private ArrayList<Element> boardObjects;
     private int bound;
-    private Point2D playerPos = new Point2D(5, 5);
 
     /**
      * A constructor for ObjectManager class.
@@ -39,6 +37,7 @@ public class ObjectManager implements Serializable, ChangeListener {
     public ObjectManager(ArrayList<Element> boardObjects, int bound) {
         this.boardObjects = boardObjects;
         this.bound = bound;
+
     }
 
 
@@ -117,7 +116,7 @@ public class ObjectManager implements Serializable, ChangeListener {
     }
 
     public void addPortal(Point2D pos) {
-        this.addObject(new Portal("Portal", pos, pos)); //new Point2D(15, 15)
+        this.addObject(new Portal(EnumsForSprites.PORTAL, pos, pos)); //new Point2D(15, 15)
     }
 
     public boolean checkPortals() {
@@ -131,7 +130,7 @@ public class ObjectManager implements Serializable, ChangeListener {
     }
 
     public void addRock(Point2D pos) {
-        Rock teleportPoint = new Rock("Rock", pos);
+        Rock teleportPoint = new Rock(EnumsForSprites.ROCK, pos);
         this.addObject(teleportPoint);
 
         for (Element element : boardObjects){
@@ -170,9 +169,10 @@ public class ObjectManager implements Serializable, ChangeListener {
      * Updates the content of the ObjectManager, removing elements that have gone off the screen and adding elements
      * that have been generated.
      */
-    public void updateObjects() {
+    public void updateObjects(PlayerState ps) {
         HashSet<Element> objectsToRemove = new HashSet<>();
         HashSet<Element> objectsToAdd = new HashSet<>();
+        Point2D playerPos = ps.getPos();
 
         for (Element boardObject : boardObjects) {
 
@@ -211,13 +211,6 @@ public class ObjectManager implements Serializable, ChangeListener {
                 ce.setVelocity(newVel);
             }
         }
-    }
-
-    public void propertyChange(PropertyChangeEvent evt) {
-        Point2D playerOldPos = (Point2D) evt.getOldValue();
-        Point2D playerNewPos = (Point2D) evt.getNewValue();
-
-        this.playerPos = playerNewPos;
     }
 
 
