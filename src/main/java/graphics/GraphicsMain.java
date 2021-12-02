@@ -2,7 +2,6 @@ package graphics;
 
 import game.Game;
 import game.Serializer;
-import game.GameMaker;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,8 +12,6 @@ import javafx.stage.Stage;
 
 import utils.Point2D;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -24,72 +21,79 @@ import java.net.URL;
  */
 public class GraphicsMain extends Application {
 
-    private static Scene mainScene;
-    //NOTE: Not sure if storing RenderPane as private static is clean, but it's a temp solution at least
-    private static RenderPane renderPane;
+    private Scene mainScene;
+    private DialogPresenter dp;
+    private RenderPane renderPane;
     private int boardSize;
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage mainStage) throws IOException {
-        GameMaker gameMaker = new GameMaker();
-        DialogPresenter dp = new DialogPresenter();
-        dp.present();
+        // Dependency extracted from DialogPresenter
+        BoolDialog bd = new BoolDialog("User save state detected. Would you like" +
+                " to load it?");
+        TextDialog td = new TextDialog("Please enter the size of the board.");
 
-        PropertyChangeListener pcl = new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                String propertyName = evt.getPropertyName();
-                if (propertyName.equals("done")) {
-
+        dp = new DialogPresenter(bd, td);
+        dp.addPropertyChangeListener(evt -> {
+            String propertyName = evt.getPropertyName();
+            if (propertyName.equals("done")) {
+                try {
+                    this.onDialogsPresented(mainStage);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
-        };
+        });
+        dp.present();
+    }
 
-//        int[] sizeLoad = gameMaker.getBoardSize();
-//
-//        this.boardSize = sizeLoad[0];
-//        int load = sizeLoad[1];
-//
-//        mainStage.setTitle("1190");
-//        mainStage.setResizable(true);
-//
-//        // Init RenderPane and add to scene graph
-//        if (load == 1) {
-//            Game g = Serializer.deserialize();
-//            int size = g.getSize();
-//            renderPane = new RenderPane(g, new Point2D(32 * size,
-//                    32 * size));
-//        }
-//        else {
-//            renderPane = new RenderPane(new Game(this.boardSize), new Point2D(32 * this.boardSize,
-//                    32 * this.boardSize));
-//        }
-//        renderPane.start();
-//
-//        // Load resources using FXML
-//        // NOTE: This method of loading resources may not work when packaged as a JAR
-//        URL url = new File("src/main/assets/main.fxml").toURI().toURL();
-//        Scene fxmlScene = new Scene(FXMLLoader.load(url));
-//        mainStage.setScene(fxmlScene);
-//
-//        // TODO: Extract to another class later
-//        ScrollPane sp = (ScrollPane) fxmlScene.lookup("#renderPaneParent");
-//        sp.setContent(renderPane.getCanvas());
-//        Button playButton = (Button) fxmlScene.lookup("#playButton");
-//        PlayButtonController pbc = new PlayButtonController(playButton);
-//        playButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-//            renderPane.changeGameState();
-//        });
-//        // TODO: Extract to another class later
-//        Button saveButton = (Button) fxmlScene.lookup("#saveButton");
-//        saveButton.setOnMouseClicked(event -> {
-//            Serializer.serialize(renderPane.getGame());
-//        });
-//
-//        // Show stage
-//        mainStage.show();
+    //TODO: Extract some code to other classes.
+    private void onDialogsPresented(Stage mainStage) throws IOException {
+        // Sanity check
+        if (dp == null) return;
+
+        this.boardSize = dp.getRequestedBoardSize();
+
+        mainStage.setTitle("1190");
+        mainStage.setResizable(true);
+
+        // Init RenderPane and add to scene graph
+        if (dp.requestedLoadFromSave()) {
+            Game g = Serializer.deserialize();
+            int size = g.getSize();
+            renderPane = new RenderPane(g, new Point2D(32 * size,
+                    32 * size));
+        }
+        else {
+            renderPane = new RenderPane(new Game(this.boardSize), new Point2D(32 * this.boardSize,
+                    32 * this.boardSize));
+        }
+        renderPane.start();
+
+        // Load resources using FXML
+        // NOTE: This method of loading resources may not work when packaged as a JAR
+        URL url = new File("src/main/assets/main.fxml").toURI().toURL();
+        Scene fxmlScene = new Scene(FXMLLoader.load(url));
+        mainStage.setScene(fxmlScene);
+
+        ScrollPane sp = (ScrollPane) fxmlScene.lookup("#renderPaneParent");
+        sp.setContent(renderPane.getCanvas());
+        Button playButton = (Button) fxmlScene.lookup("#playButton");
+        PlayButtonController pbc = new PlayButtonController(playButton);
+        playButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            renderPane.changeGameState();
+        });
+
+        Button saveButton = (Button) fxmlScene.lookup("#saveButton");
+        saveButton.setOnMouseClicked(event -> {
+            Serializer.serialize(renderPane.getGame());
+        });
+
+        // Show stage
+        mainStage.show();
     }
 }

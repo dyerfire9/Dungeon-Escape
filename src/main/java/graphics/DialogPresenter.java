@@ -5,29 +5,42 @@ import javafx.event.Event;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+//TODO: Not happy with class name
+/**
+ * This class packages instructions for presenting the user with dialogs,
+ * providing a much more minimal interface.
+ */
 public class DialogPresenter {
 
-    private boolean done;
-    private int requestedBoardSize;
+    private boolean requestToLoadFromSave = false;
+    private int requestedBoardSize = 20;
     private BoolDialog bd;
     private TextDialog td;
     private ArrayList<InvalidationListener> listeners = new ArrayList<>();
+    private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
-    public DialogPresenter() throws IOException {
-        done = false;
-        bd = new BoolDialog("User save state detected. Would you like" +
-                " to load it?");
-        td = new TextDialog("Please enter the size of the board.");
+    /**
+     * Creates a new instance of this class.
+     * @throws IOException Thrown when any Dialog in this constructor throws such an exception.
+     */
+    public DialogPresenter(BoolDialog bd, TextDialog td) throws IOException {
+        this.bd = bd;
+        this.td = td;
         bd.addOnClickedYes(event -> {
             System.out.println("User clicked 'Yes'");
+            requestToLoadFromSave = true;
+            pcs.firePropertyChange("done", false, true);
             bd.hide();
         });
         bd.addOnClickedNo(event -> {
             System.out.println("User clicked 'No'");
+            requestToLoadFromSave = false;
             bd.hide();
             td.show();
         });
@@ -56,6 +69,7 @@ public class DialogPresenter {
             requestedBoardSize = Integer.parseInt(td.getText());
             td.clearErrorMsg();
             td.hide();
+            pcs.firePropertyChange("done", false, true);
             System.out.printf("User entered integer '%d'.\n", requestedBoardSize);
         } catch (NumberFormatException nfe) {
             td.setErrorMsg("Input is not a valid integer.");
@@ -63,5 +77,19 @@ public class DialogPresenter {
         } catch (Exception e) {
             td.setErrorMsg("An unknown error occurred.");
         }
+    }
+
+    //-------------- GETTERS/ADDERS --------------
+
+    public void addPropertyChangeListener(PropertyChangeListener pcl) {
+        pcs.addPropertyChangeListener(pcl);
+    }
+
+    public boolean requestedLoadFromSave() {
+        return this.requestToLoadFromSave;
+    }
+
+    public int getRequestedBoardSize() {
+        return this.requestedBoardSize;
     }
 }
