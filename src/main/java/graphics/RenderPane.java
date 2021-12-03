@@ -103,7 +103,7 @@ public class RenderPane {
         clearCanvas();
 
         // Updates game state
-        game.updateBoard();
+        game.updateObjects();
         game.updatePlayerState();
 
         // Draws new game state
