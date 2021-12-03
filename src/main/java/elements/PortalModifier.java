@@ -28,4 +28,13 @@ public class PortalModifier extends Modifier implements Serializable {
         playerState.updatePoints(-1);
         return playerState;
     }
+
+    /**
+     * Makes the player move to the teleportPoint
+     * @param newPos the new point to teleport to
+     * @return Nothing
+     */
+    public void changeTeleportPoint(Point2D newPos) {
+        this.teleportPoint = newPos;
+    }
 }
