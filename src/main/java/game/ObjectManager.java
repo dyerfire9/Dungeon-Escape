@@ -115,10 +115,19 @@ public class ObjectManager implements Serializable {
         this.addObject(new Goal(EnumsForSprites.GOAL, pos));
     }
 
+    /**
+     * A method to place a Portal element on the board. When Player reaches the Portal, the player will be teleported
+     * to specific coordinates
+     * @param pos location where the Portal element is placed on the board
+     */
     public void addPortal(Point2D pos) {
-        this.addObject(new Portal(EnumsForSprites.PORTAL, pos, pos)); //new Point2D(15, 15)
+        this.addObject(new Portal(EnumsForSprites.PORTAL, pos, pos));
     }
 
+    /**
+     * A method that checks if there is a Portal element on the board
+     * @return True if there is a Portal element on the board and False is there isn't
+     */
     public boolean checkPortals() {
         boolean isPortal = false;
         for (Element element : boardObjects){
@@ -129,6 +138,10 @@ public class ObjectManager implements Serializable {
         return isPortal;
     }
 
+    /**
+     * A method to place a Rock element on the board.  the player will be teleported to this Rock if they use the Portal
+     * @param pos location where the Rock element is placed on the board
+     */
     public void addRock(Point2D pos) {
         Rock teleportPoint = new Rock(EnumsForSprites.ROCK, pos);
         this.addObject(teleportPoint);
@@ -145,7 +158,6 @@ public class ObjectManager implements Serializable {
      *
      * @param object the element to be deleted
      */
-
     public void removeObject(Element object){
         boardObjects.remove(object);
     }
