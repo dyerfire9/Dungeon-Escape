@@ -224,16 +224,18 @@ public class ObjectManager implements Serializable {
      * @return
 
      */
-    public PlayerState modifyPlayerState(PlayerState playerState) {
+    public ArrayList<Modifier> modifyPlayerState(PlayerState playerState) {
         Point2D currPosition = playerState.getPos();
+        ArrayList<Modifier> list = new ArrayList<Modifier>();
 
         for (Element boardObject : boardObjects) {
             if ((boardObject instanceof Interactable) & Point2D.equals(boardObject.getPos(), currPosition)) {
-                playerState = ((Interactable) boardObject).changePlayerState(playerState);
+                list.add(((Interactable) boardObject).Modify(playerState));
+                //playerState = ((Interactable) boardObject).changePlayerState(playerState);
             }
         }
 
-        return playerState;
+        return list;
     }
 
 

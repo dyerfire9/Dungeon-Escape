@@ -1,10 +1,14 @@
 package elements;
 
+import game.Player;
 import game.PlayerState;
 import utils.EnumsForSprites;
 import utils.Point2D;
 
+
 public class Alligator extends MovableElement implements Interactable{
+
+    private AlligatorModifier mod;
     /**
      * A constructor for the Alligator class, inherited from its parent class MovableElement.
      * @param sprite the element's representation
@@ -15,6 +19,7 @@ public class Alligator extends MovableElement implements Interactable{
      */
     public Alligator(EnumsForSprites sprite, Point2D pos, int bound, int max_tick, Point2D velocity) {
         super(sprite, pos, bound, max_tick, velocity);
+        this.mod = new AlligatorModifier();
     }
 
     /**
@@ -23,13 +28,7 @@ public class Alligator extends MovableElement implements Interactable{
      * @return the new playerState after this encounter.
      */
     @Override
-    public PlayerState changePlayerState(PlayerState playerState) {
-        if (!playerState.checkInvincible()) {
-            playerState.updatePoints(-1);
-
-            playerState.resetIframes();
-
-        }
-        return playerState;
+    public AlligatorModifier Modify(PlayerState playerState) {
+        return this.mod;
     }
 }
