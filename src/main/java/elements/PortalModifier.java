@@ -8,10 +8,19 @@ import java.io.Serializable;
 public class PortalModifier extends Modifier implements Serializable {
     private Point2D teleportPoint;
 
+    /**
+     * PortalModifier constructor
+     * @param point the teleportPoint
+     */
     public PortalModifier(Point2D point){
         this.teleportPoint = point;
     }
 
+    /**
+     * Makes the player move to the teleportPoint
+     * @param playerState the Player's current playerState
+     * @return the modified playerState
+     */
     @Override
     public PlayerState Modifier(PlayerState playerState){
         playerState.setPos(this.teleportPoint);

@@ -19,9 +19,9 @@ public class Goal extends Element implements Interactable {
     }
 
     /**
-     * Changes a Player's PlayerState if encountered.
+     * Returns the Goal's modifier, to modify elsewhere
      * @param playerState the Player's current PlayerState
-     * @return the updated PlayerState
+     * @return the Goal's modifier
      */
     @Override
     public GoalModifier Modify(PlayerState playerState) {

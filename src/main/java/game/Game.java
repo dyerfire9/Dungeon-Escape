@@ -83,9 +83,9 @@ public class Game implements Serializable {
         return this.objectManager.getPointImagePairs();
     }
 
-    /**
+    /** Modifies the playerState with whichever modifiers are on the same tile as the player.
      * @param playerState player's current playerState
-     * @return the new playerState after an object in objectManager interacts with the player
+     * @return the new playerState after a modifier interacts with the player
      */
     public PlayerState updatePlayerState(PlayerState playerState) {
         ArrayList<Modifier> list = this.objectManager.modifyPlayerState(playerState);

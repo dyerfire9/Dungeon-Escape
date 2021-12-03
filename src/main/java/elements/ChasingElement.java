@@ -25,9 +25,9 @@ public class ChasingElement extends MovableElement implements Interactable{
 
 
     /**
-     * Defines the effect of this element on the Player if encountered.
+     * Returns the ChasingElement's modifier, to modify elsewhere
      * @param playerState the Player's current playerState
-     * @return the new playerState after this encounter.
+     * @return the ChasingElement's modifier
      */
     @Override
     public ChasingElementModifier Modify(PlayerState playerState) {

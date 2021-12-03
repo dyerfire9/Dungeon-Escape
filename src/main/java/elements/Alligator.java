@@ -23,9 +23,9 @@ public class Alligator extends MovableElement implements Interactable{
     }
 
     /**
-     * Defines the effect of this element on the Player if encountered.
+     * Returns the Alligator's modifier, to modify elsewhere
      * @param playerState the Player's current playerState
-     * @return the new playerState after this encounter.
+     * @return the Alligator's modifier
      */
     @Override
     public AlligatorModifier Modify(PlayerState playerState) {

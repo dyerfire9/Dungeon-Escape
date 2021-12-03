@@ -18,6 +18,11 @@ public class Portal extends Element implements Interactable{
         this.teleportPoint = pos;
     }
 
+    /**
+     * Returns the Portal's modifier, to modify elsewhere
+     * @param playerState the Player's current playerState
+     * @return the Portal's modifier
+     */
     @Override
     public PortalModifier Modify(PlayerState playerState) {
         return this.mod;
