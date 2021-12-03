@@ -3,7 +3,9 @@ package elements;
 import game.PlayerState;
 import utils.Point2D;
 
-public class PortalModifier extends Modifier{
+import java.io.Serializable;
+
+public class PortalModifier extends Modifier implements Serializable {
     private Point2D teleportPoint;
 
     public PortalModifier(Point2D point){

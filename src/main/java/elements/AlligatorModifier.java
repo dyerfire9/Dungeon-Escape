@@ -2,7 +2,9 @@ package elements;
 
 import game.PlayerState;
 
-public class AlligatorModifier extends Modifier{
+import java.io.Serializable;
+
+public class AlligatorModifier extends Modifier implements Serializable {
     @Override
     public PlayerState Modifier(PlayerState playerState){
         if (!playerState.checkInvincible()) {
