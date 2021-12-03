@@ -7,6 +7,8 @@ import utils.Point2D;
 
 public class ChasingElement extends MovableElement implements Interactable{
 
+    private ChasingElementModifier mod;
+
     /**
      * A constructor for the MovableElement class.
      *
@@ -18,23 +20,18 @@ public class ChasingElement extends MovableElement implements Interactable{
      */
     public ChasingElement(EnumsForSprites sprite, Point2D pos, int bound, int max_tick, Point2D velocity) {
         super(sprite, pos, bound, max_tick, velocity);
+        this.mod = new ChasingElementModifier();
     }
 
 
     /**
-     * Defines the effect of this element on the Player if encountered.
+     * Returns the ChasingElement's modifier, to modify elsewhere
      * @param playerState the Player's current playerState
-     * @return the new playerState after this encounter.
+     * @return the ChasingElement's modifier
      */
     @Override
-    public PlayerState changePlayerState(PlayerState playerState) {
-        if (!playerState.checkInvincible()) {
-            playerState.updatePoints(-5);
-
-            playerState.resetIframes();
-
-        }
-        return playerState;
+    public ChasingElementModifier Modify(PlayerState playerState) {
+        return this.mod;
     }
 
 }

@@ -229,23 +229,24 @@ public class ObjectManager implements Serializable {
 
     /**
      * If a Player steps onto the same location as an Element, check to see if the Element can affect the Player's
-     * PlayerState; if so, update PlayerState.
+     * PlayerState; if so, create a list of them to be sent to Game
      *
      * @param playerState the Player's playerState, currently including points, temporary invincibility after
      *                    encountering an element, and winning status.
-     * @return
+     * @return a list of the modifiers on the tile where player is
 
      */
-    public PlayerState modifyPlayerState(PlayerState playerState) {
+    public ArrayList<Modifier> modifyPlayerState(PlayerState playerState) {
         Point2D currPosition = playerState.getPos();
+        ArrayList<Modifier> list = new ArrayList<Modifier>();
 
         for (Element boardObject : boardObjects) {
             if ((boardObject instanceof Interactable) & Point2D.equals(boardObject.getPos(), currPosition)) {
-                playerState = ((Interactable) boardObject).changePlayerState(playerState);
+                list.add(((Interactable) boardObject).Modify(playerState));
             }
         }
 
-        return playerState;
+        return list;
     }
 
 

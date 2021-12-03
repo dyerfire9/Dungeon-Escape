@@ -4,8 +4,7 @@ import utils.EnumsForSprites;
 import utils.Point2D;
 
 public class Portal extends Element implements Interactable{
-
-    private Point2D teleportPoint;
+    private PortalModifier mod;
 
     /**
      * A constructor for the Portal class, inherited from its parent the Element class.
@@ -15,8 +14,7 @@ public class Portal extends Element implements Interactable{
      */
     public Portal(EnumsForSprites sprite, Point2D pos, Point2D teleportPoint) {
         super(sprite, pos);
-
-        this.teleportPoint = teleportPoint;
+        this.mod = new PortalModifier(teleportPoint);
     }
 
     /**
@@ -24,20 +22,17 @@ public class Portal extends Element implements Interactable{
      * @param pos the new teleporation coordinates
      */
     public void changeTeleportPoint(Point2D pos) {
-        this.teleportPoint = pos;
+        this.mod.changeTeleportPoint(pos);
     }
 
     /**
-     * Changes a Player's PlayerState if encountered.
-     * @param playerState the Player's current PlayerState
-     * @return The updated PlayerState
+     * Returns the Portal's modifier, to modify elsewhere
+     * @param playerState the Player's current playerState
+     * @return the Portal's modifier
      */
     @Override
-    public PlayerState changePlayerState(PlayerState playerState) {
-        playerState.setPos(this.teleportPoint);
-        // To check if player actually stepping on portal is registered
-        playerState.updatePoints(-1);
-        return playerState;
+    public PortalModifier Modify(PlayerState playerState) {
+        return this.mod;
     }
 
 }
