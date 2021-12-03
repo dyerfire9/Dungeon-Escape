@@ -37,7 +37,6 @@ public class Player implements Serializable {
      * Sets the Player's position to a new position and notify its Observers.
      * @param newPos the new position, represented by a Point2D object composed of 2 integer coordinates
      */
-
     public void setPos(Point2D newPos) {
         // observable.firePropertyChange("playerPos", oldPos, newPos);
         this.playerState.setPos(newPos); 
