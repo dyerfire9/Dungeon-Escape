@@ -13,7 +13,6 @@ import java.util.HashSet;
 public class Board implements Serializable {
     private final int size;
     private final Tile[][] board;
-    private ObjectManager objectManager;
 
     /**
      * A constructor for class Board.
@@ -22,7 +21,7 @@ public class Board implements Serializable {
     public Board(int size) {
         this.size = size;
         this.board = new Tile[size][size];
-        this.objectManager = new ObjectManager(size - 1);
+        // this.objectManager = new ObjectManager(size - 1);
 
         this.fillBoard();
         this.fillEdges();
@@ -88,39 +87,6 @@ public class Board implements Serializable {
             this.board[i][0] = new Tile(false);
             this.board[i][this.getSize() - 1] = new Tile( false);
         }
-    }
-
-
-    /**
-     * @return  a mapping between each location contained in the board's objectManager and its String representation.
-     */
-    public ArrayList<PointImagePair> getMovableObjectPointImgPairs() {
-        return this.objectManager.getPointImagePairs();
-    }
-
-    /**
-     * @param position player's current position
-     * @param playerState player's current playerState
-     * @return the new playerState after an object in objectManager interacts with the player
-     */
-    public PlayerState updatePlayerState(PlayerState playerState) {
-        return this.objectManager.modifyPlayerState(playerState);
-    }
-
-
-    /**
-     * Call on the board's objectManager to update the status of every object it contains .
-     */
-    public void updateBoard(PlayerState ps){
-       this.objectManager.updateObjects(ps);
-    }
-
-
-    /**
-     * @return the objectManager of the board.
-     */
-    public ObjectManager getObjectManager() {
-        return objectManager;
     }
 }
 

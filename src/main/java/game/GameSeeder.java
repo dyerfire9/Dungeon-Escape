@@ -10,29 +10,29 @@ public class GameSeeder {
     }
 
     public void addGoal (Point2D pos) {
-        this.game.getBoard().getObjectManager().addGoal(pos);
+        this.game.getObjectManager().addGoal(pos);
     }
 
     public void addDownAlligatorDen(Point2D pos) {
-        this.game.getBoard().getObjectManager().addDownAlligatorDen(pos);
+        this.game.getObjectManager().addDownAlligatorDen(pos);
     }
 
     public void addRightAlligatorDen(Point2D pos) {
-        this.game.getBoard().getObjectManager().addRightAlligatorDen(pos);
+        this.game.getObjectManager().addRightAlligatorDen(pos);
     }
 
     public void addChasingElement(Point2D pos, int max_tick) {
-        this.game.getBoard().getObjectManager().addChasingElement(pos, max_tick);
+        this.game.getObjectManager().addChasingElement(pos, max_tick);
     }
 
     //TODO:  more directions for Movable
 
     public void addPortal(Point2D pos) {
-        this.game.getBoard().getObjectManager().addPortal(pos);
+        this.game.getObjectManager().addPortal(pos);
     }
 
     public void addRock(Point2D pos) {
-        this.game.getBoard().getObjectManager().addRock(pos);
+        this.game.getObjectManager().addRock(pos);
     }
 
 
