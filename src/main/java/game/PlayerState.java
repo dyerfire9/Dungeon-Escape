@@ -65,12 +65,13 @@ public class PlayerState implements Serializable {
     /**
      * Getters and (re)Setters for PlayerState's attributes.
      */
+
+
     /**
      * Sets this Player's location to newLocation and notifies its Observers.
      *
-     * @param newPos This Parcel's new location.
+     * @param newPos This Player's new location.
      */
-
     public void setPos(Point2D newPos){
         Point2D oldPos = this.getPos();
         this.playerPosition = newPos;
