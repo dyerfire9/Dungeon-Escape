@@ -2,6 +2,7 @@ package graphics.controller;
 
 import graphics.enums.ToolMode;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
@@ -44,31 +45,18 @@ public class Editor implements FXMLController {
         deleteTool.setOnMouseClicked(event -> toolMode = ToolMode.DELETE);
     }
 
-    /**
-     * Adds a new button to the editor's palette.
-     * @param image The image displayed on the new button.
-     * @throws IOException If there was an error in creating the new button, likely due to
-     *      loading the FXML template.
-     */
-    public void addPaletteButton(EnumsForSprites element, Image image) throws IOException {
-        PaletteButton pb = new PaletteButton(element, image);
-        pb.setOnClicked(event -> this.selectedElement = pb.getElement());
-        buttons.add(pb);
-        vbox.getChildren().add(pb.getButton());
-    }
+    public void addPaletteButton(EnumsForSprites element, Image img) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/paletteButton.fxml"));
+        loader.load();
+        PaletteButton paletteButton = loader.getController();
+        paletteButton.setElement(element);
+        paletteButton.setImage(img);
+        paletteButton.addOnClicked(event -> {
+            this.selectedElement = element;
+            System.out.println("Switched to " + element);
+        });
 
-    /**
-     * Makes the editor invisible.
-     */
-    public void hide() {
-        root.setVisible(false);
-    }
-
-    /**
-     * Makes the editor visible.
-     */
-    public void show() {
-        root.setVisible(true);
+        vbox.getChildren().add(paletteButton.getButton());
     }
 
     public Pane getRoot() {

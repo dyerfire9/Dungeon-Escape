@@ -9,7 +9,12 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import utils.EnumsForSprites;
+
+import java.io.IOException;
+
 
 public class TestControllers extends Application {
 
@@ -43,11 +48,29 @@ public class TestControllers extends Application {
         MainScene mainScene = loader.getController();
         mainScene.assemble(renderPaneRoot, playSaveRoot, editorRoot);
 
+        // Start the game
         renderPane.start();
+
+        addElementsToEditor(editor);
 
         // Display GUI
         primaryStage.setScene(new Scene(mainRoot));
         primaryStage.show();
+    }
+
+    public static void addElementsToEditor(Editor ed) throws IOException {
+        ed.addPaletteButton(EnumsForSprites.IS_TRAVERSABLE,
+                new Image("file:src/main/assets/tiles/cobble_blood1.png"));
+        ed.addPaletteButton(EnumsForSprites.NOT_TRAVERSABLE,
+                new Image("file:src/main/assets/tiles/torch1.png"));
+        ed.addPaletteButton(EnumsForSprites.PLAYER,
+                new Image("file:src/main/assets/player/deep_elf_blademaster.png"));
+        ed.addPaletteButton(EnumsForSprites.ALLIGATOR,
+                new Image("file:src/main/assets/player/animals/alligator.png"));
+        ed.addPaletteButton(EnumsForSprites.ALLIGATOR_DEN,
+                new Image("file:src/main/assets/tiles/dngn_entrance.png"));
+        ed.addPaletteButton(EnumsForSprites.GOAL,
+                new Image("file:src/main/assets/player/statues/guardian-eyeopen-flame3.png"));
     }
 
 }
