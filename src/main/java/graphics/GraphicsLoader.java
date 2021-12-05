@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-//TODO: Rename this class to better reflect its current purpose
 /**
  * Contains methods for drawing the game state on a Canvas.
  */

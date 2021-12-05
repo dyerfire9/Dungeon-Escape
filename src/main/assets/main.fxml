@@ -75,13 +75,13 @@
                               </Button>
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="667.0" prefWidth="80.0">
+                        <AnchorPane id="editor" prefHeight="667.0" prefWidth="80.0">
                            <children>
                               <ScrollPane hbarPolicy="NEVER" layoutY="55.0" prefHeight="508.0" prefWidth="80.0" vbarPolicy="ALWAYS">
                                  <content>
                                     <VBox id="palette" maxHeight="1.7976931348623157E308" prefHeight="500.0" prefWidth="64.0">
                                        <children>
-                                          <Button id="sampleElement" mnemonicParsing="false" prefHeight="64.0" prefWidth="64.0">
+                                          <Button id="templateButton" mnemonicParsing="false" prefHeight="64.0" prefWidth="64.0">
                                              <graphic>
                                                 <ImageView id="sampleElementImage" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" />
                                              </graphic></Button>
