@@ -65,7 +65,8 @@ public class MovableElement extends Element implements Movable{
      * @return whether the element has moved to a new position on the board
      */
     @Override
-    public boolean move() {
+
+public boolean move() {
         Point2D currPos = super.getPos();
         Point2D newPos = Point2D.add(currPos, this.getVelocity());
 
@@ -79,6 +80,5 @@ public class MovableElement extends Element implements Movable{
 
             return true;
         }
-
     }
 }

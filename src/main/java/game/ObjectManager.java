@@ -7,14 +7,15 @@ import utils.PointImagePair;
 import utils.EnumsForSprites;
 
 import java.beans.PropertyChangeEvent;
-
+import java.beans.PropertyChangeListener;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class ObjectManager implements Serializable {
+public class ObjectManager implements Serializable, PropertyChangeListener  {
     private ArrayList<Element> boardObjects;
     private int bound;
+    private Point2D playerMove;
 
     /**
      * A constructor for ObjectManager class.
@@ -154,6 +155,15 @@ public class ObjectManager implements Serializable {
     }
 
     /**
+     * A method to place a Pushable element on the board.
+     *
+     * @param pos location where the Pushable element is placed on the board
+     */
+    public void addPushable(Point2D pos) {
+        this.addObject(new PushableElement(EnumsForSprites.PUSHABLE, pos, bound));
+    }
+
+    /**
      * A method to remove elements from the board, which is managed by the board's objectManager.
      *
      * @param object the element to be deleted
@@ -223,6 +233,26 @@ public class ObjectManager implements Serializable {
                 ce.setVelocity(newVel);
             }
         }
+
+        // Set PushableElement's new position when countered Player
+        for (Element boardObject : boardObjects) {
+            if (boardObject instanceof PushableElement) {
+                PushableElement pe = (PushableElement)boardObject;
+                if (pe.onContact(playerPos)) {
+                    Point2D pushedPos = Point2D.add(pe.getPos(), this.playerMove);
+                    pe.setPos(pushedPos);
+                }
+            }
+        }
+    }
+
+    /**
+     * PropertyChange method must be implemented in this and every observer.
+     */
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        Point2D move = Point2D.minus((Point2D)evt.getNewValue(), (Point2D)evt.getOldValue());
+        this.playerMove = move;
     }
 
 

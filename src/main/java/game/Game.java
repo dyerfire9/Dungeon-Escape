@@ -29,6 +29,7 @@ public class Game implements Serializable {
         this.objectManager = new ObjectManager(size - 1);
         Point2D pos = new Point2D(5, 5);
         this.player = new Player(pos);
+        this.player.getPlayerState().addObserver(this.objectManager);
 
         this.size = size;
         this.isRunning = true;

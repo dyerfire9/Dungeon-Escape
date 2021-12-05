@@ -35,6 +35,10 @@ public class GameSeeder {
         this.game.getObjectManager().addRock(pos);
     }
 
+    public void addPushable(Point2D pos)  {
+        this.game.getObjectManager().addPushable(pos);
+    }
+
 
 
 }

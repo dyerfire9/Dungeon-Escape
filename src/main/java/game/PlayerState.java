@@ -2,6 +2,8 @@ package game;
 
 import utils.Point2D;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 
 public class PlayerState implements Serializable {
@@ -9,6 +11,7 @@ public class PlayerState implements Serializable {
     int iFrames;
     boolean hasWon;
     Point2D playerPosition;
+    private final PropertyChangeSupport observable;
 
     /**
      * A constructor for the PlayerState class, which takes in an initial points and sets
@@ -20,7 +23,17 @@ public class PlayerState implements Serializable {
         this.iFrames = 60;
         this.hasWon = false;
         this.playerPosition = playerPos;
+        this.observable = new PropertyChangeSupport(this);
     }
+
+    /**
+     * Add a new observer to observe the changes to this class.
+     * @param observer
+     */
+    public void addObserver(PropertyChangeListener observer) {
+        observable.addPropertyChangeListener("location", observer);
+    }
+
 
     /**
      * Updates the PlayerState's points by an increment
@@ -52,7 +65,17 @@ public class PlayerState implements Serializable {
     /**
      * Getters and (re)Setters for PlayerState's attributes.
      */
-    public void setPos(Point2D newPos){this.playerPosition = newPos;}
+    /**
+     * Sets this Player's location to newLocation and notifies its Observers.
+     *
+     * @param newPos This Parcel's new location.
+     */
+
+    public void setPos(Point2D newPos){
+        Point2D oldPos = this.getPos();
+        this.playerPosition = newPos;
+        observable.firePropertyChange("location", oldPos, newPos);
+    }
     public Point2D getPos(){return this.playerPosition;}
     public void resetIframes() {this.iFrames = 60;}
     public int getPoints(){
