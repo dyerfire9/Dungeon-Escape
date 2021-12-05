@@ -28,6 +28,7 @@ public class GraphicsMain extends Application {
     private DialogPresenter dp;
     private RenderPane renderPane;
     private int boardSize;
+    private GameSeeder gameSeeder;
 
 
     public static void main(String[] args) {
@@ -64,19 +65,20 @@ public class GraphicsMain extends Application {
         mainStage.setTitle("1190");
         mainStage.setResizable(true);
 
+        Game g;
         // Init RenderPane and add to scene graph
         if (dp.requestedLoadFromSave()) {
-            Game g = Serializer.deserialize();
+            g = Serializer.deserialize();
 
             int size = g.getSize();
             renderPane = new RenderPane(g, new Point2D(32 * size,
-                    32 * size));
+                    32 * size), true);
             this.gameSeeder = new GameSeeder(g);
         } else {
             g = new Game(this.boardSize);
 
             renderPane = new RenderPane(g, new Point2D(32 * this.boardSize,
-                    32 * this.boardSize));
+                    32 * this.boardSize), false);
 
 
             this.gameSeeder = new GameSeeder(g);

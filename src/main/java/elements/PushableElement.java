@@ -6,7 +6,7 @@ import utils.Point2D;
 public class PushableElement extends Element {
     private int bound;
     public PushableElement(EnumsForSprites sprite, Point2D pos, int bound) {
-        super(sprite, pos);
+        super(sprite, pos, true);
         this.bound = bound;
     }
 
