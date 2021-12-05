@@ -13,9 +13,10 @@ public class Goal extends Element implements Interactable {
      * @param sprite the element's representation
      * @param pos the element's initial position
      */
-    public Goal (EnumsForSprites sprite, Point2D pos) {
-        super(sprite, pos);
+    public Goal (EnumsForSprites sprite, Point2D pos, boolean isPermanent) {
+        super(sprite, pos, isPermanent);
         this.mod = new GoalModifier();
+
     }
 
     /**

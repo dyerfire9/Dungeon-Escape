@@ -75,6 +75,17 @@ public class Game implements Serializable {
         this.player.decrementIframes();
     }
 
+    public boolean checkOverlap(Point2D point) {
+        if (Point2D.equals(this.player.getPos(), point)) {
+            return false;
+        }
+        else return !objectManager.checkOverlap(point);
+    }
+
+    public void resetGameToBaseState() {
+        this.objectManager.resetToBaseState();
+        this.player.resetPlayerState();
+    }
 
     /**
      * @return  a mapping between each location contained in the board's objectManager and its String representation.
@@ -144,8 +155,13 @@ public class Game implements Serializable {
     public PlayerState getPlayerState() {return this.player.getPlayerState();}
 
     public boolean checkPlayerWon() {
-        return this.player.getPlayerState().getWinningState();
+        return this.player.checkWon();
     }
 
+    public boolean checkPlayerLose() {return this.player.checkLoss();}
     public int getSize(){return this.size;}
+
+    public void deleteObject(Point2D pos) {
+        this.objectManager.removeObject(pos);
+    }
 }
