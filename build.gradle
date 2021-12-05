@@ -17,7 +17,10 @@ repositories {
 
 dependencies {
     implementation 'junit:junit:4.13.2'
-    testImplementation('org.junit.jupiter:junit-jupiter:5.8.1')
+    implementation "org.testfx:testfx-core:4.0.16-alpha"
+    implementation group: 'org.assertj', name: 'assertj-core', version: '3.13.2'
+    testImplementation('org.junit.jupiter:junit-jupiter:5.8.2')
+    testImplementation("org.testfx:testfx-junit:4.0.15-alpha")
 }
 
 test {

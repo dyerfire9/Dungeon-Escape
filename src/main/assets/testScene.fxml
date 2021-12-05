@@ -46,7 +46,7 @@
          <center>
             <AnchorPane minHeight="640.0" minWidth="640.0" prefHeight="640.0" prefWidth="640.0" BorderPane.alignment="CENTER">
                <children>
-                  <Canvas height="640.0" width="640.0" />
+                  <Canvas height="640.0" width="640.0" id="gameCanvas"/>
                </children>
             </AnchorPane>
          </center>
