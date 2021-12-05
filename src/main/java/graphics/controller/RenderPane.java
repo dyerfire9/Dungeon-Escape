@@ -1,7 +1,10 @@
-package graphics;
+package graphics.controller;
 
 import game.Game;
+import graphics.GraphicsLoader;
+import graphics.controller.FXMLController;
 import javafx.animation.AnimationTimer;
+import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
@@ -17,10 +20,12 @@ import java.util.HashSet;
  * This class encapsulates a Canvas instance that renders the game. This class in theory makes the Canvas
  * easier to manipulate within a larger scene graph.
  */
-public class RenderPane {
+public class RenderPane implements FXMLController {
 
     private Game game;
     private GraphicsLoader gl;
+
+    @FXML
     private Canvas canvas;
     private AnimationTimer timer;
     private long tick;
@@ -31,7 +36,6 @@ public class RenderPane {
 
     private final Font DEBUG_FONT = new Font("Consolas", 14);
 
-    //TODO: Edit constructor such that we only have to input one size-related parameter.
     /**
      * Constructs a pane with a desired screen size.
      * @param size The desired screen size.
@@ -48,6 +52,19 @@ public class RenderPane {
         currentNanoTime = System.nanoTime();
         pressedKeys = new HashSet<>();
         this.makeMode = false;
+    }
+
+    /**
+     * Makes a new instance given only a Game instance, with the screen size automatically calculated.
+     * @param game The Game instance.
+     */
+    public RenderPane(Game game) {
+        this(game, new Point2D(32 * game.getSize(), 32 * game.getSize()));
+    }
+
+    @Override
+    public void initialize() {
+        System.out.println("RenderPane initialized");
 
         // Attach event listeners
         canvas.setOnKeyPressed(this::onKeyPressed);
@@ -65,8 +82,6 @@ public class RenderPane {
                 currentNanoTime = now;
             }
         };
-
-
     }
 
     //------------ PUBLIC METHODS ------------//
@@ -214,6 +229,10 @@ public class RenderPane {
         return game;
     }
 
+    public boolean isMakeMode() {
+        return makeMode;
+    }
+
     public void changeGameState() {
         if (!this.makeMode) {
             this.resetObjectsToBaseState();
@@ -238,5 +257,4 @@ public class RenderPane {
     public void addGoal(Point2D pos) {
         this.game.addGoal(pos);
     }
-
 }

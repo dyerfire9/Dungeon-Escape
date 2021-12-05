@@ -83,6 +83,7 @@ public class DialogPresenter {
             System.out.printf("User entered non-integer '%s'.\n", td.getText());
         } catch (Exception e) {
             td.setErrorMsg("An unknown error occurred.");
+            e.printStackTrace();
         }
     }
 
