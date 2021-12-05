@@ -1,7 +1,7 @@
 package graphics.controller;
 
 /**
- * Tiny interface to enforce structure of an FXML controller class.
+ * A minimal interface to enforce structure of an FXML controller class.
  */
 public interface FXMLController {
     /**

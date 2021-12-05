@@ -2,16 +2,16 @@ package graphics.controller;
 
 import game.Game;
 import graphics.GraphicsLoader;
-import graphics.controller.FXMLController;
+import graphics.enums.ToolMode;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import utils.EnumsForSprites;
 import utils.Point2D;
 
 import java.util.HashSet;
@@ -22,36 +22,37 @@ import java.util.HashSet;
  */
 public class RenderPane implements FXMLController {
 
+    private final Font DEBUG_FONT = new Font("Consolas", 12);
+
+    private ToolMode toolMode = ToolMode.PLACE;
+    private EnumsForSprites element = EnumsForSprites.GOAL;
+
     private Game game;
     private GraphicsLoader gl;
 
     @FXML
     private Canvas canvas;
     private AnimationTimer timer;
-    private long tick;
+    private long tick = 0;
     private long currentNanoTime;
-    private boolean makeMode;
-
-    private HashSet<String> pressedKeys;
-
-    private final Font DEBUG_FONT = new Font("Consolas", 14);
+    private boolean makeMode = false;
+    private Point2D mousePos = new Point2D(0, 0);
+    private HashSet<String> pressedKeys = new HashSet<>();
 
     /**
      * Constructs a pane with a desired screen size.
      * @param size The desired screen size.
      */
     public RenderPane(Game game, Point2D size) {
-
         // Build node structure
         canvas = new Canvas(size.getX(), size.getY());
+        canvas.setFocusTraversable(true);
+        canvas.requestFocus();
 
         // Init some other fields
         gl = new GraphicsLoader();
         this.game = game;
-        tick = 0;
         currentNanoTime = System.nanoTime();
-        pressedKeys = new HashSet<>();
-        this.makeMode = false;
     }
 
     /**
@@ -59,7 +60,9 @@ public class RenderPane implements FXMLController {
      * @param game The Game instance.
      */
     public RenderPane(Game game) {
-        this(game, new Point2D(32 * game.getSize(), 32 * game.getSize()));
+        this(game,
+                new Point2D(GraphicsLoader.DEFAULT_TILESIZE * game.getSize(),
+                        GraphicsLoader.DEFAULT_TILESIZE * game.getSize()));
     }
 
     @Override
@@ -67,13 +70,16 @@ public class RenderPane implements FXMLController {
         System.out.println("RenderPane initialized");
 
         // Attach event listeners
-        canvas.setOnKeyPressed(this::onKeyPressed);
-        canvas.setOnKeyReleased(this::onKeyReleased);
-        canvas.setOnMouseClicked(this::onMouseClicked);
+        canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onMouseClicked);
+        canvas.addEventHandler(KeyEvent.KEY_PRESSED, this::onKeyPressed);
+        canvas.addEventHandler(KeyEvent.KEY_RELEASED, this::onKeyReleased);
+        canvas.addEventHandler(MouseEvent.MOUSE_MOVED, this::onMouseMoved);
 
-        this.addGoal(new Point2D(17, 17));
-        this.game.addDownAlligatorDen(new Point2D(12, 13));
-        this.game.addRightAlligatorDen(new Point2D(7,8));
+        //
+        this.addGoal(new Point2D(game.getSize() - 2, game.getSize() - 2));
+        this.game.addDownAlligatorDen(new Point2D(game.getSize() / 2, 1));
+        this.game.addRightAlligatorDen(new Point2D(1, game.getSize() / 2));
+
         // Init and start timer
         timer = new AnimationTimer() {
             @Override
@@ -82,16 +88,25 @@ public class RenderPane implements FXMLController {
                 currentNanoTime = now;
             }
         };
+        timer.start();
     }
 
     //------------ PUBLIC METHODS ------------//
 
     /**
-     * Starts the game loop.
+     * Starts/restarts the game's tick cycle.
      */
     public void start() {
         System.out.printf("Game timer started at tick=%d.%n", tick);
-        timer.start();
+        makeMode = false;
+    }
+
+    /**
+     * Pauses the game's tick cycle.
+     */
+    public void stop() {
+        System.out.printf("Game timer stopped at tick=%d.%n", tick);
+        makeMode = true;
     }
 
     //------------ RENDERING METHODS ------------//
@@ -104,28 +119,31 @@ public class RenderPane implements FXMLController {
      * @param deltaTime Time elapsed (in nanoseconds) since the last call of the function.
      */
     private void tickAndRender(long deltaTime) {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+
+        // Clears the canvas
+        clearCanvas();
 
         if (!this.makeMode) {
-            GraphicsContext gc = canvas.getGraphicsContext2D();
-
-            // Clears the canvas
-            clearCanvas();
-
             // Updates game state
             game.updateBoard();
             game.updatePlayerState();
 
-            // Draws new game state
-            gl.drawBoard(gc, game);
-            gl.drawPlayer(gc, game);
-
-            // Draws debug info for new game state
-            gl.drawPlayerState(gc, new Point2D(32 * 16, 32), game);
-            drawDebugInfo(1000000000.0 / deltaTime, new Point2D(100, 100));
-
             // Increments tick number
             tick += 1;
         }
+
+        // Draws new game state
+        gl.drawBoard(gc, game);
+        gl.drawPlayer(gc, game);
+
+        if (this.makeMode) {
+            gl.drawBorderAroundTile(gc, mousePos, Color.LIME);
+        }
+
+        // Draws debug info for new game state
+        gl.drawPlayerState(gc, new Point2D(32 * 16, 32), game);
+        drawDebugInfo(1000000000.0 / deltaTime, new Point2D(50, 50));
     }
 
     private void drawDebugInfo(double fps, Point2D pos) {
@@ -145,6 +163,15 @@ public class RenderPane implements FXMLController {
         GraphicsContext gc = getContext();
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+    }
+
+    private boolean checkClickedPoint(Point2D point) {
+        boolean boundCondition = (( 1 <= point.getX()  && point.getX() < this.game.getSize())
+                && ( 1 <= point.getY()  && point.getY() < this.game.getSize()));
+
+        boolean noOverlapCondition = game.checkOverlap(point);
+
+        return boundCondition && noOverlapCondition;
     }
 
     //------------ EVENT METHODS ------------//
@@ -180,27 +207,34 @@ public class RenderPane implements FXMLController {
         canvas.requestFocus();
 
         if (this.makeMode){
-            Point2D mousePoint = new Point2D((int) Math.floor(event.getX()/32), (int) Math.floor(event.getY()/32));
-            if (this.checkClickedPoint(mousePoint)) {
-                this.game.addGoal(mousePoint);
-                GraphicsContext gc = canvas.getGraphicsContext2D();
-
-                // Clears the canvas
-                clearCanvas();
-                // Draws new game state
-                gl.drawBoard(gc, game);
-                gl.drawPlayer(gc, game);
-            }
+            onMouseClickedMakeMode(event);
         }
     }
 
-    private boolean checkClickedPoint(Point2D point) {
-        boolean boundCondition = (( 1 <= point.getX()  && point.getX() < this.game.getSize())
-                                    && ( 1 <= point.getY()  && point.getY() < this.game.getSize()));
+    private void onMouseClickedMakeMode(MouseEvent event) {
+        Point2D mousePoint = new Point2D(
+                (int) Math.floor(event.getX() / gl.getTileSize()),
+                (int) Math.floor(event.getY() / gl.getTileSize()));
+        if (this.checkClickedPoint(mousePoint)) {
+            if (element == EnumsForSprites.GOAL) {
+                game.addGoal(mousePos);
+            } else if (element == EnumsForSprites.NOT_TRAVERSABLE) {
+                game.add
+            }
+            GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        boolean noOverlapCondition = game.checkOverlap(point);
+            // Clears the canvas
+            clearCanvas();
+            // Draws new game state
+            gl.drawBoard(gc, game);
+            gl.drawPlayer(gc, game);
+        }
+    }
 
-        return boundCondition && noOverlapCondition;
+    private void onMouseMoved(MouseEvent event) {
+        int tileSize = gl.getTileSize();
+        mousePos = new Point2D((int) event.getX() / tileSize,
+                (int) event.getY() / tileSize);
     }
 
     //------------ GETTERS AND SETTERS ------------//
@@ -229,10 +263,15 @@ public class RenderPane implements FXMLController {
         return game;
     }
 
-    public boolean isMakeMode() {
-        return makeMode;
+    public void setToolMode(ToolMode toolMode) {
+        this.toolMode = toolMode;
     }
 
+    public void setElement(EnumsForSprites element) {
+        this.element = element;
+    }
+
+    //TODO: Add docs here
     public void changeGameState() {
         if (!this.makeMode) {
             this.resetObjectsToBaseState();
@@ -247,6 +286,7 @@ public class RenderPane implements FXMLController {
         this.makeMode = !this.makeMode;
     }
 
+    //TODO: Add docs here
     public void resetObjectsToBaseState() {
         this.game.resetObjectsToBaseState();
     }
@@ -254,6 +294,7 @@ public class RenderPane implements FXMLController {
     //-----------------Board Element Adders--------------//
     // Object-specific add methods to be called by gameMaker
 
+    //TODO: Add docs here
     public void addGoal(Point2D pos) {
         this.game.addGoal(pos);
     }

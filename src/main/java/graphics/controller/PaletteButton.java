@@ -43,6 +43,6 @@ public class PaletteButton implements FXMLController {
 
     @Override
     public void initialize() {
-        System.out.println(this.toString() + " registered");
+        //System.out.println(this.toString() + " registered");
     }
 }

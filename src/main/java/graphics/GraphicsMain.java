@@ -1,28 +1,38 @@
 package graphics;
 
+import game.Game;
+import game.Serializer;
+import graphics.controller.Editor;
+import graphics.controller.MainScene;
+import graphics.controller.PlaySave;
 import graphics.controller.RenderPane;
 import graphics.dialog.BoolDialog;
 import graphics.dialog.TextDialog;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import utils.EnumsForSprites;
 
 import java.io.IOException;
 
 /**
- * Separate main file, only to be used for the graphics branch.
+ * Entry point of the program.
  */
 public class GraphicsMain extends Application {
 
     private DialogPresenter dp;
-    private RenderPane renderPane;
-    private int boardSize;
+    private FXMLLoader loader;
 
     public static void main(String[] args) {
-        launch(args);
+        launch();
     }
 
     @Override
-    public void start(Stage mainStage) throws IOException {
+    public void start(Stage primaryStage) throws Exception {
+
         // Dependency extracted from DialogPresenter
         BoolDialog bd = new BoolDialog("User save state detected. Would you like" +
                 " to load it?");
@@ -33,7 +43,7 @@ public class GraphicsMain extends Application {
             String propertyName = evt.getPropertyName();
             if (propertyName.equals("done")) {
                 try {
-                    this.onDialogsPresented(mainStage);
+                    this.onDialogsPresented(primaryStage);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -42,59 +52,89 @@ public class GraphicsMain extends Application {
         dp.present();
     }
 
-    // Essentially "does everything else" after the dialogs are finished presenting.
-    //TODO: Bloated method, extract some code from it
-    private void onDialogsPresented(Stage mainStage) throws IOException {
+    // Assume dp is not null
+    private void onDialogsPresented(Stage primaryStage) throws IOException {
+        primaryStage.setTitle("1190");
+        primaryStage.setResizable(true);
 
-//        this.boardSize = dp.getRequestedBoardSize();
-//
-//        mainStage.setTitle("1190");
-//        mainStage.setResizable(true);
-//
-//        // Init RenderPane and add to scene graph
-//        if (dp.requestedLoadFromSave()) {
-//            Game g = Serializer.deserialize();
-//            int size = g.getSize();
-//            renderPane = new RenderPane(g, new Point2D(32 * size,
-//                    32 * size));
-//        }
-//        else {
-//            renderPane = new RenderPane(new Game(this.boardSize), new Point2D(32 * this.boardSize,
-//                    32 * this.boardSize));
-//        }
-//        renderPane.start();
-//
-//        // Load main scene using FXML
-//        // NOTE: This method of loading resources may not work when packaged as a JAR
-//        URL url = new File("src/main/assets/main.fxml").toURI().toURL();
-//        Scene fxmlScene = new Scene(FXMLLoader.load(url));
-//        mainStage.setScene(fxmlScene);
-//
-//        ScrollPane sp = (ScrollPane) fxmlScene.lookup("#renderPaneParent");
-//        sp.setContent(renderPane.getCanvas());
-//
-//        Editor editor = new Editor();
-//        Image img = new Image("file:src/main/assets/player/animals/alligator.png");
-//        editor.addPaletteButton(EnumsForSprites.ALLIGATOR, img);
-//
-//        Button playButton = (Button) fxmlScene.lookup("#playButton");
-//        PlayButtonController pbc = new PlayButtonController(playButton);
-//        playButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-//            renderPane.changeGameState();
-//            if (renderPane.isMakeMode()) {
-//                editor.show();
-//            } else {
-//                editor.hide();
-//            }
-//        });
-//
-//        Button saveButton = (Button) fxmlScene.lookup("#saveButton");
-//        saveButton.setOnMouseClicked(event -> {
-//            renderPane.resetObjectsToBaseState();
-//            Serializer.serialize(renderPane.getGame());
-//        });
+        Game game;
+        if (dp.requestedLoadFromSave()) {
+            game = Serializer.deserialize();
+        } else {
+            game = new Game(dp.getRequestedBoardSize());
+        }
 
-        // Show stage
-        mainStage.show();
+        loader = new FXMLLoader(getClass().getResource("/fxml/renderPane.fxml"));
+        // Controller set manually since a no-arg constructor is not feasible,
+        // therefore FXML cannot autoinitialize this class.
+        loader.setController(new RenderPane(game));
+        Parent renderPaneRoot = loader.load();
+        RenderPane renderPane = loader.getController();
+
+        // Load each FXML sub-scene (voodoo magic)
+        loader = new FXMLLoader(getClass().getResource("/fxml/editor.fxml"));
+        Parent editorRoot = loader.load();
+        Editor editor = loader.getController();
+
+        loader = new FXMLLoader(getClass().getResource("/fxml/playSave.fxml"));
+        Parent playSaveRoot = loader.load();
+        PlaySave playSave = loader.getController();
+
+        // Load main FXML scene, assemble pieces together.
+        loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+        Parent mainRoot = loader.load();
+        MainScene mainScene = loader.getController();
+        mainScene.assemble(renderPaneRoot, playSaveRoot, editorRoot);
+
+        // Start the game
+        renderPane.start();
+
+        addElementsToEditor(editor);
+        registerActions(playSave, editor, renderPane);
+
+        // Display GUI
+        primaryStage.setScene(new Scene(mainRoot));
+        primaryStage.show();
     }
+
+    /**
+     * Registers different elements to a given editor palette. To add a new element,
+     * edit the implementation to make another call to addPaletteButton().
+     * @param ed The given editor.
+     * @throws IOException If any error occurs when reading sprite files.
+     */
+    private static void addElementsToEditor(Editor ed) throws IOException {
+        ed.addPaletteButton(EnumsForSprites.IS_TRAVERSABLE,
+                new Image("file:src/main/assets/tiles/cobble_blood1.png"));
+        ed.addPaletteButton(EnumsForSprites.NOT_TRAVERSABLE,
+                new Image("file:src/main/assets/tiles/torch1.png"));
+        ed.addPaletteButton(EnumsForSprites.PLAYER,
+                new Image("file:src/main/assets/player/deep_elf_blademaster.png"));
+        ed.addPaletteButton(EnumsForSprites.ALLIGATOR,
+                new Image("file:src/main/assets/player/animals/alligator.png"));
+        ed.addPaletteButton(EnumsForSprites.ALLIGATOR_DEN,
+                new Image("file:src/main/assets/tiles/dngn_entrance.png"));
+        ed.addPaletteButton(EnumsForSprites.GOAL,
+                new Image("file:src/main/assets/player/statues/guardian-eyeopen-flame3.png"));
+    }
+
+    // Hooks up events to actions.
+    private void registerActions(PlaySave playSave, Editor editor, RenderPane renderPane) {
+        playSave.addOnClickedPlay(event -> {
+            if (playSave.isInPlayMode()) {
+                renderPane.start();
+            } else {
+                renderPane.resetObjectsToBaseState();
+                renderPane.stop();
+            }
+        });
+        //TODO: Fix bug where AlligatorFactory is out of sync.
+        //Temp fix is to reset game state on save.
+        playSave.addOnClickedSave(event -> {
+            Serializer.serialize(renderPane.getGame());
+        });
+
+
+    }
+
 }

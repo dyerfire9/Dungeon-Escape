@@ -41,8 +41,14 @@ public class Editor implements FXMLController {
     @Override
     public void initialize() {
         System.out.println("Editor initialized");
-        addTool.setOnMouseClicked(event -> toolMode = ToolMode.PLACE);
-        deleteTool.setOnMouseClicked(event -> toolMode = ToolMode.DELETE);
+        addTool.setOnMouseClicked(event -> {
+            toolMode = ToolMode.PLACE;
+            System.out.printf("[Editor] Switched tool mode to '%s'. %n", toolMode);
+        });
+        deleteTool.setOnMouseClicked(event -> {
+            toolMode = ToolMode.DELETE;
+            System.out.printf("[Editor] Switched tool mode to '%s'. %n", toolMode);
+        });
     }
 
     public void addPaletteButton(EnumsForSprites element, Image img) throws IOException {
@@ -53,7 +59,7 @@ public class Editor implements FXMLController {
         paletteButton.setImage(img);
         paletteButton.addOnClicked(event -> {
             this.selectedElement = element;
-            System.out.println("Switched to " + element);
+            System.out.printf("[Editor] Switched palette element to '%s'. %n", element);
         });
 
         vbox.getChildren().add(paletteButton.getButton());

@@ -33,7 +33,7 @@ public class DialogPresenter {
      * Creates a new instance of this class.
      * @throws IOException Thrown when any Dialog in this constructor throws such an exception.
      */
-    public DialogPresenter(BoolDialog bd, TextDialog td) throws IOException {
+    public DialogPresenter(BoolDialog bd, TextDialog td) {
         this.bd = bd;
         this.td = td;
         bd.addOnClickedYes(event -> {
