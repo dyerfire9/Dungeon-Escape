@@ -29,7 +29,6 @@ public class GraphicsMain extends Application {
     private RenderPane renderPane;
     private int boardSize;
 
-    private GameSeeder gameSeeder;
 
     public static void main(String[] args) {
         launch(args);
@@ -71,34 +70,13 @@ public class GraphicsMain extends Application {
 
             int size = g.getSize();
             renderPane = new RenderPane(g, new Point2D(32 * size,
-                    32 * size));
-           this.gameSeeder = new GameSeeder(g);
+                    32 * size), true);
         }
         else {
             Game g = new Game(this.boardSize);
 
             renderPane = new RenderPane(g, new Point2D(32 * this.boardSize,
-                    32 * this.boardSize));
-
-          
-          
-          this.gameSeeder = new GameSeeder(g);
-
-        //TODO: to hook up with GUI
-        this.gameSeeder.addGoal(new Point2D(17, 17));
-        this.gameSeeder.addDownAlligatorDen(new Point2D(12, 13));
-        this.gameSeeder.addRightAlligatorDen(new Point2D(7,8));
-        this.gameSeeder.addChasingElement(new Point2D(10,5), 30);
-        this.gameSeeder.addChasingElement(new Point2D(5,16), 15);
-      
-      //TODO
-
-      this.gameSeeder.addPortal(new Point2D(5, 15));
-      this.gameSeeder.addPortal(new Point2D(3, 10));
-      this.gameSeeder.addPortal(new Point2D(16, 7));
-      this.gameSeeder.addRock(new Point2D(15, 15));
-
-
+                    32 * this.boardSize), false);
         }
         
 

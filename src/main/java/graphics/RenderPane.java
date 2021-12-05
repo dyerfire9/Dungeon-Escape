@@ -1,6 +1,7 @@
 package graphics;
 
 import game.Game;
+import game.GameSeeder;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -20,6 +21,7 @@ import java.util.HashSet;
 public class RenderPane {
 
     private Game game;
+    private GameSeeder gameSeeder;
     private GraphicsLoader gl;
     private Canvas canvas;
     private AnimationTimer timer;
@@ -36,7 +38,7 @@ public class RenderPane {
      * Constructs a pane with a desired screen size.
      * @param size The desired screen size.
      */
-    public RenderPane(Game game, Point2D size) {
+    public RenderPane(Game game, Point2D size, boolean load) {
 
         // Build node structure
         canvas = new Canvas(size.getX(), size.getY());
@@ -53,10 +55,6 @@ public class RenderPane {
         canvas.setOnKeyPressed(this::onKeyPressed);
         canvas.setOnKeyReleased(this::onKeyReleased);
         canvas.setOnMouseClicked(this::onMouseClicked);
-
-        this.addGoal(new Point2D(17, 17));
-        this.game.addDownAlligatorDen(new Point2D(12, 13));
-        this.game.addRightAlligatorDen(new Point2D(7,8));
         // Init and start timer
         timer = new AnimationTimer() {
             @Override
@@ -66,7 +64,23 @@ public class RenderPane {
             }
         };
 
+        if (load) {
+            this.gameSeeder = new GameSeeder(this.game);
+        }
+        else {
+            this.gameSeeder = new GameSeeder(this.game);
 
+            //TODO: to hook up with GUI
+            this.gameSeeder.addGoal(new Point2D(17, 17));
+            this.gameSeeder.addDownAlligatorDen(new Point2D(12, 13));
+            this.gameSeeder.addRightAlligatorDen(new Point2D(7,8));
+            this.gameSeeder.addChasingElement(new Point2D(10,5), 30);
+            this.gameSeeder.addChasingElement(new Point2D(5,16), 15);
+            this.gameSeeder.addPortal(new Point2D(5, 15));
+            this.gameSeeder.addPortal(new Point2D(3, 10));
+            this.gameSeeder.addPortal(new Point2D(16, 7));
+            this.gameSeeder.addRock(new Point2D(15, 15));
+        }
     }
 
     //------------ PUBLIC METHODS ------------//
@@ -170,7 +184,7 @@ public class RenderPane {
         if (this.makeMode){
             Point2D mousePoint = new Point2D((int) Math.floor(event.getX()/32), (int) Math.floor(event.getY()/32));
             if (this.checkClickedPoint(mousePoint)) {
-                this.game.addGoal(mousePoint);
+                this.gameSeeder.addGoal(mousePoint);
                 GraphicsContext gc = canvas.getGraphicsContext2D();
 
                 // Clears the canvas
@@ -234,12 +248,4 @@ public class RenderPane {
     public void resetGameToBaseState() {
         this.game.resetGameToBaseState();
     }
-
-    //-----------------Board Element Adders--------------//
-    // Object-specific add methods to be called by gameMaker
-
-    public void addGoal(Point2D pos) {
-        this.game.addGoal(pos);
-    }
-
 }
