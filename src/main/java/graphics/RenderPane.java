@@ -92,6 +92,9 @@ public class RenderPane {
 
         if (!this.makeMode) {
             GraphicsContext gc = canvas.getGraphicsContext2D();
+            if (this.game.checkPlayerLose() | this.game.checkPlayerWon()) {
+                this.game.resetGameToBaseState();
+            }
 
             // Clears the canvas
             clearCanvas();
@@ -216,7 +219,7 @@ public class RenderPane {
 
     public void changeGameState() {
         if (!this.makeMode) {
-            this.resetObjectsToBaseState();
+            this.resetGameToBaseState();
             GraphicsContext gc = canvas.getGraphicsContext2D();
 
             // Clears the canvas
@@ -228,8 +231,8 @@ public class RenderPane {
         this.makeMode = !this.makeMode;
     }
 
-    public void resetObjectsToBaseState() {
-        this.game.resetObjectsToBaseState();
+    public void resetGameToBaseState() {
+        this.game.resetGameToBaseState();
     }
 
     //-----------------Board Element Adders--------------//

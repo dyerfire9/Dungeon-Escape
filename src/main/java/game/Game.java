@@ -74,7 +74,7 @@ public class Game implements Serializable {
         else return !board.checkOverlap(point);
     }
 
-    public void resetObjectsToBaseState() {
+    public void resetGameToBaseState() {
         this.board.resetObjectsToBaseState();
         this.player.resetPlayerState();
     }
@@ -111,11 +111,15 @@ public class Game implements Serializable {
     public PlayerState getPlayerState() {return this.player.getPlayerState();}
 
     public boolean checkPlayerWon() {
-        return this.player.getPlayerState().getWinningState();
+        return this.player.checkWon();
     }
 
+    public boolean checkPlayerLose() {return this.player.checkLoss();}
     public int getSize(){return this.size;}
 
+    public void deleteObject(Point2D pos) {
+        this.board.deleteObject(pos);
+    }
     //-----Adding Elements to the board----//
     public void addGoal(Point2D pos) {
         this.board.addGoal(pos);

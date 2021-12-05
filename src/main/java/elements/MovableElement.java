@@ -4,7 +4,7 @@ import utils.EnumsForSprites;
 import utils.Point2D;
 
 
-public class MovableElement extends Element implements Movable{
+public class MovableElement extends Element implements Movable, Resettable{
     private final int max_tick;
     private int counter;
     private final Point2D velocity;
@@ -67,6 +67,7 @@ public class MovableElement extends Element implements Movable{
         }
     }
 
+    @Override
     public void reset() {
         super.setPos(this.initialPosition);
     }

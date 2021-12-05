@@ -110,6 +110,19 @@ public class ObjectManager implements Serializable {
         boardObjects.remove(object);
     }
 
+    public void removeObject(Point2D pos) {
+        HashSet<Element> objectsToRemove = new HashSet<>();
+
+        for (Element boardObject : boardObjects) {
+            if (Point2D.equals(boardObject.getPos(), pos)) {
+                objectsToRemove.add(boardObject);
+            }
+        }
+            // Remove objects that are at the pos
+        for (Element element : objectsToRemove) {
+            this.removeObject(element);
+        }
+    }
 
     /**
      * A getter method to collect and access a mapping between the location and the string representation of all objects
@@ -192,12 +205,9 @@ public class ObjectManager implements Serializable {
         HashSet<Element> objectsToRemove = new HashSet<>();
 
         for (Element element: this.boardObjects) {
-           if (element instanceof MovableElement && element.checkIsPermanent()){
-               ((MovableElement) element).reset();
-            }
-            else if (element instanceof Generator && element.checkIsPermanent()){
-                ((Generator) element).reset();
-            }
+           if (element instanceof Resettable && element.checkIsPermanent()) {
+               ((Resettable) element).reset();
+           }
            else {
                if (!element.checkIsPermanent()) {objectsToRemove.add(element);}
            }
@@ -207,4 +217,5 @@ public class ObjectManager implements Serializable {
             this.removeObject(element);
         }
     }
+
 }

@@ -3,7 +3,7 @@ package elements;
 import utils.EnumsForSprites;
 import utils.Point2D;
 
-public abstract class Generator extends Element {
+public abstract class Generator extends Element implements Resettable {
     Point2D direction;
     int max_tick;
     int counter;
@@ -48,8 +48,8 @@ public abstract class Generator extends Element {
         }
     }
 
+    @Override
     public void reset() {
         this.counter = 0;
-    }
-}
+    }}
 

@@ -113,6 +113,7 @@ public class Board implements Serializable {
         this.objectManager.updateObjects();
     }
 
+    public void deleteObject(Point2D pos) {this.objectManager.removeObject(pos);}
     public boolean checkOverlap(Point2D point) {
         return this.objectManager.checkOverlap(point);
     }

@@ -7,6 +7,7 @@ public class Player implements Serializable {
     private Point2D pos;
     public PlayerState playerState;
     private final EnumsForSprites sprite;
+    private Point2D startPos;
 
     /**
      * A constructor for the Player class, which sets its position on the board, its PlayerState with an initial 100
@@ -15,6 +16,7 @@ public class Player implements Serializable {
      */
     public Player(Point2D pos){
         this.pos= pos;
+        this.startPos = pos;
         this.playerState = new PlayerState(100);
         this.sprite =  EnumsForSprites.PLAYER;
     }
@@ -68,5 +70,14 @@ public class Player implements Serializable {
 
     public void resetPlayerState() {
         this.playerState = new PlayerState(100);
+        this.pos = startPos;
     }
+
+    public boolean checkWon() {
+        return this.playerState.getWinningState();
+    }
+    public boolean checkLoss() {
+        return this.playerState.getPoints() <= 0;
+    }
+
 }
