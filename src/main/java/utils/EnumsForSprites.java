@@ -6,5 +6,9 @@ public enum EnumsForSprites {
     PLAYER,
     ALLIGATOR,
     ALLIGATOR_DEN,
-    GOAL
+    GOAL,
+    CHASER,
+    PORTAL,
+    ROCK
 }
+
