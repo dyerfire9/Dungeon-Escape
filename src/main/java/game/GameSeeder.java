@@ -42,6 +42,7 @@ public class GameSeeder {
         this.game.getObjectManager().addRock(pos);
     }
 
+    public void changePlayerStartPos(Point2D pos) {this.game.changePlayerStartPos(pos);}
     public void addPushable(Point2D pos)  {
         if (PushableElement.instanceCounter <= 1) {
             this.game.getObjectManager().addPushable(pos);

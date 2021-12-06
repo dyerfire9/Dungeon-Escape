@@ -88,4 +88,8 @@ public class Player implements Serializable {
         return this.playerState.getPoints() <= 0;
     }
 
+    public void setStartPos(Point2D newPos) {
+        this.startPos = newPos;
+        this.setPos(startPos);
+    }
 }
