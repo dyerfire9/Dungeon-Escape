@@ -72,7 +72,7 @@ public class Point2D implements Serializable {
      * Performs vector deduction on 2 Point2D instances.
      * @param p1 The first point.
      * @param p2 The second point.
-     * @return A new Point2D instance with value (p1 + p2).
+     * @return A new Point2D instance with value (p1 - p2).
      */
     public static Point2D minus(Point2D p1, Point2D p2) {
         return new Point2D(p1.getX() - p2.getX(), p1.getY() - p2.getY());
