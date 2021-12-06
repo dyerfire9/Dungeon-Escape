@@ -1,15 +1,18 @@
-package graphics;
+package graphics.controller;
 
 import game.Game;
+import graphics.GraphicsLoader;
+import graphics.enums.ToolMode;
 import game.GameSeeder;
 import javafx.animation.AnimationTimer;
+import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import utils.EnumsForSprites;
 import utils.Point2D;
 
 import java.util.HashSet;
@@ -18,43 +21,62 @@ import java.util.HashSet;
  * This class encapsulates a Canvas instance that renders the game. This class in theory makes the Canvas
  * easier to manipulate within a larger scene graph.
  */
-public class RenderPane {
+public class RenderPane implements FXMLController {
+
+    private final Font DEBUG_FONT = new Font("Consolas", 12);
+
+    private ToolMode toolMode = ToolMode.PLACE;
+    private EnumsForSprites element;
 
     private Game game;
     private GameSeeder gameSeeder;
     private GraphicsLoader gl;
+
+    @FXML
     private Canvas canvas;
     private AnimationTimer timer;
-    private long tick;
+    private long tick = 0;
     private long currentNanoTime;
-    private boolean makeMode;
+    private boolean makeMode = false;
+    private Point2D mousePos = new Point2D(0, 0);
+    private HashSet<String> pressedKeys = new HashSet<>();
 
-    private HashSet<String> pressedKeys;
-
-    private final Font DEBUG_FONT = new Font("Consolas", 14);
-
-    //TODO: Edit constructor such that we only have to input one size-related parameter.
     /**
      * Constructs a pane with a desired screen size.
      * @param size The desired screen size.
      */
-    public RenderPane(Game game, Point2D size, boolean load) {
-
+    public RenderPane(Game game, Point2D size) {
         // Build node structure
         canvas = new Canvas(size.getX(), size.getY());
+        canvas.setFocusTraversable(true);
+        canvas.requestFocus();
 
         // Init some other fields
         gl = new GraphicsLoader();
         this.game = game;
-        tick = 0;
         currentNanoTime = System.nanoTime();
-        pressedKeys = new HashSet<>();
-        this.makeMode = false;
+    }
+
+    /**
+     * Makes a new instance given only a Game instance, with the screen size automatically calculated.
+     * @param game The Game instance.
+     */
+    public RenderPane(Game game) {
+        this(game,
+                new Point2D(GraphicsLoader.DEFAULT_TILESIZE * game.getSize(),
+                        GraphicsLoader.DEFAULT_TILESIZE * game.getSize()));
+    }
+
+    @Override
+    public void initialize() {
+        System.out.println("RenderPane initialized");
 
         // Attach event listeners
-        canvas.setOnKeyPressed(this::onKeyPressed);
-        canvas.setOnKeyReleased(this::onKeyReleased);
-        canvas.setOnMouseClicked(this::onMouseClicked);
+        canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onMouseClicked);
+        canvas.addEventHandler(KeyEvent.KEY_PRESSED, this::onKeyPressed);
+        canvas.addEventHandler(KeyEvent.KEY_RELEASED, this::onKeyReleased);
+        canvas.addEventHandler(MouseEvent.MOUSE_MOVED, this::onMouseMoved);
+
         // Init and start timer
         timer = new AnimationTimer() {
             @Override
@@ -63,34 +85,26 @@ public class RenderPane {
                 currentNanoTime = now;
             }
         };
-
-        if (load) {
-            this.gameSeeder = new GameSeeder(this.game);
-        }
-        else {
-            this.gameSeeder = new GameSeeder(this.game);
-
-            //TODO: to hook up with GUI
-            this.gameSeeder.addGoal(new Point2D(17, 17));
-            this.gameSeeder.addDownAlligatorDen(new Point2D(12, 13));
-            this.gameSeeder.addRightAlligatorDen(new Point2D(7,8));
-            this.gameSeeder.addChasingElement(new Point2D(10,5), 30);
-            this.gameSeeder.addChasingElement(new Point2D(5,16), 15);
-            this.gameSeeder.addPortal(new Point2D(5, 15));
-            this.gameSeeder.addPortal(new Point2D(3, 10));
-            this.gameSeeder.addPortal(new Point2D(16, 7));
-            this.gameSeeder.addRock(new Point2D(15, 15));
-        }
+        timer.start();
+        this.gameSeeder = new GameSeeder(this.game);
     }
 
     //------------ PUBLIC METHODS ------------//
 
     /**
-     * Starts the game loop.
+     * Starts/restarts the game's tick cycle.
      */
     public void start() {
         System.out.printf("Game timer started at tick=%d.%n", tick);
-        timer.start();
+        makeMode = false;
+    }
+
+    /**
+     * Pauses the game's tick cycle.
+     */
+    public void stop() {
+        System.out.printf("Game timer stopped at tick=%d.%n", tick);
+        makeMode = true;
     }
 
     //------------ RENDERING METHODS ------------//
@@ -103,9 +117,12 @@ public class RenderPane {
      * @param deltaTime Time elapsed (in nanoseconds) since the last call of the function.
      */
     private void tickAndRender(long deltaTime) {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+
+        // Clears the canvas
+        clearCanvas();
 
         if (!this.makeMode) {
-            GraphicsContext gc = canvas.getGraphicsContext2D();
             if (this.game.checkPlayerLose() | this.game.checkPlayerWon()) {
                 this.game.resetGameToBaseState();
             }
@@ -117,17 +134,21 @@ public class RenderPane {
             game.updateObjects();
             game.updatePlayerState();
 
-            // Draws new game state
-            gl.drawBoard(gc, game);
-            gl.drawPlayer(gc, game);
-
-            // Draws debug info for new game state
-            gl.drawPlayerState(gc, new Point2D(32 * 16, 32), game);
-            drawDebugInfo(1000000000.0 / deltaTime, new Point2D(100, 100));
-
             // Increments tick number
             tick += 1;
         }
+
+        // Draws new game state
+        gl.drawBoard(gc, game);
+        gl.drawPlayer(gc, game);
+
+        if (this.makeMode) {
+            gl.drawBorderAroundTile(gc, mousePos, Color.LIME);
+        }
+
+        // Draws debug info for new game state
+        gl.drawPlayerState(gc, new Point2D(32 * 16, 32), game);
+        drawDebugInfo(1000000000.0 / deltaTime, new Point2D(50, 50));
     }
 
     private void drawDebugInfo(double fps, Point2D pos) {
@@ -147,6 +168,16 @@ public class RenderPane {
         GraphicsContext gc = getContext();
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+    }
+
+    private boolean checkWithinBounds(Point2D point) {
+        boolean boundCondition = (( 1 <= point.getX()  && point.getX() < this.game.getSize())
+                && ( 1 <= point.getY()  && point.getY() < this.game.getSize()));
+        return boundCondition;
+    }
+
+    private boolean checkOverlap(Point2D point) {
+        return game.checkOverlap(point);
     }
 
     //------------ EVENT METHODS ------------//
@@ -182,27 +213,53 @@ public class RenderPane {
         canvas.requestFocus();
 
         if (this.makeMode){
-            Point2D mousePoint = new Point2D((int) Math.floor(event.getX()/32), (int) Math.floor(event.getY()/32));
-            if (this.checkClickedPoint(mousePoint)) {
-                this.gameSeeder.addGoal(mousePoint);
-                GraphicsContext gc = canvas.getGraphicsContext2D();
-
-                // Clears the canvas
-                clearCanvas();
-                // Draws new game state
-                gl.drawBoard(gc, game);
-                gl.drawPlayer(gc, game);
-            }
+            onMouseClickedMakeMode(event);
         }
     }
 
-    private boolean checkClickedPoint(Point2D point) {
-        boolean boundCondition = (( 1 <= point.getX()  && point.getX() < this.game.getSize())
-                                    && ( 1 <= point.getY()  && point.getY() < this.game.getSize()));
+    private void onMouseClickedMakeMode(MouseEvent event) {
+        if (this.checkWithinBounds(mousePos)) {
+            if (this.toolMode == ToolMode.PLACE && this.checkOverlap(mousePos)) {
+                if (element == EnumsForSprites.GOAL) {
+                    gameSeeder.addGoal(mousePos);
+                } else if (element == EnumsForSprites.ALLIGATOR_DEN_UP) {
+                    gameSeeder.addUpAlligatorDen(mousePos);
+                } else if (element == EnumsForSprites.ALLIGATOR_DEN_DOWN) {
+                    gameSeeder.addDownAlligatorDen(mousePos);
+                } else if (element == EnumsForSprites.ALLIGATOR_DEN_LEFT) {
+                    gameSeeder.addLeftAlligatorDen(mousePos);
+                } else if (element == EnumsForSprites.ALLIGATOR_DEN_RIGHT) {
+                    gameSeeder.addRightAlligatorDen(mousePos);
+                } else if (element == EnumsForSprites.PORTAL) {
+                    gameSeeder.addPortal(mousePos);
+                } else if (element == EnumsForSprites.CHASER) {
+                    gameSeeder.addChasingElement(mousePos, 15);
+                } else if (element == EnumsForSprites.ROCK) {
+                    gameSeeder.addRock(mousePos);
+                }
+                else {
+                    System.out.printf("No implementation for placing element '%s'.%n", element);
+                }
+            } else if (this.toolMode == ToolMode.DELETE) {
+                this.game.deleteObject(mousePos);
+            }
 
-        boolean noOverlapCondition = game.checkOverlap(point);
+            GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        return boundCondition && noOverlapCondition;
+            // Clears the canvas
+            clearCanvas();
+            // Draws new game state
+            gl.drawBoard(gc, game);
+            gl.drawPlayer(gc, game);
+        }
+
+    }
+
+    private void onMouseMoved(MouseEvent event) {
+        int tileSize = gl.getTileSize();
+        mousePos = new Point2D(
+                (int) Math.floor(event.getX() / gl.getTileSize()),
+                (int) Math.floor(event.getY() / gl.getTileSize()));
     }
 
     //------------ GETTERS AND SETTERS ------------//
@@ -231,6 +288,15 @@ public class RenderPane {
         return game;
     }
 
+    public void setToolMode(ToolMode toolMode) {
+        this.toolMode = toolMode;
+    }
+
+    public void setElement(EnumsForSprites element) {
+        this.element = element;
+    }
+
+    //TODO: Add docs here
     public void changeGameState() {
         if (!this.makeMode) {
             this.resetGameToBaseState();
