@@ -29,6 +29,10 @@ public class GameSeeder {
         this.game.getObjectManager().addRightAlligatorDen(pos);
     }
 
+    public void addUpAlligatorDen(Point2D pos) { this.game.getObjectManager().addUpAlligatorDen(pos); }
+
+    public void addLeftAlligatorDen(Point2D pos) { this.game.getObjectManager().addLeftAlligatorDen(pos); }
+
     public void addChasingElement(Point2D pos, int max_tick) {
         this.game.getObjectManager().addChasingElement(pos, max_tick);
     }
@@ -40,7 +44,5 @@ public class GameSeeder {
     public void addRock(Point2D pos) {
         this.game.getObjectManager().addRock(pos);
     }
-
-
 
 }

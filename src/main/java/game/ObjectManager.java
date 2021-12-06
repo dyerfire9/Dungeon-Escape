@@ -75,7 +75,7 @@ public class ObjectManager implements Serializable {
      * @param pos where the new AlligatorDen is placed on the board.
      */
     public void addRightAlligatorDen(Point2D pos) {
-        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATOR_DEN, pos, new Point2D(1, 0), 120, bound,
+        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATOR_DEN_RIGHT, pos, new Point2D(1, 0), 120, bound,
                 true));
 
     }
@@ -87,7 +87,7 @@ public class ObjectManager implements Serializable {
      * @param pos where the new AlligatorDen is placed on the board
      */
     public void addLeftAlligatorDen(Point2D pos) {
-        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATOR_DEN, pos, new Point2D(-1, 0), 120, bound,
+        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATOR_DEN_LEFT, pos, new Point2D(-1, 0), 120, bound,
                 true));
 
     }
@@ -98,7 +98,7 @@ public class ObjectManager implements Serializable {
      * @param pos where the new AlligatorDen is placed on the board
      */
     public void addUpAlligatorDen(Point2D pos) {
-        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATOR_DEN, pos, new Point2D(0, -1), 120, bound,
+        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATOR_DEN_UP, pos, new Point2D(0, -1), 120, bound,
                 true));
 
     }
@@ -109,7 +109,7 @@ public class ObjectManager implements Serializable {
      * @param pos where the new AlligatorDen is placed on the board
      */
     public void addDownAlligatorDen(Point2D pos) {
-        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATOR_DEN, pos, new Point2D(0, 1), 120, bound,
+        this.addObject(new AlligatorDen(EnumsForSprites.ALLIGATOR_DEN_DOWN, pos, new Point2D(0, 1), 120, bound,
                 true));
 
     }
