@@ -1,5 +1,6 @@
 package game;
 
+import elements.PushableElement;
 import utils.Point2D;
 
 public class GameSeeder {
@@ -36,7 +37,12 @@ public class GameSeeder {
     }
 
     public void addPushable(Point2D pos)  {
-        this.game.getObjectManager().addPushable(pos);
+        if (PushableElement.instanceCounter <= 1) {
+            this.game.getObjectManager().addPushable(pos);
+        }
+        else {
+            System.out.println("Can't plant more PushableElements.");
+        }
     }
 
 
