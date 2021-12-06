@@ -2,10 +2,7 @@ package graphics;
 
 import game.Game;
 import game.Serializer;
-import graphics.controller.Editor;
-import graphics.controller.MainScene;
-import graphics.controller.PlaySave;
-import graphics.controller.RenderPane;
+import graphics.controller.*;
 import graphics.dialog.BoolDialog;
 import graphics.dialog.TextDialog;
 import javafx.application.Application;
@@ -17,6 +14,7 @@ import javafx.stage.Stage;
 import utils.EnumsForSprites;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Entry point of the program.
@@ -104,15 +102,17 @@ public class GraphicsMain extends Application {
      * @throws IOException If any error occurs when reading sprite files.
      */
     private static void addElementsToEditor(Editor ed) throws IOException {
-        ed.addPaletteButton(EnumsForSprites.IS_TRAVERSABLE,
-                new Image("file:src/main/assets/tiles/cobble_blood1.png"));
-        ed.addPaletteButton(EnumsForSprites.NOT_TRAVERSABLE,
-                new Image("file:src/main/assets/tiles/torch1.png"));
-        ed.addPaletteButton(EnumsForSprites.PLAYER,
-                new Image("file:src/main/assets/player/deep_elf_blademaster.png"));
-        ed.addPaletteButton(EnumsForSprites.ALLIGATOR,
-                new Image("file:src/main/assets/player/animals/alligator.png"));
-        ed.addPaletteButton(EnumsForSprites.ALLIGATOR_DEN,
+//        ed.addPaletteButton(EnumsForSprites.IS_TRAVERSABLE,
+//                new Image("file:src/main/assets/tiles/cobble_blood1.png"));
+//        ed.addPaletteButton(EnumsForSprites.NOT_TRAVERSABLE,
+//                new Image("file:src/main/assets/tiles/torch1.png"));
+        ed.addPaletteButton(EnumsForSprites.ALLIGATOR_DEN_LEFT,
+                new Image("file:src/main/assets/tiles/dngn_entrance.png"));
+        ed.addPaletteButton(EnumsForSprites.ALLIGATOR_DEN_RIGHT,
+                new Image("file:src/main/assets/tiles/dngn_entrance.png"));
+        ed.addPaletteButton(EnumsForSprites.ALLIGATOR_DEN_DOWN,
+                new Image("file:src/main/assets/tiles/dngn_entrance.png"));
+        ed.addPaletteButton(EnumsForSprites.ALLIGATOR_DEN_UP,
                 new Image("file:src/main/assets/tiles/dngn_entrance.png"));
         ed.addPaletteButton(EnumsForSprites.GOAL,
                 new Image("file:src/main/assets/player/statues/guardian-eyeopen-flame3.png"));
@@ -120,6 +120,12 @@ public class GraphicsMain extends Application {
 
     // Hooks up events to actions.
     private void registerActions(PlaySave playSave, Editor editor, RenderPane renderPane) {
+        for (PaletteButton pb : editor.getButtons()) {
+            pb.addOnClicked(event -> {
+                renderPane.setElement(pb.getElement());
+            });
+        }
+
         playSave.addOnClickedPlay(event -> {
             if (playSave.isInPlayMode()) {
                 renderPane.start();
@@ -128,6 +134,7 @@ public class GraphicsMain extends Application {
                 renderPane.stop();
             }
         });
+
         //TODO: Fix bug where AlligatorFactory is out of sync.
         //Temp fix is to reset game state on save.
         playSave.addOnClickedSave(event -> {

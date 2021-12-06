@@ -62,7 +62,12 @@ public class Editor implements FXMLController {
             System.out.printf("[Editor] Switched palette element to '%s'. %n", element);
         });
 
+        buttons.add(paletteButton);
         vbox.getChildren().add(paletteButton.getButton());
+    }
+
+    public ArrayList<PaletteButton> getButtons() {
+        return buttons;
     }
 
     public Pane getRoot() {

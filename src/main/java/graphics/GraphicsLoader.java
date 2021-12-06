@@ -42,7 +42,13 @@ public class GraphicsLoader {
                 new Image("file:src/main/assets/player/deep_elf_blademaster.png"));
         this.strMapping.put(EnumsForSprites.ALLIGATOR,
                 new Image("file:src/main/assets/player/animals/alligator.png"));
-        this.strMapping.put(EnumsForSprites.ALLIGATOR_DEN,
+        this.strMapping.put(EnumsForSprites.ALLIGATOR_DEN_LEFT,
+                new Image("file:src/main/assets/tiles/dngn_entrance.png"));
+        this.strMapping.put(EnumsForSprites.ALLIGATOR_DEN_RIGHT,
+                new Image("file:src/main/assets/tiles/dngn_entrance.png"));
+        this.strMapping.put(EnumsForSprites.ALLIGATOR_DEN_UP,
+                new Image("file:src/main/assets/tiles/dngn_entrance.png"));
+        this.strMapping.put(EnumsForSprites.ALLIGATOR_DEN_DOWN,
                 new Image("file:src/main/assets/tiles/dngn_entrance.png"));
         this.strMapping.put(EnumsForSprites.GOAL,
                 new Image("file:src/main/assets/player/statues/guardian-eyeopen-flame3.png"));

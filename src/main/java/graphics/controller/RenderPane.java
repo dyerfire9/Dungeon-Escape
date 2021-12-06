@@ -25,7 +25,7 @@ public class RenderPane implements FXMLController {
     private final Font DEBUG_FONT = new Font("Consolas", 12);
 
     private ToolMode toolMode = ToolMode.PLACE;
-    private EnumsForSprites element = EnumsForSprites.GOAL;
+    private EnumsForSprites element;
 
     private Game game;
     private GraphicsLoader gl;
@@ -75,7 +75,7 @@ public class RenderPane implements FXMLController {
         canvas.addEventHandler(KeyEvent.KEY_RELEASED, this::onKeyReleased);
         canvas.addEventHandler(MouseEvent.MOUSE_MOVED, this::onMouseMoved);
 
-        //
+        // Default map
         this.addGoal(new Point2D(game.getSize() - 2, game.getSize() - 2));
         this.game.addDownAlligatorDen(new Point2D(game.getSize() / 2, 1));
         this.game.addRightAlligatorDen(new Point2D(1, game.getSize() / 2));
@@ -218,8 +218,16 @@ public class RenderPane implements FXMLController {
         if (this.checkClickedPoint(mousePoint)) {
             if (element == EnumsForSprites.GOAL) {
                 game.addGoal(mousePos);
-            } else if (element == EnumsForSprites.NOT_TRAVERSABLE) {
-                game.add
+            } else if (element == EnumsForSprites.ALLIGATOR_DEN_UP) {
+                game.addUpAlligatorDen(mousePos);
+            } else if (element == EnumsForSprites.ALLIGATOR_DEN_DOWN) {
+                game.addDownAlligatorDen(mousePos);
+            } else if (element == EnumsForSprites.ALLIGATOR_DEN_LEFT) {
+                game.addLeftAlligatorDen(mousePos);
+            } else if (element == EnumsForSprites.ALLIGATOR_DEN_RIGHT) {
+                game.addRightAlligatorDen(mousePos);
+            } else {
+                System.out.printf("No implementation for placing element '%s'.", element);
             }
             GraphicsContext gc = canvas.getGraphicsContext2D();
 

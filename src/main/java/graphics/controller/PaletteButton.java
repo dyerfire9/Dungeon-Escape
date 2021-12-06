@@ -33,6 +33,10 @@ public class PaletteButton implements FXMLController {
         this.element = element;
     }
 
+    public EnumsForSprites getElement() {
+        return element;
+    }
+
     public void setImage(Image img) {
         imgView.setImage(img);
     }
