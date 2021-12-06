@@ -73,6 +73,7 @@ public class GraphicsMain extends Application {
         loader = new FXMLLoader(getClass().getResource("/fxml/editor.fxml"));
         Parent editorRoot = loader.load();
         Editor editor = loader.getController();
+        editor.hide();
 
         loader = new FXMLLoader(getClass().getResource("/fxml/playSave.fxml"));
         Parent playSaveRoot = loader.load();
@@ -129,9 +130,11 @@ public class GraphicsMain extends Application {
         playSave.addOnClickedPlay(event -> {
             if (playSave.isInPlayMode()) {
                 renderPane.start();
+                editor.hide();
             } else {
                 renderPane.resetObjectsToBaseState();
                 renderPane.stop();
+                editor.show();
             }
         });
 

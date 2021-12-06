@@ -66,6 +66,14 @@ public class Editor implements FXMLController {
         vbox.getChildren().add(paletteButton.getButton());
     }
 
+    public void show() {
+        root.setVisible(true);
+    }
+
+    public void hide() {
+        root.setVisible(false);
+    }
+
     public ArrayList<PaletteButton> getButtons() {
         return buttons;
     }
