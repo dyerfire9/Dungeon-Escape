@@ -20,6 +20,7 @@ public class Tile implements Serializable {
         }
         else {
             this.sprite = EnumsForSprites.NOT_TRAVERSABLE;
+
         }
     }
 

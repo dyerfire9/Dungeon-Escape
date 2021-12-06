@@ -1,10 +1,12 @@
 package graphics;
 
 import game.Game;
+import game.GameSeeder;
 import game.Serializer;
 import graphics.controller.*;
 import graphics.dialog.BoolDialog;
 import graphics.dialog.TextDialog;
+import graphics.enums.ToolMode;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,6 +25,7 @@ public class GraphicsMain extends Application {
 
     private DialogPresenter dp;
     private FXMLLoader loader;
+
 
     public static void main(String[] args) {
         launch();
@@ -103,10 +106,6 @@ public class GraphicsMain extends Application {
      * @throws IOException If any error occurs when reading sprite files.
      */
     private static void addElementsToEditor(Editor ed) throws IOException {
-//        ed.addPaletteButton(EnumsForSprites.IS_TRAVERSABLE,
-//                new Image("file:src/main/assets/tiles/cobble_blood1.png"));
-//        ed.addPaletteButton(EnumsForSprites.NOT_TRAVERSABLE,
-//                new Image("file:src/main/assets/tiles/torch1.png"));
         ed.addPaletteButton(EnumsForSprites.ALLIGATOR_DEN_LEFT,
                 new Image("file:src/main/assets/tiles/dngn_entrance.png"));
         ed.addPaletteButton(EnumsForSprites.ALLIGATOR_DEN_RIGHT,
@@ -117,6 +116,12 @@ public class GraphicsMain extends Application {
                 new Image("file:src/main/assets/tiles/dngn_entrance.png"));
         ed.addPaletteButton(EnumsForSprites.GOAL,
                 new Image("file:src/main/assets/player/statues/guardian-eyeopen-flame3.png"));
+        ed.addPaletteButton(EnumsForSprites.CHASER,
+                new Image("file:src/main/assets/player/nonliving/molten_gargoyle.png"));
+        ed.addPaletteButton(EnumsForSprites.PORTAL,
+                new Image("file:src/main/assets/tiles/dngn_portal.png"));
+        ed.addPaletteButton(EnumsForSprites.ROCK,
+                new Image("file:src/main/assets/tiles/crystal_floor5.png"));
     }
 
     // Hooks up events to actions.
@@ -132,7 +137,7 @@ public class GraphicsMain extends Application {
                 renderPane.start();
                 editor.hide();
             } else {
-                renderPane.resetObjectsToBaseState();
+                renderPane.resetGameToBaseState();
                 renderPane.stop();
                 editor.show();
             }
@@ -144,6 +149,12 @@ public class GraphicsMain extends Application {
             Serializer.serialize(renderPane.getGame());
         });
 
+        editor.addOnClickedAddTool(event -> {
+            renderPane.setToolMode(ToolMode.PLACE);
+        });
+        editor.addOnClickedDeleteTool(event -> {
+            renderPane.setToolMode(ToolMode.DELETE);
+        });
 
     }
 

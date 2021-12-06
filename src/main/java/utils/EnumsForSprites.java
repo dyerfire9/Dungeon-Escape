@@ -9,5 +9,9 @@ public enum EnumsForSprites {
     ALLIGATOR_DEN_DOWN,
     ALLIGATOR_DEN_RIGHT,
     ALLIGATOR_DEN_LEFT,
-    GOAL
+    GOAL,
+    CHASER,
+    PORTAL,
+    ROCK
 }
+

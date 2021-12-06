@@ -1,13 +1,19 @@
 package game;
 import utils.Point2D;
 import utils.EnumsForSprites;
+
+import java.awt.*;
 import java.io.Serializable;
+import java.beans.PropertyChangeSupport;
+import java.beans.PropertyChangeListener;
+
 
 public class Player implements Serializable {
-    private Point2D pos;
     public PlayerState playerState;
     private final EnumsForSprites sprite;
-    private final Point2D initPos;
+    private Point2D startPos;
+
+    private final PropertyChangeSupport observable;
 
     /**
      * A constructor for the Player class, which sets its position on the board, its PlayerState with an initial 100
@@ -15,25 +21,29 @@ public class Player implements Serializable {
      * @param pos the initial position of the Player
      */
     public Player(Point2D pos){
-        this.pos= pos;
-        this.playerState = new PlayerState(100);
+        this.startPos = pos;
+        this.playerState = new PlayerState(100, pos);
         this.sprite =  EnumsForSprites.PLAYER;
-        this.initPos = pos;
+        this.observable = new PropertyChangeSupport(this);
     }
+
 
 
     /** Gets the Player's current position.
      * @return the Player's current position, represented by a Point2D object composed of 2 integer coordinates
      */
     public Point2D getPos(){
-        return pos;
+        return this.playerState.getPos();
     }
 
     /**
-     * Sets the Player's position to a new position.
+     * Sets the Player's position to a new position and notify its Observers.
      * @param newPos the new position, represented by a Point2D object composed of 2 integer coordinates
      */
-    public void setPos(Point2D newPos) { this.pos = newPos; }
+    public void setPos(Point2D newPos) {
+        // observable.firePropertyChange("playerPos", oldPos, newPos);
+        this.playerState.setPos(newPos); 
+    }
 
 
     /**
@@ -43,7 +53,6 @@ public class Player implements Serializable {
     public void setPlayerState(PlayerState playerState) {
         this.playerState = playerState;
     }
-
 
     /**
      * Sets the Player's representation, currently a String and to be mapped to an Image by  the GraphicsLoader.
@@ -69,7 +78,14 @@ public class Player implements Serializable {
     }
 
     public void resetPlayerState() {
-        this.playerState = new PlayerState(100);
-        this.pos = initPos;
+        this.playerState = new PlayerState(100, this.startPos);
     }
+
+    public boolean checkWon() {
+        return this.playerState.getWinningState();
+    }
+    public boolean checkLoss() {
+        return this.playerState.getPoints() <= 0;
+    }
+
 }

@@ -3,6 +3,7 @@ package graphics.controller;
 import game.Game;
 import graphics.GraphicsLoader;
 import graphics.enums.ToolMode;
+import game.GameSeeder;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -28,6 +29,7 @@ public class RenderPane implements FXMLController {
     private EnumsForSprites element;
 
     private Game game;
+    private GameSeeder gameSeeder;
     private GraphicsLoader gl;
 
     @FXML
@@ -75,11 +77,6 @@ public class RenderPane implements FXMLController {
         canvas.addEventHandler(KeyEvent.KEY_RELEASED, this::onKeyReleased);
         canvas.addEventHandler(MouseEvent.MOUSE_MOVED, this::onMouseMoved);
 
-        // Default map
-        this.addGoal(new Point2D(game.getSize() - 2, game.getSize() - 2));
-        this.game.addDownAlligatorDen(new Point2D(game.getSize() / 2, 1));
-        this.game.addRightAlligatorDen(new Point2D(1, game.getSize() / 2));
-
         // Init and start timer
         timer = new AnimationTimer() {
             @Override
@@ -89,6 +86,7 @@ public class RenderPane implements FXMLController {
             }
         };
         timer.start();
+        this.gameSeeder = new GameSeeder(this.game);
     }
 
     //------------ PUBLIC METHODS ------------//
@@ -125,8 +123,15 @@ public class RenderPane implements FXMLController {
         clearCanvas();
 
         if (!this.makeMode) {
+            if (this.game.checkPlayerLose() | this.game.checkPlayerWon()) {
+                this.game.resetGameToBaseState();
+            }
+
+            // Clears the canvas
+            clearCanvas();
+
             // Updates game state
-            game.updateBoard();
+            game.updateObjects();
             game.updatePlayerState();
 
             // Increments tick number
@@ -165,13 +170,14 @@ public class RenderPane implements FXMLController {
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
-    private boolean checkClickedPoint(Point2D point) {
+    private boolean checkWithinBounds(Point2D point) {
         boolean boundCondition = (( 1 <= point.getX()  && point.getX() < this.game.getSize())
                 && ( 1 <= point.getY()  && point.getY() < this.game.getSize()));
+        return boundCondition;
+    }
 
-        boolean noOverlapCondition = game.checkOverlap(point);
-
-        return boundCondition && noOverlapCondition;
+    private boolean checkOverlap(Point2D point) {
+        return game.checkOverlap(point);
     }
 
     //------------ EVENT METHODS ------------//
@@ -212,23 +218,32 @@ public class RenderPane implements FXMLController {
     }
 
     private void onMouseClickedMakeMode(MouseEvent event) {
-        Point2D mousePoint = new Point2D(
-                (int) Math.floor(event.getX() / gl.getTileSize()),
-                (int) Math.floor(event.getY() / gl.getTileSize()));
-        if (this.checkClickedPoint(mousePoint)) {
-            if (element == EnumsForSprites.GOAL) {
-                game.addGoal(mousePos);
-            } else if (element == EnumsForSprites.ALLIGATOR_DEN_UP) {
-                game.addUpAlligatorDen(mousePos);
-            } else if (element == EnumsForSprites.ALLIGATOR_DEN_DOWN) {
-                game.addDownAlligatorDen(mousePos);
-            } else if (element == EnumsForSprites.ALLIGATOR_DEN_LEFT) {
-                game.addLeftAlligatorDen(mousePos);
-            } else if (element == EnumsForSprites.ALLIGATOR_DEN_RIGHT) {
-                game.addRightAlligatorDen(mousePos);
-            } else {
-                System.out.printf("No implementation for placing element '%s'.", element);
+        if (this.checkWithinBounds(mousePos)) {
+            if (this.toolMode == ToolMode.PLACE && this.checkOverlap(mousePos)) {
+                if (element == EnumsForSprites.GOAL) {
+                    gameSeeder.addGoal(mousePos);
+                } else if (element == EnumsForSprites.ALLIGATOR_DEN_UP) {
+                    gameSeeder.addUpAlligatorDen(mousePos);
+                } else if (element == EnumsForSprites.ALLIGATOR_DEN_DOWN) {
+                    gameSeeder.addDownAlligatorDen(mousePos);
+                } else if (element == EnumsForSprites.ALLIGATOR_DEN_LEFT) {
+                    gameSeeder.addLeftAlligatorDen(mousePos);
+                } else if (element == EnumsForSprites.ALLIGATOR_DEN_RIGHT) {
+                    gameSeeder.addRightAlligatorDen(mousePos);
+                } else if (element == EnumsForSprites.PORTAL) {
+                    gameSeeder.addPortal(mousePos);
+                } else if (element == EnumsForSprites.CHASER) {
+                    gameSeeder.addChasingElement(mousePos, 15);
+                } else if (element == EnumsForSprites.ROCK) {
+                    gameSeeder.addRock(mousePos);
+                }
+                else {
+                    System.out.printf("No implementation for placing element '%s'.%n", element);
+                }
+            } else if (this.toolMode == ToolMode.DELETE) {
+                this.game.deleteObject(mousePos);
             }
+
             GraphicsContext gc = canvas.getGraphicsContext2D();
 
             // Clears the canvas
@@ -237,12 +252,14 @@ public class RenderPane implements FXMLController {
             gl.drawBoard(gc, game);
             gl.drawPlayer(gc, game);
         }
+
     }
 
     private void onMouseMoved(MouseEvent event) {
         int tileSize = gl.getTileSize();
-        mousePos = new Point2D((int) event.getX() / tileSize,
-                (int) event.getY() / tileSize);
+        mousePos = new Point2D(
+                (int) Math.floor(event.getX() / gl.getTileSize()),
+                (int) Math.floor(event.getY() / gl.getTileSize()));
     }
 
     //------------ GETTERS AND SETTERS ------------//
@@ -282,7 +299,7 @@ public class RenderPane implements FXMLController {
     //TODO: Add docs here
     public void changeGameState() {
         if (!this.makeMode) {
-            this.resetObjectsToBaseState();
+            this.resetGameToBaseState();
             GraphicsContext gc = canvas.getGraphicsContext2D();
 
             // Clears the canvas
@@ -294,16 +311,7 @@ public class RenderPane implements FXMLController {
         this.makeMode = !this.makeMode;
     }
 
-    //TODO: Add docs here
-    public void resetObjectsToBaseState() {
-        this.game.resetObjectsToBaseState();
-    }
-
-    //-----------------Board Element Adders--------------//
-    // Object-specific add methods to be called by gameMaker
-
-    //TODO: Add docs here
-    public void addGoal(Point2D pos) {
-        this.game.addGoal(pos);
+    public void resetGameToBaseState() {
+        this.game.resetGameToBaseState();
     }
 }

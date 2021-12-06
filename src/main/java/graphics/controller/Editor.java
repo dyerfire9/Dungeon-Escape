@@ -1,10 +1,12 @@
 package graphics.controller;
 
 import graphics.enums.ToolMode;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import utils.EnumsForSprites;
@@ -80,6 +82,13 @@ public class Editor implements FXMLController {
 
     public Pane getRoot() {
         return root;
+    }
+
+    public void addOnClickedAddTool(EventHandler<MouseEvent> handler) {
+        addTool.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
+    }
+    public void addOnClickedDeleteTool(EventHandler<MouseEvent> handler) {
+        deleteTool.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
     }
 
     /**
