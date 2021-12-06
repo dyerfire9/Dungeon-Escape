@@ -11,7 +11,7 @@ public enum EnumsForSprites {
     ALLIGATOR_DEN_LEFT,
     GOAL,
     CHASER,
+    ROCK,
     PORTAL,
-    ROCK
-}
+    PUSHABLE}
 

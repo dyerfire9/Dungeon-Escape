@@ -57,6 +57,8 @@ public class GraphicsLoader {
                 new Image("file:src/main/assets/player/nonliving/molten_gargoyle.png"));
         this.strMapping.put(EnumsForSprites.PORTAL, new Image("file:src/main/assets/tiles/dngn_portal.png"));
         this.strMapping.put(EnumsForSprites.ROCK, new Image("file:src/main/assets/tiles/crystal_floor5.png"));
+        this.strMapping.put(EnumsForSprites.PUSHABLE,
+                new Image("file:src/main/assets/player/nonliving/ball_lightning.png"));
 
     }
 
