@@ -1,4 +1,4 @@
-package elements;
+package elements.types;
 import utils.EnumsForSprites;
 import utils.Point2D;
 

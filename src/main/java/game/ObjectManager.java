@@ -1,7 +1,8 @@
 package game;
 
-import elements.*;
-import elements.Element;
+import elements.types.*;
+import elements.modification.Interactable;
+import elements.modification.Modifier;
 import utils.Point2D;
 import utils.PointImagePair;
 import utils.EnumsForSprites;

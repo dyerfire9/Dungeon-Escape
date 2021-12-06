@@ -1,12 +1,13 @@
-package elements;
+package elements.types;
 
-import game.Player;
+import elements.modification.Interactable;
+import elements.modification.AlligatorModifier;
 import game.PlayerState;
 import utils.EnumsForSprites;
 import utils.Point2D;
 
 
-public class Alligator extends MovableElement implements Interactable{
+public class Alligator extends MovableElement implements Interactable {
 
     private AlligatorModifier mod;
     /**

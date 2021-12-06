@@ -1,14 +1,12 @@
 package game;
 
-import elements.*;
+import elements.modification.Modifier;
 import utils.EnumsForSprites;
 import utils.Point2D;
 import utils.PointImagePair;
 
-import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 
 public class Game implements Serializable {

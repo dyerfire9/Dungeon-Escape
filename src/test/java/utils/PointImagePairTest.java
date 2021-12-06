@@ -1,7 +1,5 @@
 package utils;
 
-import elements.AlligatorDen;
-import elements.MovableElement;
 import org.junit.Test;
 
 public class PointImagePairTest {
