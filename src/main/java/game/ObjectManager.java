@@ -282,7 +282,11 @@ public class ObjectManager implements Serializable, PropertyChangeListener  {
                             ps.setPos(new Point2D(boardObject.getPos().getX() - playerMove.getX(),
                                     boardObject.getPos().getY() - playerMove.getY()));
                             break loop;
-                        } else if (pushedPos.getX() == 0 || pushedPos.getY() == 0) {
+                        } else if (pushedPos.getX() == 0 ||
+                                pushedPos.getY() == 0 ||
+                        pushedPos.getX() == this.bound ||
+                        pushedPos.getY() == this.bound) {
+
                             ps.setPos(new Point2D(boardObject.getPos().getX() - playerMove.getX(),
                                     boardObject.getPos().getY() - playerMove.getY()));
                             break loop;
