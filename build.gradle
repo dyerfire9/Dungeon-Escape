@@ -11,18 +11,29 @@ javafx {
 
 mainClassName = 'graphics.GraphicsMain'
 
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+    }
+}
+
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
-    implementation 'junit:junit:4.13.2'
-    testImplementation('org.junit.jupiter:junit-jupiter:5.8.1')
+
+    testImplementation "org.testfx:testfx-core:4.0.+"
+    testImplementation "org.testfx:testfx-junit5:4.0.16-alpha"
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 }
 
 test {
-    testLogging {
-        events "passed", "skipped", "failed"
-    }
+    useJUnitPlatform()
 }
 
