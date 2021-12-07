@@ -148,7 +148,7 @@ public class RenderPane implements FXMLController {
 
         // Draws debug info for new game state
         gl.drawPlayerState(gc, new Point2D(32 * 16, 32), game);
-        drawDebugInfo(1000000000.0 / deltaTime, new Point2D(32, 32));
+        drawDebugInfo(1000000000.0 / deltaTime, new Point2D(50, 50));
     }
 
     private void drawDebugInfo(double fps, Point2D pos) {
@@ -160,7 +160,8 @@ public class RenderPane implements FXMLController {
                 pos.getX(), pos.getY() + DEBUG_FONT.getSize());
         gc.fillText(String.format("PressedKeys: %s", pressedKeys.toString()),
                 pos.getX(), pos.getY() + 2*DEBUG_FONT.getSize());
-
+        gc.fillText(String.format("Frame: %d", tick),
+                pos.getX(), pos.getY() + 3*DEBUG_FONT.getSize());
     }
 
     public void clearCanvas() {
@@ -235,9 +236,6 @@ public class RenderPane implements FXMLController {
                     gameSeeder.addChasingElement(mousePos, 15);
                 } else if (element == EnumsForSprites.ROCK) {
                     gameSeeder.addRock(mousePos);
-                }
-                else if (element == EnumsForSprites.PLAYER) {
-                    gameSeeder.changePlayerStartPos(mousePos);
                 }
                 else {
                     System.out.printf("No implementation for placing element '%s'.%n", element);

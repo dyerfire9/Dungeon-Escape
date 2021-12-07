@@ -165,7 +165,4 @@ public class Game implements Serializable {
     public void deleteObject(Point2D pos) {
         this.objectManager.removeObject(pos);
     }
-    public void changePlayerStartPos(Point2D newPos) {
-        this.player.setStartPos(newPos);
-    }
 }
