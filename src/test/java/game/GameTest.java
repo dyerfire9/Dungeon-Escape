@@ -51,7 +51,7 @@ public class GameTest {
         Game game = new Game(board.getSize());
 
         assert(!game.checkOverlap(new Point2D(5,5)));
-
+        assert(game.checkOverlap(new Point2D(5,4)));
     }
 
     @Test(timeout = 500)
