@@ -18,13 +18,13 @@ public class PlayerStateTest {
    }
 
     @Test(timeout = 50)
-    public void updatePoints() {
+    public void TestUpdatePoints() {
        ps.updatePoints(-5);
        assertEquals(ps.getPoints(), 35);
     }
 
-    @Test
-    public void decrementIframes() {
+    @Test(timeout = 50)
+    public void TestDecrementIframes() {
        for (int i = 0; i < 10; i ++) {
            ps.decrementIframes();
        }
@@ -32,24 +32,30 @@ public class PlayerStateTest {
 
     }
 
-    @Test
-    public void checkInvincible() {
+    @Test(timeout = 50)
+    public void TestCheckInvincible() {
        assertEquals(ps.checkInvincible(), true);
     }
 
 
 
-    @Test
-    public void resetIframes() {
+    @Test(timeout = 50)
+    public void TestResetIframes() {
        assertEquals(ps.getiFrames(), 60);
     }
 
 
 
-    @Test
-    public void setWinningState() {
+    @Test(timeout = 50)
+    public void TestSetWinningState() {
        ps.setWinningState(true);
        assertEquals(ps.hasWon, true);
+    }
+
+    @Test(timeout = 50)
+    public void TestPos(){
+       ps.setPos(new Point2D(1,1));
+       assert ps.getPos().getY() == 1;
     }
 
 }

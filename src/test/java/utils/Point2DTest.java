@@ -34,6 +34,13 @@ class Point2DTest {
     void add() {
         Point2D result = new Point2D(10, 20);
         assert(Point2D.equals(Point2D.add(p, pp), result));
+        Point2D point2D = new Point2D(2,2);
+        assert(Point2D.equals(Point2D.minus(result, point2D), new Point2D(8,18)));
+        assert Point2D.xDistance(result, point2D) == 8;
+        assert Point2D.yDistance(result, point2D) == 18;
+        assert Point2D.linearDistance(pp, p) == 0.0;
+        System.out.println(point2D.toString());
     }
+
 
 }

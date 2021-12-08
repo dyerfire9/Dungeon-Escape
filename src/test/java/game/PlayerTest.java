@@ -20,6 +20,12 @@ public class PlayerTest {
         player.setPlayerState(c);
         assert (player.getPlayerState().getPoints() == (20));
         assert player.getSprite() == EnumsForSprites.PLAYER;
+        assert player.checkWon() == false;
+        assert player.checkLoss() == false;
+        player.decrementIframes();
+        assert player.getPlayerState().getiFrames() == 59;
+        player.resetPlayerState();
+        assert player.getPlayerState().getiFrames() == 60;
     }
 
 
