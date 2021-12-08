@@ -79,5 +79,18 @@ public class GameTest {
         totalObjects = objman.getBoardObjects().size();
 
         assert (totalObjects == 1);
+        PlayerState playerState = new PlayerState(92, new Point2D(1,1));
+        game.updateObjects();
+        game.updatePlayerState();
+        game.updateObjects(playerState);
+        game.updatePlayerState(playerState);
+        game.getBoardTiles();
+        game.getBoardMovableObjects();
+        game.checkPlayerLose();
+        game.checkPlayerWon();
+        game.getMovableObjectPointImgPairs();
+        game.resetGameToBaseState();
+
+
     }
 }
