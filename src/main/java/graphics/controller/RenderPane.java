@@ -220,26 +220,8 @@ public class RenderPane implements FXMLController {
     private void onMouseClickedMakeMode(MouseEvent event) {
         if (this.checkWithinBounds(mousePos)) {
             if (this.toolMode == ToolMode.PLACE && this.checkOverlap(mousePos)) {
-                if (element == EnumsForSprites.GOAL) {
-                    gameSeeder.addGoal(mousePos);
-                } else if (element == EnumsForSprites.ALLIGATOR_DEN_UP) {
-                    gameSeeder.addUpAlligatorDen(mousePos);
-                } else if (element == EnumsForSprites.ALLIGATOR_DEN_DOWN) {
-                    gameSeeder.addDownAlligatorDen(mousePos);
-                } else if (element == EnumsForSprites.ALLIGATOR_DEN_LEFT) {
-                    gameSeeder.addLeftAlligatorDen(mousePos);
-                } else if (element == EnumsForSprites.ALLIGATOR_DEN_RIGHT) {
-                    gameSeeder.addRightAlligatorDen(mousePos);
-                } else if (element == EnumsForSprites.PORTAL) {
-                    gameSeeder.addPortal(mousePos);
-                } else if (element == EnumsForSprites.CHASER) {
-                    gameSeeder.addChasingElement(mousePos, 15);
-                } else if (element == EnumsForSprites.ROCK) {
-                    gameSeeder.addRock(mousePos);
-                }
-                else {
-                    System.out.printf("No implementation for placing element '%s'.%n", element);
-                }
+                gameSeeder.add(element, mousePos);
+
             } else if (this.toolMode == ToolMode.DELETE) {
                 this.game.deleteObject(mousePos);
             }

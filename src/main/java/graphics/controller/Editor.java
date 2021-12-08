@@ -40,6 +40,9 @@ public class Editor implements FXMLController {
         buttons = new ArrayList<>();
     }
 
+    /**
+     * Implements FXMLController's initialize() method
+     */
     @Override
     public void initialize() {
         System.out.println("Editor initialized");
@@ -53,6 +56,12 @@ public class Editor implements FXMLController {
         });
     }
 
+    /**
+     * Loads the FXML file that sets up the main scene
+     * @param element
+     * @param img
+     * @throws IOException
+     */
     public void addPaletteButton(EnumsForSprites element, Image img) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/paletteButton.fxml"));
         loader.load();
