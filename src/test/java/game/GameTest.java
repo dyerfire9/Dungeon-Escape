@@ -1,5 +1,6 @@
 package game;
 
+import elements.types.Element;
 import org.junit.*;
 import utils.EnumsForSprites;
 import utils.Point2D;
@@ -33,11 +34,35 @@ public class GameTest {
 
     @Test(timeout = 500)
     public void TestSetRunning() {
-        Game game = new Game(8);
+        Game game = new Game(10);
         game.setRunning(false);
         assert !game.isRunning();
         game.setRunning(true);
         assert game.isRunning();
     }
 
+    @Test(timeout = 500)
+    public void TestCheckOverLap() {
+        Board board = new Board(15);
+
+        board.fillBoard();
+        board.fillEdges();
+
+        Game game = new Game(board.getSize());
+
+        assert(!game.checkOverlap(new Point2D(5,5)));
+
+    }
+
+    @Test(timeout = 500)
+    public void TestGetSize() {
+        Board board = new Board(15);
+
+        board.fillBoard();
+        board.fillEdges();
+
+        Game game = new Game(board.getSize());
+
+        assert(game.getSize() == 15);
+    }
 }
