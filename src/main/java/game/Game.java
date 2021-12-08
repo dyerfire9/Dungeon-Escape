@@ -74,6 +74,12 @@ public class Game implements Serializable {
         this.player.decrementIframes();
     }
 
+
+    /**
+     * Checks whether a certain position on the board has Player or any element.
+     * @param point a position on the board to check
+     * @return true if no Player or element is at that position
+     */
     public boolean checkOverlap(Point2D point) {
         if (Point2D.equals(this.player.getPos(), point)) {
             return false;
@@ -81,6 +87,9 @@ public class Game implements Serializable {
         else return !objectManager.checkOverlap(point);
     }
 
+    /**
+     * a wrapper method calling on objectManager and Player to reset to their initial states
+     */
     public void resetGameToBaseState() {
         this.objectManager.resetToBaseState();
         this.player.resetPlayerState();
