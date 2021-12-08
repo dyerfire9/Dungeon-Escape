@@ -1,5 +1,6 @@
 package elements;
 
+import elements.types.PushableElement;
 import game.Board;
 import game.ObjectManager;
 import game.PlayerState;

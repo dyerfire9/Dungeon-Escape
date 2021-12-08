@@ -1,5 +1,7 @@
 package elements;
 
+import elements.types.Element;
+import elements.types.Rock;
 import game.Board;
 import game.ObjectManager;
 import org.junit.Test;
