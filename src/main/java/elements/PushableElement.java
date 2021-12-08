@@ -11,10 +11,7 @@ public class PushableElement extends Element {
     }
 
     public boolean onContact(Point2D playerPos) {
-        return ((Math.abs(Point2D.xDistance(this.getPos(), playerPos)) == 0 &&
-                this.getPos().getY() == playerPos.getY()) ||
-                Math.abs(Point2D.yDistance(this.getPos(), playerPos)) == 0 &&
-                        this.getPos().getX() == playerPos.getX());
+        return ((Math.abs(Point2D.xDistance(this.getPos(), playerPos)) == 0 && this.getPos().getY() == playerPos.getY()) || Math.abs(Point2D.yDistance(this.getPos(), playerPos)) == 0 && this.getPos().getX() == playerPos.getX());
     }
 
     /**
