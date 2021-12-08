@@ -1,4 +1,4 @@
-package elements;
+package elements.types;
 
 import elements.types.Element;
 import elements.types.Rock;

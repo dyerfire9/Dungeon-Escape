@@ -1,6 +1,4 @@
-package elements;
-import elements.types.Element;
-import elements.types.Goal;
+package elements.types;
 
 import game.Board;
 import game.ObjectManager;

@@ -7,8 +7,8 @@ import utils.Point2D;
 import static org.junit.Assert.assertEquals;
 
 public class PlayerStateTest {
-    Point2D point2D = new Point2D(3,3);
-    PlayerState ps = new PlayerState(40, point2D);
+
+    PlayerState ps = new PlayerState(40, new Point2D(2,2));
 
    @Test(timeout = 50)
    public void TestPlayerState() {
