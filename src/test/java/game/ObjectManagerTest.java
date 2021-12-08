@@ -1,10 +1,13 @@
 package game;
 
+import elements.modification.Modifier;
 import elements.types.*;
 import org.junit.*;
 import utils.EnumsForSprites;
 import utils.Point2D;
+import utils.PointImagePair;
 
+import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 
 public class ObjectManagerTest {
@@ -62,6 +65,18 @@ public class ObjectManagerTest {
         assert e.get(7) instanceof PushableElement;
         assert om.checkPortals();
         assert !om.checkOverlap(point2D);
+        ObjectManager mo = new ObjectManager(e, 20);
+        assert mo.checkPortals();
+        PlayerState playerState = new PlayerState(100, new Point2D(3,2));
+        mo.addPushable(new Point2D(11,12));
+        mo.addGoal(new Point2D(12,12));
+        ChasingElement chasingElement = new ChasingElement(EnumsForSprites.CHASER, new Point2D(13,13),4,
+                2, new Point2D(1,0),false);
+        mo.addObject(chasingElement);
+        mo.updateObjects(playerState);
+        ArrayList<Modifier> m = mo.modifyPlayerState(playerState);
+        ArrayList<PointImagePair> k = mo.getPointImagePairs();
+        mo.resetToBaseState();
     }
 
     @Test(timeout = 500)
