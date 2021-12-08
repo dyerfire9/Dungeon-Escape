@@ -36,4 +36,11 @@ public class ElementTest {
         assert(element.getPos() != pos);
         assert(Point2D.equals(element.getPos(), new Point2D(5,5)));
     }
+
+    @Test
+    public void TestCheckIsPermanent() {
+        Point2D pos = new Point2D(3,3);
+        Element element = new Element(EnumsForSprites.PUSHABLE, pos, true);
+        assert(element.checkIsPermanent());
+    }
 }
