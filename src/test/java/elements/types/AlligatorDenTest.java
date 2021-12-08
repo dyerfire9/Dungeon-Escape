@@ -1,4 +1,4 @@
-package elements;
+package elements.types;
 
 import elements.types.AlligatorDen;
 import elements.types.MovableElement;

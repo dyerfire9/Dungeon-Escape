@@ -1,4 +1,4 @@
-package elements;
+package elements.types;
 
 import elements.types.Alligator;
 import org.junit.Test;
