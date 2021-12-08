@@ -1,11 +1,13 @@
-package elements;
+package elements.types;
 
+import elements.modification.ChasingElementModifier;
+import elements.modification.Interactable;
 import game.PlayerState;
 import utils.EnumsForSprites;
 import utils.Point2D;
 
 
-public class ChasingElement extends MovableElement implements Interactable{
+public class ChasingElement extends MovableElement implements Interactable {
 
     private ChasingElementModifier mod;
 

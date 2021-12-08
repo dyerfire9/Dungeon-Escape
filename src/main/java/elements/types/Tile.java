@@ -1,4 +1,4 @@
-package elements;
+package elements.types;
 
 
 import java.io.Serializable;

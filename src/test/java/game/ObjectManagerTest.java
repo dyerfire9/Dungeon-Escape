@@ -1,8 +1,7 @@
 package game;
 
-import game.ObjectManager;
-import elements.Alligator;
-import elements.Element;
+import elements.types.Alligator;
+import elements.types.Element;
 import org.junit.*;
 import utils.EnumsForSprites;
 import utils.Point2D;

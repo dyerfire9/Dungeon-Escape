@@ -1,5 +1,7 @@
-package elements;
+package elements.types;
 
+import elements.modification.GoalModifier;
+import elements.modification.Interactable;
 import game.PlayerState;
 import utils.Point2D;
 import utils.EnumsForSprites;

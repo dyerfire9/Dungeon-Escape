@@ -1,6 +1,6 @@
 package game;
 
-import elements.PushableElement;
+import elements.types.PushableElement;
 import utils.Point2D;
 
 public class GameSeeder {

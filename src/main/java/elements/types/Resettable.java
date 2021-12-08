@@ -1,4 +1,4 @@
-package elements;
+package elements.types;
 
 public interface Resettable {
     void reset();
