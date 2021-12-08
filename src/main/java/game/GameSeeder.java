@@ -91,12 +91,7 @@ public class GameSeeder {
      * @param pos the position on the Game's board where the element is to be planted
      */
     public void addPushable(Point2D pos)  {
-        if (PushableElement.instanceCounter <= 1) {
             this.game.getObjectManager().addPushable(pos);
-        }
-        else {
-            System.out.println("Can't plant more PushableElements.");
-        }
     }
 
     public void add(EnumsForSprites element, Point2D mousePos) {

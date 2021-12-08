@@ -26,6 +26,12 @@ public class MainScene implements FXMLController {
         System.out.println("MainScene initialized");
     }
 
+    /**
+     * Sets FXML nodes to their respective parents in the main scene
+     * @param renderPane the renderPane node
+     * @param playSave the playSave node
+     * @param editor the editor node
+     */
     public void assemble(Node renderPane, Node playSave, Node editor) {
         this.renderPane.getChildren().add(renderPane);
         this.playSave.getChildren().add(playSave);
