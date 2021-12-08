@@ -63,4 +63,27 @@ public class ObjectManagerTest {
         assert om.checkPortals();
         assert !om.checkOverlap(point2D);
     }
+
+    @Test(timeout = 500)
+    public void TestObjectAdditions() {
+        int totalObjBeforeAdditions;
+        int totalObjPostAdditions;
+
+        Game game = new Game(15);
+        Goal goal = new Goal(EnumsForSprites.GOAL, new Point2D(14, 13), true);
+        Rock r = new Rock(EnumsForSprites.ROCK, new Point2D(12, 12), true);
+        Portal portal = new Portal(EnumsForSprites.PORTAL, new Point2D(7,7), r.getPos(), true);
+        ObjectManager objman = game.getObjectManager();
+
+        objman.addDownAlligatorDen(new Point2D(7,5));
+        objman.addRightAlligatorDen(new Point2D(2,7));
+        totalObjBeforeAdditions = objman.getBoardObjects().size();
+
+        objman.addObject(goal);
+        objman.addObject(r);
+        objman.addObject(portal);
+        totalObjPostAdditions = objman.getBoardObjects().size();
+        assert(totalObjBeforeAdditions != totalObjPostAdditions);
+
+    }
 }

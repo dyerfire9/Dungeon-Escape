@@ -1,8 +1,11 @@
 package game;
 
+import elements.types.*;
 import org.junit.*;
 import utils.EnumsForSprites;
 import utils.Point2D;
+
+import java.util.ArrayList;
 
 // TODO add tests for all applicable game methods
 public class GameTest {
@@ -40,4 +43,18 @@ public class GameTest {
         assert game.isRunning();
     }
 
+    @Test(timeout = 500)
+    public void TestRemoveObject() {
+        int totalObjects;
+        Game game = new Game(15);
+        ObjectManager objman = game.getObjectManager();
+        objman.addPortal((new Point2D(5,12)));
+        objman.addPortal((new Point2D(7,6)));
+        objman.addGoal((new Point2D(14,13)));
+        game.deleteObject(new Point2D(7,6));
+        game.deleteObject(new Point2D(5,12));
+        totalObjects = objman.getBoardObjects().size();
+
+        assert(totalObjects == 1);
+    }
 }
