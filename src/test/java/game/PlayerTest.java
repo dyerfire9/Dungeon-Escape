@@ -16,7 +16,7 @@ public class PlayerTest {
         assert (player.getPos() == (b));
 
         assert (player.getPlayerState().getPoints() == (100));
-        PlayerState c = new PlayerState(20);
+        PlayerState c = new PlayerState(20, new Point2D(2,2));
         player.setPlayerState(c);
         assert (player.getPlayerState().getPoints() == (20));
         assert player.getSprite() == EnumsForSprites.PLAYER;

@@ -1,4 +1,4 @@
-package elements;
+package elements.types;
 
 import game.Board;
 import game.ObjectManager;

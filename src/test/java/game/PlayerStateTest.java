@@ -2,12 +2,13 @@ package game;
 
 import game.PlayerState;
 import org.junit.*;
+import utils.Point2D;
 
 import static org.junit.Assert.assertEquals;
 
 public class PlayerStateTest {
 
-    PlayerState ps = new PlayerState(40);
+    PlayerState ps = new PlayerState(40, new Point2D(2,2));
 
    @Test(timeout = 50)
    public void TestPlayerState() {
