@@ -218,6 +218,8 @@ public class ObjectManager implements Serializable, PropertyChangeListener  {
         HashSet<Element> objectsToRemove = new HashSet<>();
         HashSet<Element> objectsToAdd = new HashSet<>();
         Point2D playerPos = ps.getPos();
+        //
+        ArrayList<Element> pushables = new ArrayList<>();
 
         for (Element boardObject : boardObjects) {
 
@@ -257,16 +259,46 @@ public class ObjectManager implements Serializable, PropertyChangeListener  {
             }
         }
 
-        // Set PushableElement's new position when countered Player
         for (Element boardObject : boardObjects) {
-            if (boardObject instanceof PushableElement) {
-                PushableElement pe = (PushableElement)boardObject;
-                if (pe.onContact(playerPos)) {
-                    Point2D pushedPos = Point2D.add(pe.getPos(), this.playerMove);
-                    pe.setPos(pushedPos);
-                }
+            if (boardObject instanceof PushableElement){
+                pushables.add(boardObject);
             }
         }
+
+        // Set PushableElement's new position when countered Player
+        loop : {for (Element boardObject : boardObjects) {
+            if (boardObject instanceof PushableElement) {
+                ///////////
+
+                // When player meets the ball.
+                if (Point2D.equals(boardObject.getPos(), playerPos)) {
+                    pushables.remove(boardObject);
+
+                    Point2D pushedPos = new Point2D(boardObject.getPos().getX() + playerMove.getX(),
+                            boardObject.getPos().getY() + playerMove.getY());
+
+                    for (Element another : pushables){
+
+                        if (Point2D.equals(pushedPos, another.getPos())) {
+                            ps.setPos(new Point2D(boardObject.getPos().getX() - playerMove.getX(),
+                                    boardObject.getPos().getY() - playerMove.getY()));
+                            break loop;
+                        } else if (pushedPos.getX() == 0 ||
+                                pushedPos.getY() == 0 ||
+                        pushedPos.getX() == this.bound ||
+                        pushedPos.getY() == this.bound) {
+
+                            ps.setPos(new Point2D(boardObject.getPos().getX() - playerMove.getX(),
+                                    boardObject.getPos().getY() - playerMove.getY()));
+                            break loop;
+                        }
+                    }
+                    boardObject.setPos(pushedPos);
+
+                }
+
+            }
+        }}
     }
 
     /**
