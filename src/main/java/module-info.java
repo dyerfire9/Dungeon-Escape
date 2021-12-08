@@ -4,8 +4,7 @@ module graphics {
     requires java.desktop;
 
     opens graphics to javafx.graphics, javafx.fxml;
-
-    exports graphics;
+    opens graphics.controller to javafx.fxml;
     exports graphics.dialog;
     opens graphics.dialog to javafx.fxml, javafx.graphics;
 }

@@ -1,3 +1,4 @@
+
 package graphics;
 
 import game.Game;
@@ -26,6 +27,11 @@ public class GraphicsMain extends Application {
     private DialogPresenter dp;
     private FXMLLoader loader;
 
+
+
+    public static void main(String[] args) {
+        launch();
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
