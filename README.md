@@ -9,16 +9,26 @@ Note: Any time you are prompted to enter a board size, enter 20. We still need t
 2. Run GraphicsMain.java. 
 
 
+How to play our game. 
 
-- Since there is no serialized game in the beginning, you first will need to enter a board size to make a game (see note).
-- You can now move around and interact with the game using WASD controls
-- Press the "P..." button to pause the game
+Controls: Simply use WASD to move around the board. There are no other keyboard controls, so stick to these.
+
+Starting the game: When you start the game, you’ll begin in play mode. You should see a blank canvas and be able to move the player around the screen. Keep in mind that the torches are the bounds of the screen, so you cannot move or place elements on these 
+
+Switching to edit mode: Click on the “Pause” button, this should switch the game into edit mode. You will now see a set of buttons to choose from on the left side of the screen. Click on the green (+) symbol, to go into add mode (your are in add mode by default, so you don’t NEED to switch into add mode when you hop into edit mode). Now, you can click on any of the elements and place them on tiles the board. We’ve provided a summary of what they do below:
+
+The caves: These spawn alligators in a certain direction (denoted by the arrow)
+
+The demon with wings: This chases the player around on the board
+
+The triangle: This is the goal.
+
+The player sprite: This changes the player’s default position 
+
+The portal: To use this, first place a portal, then place a rock (the button with a black square on it), the portal will link to the rock and the player will teleport there once they step on it. 
+
+If you want to delete anything you placed inside of Edit mode, simply click the garbage bin to switch to delete mode and click on the tile you want to remove the element from. You will need to switch to add mode if you want to add anything. While in edit mode, you can save your game, close the game and then rerun GraphicsMain.java. You will be prompted to restore your save state. 
 
 
 
-3. Press the "save" button. Once you press this, you can exit the game. 
-
-
-
-
-4. Relaunch the game, now you are prompted to either start anew or continue from the old save. You can pick whichever option you want and continue from there.
+Note: whenever the player runs out of points or reaches the goal in play mode, the game will restart from the base state (objects will be reset and so will the playerstate).
