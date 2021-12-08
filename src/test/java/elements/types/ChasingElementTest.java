@@ -11,9 +11,10 @@ public class ChasingElementTest {
 
     @Test(timeout = 500)
     public void TestChasingElementIsPlaced() {
+        Point2D chaserPos = new Point2D(10, 10);
         Board board = new Board(20);
         ObjectManager objman = new ObjectManager(board.getSize() - 1);
-        ChasingElement chaser = new ChasingElement(EnumsForSprites.CHASER, new Point2D(10, 10),
+        ChasingElement chaser = new ChasingElement(EnumsForSprites.CHASER, chaserPos,
                 15, 3, new Point2D(1, 1), true);
         board.fillBoard();
         board.fillEdges();
@@ -22,8 +23,6 @@ public class ChasingElementTest {
         for(Element boardObject : objman.getBoardObjects()) {
             if (boardObject instanceof ChasingElement) {
                 assert (boardObject.getPos() == chaser.getPos());
-            } else {
-                assert (boardObject.getPos() != chaser.getPos());
             }
         }
     }
