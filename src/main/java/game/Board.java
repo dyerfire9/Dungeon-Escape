@@ -1,14 +1,11 @@
 package game;
 
-import elements.Element;
-import elements.MovableElement;
-import elements.Tile;
+import elements.types.Tile;
 import utils.Point2D;
 import utils.PointImagePair;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class Board implements Serializable {
     private final int size;

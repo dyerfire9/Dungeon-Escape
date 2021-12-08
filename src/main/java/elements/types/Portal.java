@@ -1,9 +1,11 @@
-package elements;
+package elements.types;
+import elements.modification.Interactable;
+import elements.modification.PortalModifier;
 import game.PlayerState;
 import utils.EnumsForSprites;
 import utils.Point2D;
 
-public class Portal extends Element implements Interactable{
+public class Portal extends Element implements Interactable {
     private PortalModifier mod;
 
     /**

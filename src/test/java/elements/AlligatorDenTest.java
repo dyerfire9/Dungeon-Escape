@@ -1,5 +1,7 @@
 package elements;
 
+import elements.types.AlligatorDen;
+import elements.types.MovableElement;
 import org.junit.Test;
 import utils.Point2D;
 import utils.EnumsForSprites;
