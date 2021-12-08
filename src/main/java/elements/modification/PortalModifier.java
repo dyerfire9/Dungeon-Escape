@@ -1,4 +1,4 @@
-package elements;
+package elements.modification;
 
 import game.PlayerState;
 import utils.Point2D;

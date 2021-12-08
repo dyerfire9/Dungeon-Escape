@@ -1,5 +1,6 @@
 package elements;
 
+import elements.types.Alligator;
 import org.junit.Test;
 import game.PlayerState;
 import utils.Point2D;
