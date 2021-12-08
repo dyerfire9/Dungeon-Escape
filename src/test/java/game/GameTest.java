@@ -65,4 +65,19 @@ public class GameTest {
 
         assert(game.getSize() == 15);
     }
+
+    @Test(timeout = 500)
+    public void TestRemoveObject() {
+        int totalObjects;
+        Game game = new Game(15);
+        ObjectManager objman = game.getObjectManager();
+        objman.addPortal((new Point2D(5, 12)));
+        objman.addPortal((new Point2D(7, 6)));
+        objman.addGoal((new Point2D(14, 13)));
+        game.deleteObject(new Point2D(7, 6));
+        game.deleteObject(new Point2D(5, 12));
+        totalObjects = objman.getBoardObjects().size();
+
+        assert (totalObjects == 1);
+    }
 }
