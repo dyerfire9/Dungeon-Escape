@@ -12,7 +12,7 @@ public class AlligatorModifierTest {
         Alligator alligator = new Alligator(EnumsForSprites.ALLIGATOR, new Point2D(6, 5),
                 20, 60, new Point2D(1, 0), false);
 
-        Point2D point2D = new Point2D(2,2);
+        Point2D point2D = new Point2D(2,3);
         PlayerState playerState = new PlayerState(100, point2D);
 
         AlligatorModifier modifiedPlayerstate =  alligator.Modify(playerState);
