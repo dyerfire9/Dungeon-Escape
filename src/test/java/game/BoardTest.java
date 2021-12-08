@@ -12,6 +12,7 @@ public class BoardTest {
         Point2D b = new Point2D(0,3);
         assert board.isTraversable(a);
         assert !board.isTraversable(b);
+        assert board.getBoardSprites().size() == 64;
     }
 
 }
