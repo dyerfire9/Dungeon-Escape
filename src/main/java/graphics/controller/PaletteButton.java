@@ -23,8 +23,15 @@ public class PaletteButton implements FXMLController {
 
     private EnumsForSprites element;
 
+    /**
+     * An empty constructor for the PallettButton class.
+     */
     public PaletteButton() { }
 
+    /**
+     * A getter method that returns the Button object.
+     * @return the Button object.
+     */
     public Button getButton() {
         return button;
     }

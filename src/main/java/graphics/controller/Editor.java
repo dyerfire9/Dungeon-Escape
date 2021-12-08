@@ -57,10 +57,10 @@ public class Editor implements FXMLController {
     }
 
     /**
-     * Loads the FXML file that sets up the main scene
-     * @param element
-     * @param img
-     * @throws IOException
+     * Adds custom buttons to the main GUI, which, when clicked on, add different types of Elements to the game board.
+     * @param element the Sprite for a type of Element object to be added
+     * @param img the image for a button to add the Element
+     * @throws IOException a checked exception that indicates a failure in Input & Output operations
      */
     public void addPaletteButton(EnumsForSprites element, Image img) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/paletteButton.fxml"));
@@ -77,14 +77,24 @@ public class Editor implements FXMLController {
         vbox.getChildren().add(paletteButton.getButton());
     }
 
+    /**
+     * shows the main GUI
+     */
     public void show() {
         root.setVisible(true);
     }
 
+    /**
+     * hides the main GUI
+     */
     public void hide() {
         root.setVisible(false);
     }
 
+    /**
+     * a getter method to get the list of all custom buttons added to the main GUI
+     * @return a list of buttons
+     */
     public ArrayList<PaletteButton> getButtons() {
         return buttons;
     }
@@ -93,9 +103,19 @@ public class Editor implements FXMLController {
         return root;
     }
 
+    /**
+     * Adds a mouse-event handler to the button that switches the game mode to PLACE ELEMENT
+     * @param handler a mouse-event handler
+     */
     public void addOnClickedAddTool(EventHandler<MouseEvent> handler) {
         addTool.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
     }
+
+
+    /**
+     * Adds a mouse-event handler to the button that switches the game mode to DELETE ELEMENT
+     * @param handler a mouse-even handler
+     */
     public void addOnClickedDeleteTool(EventHandler<MouseEvent> handler) {
         deleteTool.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
     }
