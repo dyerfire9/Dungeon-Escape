@@ -109,13 +109,13 @@ public class GraphicsMain extends Application {
      */
     private static void addElementsToEditor(Editor ed) throws IOException {
         ed.addPaletteButton(EnumsForSprites.ALLIGATOR_DEN_LEFT,
-                new Image("file:src/main/assets/tiles/dngn_entrance.png"));
+                new Image("file:src/main/assets/tiles/dngn_entrance_left.png"));
         ed.addPaletteButton(EnumsForSprites.ALLIGATOR_DEN_RIGHT,
-                new Image("file:src/main/assets/tiles/dngn_entrance.png"));
+                new Image("file:src/main/assets/tiles/dngn_entrance_right.png"));
         ed.addPaletteButton(EnumsForSprites.ALLIGATOR_DEN_DOWN,
-                new Image("file:src/main/assets/tiles/dngn_entrance.png"));
+                new Image("file:src/main/assets/tiles/dngn_entrance_down.png"));
         ed.addPaletteButton(EnumsForSprites.ALLIGATOR_DEN_UP,
-                new Image("file:src/main/assets/tiles/dngn_entrance.png"));
+                new Image("file:src/main/assets/tiles/dngn_entrance_up.png"));
         ed.addPaletteButton(EnumsForSprites.GOAL,
                 new Image("file:src/main/assets/player/statues/guardian-eyeopen-flame3.png"));
         ed.addPaletteButton(EnumsForSprites.CHASER,

@@ -29,13 +29,16 @@ public class PlaySave implements FXMLController {
     @Override
     public void initialize() {
         System.out.println("PlaySave initialized");
+        saveButton.setVisible(false);
         playButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (inPlayMode) {
                 playButton.setText("Play");
                 inPlayMode = false;
+                saveButton.setVisible(true);
             } else {
                 playButton.setText("Pause");
                 inPlayMode = true;
+                saveButton.setVisible(false);
             }
         });
     }
