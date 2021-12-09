@@ -174,14 +174,19 @@ public class ObjectManager implements Serializable, PropertyChangeListener  {
     }
 
     /**
-     * A method to remove elements from the board, which is managed by the board's objectManager.
-     *
+     * A method to remove elements from the board by specific instance.
+     * (Overloaded)
      * @param object the element to be deleted
      */
     public void removeObject(Element object) {
         boardObjects.remove(object);
     }
 
+    /**
+     * A method to remove elements from the board by position.
+     * (Overloaded)
+     * @param pos the position to be cleared of elements
+     */
     public void removeObject(Point2D pos) {
         HashSet<Element> objectsToRemove = new HashSet<>();
 
@@ -336,6 +341,11 @@ public class ObjectManager implements Serializable, PropertyChangeListener  {
         return list;
     }
 
+    /**
+     * Checks whether there is an element occupying a position on the board.
+     * @param point a position on the board
+     * @return true if that position is occupied by an element
+     */
     public boolean checkOverlap(Point2D point) {
         for (Element element : this.boardObjects) {
             if (Point2D.equals(point, element.getPos())) {
@@ -345,6 +355,10 @@ public class ObjectManager implements Serializable, PropertyChangeListener  {
         return false;
 
     }
+
+    /**
+     * Resets all the resettable elements on the board to their respective base states.
+     */
     public void resetToBaseState() {
         HashSet<Element> objectsToRemove = new HashSet<>();
 

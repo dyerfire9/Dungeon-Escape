@@ -77,6 +77,9 @@ public class Player implements Serializable {
         this.playerState.decrementIframes();
     }
 
+    /**
+     * Resets the player's PlayerState to the original 100 points and the original position.
+     */
     public void resetPlayerState() {
         this.playerState = new PlayerState(100, this.startPos);
     }

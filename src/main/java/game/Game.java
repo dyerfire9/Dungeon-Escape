@@ -169,6 +169,10 @@ public class Game implements Serializable {
     public boolean checkPlayerLose() {return this.player.checkLoss();}
     public int getSize(){return this.size;}
 
+    /**
+     * A wrapper method that calls on the objectManager to remove an object at a certain position on the board.
+     * @param pos the position to be cleared
+     */
     public void deleteObject(Point2D pos) {
         this.objectManager.removeObject(pos);
     }

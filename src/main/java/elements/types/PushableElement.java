@@ -12,6 +12,11 @@ public class PushableElement extends Element {
         instanceCounter += 1;
     }
 
+    /**
+     * Checks whether an instance of the PushableElement is touching the Player on any of the 4 sides.
+     * @param playerPos player's position on the game board
+     * @return true if the PushableElement is right next to Player on the game board
+     */
     public boolean onContact(Point2D playerPos) {
         return ((Math.abs(Point2D.xDistance(this.getPos(), playerPos)) == 0 && this.getPos().getY() == playerPos.getY()) || Math.abs(Point2D.yDistance(this.getPos(), playerPos)) == 0 && this.getPos().getX() == playerPos.getX());
     }
