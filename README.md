@@ -33,4 +33,6 @@ While in edit mode, you can save your game, close the game and then rerun Graphi
 
 
 
-Note: whenever the player runs out of points or reaches the goal in play mode, the game will restart from the base state (objects will be reset and so will the playerstate).
+Note: Whenever the player runs out of points or reaches the goal in play mode, the game will restart from the base state (objects will be reset and so will the playerstate).
+
+Note: If the game is unresponsive, click on the game board with the mouse.
