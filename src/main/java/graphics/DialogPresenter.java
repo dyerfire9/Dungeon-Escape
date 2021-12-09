@@ -22,6 +22,9 @@ import java.util.ArrayList;
  */
 public class DialogPresenter {
 
+    private static final int MIN_BOARD_SIZE = 5;
+    private static final int MAX_BOARD_SIZE = 50;
+
     private boolean requestToLoadFromSave = false;
     private int requestedBoardSize = 20;
     private BoolDialog bd;
@@ -74,6 +77,9 @@ public class DialogPresenter {
                 }
             }
             requestedBoardSize = Integer.parseInt(td.getText());
+            if (requestedBoardSize < MIN_BOARD_SIZE || requestedBoardSize > MAX_BOARD_SIZE) {
+                throw new IllegalArgumentException();
+            }
             td.clearErrorMsg();
             td.hide();
             pcs.firePropertyChange("done", false, true);
@@ -81,6 +87,11 @@ public class DialogPresenter {
         } catch (NumberFormatException nfe) {
             td.setErrorMsg("Input is not a valid integer.");
             System.out.printf("User entered non-integer '%s'.\n", td.getText());
+        } catch (IllegalArgumentException iae) {
+            td.setErrorMsg(String.format("Input must be an integer between %d and %d",
+                    MIN_BOARD_SIZE, MAX_BOARD_SIZE));
+            System.out.printf("User entered integer '%d', but is not within acceptable bounds.\n",
+                    requestedBoardSize);
         } catch (Exception e) {
             td.setErrorMsg("An unknown error occurred.");
             e.printStackTrace();

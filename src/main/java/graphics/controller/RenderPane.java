@@ -8,8 +8,10 @@ import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import utils.EnumsForSprites;
@@ -33,6 +35,10 @@ public class RenderPane implements FXMLController {
     private GraphicsLoader gl;
 
     @FXML
+    private AnchorPane root;
+    @FXML
+    private ScrollPane canvasParent;
+
     private Canvas canvas;
     private AnimationTimer timer;
     private long tick = 0;
@@ -46,7 +52,7 @@ public class RenderPane implements FXMLController {
      * @param size The desired screen size.
      */
     public RenderPane(Game game, Point2D size) {
-        // Build node structure
+
         canvas = new Canvas(size.getX(), size.getY());
         canvas.setFocusTraversable(true);
         canvas.requestFocus();
@@ -69,6 +75,7 @@ public class RenderPane implements FXMLController {
 
     @Override
     public void initialize() {
+
         System.out.println("RenderPane initialized");
 
         // Attach event listeners
@@ -76,6 +83,8 @@ public class RenderPane implements FXMLController {
         canvas.addEventHandler(KeyEvent.KEY_PRESSED, this::onKeyPressed);
         canvas.addEventHandler(KeyEvent.KEY_RELEASED, this::onKeyReleased);
         canvas.addEventHandler(MouseEvent.MOUSE_MOVED, this::onMouseMoved);
+
+        canvasParent.setContent(canvas);
 
         // Init and start timer
         timer = new AnimationTimer() {
@@ -268,6 +277,10 @@ public class RenderPane implements FXMLController {
      */
     public Game getGame() {
         return game;
+    }
+
+    public AnchorPane getRoot() {
+        return root;
     }
 
     public void setToolMode(ToolMode toolMode) {
