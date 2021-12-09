@@ -74,8 +74,11 @@ public class RenderPane implements FXMLController {
     }
 
     /**
-     * Implements the initialize() method inherited from the FXMLController interface. This method will be called once on an implementing controller when the contents of its associated document have been completely loaded.
-     * This implementation is tailored because more control over the behavior of the controller and the elements it manages is required.
+     * Implements the initialize() method inherited from the FXMLController interface.
+     * This method will be called once on an implementing controller when the contents of
+     * its associated document have been completely loaded.
+     * This implementation is tailored because more control over the behavior
+     * of the controller and the elements it manages is required.
      */
     @Override
     public void initialize() {

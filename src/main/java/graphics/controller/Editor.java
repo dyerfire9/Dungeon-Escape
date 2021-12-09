@@ -78,14 +78,14 @@ public class Editor implements FXMLController {
     }
 
     /**
-     * shows the main GUI
+     * Shows the main GUI
      */
     public void show() {
         root.setVisible(true);
     }
 
     /**
-     * hides the main GUI
+     * Hides the main GUI
      */
     public void hide() {
         root.setVisible(false);
@@ -97,10 +97,6 @@ public class Editor implements FXMLController {
      */
     public ArrayList<PaletteButton> getButtons() {
         return buttons;
-    }
-
-    public Pane getRoot() {
-        return root;
     }
 
     /**

@@ -46,6 +46,10 @@ public class MainScene implements FXMLController {
         AnchorPane.setBottomAnchor(this.editor, 0.0);
     }
 
+    /**
+     * Returns the root node of this scene.
+     * @return The root node.
+     */
     public AnchorPane getRoot() {
         return root;
     }

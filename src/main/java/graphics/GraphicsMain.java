@@ -2,7 +2,6 @@
 package graphics;
 
 import game.Game;
-import game.GameSeeder;
 import game.Serializer;
 import graphics.controller.*;
 import graphics.dialog.BoolDialog;
@@ -10,7 +9,6 @@ import graphics.dialog.TextDialog;
 import graphics.enums.ToolMode;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -19,7 +17,6 @@ import javafx.stage.Stage;
 import utils.EnumsForSprites;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Entry point of the program.
