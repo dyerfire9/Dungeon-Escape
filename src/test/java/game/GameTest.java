@@ -10,7 +10,7 @@ public class GameTest {
     public void TestGameBasics() {
         Game game = new Game(8);
         assert game.getBoard().getSize() == 8;
-        Point2D p = new Point2D(5,5);
+        Point2D p = new Point2D(1,1);
         assert Point2D.equals(game.getPlayerPosition(), p);
         assert game.getPlayerState().getPoints() == 100;
         assert game.getPlayerSprite() == EnumsForSprites.PLAYER;
@@ -21,7 +21,7 @@ public class GameTest {
         Game game = new Game(8);
         Point2D c = new Point2D(1,0);
         game.movePlayer(c);
-        Point2D d = new Point2D(6,5);
+        Point2D d = new Point2D(2,1);
         assert Point2D.equals(game.getPlayerPosition(), d);
     }
 
@@ -49,7 +49,7 @@ public class GameTest {
 
         Game game = new Game(board.getSize());
 
-        assert(!game.checkOverlap(new Point2D(5,5)));
+        assert(!game.checkOverlap(new Point2D(1,1)));
         assert(game.checkOverlap(new Point2D(5,4)));
     }
 

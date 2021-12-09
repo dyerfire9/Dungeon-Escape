@@ -38,7 +38,7 @@ public class ObjectManagerTest {
     public void TestAddObject() {
         ObjectManager om = new ObjectManager(18);
         om.addChasingElement(new Point2D(3,2),1);
-        om.addRightAlligatorDen(new Point2D(1,1));
+        om.addRightAlligatorDen(new Point2D(5,1));
         om.addLeftAlligatorDen(new Point2D(1,2));
         om.addDownAlligatorDen(new Point2D(2,1));
         om.addUpAlligatorDen(new Point2D(2,2));
@@ -63,6 +63,7 @@ public class ObjectManagerTest {
         om.removeObject(point2D);
         om.removeObject(e.get(5));
         assert e.get(7) instanceof PushableElement;
+        om.addPortal(new Point2D(17,16));
         assert om.checkPortals();
         assert !om.checkOverlap(point2D);
         ObjectManager mo = new ObjectManager(e, 20);
