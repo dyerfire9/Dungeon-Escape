@@ -94,6 +94,8 @@ public class GameSeeder {
             this.game.getObjectManager().addPushable(pos);
     }
 
+    public void changePlayerStartPos(Point2D pos) {this.game.changePlayerStartPos(pos);}
+
 
     /**
      * Adds objects to the game board by type and at a certain position.
@@ -119,6 +121,8 @@ public class GameSeeder {
             this.addRock(mousePos);
         } else if (element == EnumsForSprites.PUSHABLE) {
             this.addPushable(mousePos);
+        } else if (element == EnumsForSprites.PLAYER) {
+            this.changePlayerStartPos(mousePos);
         }
         else {
             System.out.printf("No implementation for placing element '%s'.%n", element);

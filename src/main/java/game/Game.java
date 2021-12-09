@@ -166,6 +166,10 @@ public class Game implements Serializable {
         return this.player.checkWon();
     }
 
+    public void changePlayerStartPos(Point2D newPos) {
+        this.player.setStartPos(newPos);
+    }
+
     public boolean checkPlayerLose() {return this.player.checkLoss();}
     public int getSize(){return this.size;}
 
