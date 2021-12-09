@@ -45,7 +45,6 @@ public class ObjectManagerTest {
         om.addGoal(new Point2D(3,1));
         om.addPortal(new Point2D(4,4));
         om.addRock(new Point2D(4,5));
-        om.addPushable(new Point2D(5,5));
         Point2D point2D = new Point2D(7,7);
         om.addGoal(point2D);
         ArrayList<Element> e = om.getBoardObjects();
@@ -57,24 +56,21 @@ public class ObjectManagerTest {
         assert e.get(5) instanceof Goal;
         assert e.get(6) instanceof Portal;
         assert e.get(7) instanceof Rock;
-        assert e.get(8) instanceof PushableElement;
-        assert e.get(9) instanceof Goal;
+        assert e.get(8) instanceof Goal;
         assert om.checkOverlap(point2D);
         om.removeObject(point2D);
         om.removeObject(e.get(5));
-        assert e.get(7) instanceof PushableElement;
         om.addPortal(new Point2D(17,16));
         assert om.checkPortals();
         assert !om.checkOverlap(point2D);
         ObjectManager mo = new ObjectManager(e, 20);
         assert mo.checkPortals();
         PlayerState playerState = new PlayerState(100, new Point2D(3,2));
-        mo.addPushable(new Point2D(11,12));
         mo.addGoal(new Point2D(12,12));
         ChasingElement chasingElement = new ChasingElement(EnumsForSprites.CHASER, new Point2D(13,13),4,
                 2, new Point2D(1,0),false);
         mo.addObject(chasingElement);
-        mo.updateObjects(playerState);
+        mo.updateObjects();
         ArrayList<Modifier> m = mo.modifyPlayerState(playerState);
         ArrayList<PointImagePair> k = mo.getPointImagePairs();
         mo.resetToBaseState();

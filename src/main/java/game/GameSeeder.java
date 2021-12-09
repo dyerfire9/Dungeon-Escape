@@ -1,6 +1,5 @@
 package game;
 
-import elements.types.PushableElement;
 import utils.EnumsForSprites;
 import utils.Point2D;
 
@@ -85,15 +84,6 @@ public class GameSeeder {
         this.game.getObjectManager().addRock(pos);
     }
 
-
-    /**
-     * A wrapper method for this GameSeeder to add a Pushable object to its Game.
-     * @param pos the position on the Game's board where the element is to be planted
-     */
-    public void addPushable(Point2D pos)  {
-            this.game.getObjectManager().addPushable(pos);
-    }
-
     public void changePlayerStartPos(Point2D pos) {this.game.changePlayerStartPos(pos);}
 
 
@@ -119,8 +109,6 @@ public class GameSeeder {
             this.addChasingElement(mousePos, 15);
         } else if (element == EnumsForSprites.ROCK && this.game.checkPortals()) {
             this.addRock(mousePos);
-        } else if (element == EnumsForSprites.PUSHABLE) {
-            this.addPushable(mousePos);
         } else if (element == EnumsForSprites.PLAYER) {
             this.changePlayerStartPos(mousePos);
         }

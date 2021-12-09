@@ -7,16 +7,13 @@ import utils.Point2D;
 import utils.PointImagePair;
 import utils.EnumsForSprites;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class ObjectManager implements Serializable, PropertyChangeListener  {
+public class ObjectManager implements Serializable  {
     private ArrayList<Element> boardObjects;
     private int bound;
-    private Point2D playerMove;
 
     /**
      * A constructor for ObjectManager class.
@@ -163,15 +160,6 @@ public class ObjectManager implements Serializable, PropertyChangeListener  {
     }
 
     /**
-     * A method to place a Pushable element on the board.
-     *
-     * @param pos location where the Pushable element is placed on the board
-     */
-    public void addPushable(Point2D pos) {
-        this.addObject(new PushableElement(EnumsForSprites.PUSHABLE, pos, bound));
-    }
-
-    /**
      * A method to remove elements from the board by specific instance.
      * (Overloaded)
      * @param object the element to be deleted
@@ -217,13 +205,10 @@ public class ObjectManager implements Serializable, PropertyChangeListener  {
      * Updates the content of the ObjectManager, removing elements that have gone off the screen and adding elements
      * that have been generated.
      */
-    public void updateObjects(PlayerState ps) {
+    public void updateObjects() {
 
         HashSet<Element> objectsToRemove = new HashSet<>();
         HashSet<Element> objectsToAdd = new HashSet<>();
-        Point2D playerPos = ps.getPos();
-        //
-        ArrayList<Element> pushables = new ArrayList<>();
 
         for (Element boardObject : boardObjects) {
 
@@ -250,69 +235,8 @@ public class ObjectManager implements Serializable, PropertyChangeListener  {
         for (Element element : objectsToAdd) {
             this.addObject(element);
         }
-
-
-        // Set ChasingElement's velocity in relation to Player position each tick.
-        for (Element boardObject : boardObjects) {
-            if (boardObject instanceof ChasingElement) {
-                ChasingElement ce = (ChasingElement)boardObject;
-                int directionX = (int) (Math.signum(Point2D.xDistance(playerPos, ce.getPos())) * 1);
-                int directionY = (int) (Math.signum(Point2D.yDistance(playerPos, ce.getPos())) * 1);
-                Point2D newVel = new Point2D(directionX, directionY);
-                ce.setVelocity(newVel);
-            }
-        }
-
-        for (Element boardObject : boardObjects) {
-            if (boardObject instanceof PushableElement){
-                pushables.add(boardObject);
-            }
-        }
-
-        // Set PushableElement's new position when countered Player
-        loop : {for (Element boardObject : boardObjects) {
-            if (boardObject instanceof PushableElement) {
-                ///////////
-
-                // When player meets the ball.
-                if (Point2D.equals(boardObject.getPos(), playerPos)) {
-                    pushables.remove(boardObject);
-
-                    Point2D pushedPos = new Point2D(boardObject.getPos().getX() + playerMove.getX(),
-                            boardObject.getPos().getY() + playerMove.getY());
-
-                    for (Element another : pushables){
-
-                        if (Point2D.equals(pushedPos, another.getPos())) {
-                            ps.setPos(new Point2D(boardObject.getPos().getX() - playerMove.getX(),
-                                    boardObject.getPos().getY() - playerMove.getY()));
-                            break loop;
-                        } else if (pushedPos.getX() == 0 ||
-                                pushedPos.getY() == 0 ||
-                        pushedPos.getX() == this.bound ||
-                        pushedPos.getY() == this.bound) {
-
-                            ps.setPos(new Point2D(boardObject.getPos().getX() - playerMove.getX(),
-                                    boardObject.getPos().getY() - playerMove.getY()));
-                            break loop;
-                        }
-                    }
-                    boardObject.setPos(pushedPos);
-
-                }
-
-            }
-        }}
     }
 
-    /**
-     * PropertyChange method must be implemented in this and every observer.
-     */
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        Point2D move = Point2D.minus((Point2D)evt.getNewValue(), (Point2D)evt.getOldValue());
-        this.playerMove = move;
-    }
 
 
 

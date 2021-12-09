@@ -81,7 +81,7 @@ public class GameTest {
         PlayerState playerState = new PlayerState(92, new Point2D(1,1));
         game.updateObjects();
         game.updatePlayerState();
-        game.updateObjects(playerState);
+        game.updateObjects();
         game.updatePlayerState(playerState);
         game.getBoardTiles();
         game.getBoardMovableObjects();

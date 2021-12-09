@@ -16,9 +16,6 @@ public class GameSeederTest {
         om.addGoal(new Point2D(3,1));
         om.addPortal(new Point2D(4,4));
         om.addRock(new Point2D(4,5));
-        om.addPushable(new Point2D(5,5));
-        om.addPushable(new Point2D(5,6));
-        om.addPushable(new Point2D(5,7));
         Point2D point2D = new Point2D(7,7);
         om.addGoal(point2D);
         om.add(EnumsForSprites.GOAL, new Point2D(9,1));

@@ -12,24 +12,24 @@ public class ElementTest {
     @Test
     public void TestGetPointImagePair() {
         Point2D pos = new Point2D(3,3);
-        Element element = new Element(EnumsForSprites.PUSHABLE, pos, true);
+        Element element = new Element(EnumsForSprites.ALLIGATOR_DEN_DOWN, pos, true);
         PointImagePair result = element.getPointImagePair();
         System.out.println(result);
         assert(element.getPointImagePair().getPoint() == pos);
-        assert(element.getPointImagePair().getImg() == EnumsForSprites.PUSHABLE);
+        assert(element.getPointImagePair().getImg() == EnumsForSprites.ALLIGATOR_DEN_DOWN);
     }
 
     @Test
     public void TestGetPos() {
         Point2D pos = new Point2D(3,3);
-        Element element = new Element(EnumsForSprites.PUSHABLE, pos, true);
+        Element element = new Element(EnumsForSprites.ALLIGATOR_DEN_DOWN, pos, true);
         assert(element.getPos() == pos);
     }
 
     @Test
     public void TestSetPos() {
         Point2D pos = new Point2D(3,3);
-        Element element = new Element(EnumsForSprites.PUSHABLE, pos, true);
+        Element element = new Element(EnumsForSprites.ALLIGATOR_DEN_DOWN, pos, true);
         assert(element.getPos() == pos);
 
         element.setPos(new Point2D(5,5));
@@ -40,7 +40,7 @@ public class ElementTest {
     @Test
     public void TestCheckIsPermanent() {
         Point2D pos = new Point2D(3,3);
-        Element element = new Element(EnumsForSprites.PUSHABLE, pos, true);
+        Element element = new Element(EnumsForSprites.ALLIGATOR_DEN_DOWN, pos, true);
         assert(element.checkIsPermanent());
     }
 }
