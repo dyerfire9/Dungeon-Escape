@@ -48,6 +48,10 @@ public abstract class Generator extends Element implements Resettable {
         }
     }
 
+    /**
+     * Implements the reset() method inherited from the Resettable interface.
+     * in this implementation, resetting means to set the tick-counter of this instance to 0.
+     */
     @Override
     public void reset() {
         this.counter = 0;

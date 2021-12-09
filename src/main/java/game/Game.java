@@ -25,7 +25,7 @@ public class Game implements Serializable {
     public Game (int size) {
         this.board = new Board(size);
         this.objectManager = new ObjectManager(size - 1);
-        Point2D pos = new Point2D(5, 5);
+        Point2D pos = new Point2D(1, 1);
         this.player = new Player(pos);
         this.player.getPlayerState().addObserver(this.objectManager);
 
@@ -169,6 +169,10 @@ public class Game implements Serializable {
     public boolean checkPlayerLose() {return this.player.checkLoss();}
     public int getSize(){return this.size;}
 
+    /**
+     * A wrapper method that calls on the objectManager to remove an object at a certain position on the board.
+     * @param pos the position to be cleared
+     */
     public void deleteObject(Point2D pos) {
         this.objectManager.removeObject(pos);
     }

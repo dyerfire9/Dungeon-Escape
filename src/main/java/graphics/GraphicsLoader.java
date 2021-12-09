@@ -30,6 +30,7 @@ public class GraphicsLoader {
 
     /**
      * Constructs an instance with the default tile size.
+     * Maps sprites representing elements on the game board to images.
      */
     public GraphicsLoader() {
 

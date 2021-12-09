@@ -55,7 +55,15 @@ public class GraphicsMain extends Application {
         dp.present();
     }
 
-    // Assume dp is not null
+    /** Assume dialogsPresented is not null. This method:
+     * gathers information from the initial dialogs with the user,
+     * loads the FXML file and sets the controller associated with the root object for each subscene and the main scene
+     * assembles the subscenes into the main scene,
+     * starts the game, and
+     * displays the GUI.
+     * @param primaryStage the top level JavaFX container, supplied by JavaFX
+     * @throws IOException Checked Exceptions to be caught and handled
+     */
     private void onDialogsPresented(Stage primaryStage) throws IOException {
         primaryStage.setTitle("1190");
         primaryStage.setResizable(true);
@@ -124,6 +132,8 @@ public class GraphicsMain extends Application {
                 new Image("file:src/main/assets/tiles/dngn_portal.png"));
         ed.addPaletteButton(EnumsForSprites.ROCK,
                 new Image("file:src/main/assets/tiles/crystal_floor5.png"));
+        ed.addPaletteButton(EnumsForSprites.PUSHABLE,
+                new Image("file:src/main/assets/player/nonliving/ball_lightning.png"));
     }
 
     // Hooks up events to actions.

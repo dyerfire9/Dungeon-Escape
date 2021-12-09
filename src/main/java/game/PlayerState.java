@@ -66,7 +66,6 @@ public class PlayerState implements Serializable {
      * Getters and (re)Setters for PlayerState's attributes.
      */
 
-
     /**
      * Sets this Player's location to newLocation and notifies its Observers.
      *

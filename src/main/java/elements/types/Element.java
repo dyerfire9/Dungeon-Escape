@@ -47,6 +47,10 @@ public class Element implements Serializable {
         this.pos = newPos;
     }
 
+    /**
+     * Checks to see if this element is permanent, i.e. cannot be removed from the collection of boardObjects when the game is reset.
+     * @return true if the element persists upon game reset.
+     */
     public boolean checkIsPermanent() {
         return this.isPermanent;
     }

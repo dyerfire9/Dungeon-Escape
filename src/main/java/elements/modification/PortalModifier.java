@@ -36,4 +36,8 @@ public class PortalModifier extends Modifier implements Serializable {
     public void changeTeleportPoint(Point2D newPos) {
         this.teleportPoint = newPos;
     }
+
+    public Point2D getTeleportPoint() {
+        return this.teleportPoint;
+    }
 }
