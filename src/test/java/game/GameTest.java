@@ -5,7 +5,6 @@ import org.junit.*;
 import utils.EnumsForSprites;
 import utils.Point2D;
 
-// TODO add tests for all applicable game methods
 public class GameTest {
     @Test(timeout = 500)
     public void TestGameBasics() {
