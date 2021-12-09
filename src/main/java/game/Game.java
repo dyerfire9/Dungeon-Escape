@@ -176,4 +176,6 @@ public class Game implements Serializable {
     public void deleteObject(Point2D pos) {
         this.objectManager.removeObject(pos);
     }
+
+    public boolean checkPortals() {return this.objectManager.checkPortals();}
 }

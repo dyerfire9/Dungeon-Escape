@@ -146,6 +146,7 @@ public class ObjectManager implements Serializable, PropertyChangeListener  {
                 isPortal = true;
             }
         }
+        System.out.println(isPortal);
         return isPortal;
     }
 
