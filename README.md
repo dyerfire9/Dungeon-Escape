@@ -25,7 +25,7 @@ The triangle: This is the goal.
 
 The player sprite: This changes the player’s default position 
 
-The portal: To use this, first place a portal, then place a rock (the button with a black square on it), the portal will link to the rock and the player will teleport there once they step on it. 
+The portal: To use this, first place a portal, this portal is unlinked. Once you place a rock, all "unlinked" teleporters will link to the rock. The player will teleport to the rock once they step on the teleporter. You cannot place a rock if there are no unlinked teleporters.
 
 If you want to delete anything you placed inside of Edit mode, simply click the garbage bin to switch to delete mode and click on the tile you want to remove the element from. You will need to switch to add mode if you want to add anything. While in edit mode, you can save your game, close the game and then rerun GraphicsMain.java. You will be prompted to restore your save state. 
 
