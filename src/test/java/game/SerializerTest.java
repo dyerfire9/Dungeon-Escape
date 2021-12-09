@@ -11,8 +11,8 @@ public class SerializerTest {
         game.movePlayer(p);
         Serializer.serialize(game);
         Game n = Serializer.deserialize();
-        assert n.getPlayerPosition().getX() == 6;
-        assert n.getPlayerPosition().getY() == 7;
+        assert n.getPlayerPosition().getX() == 2;
+        assert n.getPlayerPosition().getY() == 3;
 
     }
 
