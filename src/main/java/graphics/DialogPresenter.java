@@ -13,7 +13,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-//TODO: Not happy with class name
 
 // NOTE: The class can be generalized to work with N dialogs if needed in the future.
 /**

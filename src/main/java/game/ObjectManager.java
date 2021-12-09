@@ -57,9 +57,6 @@ public class ObjectManager implements Serializable, PropertyChangeListener  {
         boardObjects.add(object);
     }
 
-    // TODO: add for each type of element
-
-
     /**
      * A method to place a ChasingElement as a specific location on the board.
      *

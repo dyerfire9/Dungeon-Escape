@@ -160,8 +160,6 @@ public class GraphicsMain extends Application {
             }
         });
 
-        //TODO: Fix bug where AlligatorFactory is out of sync.
-        //Temp fix is to reset game state on save.
         playSave.addOnClickedSave(event -> {
             Serializer.serialize(renderPane.getGame());
         });
