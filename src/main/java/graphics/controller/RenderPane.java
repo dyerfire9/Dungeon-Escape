@@ -25,7 +25,7 @@ import java.util.HashSet;
  */
 public class RenderPane implements FXMLController {
 
-    private final Font DEBUG_FONT = new Font("Consolas", 16);
+    private final Font DEBUG_FONT = new Font("Consolas", 14);
 
     private ToolMode toolMode = ToolMode.PLACE;
     private EnumsForSprites element;
@@ -160,7 +160,7 @@ public class RenderPane implements FXMLController {
         }
 
         // Draws debug info for new game state
-        gl.drawPlayerState(gc, new Point2D(32 * 16, 32), game);
+        gl.drawPlayerState(gc, new Point2D(250, 50), game);
         drawDebugInfo(1000000000.0 / deltaTime, new Point2D(50, 50));
     }
 

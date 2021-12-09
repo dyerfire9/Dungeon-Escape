@@ -22,7 +22,7 @@ public class GraphicsLoader {
     public static final int DEFAULT_TILESIZE = 32;
     public static final int HIGHLIGHT_BORDER_WIDTH = 2;
 
-    private static Font debugFont = new Font("Consolas", 16);
+    private static Font debugFont = new Font("Consolas", 14);
 
     // Represents the amount of space (in pixels) that a single tile takes up.
     // Added tileSize because we may not want to hardcode this value in the future.
@@ -120,14 +120,14 @@ public class GraphicsLoader {
         gc.setFont(debugFont);
         gc.setFill(Color.MAGENTA);
         gc.fillText("Points: " + currState.getPoints(),
-                point.getX(), point.getY());
-        gc.fillText("Invincible: " + currState.checkInvincible(),
                 point.getX(), point.getY() + debugFont.getSize());
-        gc.fillText("Iframes: " + currState.getiFrames(),
+        gc.fillText("Invincible: " + currState.checkInvincible(),
                 point.getX(), point.getY() + 2*debugFont.getSize());
+        gc.fillText("Iframes: " + currState.getiFrames(),
+                point.getX(), point.getY() + 3*debugFont.getSize());
         if (game.checkPlayerWon()) {
             gc.fillText("Won the game", point.getX(),
-                    point.getY() + 3*debugFont.getSize());
+                    point.getY() + 4*debugFont.getSize());
         }
     }
 

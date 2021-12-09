@@ -10,9 +10,11 @@ import graphics.dialog.TextDialog;
 import graphics.enums.ToolMode;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import utils.EnumsForSprites;
 
@@ -94,7 +96,7 @@ public class GraphicsMain extends Application {
 
         // Load main FXML scene, assemble pieces together.
         loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
-        Parent mainRoot = loader.load();
+        AnchorPane mainRoot = loader.load();
         MainScene mainScene = loader.getController();
         mainScene.assemble(renderPaneRoot, playSaveRoot, editorRoot);
 
@@ -104,9 +106,12 @@ public class GraphicsMain extends Application {
         addElementsToEditor(editor);
         registerActions(playSave, editor, renderPane);
 
+
         // Display GUI
         primaryStage.setScene(new Scene(mainRoot));
         primaryStage.show();
+        primaryStage.setWidth(mainRoot.getWidth());
+        primaryStage.setHeight(mainRoot.getHeight());
     }
 
     /**
