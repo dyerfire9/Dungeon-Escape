@@ -109,13 +109,16 @@ public class Game implements Serializable {
 
 
     /**
-     * Call on the board's objectManager to update the status of every object it contains .
+     * A wrapper method that calls on the underlying board to update itself.
      */
-    public void updateObjects(){
-        this.objectManager.updateObjects();
+    public void updateObjects() {
+        PlayerState ps = this.player.getPlayerState();
+        this.updateObjects(ps);
     }
 
-
+    public void updateObjects(PlayerState ps){
+        this.objectManager.updateObjects(ps);
+    }
     /**
      * @return the objectManager of the board.
      */

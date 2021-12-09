@@ -205,11 +205,11 @@ public class ObjectManager implements Serializable  {
      * Updates the content of the ObjectManager, removing elements that have gone off the screen and adding elements
      * that have been generated.
      */
-    public void updateObjects() {
+    public void updateObjects(PlayerState ps) {
 
         HashSet<Element> objectsToRemove = new HashSet<>();
         HashSet<Element> objectsToAdd = new HashSet<>();
-
+        Point2D playerPos = ps.getPos();
         for (Element boardObject : boardObjects) {
 
             if (boardObject instanceof MovableElement) {
@@ -234,6 +234,17 @@ public class ObjectManager implements Serializable  {
         //Add any generated objects
         for (Element element : objectsToAdd) {
             this.addObject(element);
+        }
+
+        // Set ChasingElement's velocity in relation to Player position each tick.
+        for (Element boardObject : boardObjects) {
+            if (boardObject instanceof ChasingElement) {
+                ChasingElement ce = (ChasingElement)boardObject;
+                int directionX = (int) (Math.signum(Point2D.xDistance(playerPos, ce.getPos())) * 1);
+                int directionY = (int) (Math.signum(Point2D.yDistance(playerPos, ce.getPos())) * 1);
+                Point2D newVel = new Point2D(directionX, directionY);
+                ce.setVelocity(newVel);
+            }
         }
     }
 

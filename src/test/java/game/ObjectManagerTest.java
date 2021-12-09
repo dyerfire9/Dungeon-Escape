@@ -70,7 +70,7 @@ public class ObjectManagerTest {
         ChasingElement chasingElement = new ChasingElement(EnumsForSprites.CHASER, new Point2D(13,13),4,
                 2, new Point2D(1,0),false);
         mo.addObject(chasingElement);
-        mo.updateObjects();
+        mo.updateObjects(playerState);
         ArrayList<Modifier> m = mo.modifyPlayerState(playerState);
         ArrayList<PointImagePair> k = mo.getPointImagePairs();
         mo.resetToBaseState();
