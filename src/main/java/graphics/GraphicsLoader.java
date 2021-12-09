@@ -22,6 +22,8 @@ public class GraphicsLoader {
     public static final int DEFAULT_TILESIZE = 32;
     public static final int HIGHLIGHT_BORDER_WIDTH = 2;
 
+    private static Font debugFont = new Font("Consolas", 16);
+
     // Represents the amount of space (in pixels) that a single tile takes up.
     // Added tileSize because we may not want to hardcode this value in the future.
     private int tileSize;
@@ -115,14 +117,17 @@ public class GraphicsLoader {
     public void drawPlayerState(GraphicsContext gc, Point2D point, Game game) {
         PlayerState currState = game.getPlayerState();
 
-        Font debugFont = new Font("Consolas", 12);
         gc.setFont(debugFont);
         gc.setFill(Color.MAGENTA);
-        gc.fillText("Points: " + currState.getPoints(), point.getX(), point.getY() + 12);
-        gc.fillText("Invincible: " + currState.checkInvincible(), point.getX(), point.getY() + 24);
-        gc.fillText("Iframes: " + currState.getiFrames(), point.getX(), point.getY() + 36);
+        gc.fillText("Points: " + currState.getPoints(),
+                point.getX(), point.getY());
+        gc.fillText("Invincible: " + currState.checkInvincible(),
+                point.getX(), point.getY() + debugFont.getSize());
+        gc.fillText("Iframes: " + currState.getiFrames(),
+                point.getX(), point.getY() + 2*debugFont.getSize());
         if (game.checkPlayerWon()) {
-            gc.fillText("Won the game", point.getX(), point.getY() + 48);
+            gc.fillText("Won the game", point.getX(),
+                    point.getY() + 3*debugFont.getSize());
         }
     }
 

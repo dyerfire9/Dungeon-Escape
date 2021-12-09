@@ -25,7 +25,7 @@ import java.util.HashSet;
  */
 public class RenderPane implements FXMLController {
 
-    private final Font DEBUG_FONT = new Font("Consolas", 12);
+    private final Font DEBUG_FONT = new Font("Consolas", 16);
 
     private ToolMode toolMode = ToolMode.PLACE;
     private EnumsForSprites element;
