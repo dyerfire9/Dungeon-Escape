@@ -141,7 +141,8 @@ public class ObjectManager implements Serializable, PropertyChangeListener  {
     public boolean checkPortals() {
         boolean isPortal = false;
         for (Element element : boardObjects){
-            if (element instanceof Portal){
+            if (element instanceof Portal &&  Point2D.equals(((Portal) element).getTeleportPoint(), element.getPos())){
+
                 isPortal = true;
             }
         }
@@ -157,7 +158,7 @@ public class ObjectManager implements Serializable, PropertyChangeListener  {
         this.addObject(teleportPoint);
 
         for (Element element : boardObjects){
-            if (element instanceof Portal){
+            if ((element instanceof Portal) && ((Portal) element).getTeleportPoint() == element.getPos()){
                 ((Portal) element).changeTeleportPoint(teleportPoint.getPos());
             }
         }

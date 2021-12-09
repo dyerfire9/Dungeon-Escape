@@ -132,6 +132,8 @@ public class GraphicsMain extends Application {
                 new Image("file:src/main/assets/tiles/dngn_portal.png"));
         ed.addPaletteButton(EnumsForSprites.ROCK,
                 new Image("file:src/main/assets/tiles/crystal_floor5.png"));
+        ed.addPaletteButton(EnumsForSprites.PUSHABLE,
+                new Image("file:src/main/assets/player/nonliving/ball_lightning.png"));
     }
 
     // Hooks up events to actions.
