@@ -117,6 +117,8 @@ public class GameSeeder {
             this.addChasingElement(mousePos, 15);
         } else if (element == EnumsForSprites.ROCK) {
             this.addRock(mousePos);
+        } else if (element == EnumsForSprites.PUSHABLE) {
+            this.addPushable(mousePos);
         }
         else {
             System.out.printf("No implementation for placing element '%s'.%n", element);

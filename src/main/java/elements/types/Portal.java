@@ -37,4 +37,7 @@ public class Portal extends Element implements Interactable {
         return this.mod;
     }
 
+    public Point2D getTeleportPoint() {
+        return this.mod.getTeleportPoint();
+    }
 }
