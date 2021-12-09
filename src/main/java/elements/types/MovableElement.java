@@ -90,6 +90,10 @@ public class MovableElement extends Element implements Movable, Resettable {
 
     }
 
+    /**
+     * Implements the reset() method inherited from the Resettable interface.
+     * in this implementation, resetting means to set the position and velocity of this instance to the saved initial states.
+     */
     @Override
     public void reset() {
         this.setPos(this.initialPosition);

@@ -21,7 +21,7 @@ public class Serializer {
     }
 
     /**
-     * A deserializer, which can be used to convert the saved game data back into a game.
+     * A deserializer, which reads the saved game data in the .ser file and converts the saved game data back into a game.
      */
     public static Game deserialize(){
         Game game = null;

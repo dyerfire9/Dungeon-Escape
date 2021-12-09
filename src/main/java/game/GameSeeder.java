@@ -94,6 +94,12 @@ public class GameSeeder {
             this.game.getObjectManager().addPushable(pos);
     }
 
+
+    /**
+     * Adds objects to the game board by type and at a certain position.
+     * @param element the sprite representation of the element to be added
+     * @param mousePos the position where the element is to be added on the board
+     */
     public void add(EnumsForSprites element, Point2D mousePos) {
         if (element == EnumsForSprites.GOAL) {
             this.addGoal(mousePos);
