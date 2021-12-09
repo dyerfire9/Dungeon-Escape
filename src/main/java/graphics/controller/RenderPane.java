@@ -67,6 +67,10 @@ public class RenderPane implements FXMLController {
                         GraphicsLoader.DEFAULT_TILESIZE * game.getSize()));
     }
 
+    /**
+     * Implements the initialize() method inherited from the FXMLController interface. This method will be called once on an implementing controller when the contents of its associated document have been completely loaded.
+     * This implementation is tailored because more control over the behavior of the controller and the elements it manages is required.
+     */
     @Override
     public void initialize() {
         System.out.println("RenderPane initialized");
@@ -151,6 +155,11 @@ public class RenderPane implements FXMLController {
         drawDebugInfo(1000000000.0 / deltaTime, new Point2D(50, 50));
     }
 
+    /**
+     * This method draws the frame-per-second, user-pressed-key, and invincibility-frame information of the Player on the canvas.
+     * @param fps frame-per-second of rendering
+     * @param pos the position on the canvas to draw this text information
+     */
     private void drawDebugInfo(double fps, Point2D pos) {
         GraphicsContext gc = getContext();
         gc.setFill(Color.MAGENTA);
@@ -164,24 +173,41 @@ public class RenderPane implements FXMLController {
                 pos.getX(), pos.getY() + 3*DEBUG_FONT.getSize());
     }
 
+    /**
+     * A method to clear the canvas.
+     */
     public void clearCanvas() {
         GraphicsContext gc = getContext();
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
+    /**
+     * Checks to see whether a position (represented by a Point2D object) is within the boundaries of the game board.
+     * @param point a position
+     * @return whether it is located within the boundaries of the game board
+     */
     private boolean checkWithinBounds(Point2D point) {
         boolean boundCondition = (( 1 <= point.getX()  && point.getX() < this.game.getSize())
                 && ( 1 <= point.getY()  && point.getY() < this.game.getSize()));
         return boundCondition;
     }
 
+    /**
+     * A wrapper method that calls on the game's checkOverlap() to see if a position is occupied by Player or an Element.
+     * @param point a position
+     * @return true if a position is NOT occupied by Player or an Element.
+     */
     private boolean checkOverlap(Point2D point) {
         return game.checkOverlap(point);
     }
 
     //------------ EVENT METHODS ------------//
 
+    /**
+     * A method to read user's keypress, translate it into a 2D movement, and send to the game to move the Player.
+     * @param event a keypress event
+     */
     private void onKeyPressed(KeyEvent event) {
         String keyCode = event.getCode().toString();
 
@@ -205,10 +231,18 @@ public class RenderPane implements FXMLController {
         }
     }
 
+    /**
+     * A method to remove an expiring keypress event from the HashSet "pressedKeys" upon key release.
+     * @param event the expiring keypress event
+     */
     private void onKeyReleased(KeyEvent event) {
         pressedKeys.remove(event.getCode().toString());
     }
 
+    /**
+     * A method to read mouse-clicks the  on the canvas.
+     * @param event a mouse event
+     */
     private void onMouseClicked(MouseEvent event) {
         canvas.requestFocus();
 
@@ -217,6 +251,10 @@ public class RenderPane implements FXMLController {
         }
     }
 
+    /**
+     * A method to read if mouse clicked on an Element on the canvas in the Make Mode. If so, re-draw the canvas with the new Element planted.
+     * @param event a mouse event
+     */
     private void onMouseClickedMakeMode(MouseEvent event) {
         if (this.checkWithinBounds(mousePos)) {
             if (this.toolMode == ToolMode.PLACE && this.checkOverlap(mousePos)) {
@@ -237,6 +275,10 @@ public class RenderPane implements FXMLController {
 
     }
 
+    /**
+     * A method to map the position of a mouse-clicks on the canvas to a square-tile on the game board that encompasses that location.
+     * @param event a mouse event
+     */
     private void onMouseMoved(MouseEvent event) {
         int tileSize = gl.getTileSize();
         mousePos = new Point2D(
@@ -270,15 +312,26 @@ public class RenderPane implements FXMLController {
         return game;
     }
 
+    /**
+     * Set the toolMode attribute of this instance.
+     * @param toolMode the new toolMode to be used
+     */
     public void setToolMode(ToolMode toolMode) {
         this.toolMode = toolMode;
     }
 
+    /**
+     * Set the Element attribute of this instance.
+     * @param element the new element to be used
+     */
     public void setElement(EnumsForSprites element) {
         this.element = element;
     }
 
-    //TODO: Add docs here
+
+    /**
+     * A method to switch the Game between made-mode and play-mode. Upon a switch, clears the canvas and re-draws the board and Player.
+     */
     public void changeGameState() {
         if (!this.makeMode) {
             this.resetGameToBaseState();
@@ -293,6 +346,9 @@ public class RenderPane implements FXMLController {
         this.makeMode = !this.makeMode;
     }
 
+    /**
+     * A method to reset the Game to its base state.
+     */
     public void resetGameToBaseState() {
         this.game.resetGameToBaseState();
     }

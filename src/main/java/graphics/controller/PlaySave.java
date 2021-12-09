@@ -26,6 +26,10 @@ public class PlaySave implements FXMLController {
         return inPlayMode;
     }
 
+    /**
+     * Implements the initialize() method inherited from the FXMLController interface. This method will be called once on an implementing controller when the contents of its associated document have been completely loaded.
+     * This implementation is tailored because more control over the behavior of the controller and the elements it manages is required.
+     */
     @Override
     public void initialize() {
         System.out.println("PlaySave initialized");
@@ -43,10 +47,18 @@ public class PlaySave implements FXMLController {
         });
     }
 
+    /**
+     * Adds a mouse-action handler to the button.
+     * @param handler a mouse-action handler
+     */
     public void addOnClickedPlay(EventHandler<MouseEvent> handler) {
         playButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
     }
 
+    /**
+     * Adds a mouse-action handler to the button.
+     * @param handler a mouse-action handler
+     */
     public void addOnClickedSave(EventHandler<MouseEvent> handler) {
         saveButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
     }

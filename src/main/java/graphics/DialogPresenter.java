@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 //TODO: Not happy with class name
 
-// NOTE: I think the class can be generalized to work with N dialogs if needed in the future.
+// NOTE: The class can be generalized to work with N dialogs if needed in the future.
 /**
  * This class packages instructions for presenting the user with dialogs,
  * providing a much more minimal interface.
@@ -64,6 +64,11 @@ public class DialogPresenter {
         }
     }
 
+    /**
+     * A method to read user's input of game board size upon user hitting the Enter key.
+     * Throws Exceptions if 1) user did not type in a valid integer or 2) some other unknown error occurred.
+     * @param event a key press by the user
+     */
     private void onUserSubmit(Event event) {
         try {
             // Suppress response if user typed in non-ENTER key
@@ -87,16 +92,24 @@ public class DialogPresenter {
         }
     }
 
-    //-------------- GETTERS/ADDERS --------------
 
+    /**
+     * A method to add an Observer to the property change support. In this case, the property change support watches changes in instances of the DialogPresenter.
+     */
     public void addPropertyChangeListener(PropertyChangeListener pcl) {
         pcs.addPropertyChangeListener(pcl);
     }
 
+    /**
+     * A getter method to get whether a saved game is to be loaded.
+     */
     public boolean requestedLoadFromSave() {
         return this.requestToLoadFromSave;
     }
 
+    /**
+     * A getter method to get the user-requested size of the game board.
+     */
     public int getRequestedBoardSize() {
         return this.requestedBoardSize;
     }
