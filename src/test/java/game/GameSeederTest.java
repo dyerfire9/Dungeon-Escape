@@ -30,7 +30,7 @@ public class GameSeederTest {
         om.add(EnumsForSprites.ROCK, new Point2D(9,7));
         om.add(EnumsForSprites.CHASER, new Point2D(9,8));
         om.add(EnumsForSprites.IS_TRAVERSABLE, new Point2D(9,10));
-        om.add(EnumsForSprites.PUSHABLEELEMENT, new Point2D(3,2));
+        om.add(EnumsForSprites.PUSHABLE_ELEMENT, new Point2D(3,2));
     }
 
 }

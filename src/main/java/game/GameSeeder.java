@@ -118,7 +118,7 @@ public class GameSeeder {
             this.addChasingElement(mousePos, 15);
         } else if (element == EnumsForSprites.ROCK && this.game.checkPortals()) {
             this.addRock(mousePos);
-        } else if (element == EnumsForSprites.PUSHABLEELEMENT) {
+        } else if (element == EnumsForSprites.PUSHABLE_ELEMENT) {
             this.addPushable(mousePos);
         } else if (element == EnumsForSprites.PLAYER) {
             this.changePlayerStartPos(mousePos);

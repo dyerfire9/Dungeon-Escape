@@ -15,7 +15,7 @@ public class PushableElementTest {
 //        Board board = new Board(20);
 //        ObjectManager obm = new ObjectManager(board.getSize() - 1);
 
-        PushableElement pe = new PushableElement(EnumsForSprites.PUSHABLEELEMENT,
+        PushableElement pe = new PushableElement(EnumsForSprites.PUSHABLE_ELEMENT,
                 new Point2D(3,3), 10);
 //        board.fillBoard();
 //        board.fillEdges();
@@ -30,7 +30,7 @@ public class PushableElementTest {
 
     @Test(timeout = 500)
     public void TestOnContact(){
-        PushableElement pe = new PushableElement(EnumsForSprites.PUSHABLEELEMENT,
+        PushableElement pe = new PushableElement(EnumsForSprites.PUSHABLE_ELEMENT,
                 new Point2D(3,3), 10);
         PlayerState ps = new PlayerState(100, new Point2D(3,4));
 

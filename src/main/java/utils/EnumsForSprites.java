@@ -13,5 +13,5 @@ public enum EnumsForSprites {
     CHASER,
     ROCK,
     PORTAL,
-    PUSHABLEELEMENT}
+    PUSHABLE_ELEMENT}
 

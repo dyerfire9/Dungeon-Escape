@@ -167,7 +167,7 @@ public class ObjectManager implements Serializable, PropertyChangeListener {
      * @param pos location where the Pushable element is placed on the board
      */
     public void addPushable(Point2D pos) {
-        this.addObject(new PushableElement(EnumsForSprites.PUSHABLEELEMENT, pos, bound));
+        this.addObject(new PushableElement(EnumsForSprites.PUSHABLE_ELEMENT, pos, bound));
     }
 
     /**
@@ -275,15 +275,9 @@ public class ObjectManager implements Serializable, PropertyChangeListener {
                 // When player meets the ball.
                 if (Point2D.equals(boardObject.getPos(), playerPos)) {
                     pushables.remove(boardObject);
-                    System.out.println("player: " + playerPos.getX() + ", " + playerPos.getY());
-
-                    System.out.println("object: " + boardObject.getPos().getX() + "," + boardObject.getPos().getY());
-
 
                     Point2D pushedPos = new Point2D(boardObject.getPos().getX() + ps.getMovement().getX(),
                             boardObject.getPos().getY() + ps.getMovement().getY());
-
-                    System.out.println("pushed: " + pushedPos.getX() + "," + pushedPos.getY() );
 
                     for (Element another : pushables){
 
