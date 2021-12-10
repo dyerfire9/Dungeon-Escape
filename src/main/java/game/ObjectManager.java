@@ -262,6 +262,25 @@ public class ObjectManager implements Serializable, PropertyChangeListener {
                 ce.setVelocity(newVel);
             }
         }
+
+        processPushables(ps);
+
+    }
+
+    /**
+     * Updates the pushableElements of the ObjectManager, it checks player's movement, and compare
+     * Player and all pushableElements Position.
+     * RULES:
+     * 1. Player cannot push the element into the wall.
+     * 2. Player cannot push 2 or more concatenated pushableElements.
+     * If the player's movement followed the rules, then change the player's position
+     * and change the pushableElement's position to the pushed direction (player's movement).
+     */
+    public void processPushables(PlayerState ps){
+        ArrayList<Element> pushables = new ArrayList<>();
+        Point2D playerPos = ps.getPos();
+
+
         for (Element boardObject : boardObjects) {
             if (boardObject instanceof PushableElement){
                 pushables.add(boardObject);
@@ -304,9 +323,8 @@ public class ObjectManager implements Serializable, PropertyChangeListener {
                 }
             }
         }}
+
     }
-
-
 
 
     /**
