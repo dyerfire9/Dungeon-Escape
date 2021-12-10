@@ -95,7 +95,6 @@ public class PlayerState implements Serializable {
     }
     public void setWinningState(boolean hasWon) {this.hasWon = hasWon; }
     public boolean getWinningState() {return this.hasWon;}
-
     public Point2D getMovement(){
         return this.movement;
     }
