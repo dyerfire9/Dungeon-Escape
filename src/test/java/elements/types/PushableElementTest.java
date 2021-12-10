@@ -11,16 +11,8 @@ import utils.Point2D;
 public class PushableElementTest {
     @Test(timeout = 500)
     public void TestSetPos() {
-
-//        Board board = new Board(20);
-//        ObjectManager obm = new ObjectManager(board.getSize() - 1);
-
         PushableElement pe = new PushableElement(EnumsForSprites.PUSHABLE_ELEMENT,
                 new Point2D(3,3), 10);
-//        board.fillBoard();
-//        board.fillEdges();
-//
-//        obm.addObject(pe);
 
         Point2D moveTo = new Point2D(5,5);
         assert(!Point2D.equals(pe.getPos(), moveTo));
