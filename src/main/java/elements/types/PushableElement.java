@@ -3,11 +3,14 @@ package elements.types;
 import utils.EnumsForSprites;
 import utils.Point2D;
 
-public class PushableElement extends Element {
+public class PushableElement extends Element implements Resettable{
     private int bound;
+    private Point2D initialPosition;
+
     public PushableElement(EnumsForSprites sprite, Point2D pos, int bound) {
         super(sprite, pos, true);
         this.bound = bound;
+        this.initialPosition = pos;
     }
 
     /**
@@ -22,7 +25,6 @@ public class PushableElement extends Element {
     /**
      * Checks whether the element can be pushed to a new position on the board.
      * If the new position is within the boundary, the element moves to the new position.
-     * @return whether the element has moved to a new position on the board
      */
     @Override
     public void setPos(Point2D newPos) {
@@ -33,5 +35,14 @@ public class PushableElement extends Element {
         else {
             super.setPos(newPos);
         }
+    }
+
+    /**
+     * Implements the reset() method inherited from the Resettable interface.
+     * in this implementation, resetting means to set the position to the saved initial states.
+     */
+    @Override
+    public void reset() {
+        this.setPos(this.initialPosition);
     }
 }
