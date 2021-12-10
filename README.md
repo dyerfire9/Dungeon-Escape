@@ -27,12 +27,20 @@ The player sprite: This changes the player’s default position.
 
 The blue portal: To use this, first place a portal; this portal is unlinked. Once you place a black square rock, all "unlinked" teleporters will link to the rock. The player will teleport to the rock once they step on the teleporter. You cannot place a rock if there are no unlinked teleporters.
 
-If you want to delete anything you placed inside of Edit mode, simply click the garbage bin to switch to delete mode and click on the tile you want to remove the element from. You will need to switch to add mode if you want to add anything.
+The lightning ball: This is the pushable element, you can place multiple on the board and push a single one around. If there is a pushable element in the way of where you are trying to push a pushable element, it will not budge. In other words, you cannot push a pushable element into another one. 
+
+If you want to delete anything you placed inside of Edit mode, simply click the garbage bin to switch to delete mode and click on the tile you want to remove the element from. You will need to switch to add mode if you want to add anything (by pressing the green + button).
 
 While in edit mode, you can save your game, close the game and then rerun GraphicsMain.java. You will be prompted to restore your save state. 
 
 
 
-Note: Whenever the player runs out of points or reaches the goal in play mode, the game will restart from the base state (objects will be reset and so will the playerstate).
+Notes: 
+- Whenever the player runs out of points or reaches the goal in play mode, the game will restart from the base state (objects will be reset and so will the playerstate).
 
-Note: If the game is unresponsive, click on the game board with the mouse.
+- If the game is unresponsive, click on the game board with the mouse. We observed that sometimes it loses focus on some computer for some reason. 
+
+- You will need to scroll down on the panel with all the buttons in edit mode to find the player position change button. This may or may not be cut off in the scrolling menu. 
+
+**IMPORTANT**
+- We recommend you set the game size to somewhere between 15-20. If the game is cutoff for you at any points because of the screen size you entered, just fullscreen the window. If it is still cuttoff, then your monitor size is not big enough for the game size you entered, try something smaller.
