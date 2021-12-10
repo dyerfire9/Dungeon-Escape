@@ -17,6 +17,9 @@ public class GameSeederTest {
         om.addPortal(new Point2D(4,4));
         om.addRock(new Point2D(4,5));
         Point2D point2D = new Point2D(7,7);
+        om.addPushable(new Point2D(5,5));
+        om.addPushable(new Point2D(5,6));
+        om.addPushable(new Point2D(5,7));
         om.addGoal(point2D);
         om.add(EnumsForSprites.GOAL, new Point2D(9,1));
         om.add(EnumsForSprites.ALLIGATOR_DEN_UP, new Point2D(9,2));
@@ -27,6 +30,7 @@ public class GameSeederTest {
         om.add(EnumsForSprites.ROCK, new Point2D(9,7));
         om.add(EnumsForSprites.CHASER, new Point2D(9,8));
         om.add(EnumsForSprites.IS_TRAVERSABLE, new Point2D(9,10));
+        om.add(EnumsForSprites.PUSHABLEELEMENT, new Point2D(3,2));
     }
 
 }
