@@ -10,11 +10,12 @@
 - Worked on refactoring code and making the ObjectManager work
 
 #### Hyungsoo (Henry):
-- Important Note: I implemented pushableElement that works properly. However, we removed pushableElement because of too many bugs with our lastest version. If you want to check the pushableElement properly then Check : (https://github.com/CSC207-UofT/course-project-1190/pull/7). Finally I found the reason why it doesn't work, we didn't have enough time to finish this. This is the reason why our program doesn't contain pushableElement unfortunately.
+- ~~Important Note: I implemented pushableElement that works properly. However, we removed pushableElement because of too many bugs with our lastest version. If you want to check the pushableElement properly then Check : (https://github.com/CSC207-UofT/course-project-1190/pull/7). Finally I found the reason why it doesn't work, we didn't have enough time to finish this. This is the reason why our program doesn't contain pushableElement unfortunately.~~
+- All bugs with pushableElement is fixed not my final pull request is (https://github.com/CSC207-UofT/course-project-1190/pull/19).
 - Implemented pushableElement
 - Revised the pushableElement to follow observer pattern. (Gwen helped me revising the object.)
     - There were too many arithmatical bugs with the pushableElement. I fixed the bugs several times.
-- Final version of the revised pushable element (https://github.com/CSC207-UofT/course-project-1190/pull/17) is the final version. (I had few pull requests before the pull request but we didn't merge some of them because of bugs because pushableElement interacts with player's movement.) Pushable element can be pushed by player's move and the player cannot push 2 pushable element at once. The element will give the player non-linear game playing experience since the player can change the board while the game is running.
+- ~~Final version of the revised pushable element (https://github.com/CSC207-UofT/course-project-1190/pull/17) is the final version.~~ (I had few pull requests before the pull request but we didn't merge some of them because of bugs because pushableElement interacts with player's movement.) Pushable element can be pushed by player's move and the player cannot push 2 pushable element at once. The element will give the player non-linear game playing experience since the player can change the board while the game is running.
     - Other pushable pull requests
     - https://github.com/CSC207-UofT/course-project-1190/pull/7 (The first version of pushableElement that is not following obsever pattern, and it fully functions)
     - https://github.com/CSC207-UofT/course-project-1190/pull/14 (Gwen's fix based on my first pull request.)

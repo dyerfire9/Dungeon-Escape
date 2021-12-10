@@ -7,11 +7,13 @@ import utils.Point2D;
 import utils.PointImagePair;
 import utils.EnumsForSprites;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class ObjectManager implements Serializable  {
+public class ObjectManager implements Serializable, PropertyChangeListener {
     private ArrayList<Element> boardObjects;
     private int bound;
 
@@ -160,6 +162,15 @@ public class ObjectManager implements Serializable  {
     }
 
     /**
+     * A method to place a Pushable element on the board.
+     *
+     * @param pos location where the Pushable element is placed on the board
+     */
+    public void addPushable(Point2D pos) {
+        this.addObject(new PushableElement(EnumsForSprites.PUSHABLE_ELEMENT, pos, bound));
+    }
+
+    /**
      * A method to remove elements from the board by specific instance.
      * (Overloaded)
      * @param object the element to be deleted
@@ -175,6 +186,7 @@ public class ObjectManager implements Serializable  {
      */
     public void removeObject(Point2D pos) {
         HashSet<Element> objectsToRemove = new HashSet<>();
+
 
         for (Element boardObject : boardObjects) {
             if (Point2D.equals(boardObject.getPos(), pos)) {
@@ -210,6 +222,10 @@ public class ObjectManager implements Serializable  {
         HashSet<Element> objectsToRemove = new HashSet<>();
         HashSet<Element> objectsToAdd = new HashSet<>();
         Point2D playerPos = ps.getPos();
+        //
+        ArrayList<Element> pushables = new ArrayList<>();
+
+
         for (Element boardObject : boardObjects) {
 
             if (boardObject instanceof MovableElement) {
@@ -246,9 +262,69 @@ public class ObjectManager implements Serializable  {
                 ce.setVelocity(newVel);
             }
         }
+
+        processPushables(ps);
+
     }
 
+    /**
+     * Updates the pushableElements of the ObjectManager, it checks player's movement, and compare
+     * Player and all pushableElements Position.
+     * RULES:
+     * 1. Player cannot push the element into the wall.
+     * 2. Player cannot push 2 or more concatenated pushableElements.
+     * If the player's movement followed the rules, then change the player's position
+     * and change the pushableElement's position to the pushed direction (player's movement).
+     */
+    public void processPushables(PlayerState ps){
+        ArrayList<Element> pushables = new ArrayList<>();
+        Point2D playerPos = ps.getPos();
 
+
+        for (Element boardObject : boardObjects) {
+            if (boardObject instanceof PushableElement){
+                pushables.add(boardObject);
+            }
+        }
+
+        // Set PushableElement's new position when countered Player
+        loop : {for (Element boardObject : boardObjects) {
+            if (boardObject instanceof PushableElement) {
+
+                // When player meets the ball.
+                if (Point2D.equals(boardObject.getPos(), playerPos)) {
+                    pushables.remove(boardObject);
+
+                    Point2D pushedPos = new Point2D(boardObject.getPos().getX() + ps.getMovement().getX(),
+                            boardObject.getPos().getY() + ps.getMovement().getY());
+
+                    for (Element another : pushables){
+
+                        if (Point2D.equals(pushedPos, another.getPos())) {
+
+                            ps.setPos(new Point2D(boardObject.getPos().getX() - ps.getMovement().getX(),
+                                    boardObject.getPos().getY() - ps.getMovement().getY()));
+                            pushables.add(boardObject);
+                            break loop;
+                        } else if (pushedPos.getX() == 0 ||
+                                pushedPos.getY() == 0 ||
+                                pushedPos.getX() == this.bound ||
+                                pushedPos.getY() == this.bound) {
+
+                            ps.setPos(new Point2D(boardObject.getPos().getX() - ps.getMovement().getX(),
+                                    boardObject.getPos().getY() - ps.getMovement().getY()));
+                            pushables.add(boardObject);
+                            break loop;
+                        }
+                    }
+                    pushables.add(boardObject);
+                    boardObject.setPos(pushedPos);
+
+                }
+            }
+        }}
+
+    }
 
 
     /**
@@ -307,5 +383,14 @@ public class ObjectManager implements Serializable  {
         for (Element element: objectsToRemove) {
             this.removeObject(element);
         }
+    }
+
+    /**
+     * PropertyChange method must be implemented in this and every observer.
+     */
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        Point2D move = Point2D.minus((Point2D)evt.getNewValue(), (Point2D)evt.getOldValue());
+        //this.playerMove = move;
     }
 }

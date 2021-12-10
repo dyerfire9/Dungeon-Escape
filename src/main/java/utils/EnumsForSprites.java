@@ -12,5 +12,6 @@ public enum EnumsForSprites {
     GOAL,
     CHASER,
     ROCK,
-    PORTAL}
+    PORTAL,
+    PUSHABLE_ELEMENT}
 

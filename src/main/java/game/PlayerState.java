@@ -10,7 +10,9 @@ public class PlayerState implements Serializable {
     int points;
     int iFrames;
     boolean hasWon;
+    Point2D oldPosition;
     Point2D playerPosition;
+    Point2D movement;
     private final PropertyChangeSupport observable;
 
     /**
@@ -22,7 +24,9 @@ public class PlayerState implements Serializable {
         this.points = points;
         this.iFrames = 60;
         this.hasWon = false;
+        this.oldPosition = playerPos;
         this.playerPosition = playerPos;
+        this.movement = new Point2D(0,0);
         this.observable = new PropertyChangeSupport(this);
     }
 
@@ -67,15 +71,20 @@ public class PlayerState implements Serializable {
      */
 
     /**
-     * Sets this Player's location to newLocation and notifies its Observers.
+     * Sets this Player's location to newLocation and notifies its Observers,
+     * and save player's last position.
      *
      * @param newPos This Player's new location.
      */
     public void setPos(Point2D newPos){
-        Point2D oldPos = this.getPos();
+        Point2D oldPos = this.oldPosition;
         this.playerPosition = newPos;
+        movement = new Point2D(newPos.getX() - oldPosition.getX(), newPos.getY() - oldPosition.getY());
+        this.oldPosition = newPos;
         observable.firePropertyChange("location", oldPos, newPos);
+
     }
+
     public Point2D getPos(){return this.playerPosition;}
     public void resetIframes() {this.iFrames = 60;}
     public int getPoints(){
@@ -86,4 +95,8 @@ public class PlayerState implements Serializable {
     }
     public void setWinningState(boolean hasWon) {this.hasWon = hasWon; }
     public boolean getWinningState() {return this.hasWon;}
+
+    public Point2D getMovement(){
+        return this.movement;
+    }
 }

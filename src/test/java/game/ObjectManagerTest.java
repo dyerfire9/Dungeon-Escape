@@ -45,6 +45,7 @@ public class ObjectManagerTest {
         om.addGoal(new Point2D(3,1));
         om.addPortal(new Point2D(4,4));
         om.addRock(new Point2D(4,5));
+        om.addPushable(new Point2D(5,5));
         Point2D point2D = new Point2D(7,7);
         om.addGoal(point2D);
         ArrayList<Element> e = om.getBoardObjects();
@@ -56,10 +57,12 @@ public class ObjectManagerTest {
         assert e.get(5) instanceof Goal;
         assert e.get(6) instanceof Portal;
         assert e.get(7) instanceof Rock;
-        assert e.get(8) instanceof Goal;
+        assert e.get(8) instanceof PushableElement;
+        assert e.get(9) instanceof Goal;
         assert om.checkOverlap(point2D);
         om.removeObject(point2D);
         om.removeObject(e.get(5));
+        assert e.get(7) instanceof PushableElement;
         om.addPortal(new Point2D(17,16));
         assert om.checkPortals();
         assert !om.checkOverlap(point2D);
