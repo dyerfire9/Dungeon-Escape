@@ -36,8 +36,6 @@ public class RenderPane implements FXMLController {
 
     @FXML
     private AnchorPane root;
-    @FXML
-    private ScrollPane canvasParent;
 
     private Canvas canvas;
     private AnimationTimer timer;
@@ -92,7 +90,7 @@ public class RenderPane implements FXMLController {
         canvas.addEventHandler(KeyEvent.KEY_RELEASED, this::onKeyReleased);
         canvas.addEventHandler(MouseEvent.MOUSE_MOVED, this::onMouseMoved);
 
-        canvasParent.setContent(canvas);
+        root.getChildren().add(canvas);
 
         // Init and start timer
         timer = new AnimationTimer() {
