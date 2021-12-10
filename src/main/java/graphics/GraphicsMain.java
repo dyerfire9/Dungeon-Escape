@@ -108,11 +108,11 @@ public class GraphicsMain extends Application {
 
         // Display GUI
         primaryStage.setScene(new Scene(mainRoot));
+        primaryStage.setWidth(750);
+        primaryStage.setHeight(720);
         primaryStage.show();
         primaryStage.setMinWidth(MIN_WINDOW_SIZE.getX());
         primaryStage.setMinHeight(MIN_WINDOW_SIZE.getY());
-        primaryStage.setWidth(mainRoot.getWidth());
-        primaryStage.setHeight(mainRoot.getHeight());
     }
 
     /**
