@@ -38,17 +38,17 @@
 
 <AnchorPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.controller.MainScene">
    <children>
-      <BorderPane id="layout" prefHeight="652.0" prefWidth="734.0">
+      <BorderPane id="layout" prefHeight="652.0" prefWidth="734.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
             <AnchorPane id="renderPane" fx:id="renderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="640.0" minWidth="640.0" prefHeight="640.0" prefWidth="640.0" BorderPane.alignment="CENTER" />
          </center>
          <left>
             <AnchorPane maxHeight="1.7976931348623157E308" prefHeight="586.0" prefWidth="64.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox prefHeight="652.0" prefWidth="80.0" AnchorPane.bottomAnchor="0.0">
+                  <VBox prefHeight="652.0" prefWidth="80.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane id="playSave" fx:id="playSave" prefHeight="200.0" prefWidth="62.0" />
-                        <AnchorPane id="editor" fx:id="editor" prefHeight="667.0" prefWidth="80.0" />
+                        <AnchorPane id="editor" fx:id="editor" maxHeight="1.7976931348623157E308" prefHeight="667.0" prefWidth="80.0" />
                      </children>
                   </VBox>
                </children>

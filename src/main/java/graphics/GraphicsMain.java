@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import utils.EnumsForSprites;
+import utils.Point2D;
 
 import java.io.IOException;
 
@@ -25,7 +26,8 @@ public class GraphicsMain extends Application {
 
     private DialogPresenter dp;
     private FXMLLoader loader;
-
+    // Minimum allowed window size
+    private static final Point2D MIN_WINDOW_SIZE = new Point2D(400, 400);
 
 
     public static void main(String[] args) {
@@ -107,6 +109,8 @@ public class GraphicsMain extends Application {
         // Display GUI
         primaryStage.setScene(new Scene(mainRoot));
         primaryStage.show();
+        primaryStage.setMinWidth(MIN_WINDOW_SIZE.getX());
+        primaryStage.setMinHeight(MIN_WINDOW_SIZE.getY());
         primaryStage.setWidth(mainRoot.getWidth());
         primaryStage.setHeight(mainRoot.getHeight());
     }

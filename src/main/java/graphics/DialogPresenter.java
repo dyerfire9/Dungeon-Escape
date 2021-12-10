@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class DialogPresenter {
 
     private static final int MIN_BOARD_SIZE = 5;
-    private static final int MAX_BOARD_SIZE = 20;
+    private static final int MAX_BOARD_SIZE = 30;
 
     private boolean requestToLoadFromSave = false;
     private int requestedBoardSize = 20;

@@ -36,10 +36,10 @@ public class MainScene implements FXMLController {
      */
     public void assemble(Node renderPane, Node playSave, Node editor) {
         this.renderPane.getChildren().add(renderPane);
-        AnchorPane.setLeftAnchor(this.renderPane, 0.0);
-        AnchorPane.setRightAnchor(this.renderPane, 0.0);
-        AnchorPane.setTopAnchor(this.renderPane, 0.0);
-        AnchorPane.setBottomAnchor(this.renderPane, 0.0);
+        AnchorPane.setLeftAnchor(renderPane, 0.0);
+        AnchorPane.setRightAnchor(renderPane, 0.0);
+        AnchorPane.setTopAnchor(renderPane, 0.0);
+        AnchorPane.setBottomAnchor(renderPane, 0.0);
         this.playSave.getChildren().add(playSave);
         this.editor.getChildren().add(editor);
         AnchorPane.setTopAnchor(this.editor, 0.0);

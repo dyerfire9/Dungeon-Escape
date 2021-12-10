@@ -41,6 +41,7 @@ public class RenderPane implements FXMLController {
 
     private Canvas canvas;
     private AnimationTimer timer;
+    private boolean showDebug = true;
     private long tick = 0;
     private long currentNanoTime;
     private boolean makeMode = false;
@@ -134,7 +135,8 @@ public class RenderPane implements FXMLController {
      */
     private void tickAndRender(long deltaTime) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-
+        canvas.setWidth(root.getWidth());
+        canvas.setHeight(root.getHeight());
         // Clears the canvas
         clearCanvas();
 
@@ -163,8 +165,13 @@ public class RenderPane implements FXMLController {
         }
 
         // Draws debug info for new game state
-        gl.drawPlayerState(gc, new Point2D(250, 50), game);
-        drawDebugInfo(1000000000.0 / deltaTime, new Point2D(50, 50));
+        if (showDebug) {
+            gl.drawPlayerState(gc, new Point2D(50, 100), game);
+            drawDebugInfo(1000000000.0 / deltaTime, new Point2D(50, 50));
+        }
+        gc.setFont(DEBUG_FONT);
+        gc.setFill(Color.MAGENTA);
+        gc.fillText("Press [`] to toggle debug info", 50, 30);
     }
 
     /**
@@ -200,8 +207,8 @@ public class RenderPane implements FXMLController {
      * @return whether it is located within the boundaries of the game board
      */
     private boolean checkWithinBounds(Point2D point) {
-        boolean boundCondition = (( 1 <= point.getX()  && point.getX() < this.game.getSize())
-                && ( 1 <= point.getY()  && point.getY() < this.game.getSize()));
+        boolean boundCondition = (( 1 <= point.getX()  && point.getX() < this.game.getSize() - 1)
+                && ( 1 <= point.getY()  && point.getY() < this.game.getSize() - 1));
         return boundCondition;
     }
 
@@ -238,9 +245,15 @@ public class RenderPane implements FXMLController {
             if (keyCode.equals("D") && !pressedKeys.contains(keyCode)) {
                 game.movePlayer(new Point2D(1, 0));
             }
-
-            pressedKeys.add(event.getCode().toString());
         }
+        if (keyCode.equals("BACK_QUOTE") && !pressedKeys.contains(keyCode)) {
+            if (showDebug) {
+                showDebug = false;
+            } else {
+                showDebug = true;
+            }
+        }
+        pressedKeys.add(event.getCode().toString());
     }
 
     /**

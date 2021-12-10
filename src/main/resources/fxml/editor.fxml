@@ -5,32 +5,41 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="root" fx:id="root" prefHeight="563.0" prefWidth="80.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.controller.Editor">
+<AnchorPane id="root" fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="541.0" prefWidth="80.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.controller.Editor">
    <children>
-      <ScrollPane hbarPolicy="NEVER" layoutY="29.0" prefHeight="534.0" prefWidth="80.0" vbarPolicy="ALWAYS">
-         <content>
-            <VBox id="vbox" fx:id="vbox" maxHeight="1.7976931348623157E308" prefHeight="84.0" prefWidth="64.0" />
-         </content>
-      </ScrollPane>
-      <Button id="addTool" fx:id="addTool" layoutY="-2.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0">
-         <graphic>
-            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/add.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button id="deleteTool" fx:id="deleteTool" layoutX="40.0" layoutY="-2.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0">
-         <graphic>
-            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/bin_closed.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
+      <VBox prefHeight="541.0" prefWidth="80.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="32.0" prefWidth="80.0">
+               <children>
+                  <Button id="addTool" fx:id="addTool" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/add.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="deleteTool" fx:id="deleteTool" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/bin_closed.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+            <ScrollPane hbarPolicy="NEVER" prefHeight="509.0" prefWidth="80.0" vbarPolicy="ALWAYS">
+               <content>
+                  <VBox id="vbox" fx:id="vbox" maxHeight="1.7976931348623157E308" prefHeight="78.0" prefWidth="64.0" />
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
