@@ -122,6 +122,7 @@ Therefore, our current packaging strategy is primarily a by component packaging 
 - Factory Pattern: For our generator class, we used a Factory design pattern. The `Generator` class defines an abstract method called generateElement and a function that generates moving elements and places them on the board. In our current game, the `AlligatorDen` class, a child of the `Generator`, implements this abstract method and generates `Alligator`s. Therefore, this is an application of the Factory Pattern.
 
 
+- Observer Pattern: We implemented an Observer Pattern in a type of elements called `PushableElement`. `PushableElement`s can be pushed by the `Player` once `Player` comes next to the element on any of the four sides. That means the `PushableElement` needs to be aware of `Player`'s move and move itself along that direction. Using an Observer Pattern, we set an Observable in `Player`'s `PlayerState`, which sends changes in `Player`'s position to the `ObjectManager` (the Observer). The `ObjectManager` passes the move to `PushableElement`s and enables them to move to a pushed position. 
  
 ## Use of github features throughout the project
 
@@ -159,8 +160,9 @@ We primarily tested our project with unit testing using JUnit 4.
 
 - We continued refactoring as we refined our underlying game logic and the GUI interface: 
     - With the GUI, there were at least two large changes in code structure:
+        - Once was from changing the implementation for an observer pattern from a custom one to JavaFX's built-in observers. This changed the structure of many graphics-related classes that used this pattern.
         - Another time was from changing the loading method of `Scene` instances to use `FXMLLoader`. This mostly affected the scene controllers.
-(https://github.com/CSC207-UofT/course-project-1190/pull/14). This made the logic much clearer and the code cleaner. 
+    - On the Entity-level, we refactored the implementation of PushableElements from [plain message passing](https://github.com/CSC207-UofT/course-project-1190/pull/7) to [an Observer Pattern](https://github.com/CSC207-UofT/course-project-1190/pull/14). This made the logic much clearer and the code cleaner. 
 - On advice from our TA, we created an enum class (https://github.com/CSC207-UofT/course-project-1190/pull/4) to replace the previous string-based version for element sprites.
 - We moved information about the modification of the PlayerState out of the individual elements and into modifier classes, and we moved the location of modification from `ObjectManager` to `Game` for cleaner architecture (https://github.com/CSC207-UofT/course-project-1190/pull/9).
 - Gave the Element class an `isPermanent` instance variable. This instance variable denotes whether that element should be deleted when switching from edit to play mode. Some elements remain on the screen and some elements are deleted when you switch modes. 
