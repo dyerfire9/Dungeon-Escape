@@ -2,8 +2,9 @@
 
 A Retro Dungeon Escape game inspired from the Retro Legend of Zelda games. The game allows one to seed a map with different objects such as monsters and teleporters and play through it while earning points.
 
-
-
+<div align="center">
+<img src="https://github.com/dyerfire9/Dungeon-Escape/blob/main/de.jpg" alt="drawing" width="500"/>
+</div>
 
 ## How to run:
 
