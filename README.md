@@ -1,4 +1,11 @@
-How to run:
+# Dungeon Escape
+
+A Retro Dungeon Escape game inspired from the Retro Legend of Zelda games. The game allows one to seed a map with different objects such as monsters and teleporters and play through it while earning points.
+
+
+
+
+## How to run:
 
 1. Clone this project
 2. In intellij, right click on build.gradle and click on Link gradle project
